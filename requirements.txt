@@ -11,3 +11,5 @@ nltk==3.8.1
 fastapi==0.109.2
 uvicorn==0.27.1
 pymongo
+newspaper3k
+
