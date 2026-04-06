@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>City Sentiment Monitor</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#333}
+header{background:#1a237e;color:white;padding:20px 28px}
+header h1{font-size:20px;font-weight:600}
+header p{font-size:12px;opacity:.75;margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding:20px 28px;max-width:1400px;margin:0 auto}
+footer{text-align:center;padding:20px;font-size:11px;color:#999}
+</style>
+</head>
+<body>
+<header>
+<h1>City Sentiment Monitor</h1>
+<p>How travellers talk about European cities — updated weekly &nbsp;|&nbsp; Week of 2026-03-30 &nbsp;|&nbsp; Last updated: 04 April 2026, 17:45 UTC</p>
+</header>
+<div class="grid">
+        <div style="background:white;border-radius:12px;border:1px solid #e0e0e0;padding:18px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h2 style="font-size:15px;font-weight:600;margin:0">Amsterdam</h2>
+                <span style="background:#e8f5e9;color:#1b5e20;font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500">Clear</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:26px;font-weight:700;color:#2e7d32">+0.72</span>
+                <span style="font-size:16px">—</span>
+                <span style="font-size:12px;font-weight:600;color:#2e7d32">Positive</span>
+            </div>
+            
+            <div style="display:flex;gap:16px;margin:4px 0">
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Mentions</div><div style="font-size:14px;font-weight:600">12</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Positive</div><div style="font-size:14px;font-weight:600">92%</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Negative</div><div style="font-size:14px;font-weight:600">8%</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Crowds</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:50%;height:100%;background:#e57373;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Cost</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:17%;height:100%;background:#ffb74d;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Safety</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:0%;height:100%;background:#81c784;border-radius:3px"></div></div></div>
+            </div>
+            
+            
+            <canvas id="chart-amsterdam" height="70"></canvas>
+            <script>
+            new Chart(document.getElementById('chart-amsterdam'), {
+                type:'line',
+                data:{labels:["2026-03-30"],datasets:[{data:[0.7238],borderColor:'#2e7d32',backgroundColor:'#2e7d3222',tension:0.3,pointRadius:3,fill:true}]},
+                options:{plugins:{legend:{display:false}},scales:{y:{min:-1,max:1,ticks:{font:{size:9}}},x:{ticks:{font:{size:9},maxRotation:30}}}}
+            });
+            </script>
+        </div>
+        <div style="background:white;border-radius:12px;border:1px solid #e0e0e0;padding:18px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h2 style="font-size:15px;font-weight:600;margin:0">Athens</h2>
+                <span style="background:#e8f5e9;color:#1b5e20;font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500">Clear</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:26px;font-weight:700;color:#2e7d32">+0.60</span>
+                <span style="font-size:16px">—</span>
+                <span style="font-size:12px;font-weight:600;color:#2e7d32">Positive</span>
+            </div>
+            
+            <div style="display:flex;gap:16px;margin:4px 0">
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Mentions</div><div style="font-size:14px;font-weight:600">9</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Positive</div><div style="font-size:14px;font-weight:600">78%</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Negative</div><div style="font-size:14px;font-weight:600">11%</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Crowds</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:67%;height:100%;background:#e57373;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Cost</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:89%;height:100%;background:#ffb74d;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Safety</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:0%;height:100%;background:#81c784;border-radius:3px"></div></div></div>
+            </div>
+            
+            
+            <canvas id="chart-athens" height="70"></canvas>
+            <script>
+            new Chart(document.getElementById('chart-athens'), {
+                type:'line',
+                data:{labels:["2026-03-30"],datasets:[{data:[0.6012],borderColor:'#2e7d32',backgroundColor:'#2e7d3222',tension:0.3,pointRadius:3,fill:true}]},
+                options:{plugins:{legend:{display:false}},scales:{y:{min:-1,max:1,ticks:{font:{size:9}}},x:{ticks:{font:{size:9},maxRotation:30}}}}
+            });
+            </script>
+        </div>
+        <div style="background:white;border-radius:12px;border:1px solid #e0e0e0;border-left:4px solid #f57c00;padding:18px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h2 style="font-size:15px;font-weight:600;margin:0">Lisbon</h2>
+                <span style="background:#fff3e0;color:#bf360c;font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500">Alert</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:26px;font-weight:700;color:#2e7d32">+0.55</span>
+                <span style="font-size:16px">—</span>
+                <span style="font-size:12px;font-weight:600;color:#2e7d32">Positive</span>
+            </div>
+            
+            <div style="display:flex;gap:16px;margin:4px 0">
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Mentions</div><div style="font-size:14px;font-weight:600">16</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Positive</div><div style="font-size:14px;font-weight:600">81%</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Negative</div><div style="font-size:14px;font-weight:600">19%</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Crowds</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:12%;height:100%;background:#e57373;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Cost</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:12%;height:100%;background:#ffb74d;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Safety</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:50%;height:100%;background:#81c784;border-radius:3px"></div></div></div>
+            </div>
+            
+            <p style="font-size:11px;padding:5px 8px;border-radius:4px;background:#fff3e0;color:#bf360c;margin:4px 0">Only 3 mentions this week (min: 5)</p>
+            <canvas id="chart-lisbon" height="70"></canvas>
+            <script>
+            new Chart(document.getElementById('chart-lisbon'), {
+                type:'line',
+                data:{labels:["2026-03-30"],datasets:[{data:[0.5542],borderColor:'#2e7d32',backgroundColor:'#2e7d3222',tension:0.3,pointRadius:3,fill:true}]},
+                options:{plugins:{legend:{display:false}},scales:{y:{min:-1,max:1,ticks:{font:{size:9}}},x:{ticks:{font:{size:9},maxRotation:30}}}}
+            });
+            </script>
+        </div>
+        <div style="background:white;border-radius:12px;border:1px solid #e0e0e0;padding:18px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h2 style="font-size:15px;font-weight:600;margin:0">Rome</h2>
+                <span style="background:#e8f5e9;color:#1b5e20;font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500">Clear</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:26px;font-weight:700;color:#2e7d32">+0.54</span>
+                <span style="font-size:16px">—</span>
+                <span style="font-size:12px;font-weight:600;color:#2e7d32">Positive</span>
+            </div>
+            
+            <div style="display:flex;gap:16px;margin:4px 0">
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Mentions</div><div style="font-size:14px;font-weight:600">15</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Positive</div><div style="font-size:14px;font-weight:600">87%</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Negative</div><div style="font-size:14px;font-weight:600">7%</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Crowds</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:27%;height:100%;background:#e57373;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Cost</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:13%;height:100%;background:#ffb74d;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Safety</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:13%;height:100%;background:#81c784;border-radius:3px"></div></div></div>
+            </div>
+            
+            
+            <canvas id="chart-rome" height="70"></canvas>
+            <script>
+            new Chart(document.getElementById('chart-rome'), {
+                type:'line',
+                data:{labels:["2026-03-30"],datasets:[{data:[0.5422],borderColor:'#2e7d32',backgroundColor:'#2e7d3222',tension:0.3,pointRadius:3,fill:true}]},
+                options:{plugins:{legend:{display:false}},scales:{y:{min:-1,max:1,ticks:{font:{size:9}}},x:{ticks:{font:{size:9},maxRotation:30}}}}
+            });
+            </script>
+        </div>
+        <div style="background:white;border-radius:12px;border:1px solid #e0e0e0;padding:18px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h2 style="font-size:15px;font-weight:600;margin:0">London</h2>
+                <span style="background:#e8f5e9;color:#1b5e20;font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500">Clear</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:26px;font-weight:700;color:#2e7d32">+0.54</span>
+                <span style="font-size:16px">—</span>
+                <span style="font-size:12px;font-weight:600;color:#2e7d32">Positive</span>
+            </div>
+            
+            <div style="display:flex;gap:16px;margin:4px 0">
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Mentions</div><div style="font-size:14px;font-weight:600">14</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Positive</div><div style="font-size:14px;font-weight:600">86%</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Negative</div><div style="font-size:14px;font-weight:600">14%</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Crowds</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:14%;height:100%;background:#e57373;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Cost</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:0%;height:100%;background:#ffb74d;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Safety</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:29%;height:100%;background:#81c784;border-radius:3px"></div></div></div>
+            </div>
+            
+            
+            <canvas id="chart-london" height="70"></canvas>
+            <script>
+            new Chart(document.getElementById('chart-london'), {
+                type:'line',
+                data:{labels:["2026-03-30"],datasets:[{data:[0.5398],borderColor:'#2e7d32',backgroundColor:'#2e7d3222',tension:0.3,pointRadius:3,fill:true}]},
+                options:{plugins:{legend:{display:false}},scales:{y:{min:-1,max:1,ticks:{font:{size:9}}},x:{ticks:{font:{size:9},maxRotation:30}}}}
+            });
+            </script>
+        </div>
+        <div style="background:white;border-radius:12px;border:1px solid #e0e0e0;padding:18px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h2 style="font-size:15px;font-weight:600;margin:0">Prague</h2>
+                <span style="background:#e8f5e9;color:#1b5e20;font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500">Clear</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:26px;font-weight:700;color:#2e7d32">+0.44</span>
+                <span style="font-size:16px">—</span>
+                <span style="font-size:12px;font-weight:600;color:#2e7d32">Positive</span>
+            </div>
+            
+            <div style="display:flex;gap:16px;margin:4px 0">
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Mentions</div><div style="font-size:14px;font-weight:600">10</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Positive</div><div style="font-size:14px;font-weight:600">80%</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Negative</div><div style="font-size:14px;font-weight:600">10%</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Crowds</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:0%;height:100%;background:#e57373;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Cost</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:0%;height:100%;background:#ffb74d;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Safety</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:60%;height:100%;background:#81c784;border-radius:3px"></div></div></div>
+            </div>
+            
+            
+            <canvas id="chart-prague" height="70"></canvas>
+            <script>
+            new Chart(document.getElementById('chart-prague'), {
+                type:'line',
+                data:{labels:["2026-03-30"],datasets:[{data:[0.4432],borderColor:'#2e7d32',backgroundColor:'#2e7d3222',tension:0.3,pointRadius:3,fill:true}]},
+                options:{plugins:{legend:{display:false}},scales:{y:{min:-1,max:1,ticks:{font:{size:9}}},x:{ticks:{font:{size:9},maxRotation:30}}}}
+            });
+            </script>
+        </div>
+        <div style="background:white;border-radius:12px;border:1px solid #e0e0e0;padding:18px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h2 style="font-size:15px;font-weight:600;margin:0">Paris</h2>
+                <span style="background:#e8f5e9;color:#1b5e20;font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500">Clear</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:26px;font-weight:700;color:#2e7d32">+0.42</span>
+                <span style="font-size:16px">—</span>
+                <span style="font-size:12px;font-weight:600;color:#2e7d32">Positive</span>
+            </div>
+            
+            <div style="display:flex;gap:16px;margin:4px 0">
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Mentions</div><div style="font-size:14px;font-weight:600">15</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Positive</div><div style="font-size:14px;font-weight:600">60%</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Negative</div><div style="font-size:14px;font-weight:600">33%</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Crowds</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:67%;height:100%;background:#e57373;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Cost</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:53%;height:100%;background:#ffb74d;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Safety</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:13%;height:100%;background:#81c784;border-radius:3px"></div></div></div>
+            </div>
+            
+            
+            <canvas id="chart-paris" height="70"></canvas>
+            <script>
+            new Chart(document.getElementById('chart-paris'), {
+                type:'line',
+                data:{labels:["2026-03-30"],datasets:[{data:[0.4247],borderColor:'#2e7d32',backgroundColor:'#2e7d3222',tension:0.3,pointRadius:3,fill:true}]},
+                options:{plugins:{legend:{display:false}},scales:{y:{min:-1,max:1,ticks:{font:{size:9}}},x:{ticks:{font:{size:9},maxRotation:30}}}}
+            });
+            </script>
+        </div>
+        <div style="background:white;border-radius:12px;border:1px solid #e0e0e0;padding:18px;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h2 style="font-size:15px;font-weight:600;margin:0">Barcelona</h2>
+                <span style="background:#e8f5e9;color:#1b5e20;font-size:11px;padding:3px 8px;border-radius:10px;font-weight:500">Clear</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:26px;font-weight:700;color:#2e7d32">+0.36</span>
+                <span style="font-size:16px">—</span>
+                <span style="font-size:12px;font-weight:600;color:#2e7d32">Positive</span>
+            </div>
+            
+            <div style="display:flex;gap:16px;margin:4px 0">
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Mentions</div><div style="font-size:14px;font-weight:600">13</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Positive</div><div style="font-size:14px;font-weight:600">77%</div></div>
+                <div><div style="font-size:10px;color:#999;text-transform:uppercase">Negative</div><div style="font-size:14px;font-weight:600">15%</div></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Crowds</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:0%;height:100%;background:#e57373;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Cost</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:62%;height:100%;background:#ffb74d;border-radius:3px"></div></div></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:#777;width:44px">Safety</span><div style="flex:1;height:5px;background:#eee;border-radius:3px"><div style="width:0%;height:100%;background:#81c784;border-radius:3px"></div></div></div>
+            </div>
+            
+            
+            <canvas id="chart-barcelona" height="70"></canvas>
+            <script>
+            new Chart(document.getElementById('chart-barcelona'), {
+                type:'line',
+                data:{labels:["2026-03-30"],datasets:[{data:[0.3565],borderColor:'#2e7d32',backgroundColor:'#2e7d3222',tension:0.3,pointRadius:3,fill:true}]},
+                options:{plugins:{legend:{display:false}},scales:{y:{min:-1,max:1,ticks:{font:{size:9}}},x:{ticks:{font:{size:9},maxRotation:30}}}}
+            });
+            </script>
+        </div></div>
+<footer>M6 — Data Engineering and Machine Learning Operations in Business &nbsp;|&nbsp; Aalborg University</footer>
+</body>
+</html>

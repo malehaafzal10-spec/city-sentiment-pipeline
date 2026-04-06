@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  pipeline:
+    build: .
+    env_file: .env
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./docs:/app/docs
+    command: python run_pipeline.py

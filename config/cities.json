@@ -1,0 +1,12 @@
+{
+  "cities": [
+    { "name": "Paris", "country": "France", "keywords": ["paris travel", "visit paris", "paris tourism"] },
+    { "name": "Rome", "country": "Italy", "keywords": ["rome travel", "visit rome", "rome tourism"] },
+    { "name": "Barcelona", "country": "Spain", "keywords": ["barcelona travel", "visit barcelona", "barcelona tourism"] },
+    { "name": "Lisbon", "country": "Portugal", "keywords": ["lisbon travel", "visit lisbon", "lisbon tourism"] },
+    { "name": "Amsterdam", "country": "Netherlands", "keywords": ["amsterdam travel", "visit amsterdam", "amsterdam tourism"] },
+    { "name": "Prague", "country": "Czech Republic", "keywords": ["prague travel", "visit prague", "prague tourism"] },
+    { "name": "Athens", "country": "Greece", "keywords": ["athens travel", "visit athens", "athens tourism"] },
+    { "name": "London", "country": "United Kingdom", "keywords": ["london travel", "visit london", "london tourism"] }
+  ]
+}

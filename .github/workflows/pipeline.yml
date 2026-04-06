@@ -1,0 +1,53 @@
+name: City Sentiment Pipeline
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"   # every Monday 08:00 UTC
+  workflow_dispatch:        # manual trigger from GitHub UI
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create artifact directories
+        run: mkdir -p artifacts/raw artifacts/processed artifacts/features artifacts/model_outputs artifacts/weekly artifacts/monitoring artifacts/dashboard artifacts/logs docs
+
+      - name: Run pipeline
+        env:
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USER_AGENT: CitySentinel/1.0
+          REDDIT_ENABLED: ${{ secrets.REDDIT_ENABLED }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ENABLE_LLM_VERDICTS: "false"
+          PIPELINE_DB_PATH: artifacts/pipeline.db
+          PIPELINE_ARTIFACTS_DIR: artifacts
+        run: python run_pipeline.py --skip-llm
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pipeline-run-${{ github.run_id }}
+          path: artifacts/
+          retention-days: 30
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: success()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages

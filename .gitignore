@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+artifacts/raw/
+artifacts/processed/
+artifacts/model_outputs/
+artifacts/logs/
+artifacts/*.db
+.DS_Store
+.env.example
