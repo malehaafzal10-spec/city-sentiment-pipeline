@@ -83,6 +83,7 @@ def clean_text(text: str) -> str:
     if not text:
         return ""
     text = re.sub(r"http\S+|www\.\S+", "", text)           # remove URLs
+    text = re.sub(r'\[\+\d+ chars\]', ", text)             # remove NewsAPI trunctuation markers 
     text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)           # remove bold
     text = re.sub(r"\*(.+?)\*", r"\1", text)               # remove italic
     text = re.sub(r"&amp;", "&", text)
