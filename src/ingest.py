@@ -226,21 +226,22 @@ def save_to_db(docs: list):
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
-def run(run_id: str) -> dict:
-    log.info(f"=== STEP 2: INGEST | run_id={run_id} ===")
+def run(run_id: str, news_only: bool = False) -> dict:
+    log.info(f"=== STEP 2: INGEST | run_id={run_id} | mode={'news_only' if news_only else 'full'} ===")
     init_db()
     config = load_config()
-
+ 
     news_docs = fetch_news(config, run_id)
-    reddit_docs = fetch_reddit_apify(config, run_id)
+ 
+    if news_only:
+        log.info("[Ingest] News-only mode — skipping Reddit/Apify")
+        reddit_docs = []
+    else:
+        reddit_docs = fetch_reddit_apify(config, run_id)
+ 
     all_docs = news_docs + reddit_docs
-
     save_raw_artifacts(news_docs, reddit_docs, run_id)
     save_to_db(all_docs)
-
+ 
     log.info(f"[Ingest] Complete — {len(all_docs)} total documents")
     return {"run_id": run_id, "total_docs": len(all_docs)}
-
-
-if __name__ == "__main__":
-    run(datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S"))
