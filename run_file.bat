@@ -12,7 +12,7 @@ echo.
 echo.
 echo Executing file...
 
-python src/01_ingest.py
+python src/02a_store_relevant_docs.py
 
 ::python 03_scrape_relevant_articles.py
 :: 4. Keep the window open so you can read the output logs

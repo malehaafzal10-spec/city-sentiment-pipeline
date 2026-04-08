@@ -95,15 +95,6 @@ def save_raw_artifacts(news_docs: list, run_id: str):
         log.info("[Artifacts] No documents to save as an artifact.")
         return
 
-    # 1. Save locally
-    raw_dir = os.path.join(ARTIFACTS_DIR, "raw")
-    os.makedirs(raw_dir, exist_ok=True)
-    date_str = datetime.now(timezone.utc).strftime("%Y_%m_%d")
-    
-    local_path = os.path.join(raw_dir, f"news_{date_str}.json")
-    with open(local_path, "w") as f:
-        json.dump(news_docs, f, indent=2)
-    log.info(f"[Artifacts] Saved local JSON → {local_path}")
 
     # 2. Save to MongoDB Artifacts Collection
     if MONGO_URI:
