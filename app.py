@@ -14,8 +14,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ─── CITY IMAGES ──────────────────────────────────────────────────────────────
-
 CITY_IMAGES = {
     "Paris": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&h=200&fit=crop",
     "Rome": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=200&fit=crop",
@@ -26,8 +24,6 @@ CITY_IMAGES = {
     "Athens": "https://images.unsplash.com/photo-1555993539-1732b0258235?w=400&h=200&fit=crop",
     "London": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&h=200&fit=crop",
 }
-
-# ─── STYLING ──────────────────────────────────────────────────────────────────
 
 st.markdown("""
 <style>
@@ -119,7 +115,7 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
     border: 1px solid #fde68a;
     border-radius: 5px;
     padding: 5px 9px;
-    margin-top: 8px;
+    margin-top: 6px;
     line-height: 1.5;
 }
 .verdict-box {
@@ -130,6 +126,36 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
     padding: 5px 10px;
     margin-top: 8px;
     font-style: italic;
+    line-height: 1.5;
+}
+.recommendation-yes {
+    font-size: 0.75rem;
+    color: #14532d;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+.recommendation-no {
+    font-size: 0.75rem;
+    color: #7f1d1d;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+.recommendation-maybe {
+    font-size: 0.75rem;
+    color: #78350f;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-top: 8px;
     line-height: 1.5;
 }
 .section-title {
@@ -154,8 +180,6 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 .alert-low { background: #f0fdf4; border-left: 3px solid #16a34a; }
 </style>
 """, unsafe_allow_html=True)
-
-# ─── DATA ─────────────────────────────────────────────────────────────────────
 
 DB_PATH = os.getenv("PIPELINE_DB_PATH", "artifacts/pipeline.db")
 
@@ -204,6 +228,65 @@ def load_data():
         return None, None, None, None
 
 
+@st.cache_data(ttl=3600)
+def get_visit_recommendation(city: str, avg_sentiment: float, crowding_score: float,
+                               cost_score: float, positive_ratio: float,
+                               negative_ratio: float, mention_count: int) -> dict:
+    """
+    Use Groq to generate a one-line visit recommendation for a city.
+    Cached for 1 hour so we don't call the API on every page load.
+    Returns dict with 'recommendation' text and 'verdict' (yes/no/maybe)
+    """
+    GROQ_KEY = os.getenv("GROQ_API_KEY", "")
+    if not GROQ_KEY:
+        return {"recommendation": "", "verdict": "maybe"}
+
+    try:
+        from groq import Groq
+        client = Groq(api_key=GROQ_KEY)
+
+        prompt = f"""You are a travel advisor giving honest advice.
+
+Based on this week's traveller sentiment data for {city}:
+- Overall sentiment score: {avg_sentiment:+.2f} (range: -1 to +1)
+- Positive mentions: {positive_ratio:.0%}
+- Negative mentions: {negative_ratio:.0%}
+- Crowding complaints level: {crowding_score:.2f} (0=none, 1=high)
+- Cost complaints level: {cost_score:.2f} (0=none, 1=high)
+- Based on {mention_count} traveller mentions
+
+Write ONE short honest sentence (max 20 words) saying whether travellers should visit {city} this week and the main reason why.
+Start with either "Yes —", "No —", or "Maybe —"
+Be specific and honest. Examples:
+"Yes — travellers are loving it this week, low crowds and great value."
+"No — overcrowding complaints at record high, avoid peak hours."
+"Maybe — beautiful city but costs are rising sharply this month."
+
+Reply with only that one sentence, nothing else."""
+
+        response = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=60,
+            temperature=0.3
+        )
+
+        text = response.choices[0].message.content.strip()
+
+        # Determine verdict from response
+        if text.lower().startswith("yes"):
+            verdict = "yes"
+        elif text.lower().startswith("no"):
+            verdict = "no"
+        else:
+            verdict = "maybe"
+
+        return {"recommendation": text, "verdict": verdict}
+
+    except Exception as e:
+        return {"recommendation": "", "verdict": "maybe"}
+
+
 def score_css(score):
     if score >= 0.15: return "score-pos"
     if score <= -0.05: return "score-neg"
@@ -233,6 +316,39 @@ def dim_bar_html(label, value, color):
         <span class="dim-lbl">{label}</span>
         <div class="dim-track"><div class="dim-fill" style="width:{pct:.0f}%;background:{color}"></div></div>
     </div>"""
+
+
+def format_alert_message(message: str) -> str:
+    """Convert technical alert messages into readable English."""
+    import re
+
+    # Sentiment drop: "Sentiment dropped 0.31 (+0.45 → +0.14)"
+    match = re.search(r"dropped ([\d.]+) \(([+\-\d.]+) → ([+\-\d.]+)\)", message)
+    if match:
+        drop = float(match.group(1))
+        prev = match.group(2)
+        curr = match.group(3)
+        return f"Sentiment dropped sharply this week ({prev} → {curr}). Traveller mood has worsened."
+
+    # Low volume: "Only 3 mentions this week (min: 5)"
+    match = re.search(r"Only (\d+) mentions", message)
+    if match:
+        count = match.group(1)
+        return f"Only {count} traveller mentions this week — not enough data to be confident in the score."
+
+    # Rolling deviation
+    if "deviates" in message.lower() or "rolling" in message.lower():
+        return "This week's sentiment is unusually different from the past 4-week average."
+
+    # Distribution skew
+    if "positive ratio" in message.lower():
+        return "Unusually high proportion of positive mentions — scores may be less reliable this week."
+
+    if "negative ratio" in message.lower():
+        return "Unusually high proportion of negative mentions — something may have happened this week."
+
+    # Default — return as-is if no pattern matched
+    return message
 
 
 # ─── LOAD ─────────────────────────────────────────────────────────────────────
@@ -290,9 +406,13 @@ for i, (_, row) in enumerate(metrics.iterrows()):
     img_url = CITY_IMAGES.get(city, "")
 
     alert_tag = '<span class="alert-tag">Alert</span>' if city_alerts else ""
+
+    # Format alert messages as readable English
     alert_html = "".join(
-        f'<div class="alert-box">{a["alert_message"]}</div>' for a in city_alerts
+        f'<div class="alert-box">{format_alert_message(str(a["alert_message"]))}</div>'
+        for a in city_alerts
     )
+
     verdict_html = f'<div class="verdict-box">"{row["llm_verdict"]}"</div>' if row.get("llm_verdict") else ""
     card_class = "city-card-alert" if city_alerts else "city-card"
 
@@ -301,6 +421,20 @@ for i, (_, row) in enumerate(metrics.iterrows()):
         dim_bar_html("Cost", row["cost_score"], "#f59e0b") +
         dim_bar_html("Safety", row["safety_score"], "#22c55e")
     )
+
+    # Get visit recommendation from Groq
+    rec = get_visit_recommendation(
+        city=city,
+        avg_sentiment=score,
+        crowding_score=float(row["crowding_score"]),
+        cost_score=float(row["cost_score"]),
+        positive_ratio=float(row["positive_ratio"]),
+        negative_ratio=float(row["negative_ratio"]),
+        mention_count=int(row["mention_count"])
+    )
+
+    rec_css = f"recommendation-{rec['verdict']}"
+    rec_html = f'<div class="{rec_css}">{rec["recommendation"]}</div>' if rec["recommendation"] else ""
 
     with cols[i % 4]:
         st.markdown(f"""
@@ -328,6 +462,7 @@ for i, (_, row) in enumerate(metrics.iterrows()):
       </div>
     </div>
     {dims}
+    {rec_html}
     {verdict_html}
     {alert_html}
   </div>
@@ -356,8 +491,9 @@ st.markdown('<div class="section-title">Monitoring alerts</div>', unsafe_allow_h
 if alerts is not None and not alerts.empty:
     for _, alert in alerts.iterrows():
         sev = alert["severity"]
+        readable_msg = format_alert_message(str(alert["alert_message"]))
         st.markdown(
-            f'<div class="alert-row alert-{sev}"><strong>{alert["city"]}</strong> — {alert["alert_message"]}</div>',
+            f'<div class="alert-row alert-{sev}"><strong>{alert["city"]}</strong> — {readable_msg}</div>',
             unsafe_allow_html=True
         )
 else:
@@ -369,7 +505,7 @@ else:
 # ─── RAW TABLE ────────────────────────────────────────────────────────────────
 
 st.write("")
-with st.expander("Raw data"):
+with st.expander("Weekly aggregated metrics"):
     cols_show = ["city", "week_start", "avg_sentiment", "mention_count",
                  "positive_ratio", "negative_ratio", "crowding_score", "cost_score", "safety_score"]
     st.dataframe(
@@ -384,6 +520,148 @@ with st.expander("Raw data"):
         use_container_width=True,
         hide_index=True
     )
+
+# ─── VALIDATION TAB ───────────────────────────────────────────────────────────
+
+st.write("")
+st.markdown('<div class="section-title">Model evaluation & human review</div>',
+            unsafe_allow_html=True)
+
+tab1, tab2 = st.tabs(["LLM Judge results", "Human review queue"])
+
+with tab1:
+    st.markdown("#### VADER vs LLM agreement this week")
+    st.caption(
+        "LLM Judge checks a random sample of VADER scores each run. "
+        "Low agreement means VADER may be struggling on that city."
+    )
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        judge_rows = pd.read_sql("""
+            SELECT city,
+                   COUNT(*) as total_judged,
+                   SUM(agreement) as agreed,
+                   ROUND(AVG(agreement) * 100, 1) as agreement_pct
+            FROM llm_judge_results
+            WHERE week_start = (
+                SELECT MAX(week_start) FROM llm_judge_results
+            )
+            GROUP BY city
+            ORDER BY agreement_pct ASC
+        """, conn)
+        conn.close()
+
+        if judge_rows.empty:
+            st.info("No LLM Judge results yet. Add GROQ_API_KEY to .env and run the pipeline.")
+        else:
+            for _, row in judge_rows.iterrows():
+                pct = row["agreement_pct"]
+                color = "#16a34a" if pct >= 70 else "#d97706" if pct >= 50 else "#dc2626"
+                confidence = "High confidence" if pct >= 70 else "Medium confidence" if pct >= 50 else "Low confidence"
+                st.markdown(f"""
+                <div style="display:flex;justify-content:space-between;align-items:center;
+                            padding:10px 14px;border-radius:6px;margin-bottom:6px;
+                            background:#fafafa;border:1px solid #efefef">
+                    <span style="font-weight:600;font-size:0.9rem">{row['city']}</span>
+                    <span style="font-size:0.8rem;color:#999">{int(row['agreed'])}/{int(row['total_judged'])} agreed</span>
+                    <span style="font-weight:600;color:{color};font-size:0.9rem">{pct:.0f}% — {confidence}</span>
+                </div>
+                """, unsafe_allow_html=True)
+
+    except Exception as e:
+        st.error(f"Could not load judge results: {e}")
+
+with tab2:
+    st.markdown("#### Articles flagged for human review")
+    st.caption(
+        "These articles had VADER and LLM disagreeing. "
+        "Mark each one with the correct label."
+    )
+
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        samples = pd.read_sql("""
+            SELECT id, city, clean_text, vader_label, vader_score,
+                   llm_label, human_label, needs_review
+            FROM validation_samples
+            WHERE needs_review = 1
+            ORDER BY city ASC
+            LIMIT 20
+        """, conn)
+        conn.close()
+
+        if samples.empty:
+            st.success(
+                "No articles need review right now. "
+                "Articles will appear here when LLM Judge finds disagreements."
+            )
+        else:
+            st.info(f"{len(samples)} articles need review")
+
+            for _, row in samples.iterrows():
+                with st.expander(
+                    f"{row['city']} — VADER: {row['vader_label']} "
+                    f"({row['vader_score']:+.2f}) | LLM: {row['llm_label']}"
+                ):
+                    st.write(row["clean_text"][:400])
+                    st.caption("VADER and LLM disagreed. What is the correct label?")
+
+                    col1, col2, col3, col4 = st.columns(4)
+                    with col1:
+                        if st.button("Positive", key=f"pos_{row['id']}"):
+                            conn = sqlite3.connect(DB_PATH)
+                            correct = 1 if row["vader_label"] == "positive" else 0
+                            conn.execute("UPDATE validation_samples SET human_label='positive', correct=?, needs_review=0 WHERE id=?", (correct, row["id"]))
+                            conn.commit(); conn.close(); st.rerun()
+                    with col2:
+                        if st.button("Negative", key=f"neg_{row['id']}"):
+                            conn = sqlite3.connect(DB_PATH)
+                            correct = 1 if row["vader_label"] == "negative" else 0
+                            conn.execute("UPDATE validation_samples SET human_label='negative', correct=?, needs_review=0 WHERE id=?", (correct, row["id"]))
+                            conn.commit(); conn.close(); st.rerun()
+                    with col3:
+                        if st.button("Neutral", key=f"neu_{row['id']}"):
+                            conn = sqlite3.connect(DB_PATH)
+                            correct = 1 if row["vader_label"] == "neutral" else 0
+                            conn.execute("UPDATE validation_samples SET human_label='neutral', correct=?, needs_review=0 WHERE id=?", (correct, row["id"]))
+                            conn.commit(); conn.close(); st.rerun()
+                    with col4:
+                        if st.button("Skip", key=f"skip_{row['id']}"):
+                            conn = sqlite3.connect(DB_PATH)
+                            conn.execute("UPDATE validation_samples SET needs_review=0 WHERE id=?", (row["id"],))
+                            conn.commit(); conn.close(); st.rerun()
+
+    except Exception as e:
+        st.error(f"Could not load validation samples: {e}")
+
+    st.markdown("#### VADER accuracy from human reviews")
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        accuracy = pd.read_sql("""
+            SELECT week_start,
+                   COUNT(*) as total_reviewed,
+                   SUM(correct) as correct_count,
+                   ROUND(AVG(correct) * 100, 1) as accuracy_pct
+            FROM validation_samples
+            WHERE human_label IS NOT NULL
+            GROUP BY week_start
+            ORDER BY week_start ASC
+        """, conn)
+        conn.close()
+
+        if accuracy.empty:
+            st.info("No accuracy data yet — review some articles above first.")
+        else:
+            c1, c2, c3 = st.columns(3)
+            latest = accuracy.iloc[-1]
+            c1.metric("Latest accuracy", f"{latest['accuracy_pct']:.1f}%")
+            c2.metric("Articles reviewed", int(latest["total_reviewed"]))
+            c3.metric("Correct predictions", int(latest["correct_count"]))
+            if len(accuracy) > 1:
+                st.line_chart(accuracy.set_index("week_start")["accuracy_pct"], height=200)
+    except Exception as e:
+        st.error(f"Could not load accuracy: {e}")
 
 # ─── FOOTER ───────────────────────────────────────────────────────────────────
 
