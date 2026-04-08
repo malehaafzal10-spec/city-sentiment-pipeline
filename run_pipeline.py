@@ -137,12 +137,22 @@ def run_pipeline(skip_llm: bool = False, news_only: bool = False) -> dict:
             }
             log.info(f"      ✓ LLM Judge: {judge_result.get('overall_agreement', 0):.0%} overall agreement")
  
-        # Step 9: Monitor
-        log.info("[7/7] Monitoring and drift detection")
+       # Step 9: Monitor
+        log.info("[7/8] Monitoring and drift detection")
         from monitor import run as monitor_run
         mon_result = monitor_run(run_id, city_metrics)
         results["steps"]["monitor"] = {"alerts": mon_result["total_alerts"]}
         log.info(f"      ✓ {mon_result['total_alerts']} alerts generated")
+ 
+        # Evaluate — model quality metrics
+        log.info("[8/8] Model evaluation")
+        from evaluate import run as evaluate_run
+        eval_result = evaluate_run(run_id)
+        results["steps"]["evaluate"] = eval_result
+        if "error" not in eval_result:
+            log.info(f"      ✓ Accuracy={eval_result['accuracy']:.0%} Macro F1={eval_result['macro_f1']:.0%}")
+        else:
+            log.info(f"      — {eval_result['error']}")
  
         # Step 10: Dashboard
         log.info("[8/8] Generating dashboard")
