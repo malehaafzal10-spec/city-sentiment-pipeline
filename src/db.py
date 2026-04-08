@@ -92,6 +92,38 @@ def init_db():
             run_id        TEXT NOT NULL
         )
     """)
+    # LLM Judge results — one row per article assessed
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS llm_judge_results (
+            id            INTEGER PRIMARY KEY AUTOINCREMENT,
+            doc_id        TEXT NOT NULL,
+            city          TEXT NOT NULL,
+            vader_label   TEXT NOT NULL,
+            vader_score   REAL NOT NULL,
+            llm_label     TEXT NOT NULL,
+            agreement     INTEGER NOT NULL,
+            week_start    TEXT NOT NULL,
+            run_id        TEXT NOT NULL
+        )
+    """)
+
+    # Human validation samples — articles flagged for human review
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS validation_samples (
+            id            INTEGER PRIMARY KEY AUTOINCREMENT,
+            doc_id        TEXT NOT NULL,
+            city          TEXT NOT NULL,
+            clean_text    TEXT NOT NULL,
+            vader_label   TEXT NOT NULL,
+            vader_score   REAL NOT NULL,
+            llm_label     TEXT,
+            human_label   TEXT,
+            correct       INTEGER,
+            needs_review  INTEGER DEFAULT 1,
+            week_start    TEXT NOT NULL,
+            run_id        TEXT NOT NULL
+        )
+    """)
 
     conn.commit()
     conn.close()
