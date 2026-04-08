@@ -4,6 +4,7 @@ M6 — Data Engineering and Machine Learning Operations in Business | AAU F2026
 Tracks how travellers talk about 8 European cities using NewsAPI.
 Scores sentiment weekly, detects drift, and publishes a live dashboard.
 
+run_20260406_135639
 ## Quick start
 
 ```bash
