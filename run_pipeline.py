@@ -91,7 +91,7 @@ def run_pipeline(skip_llm: bool = False, news_only: bool = False) -> dict:
         results["steps"]["score"] = r
         log.info(f"      ✓ {r['scored_count']} documents scored")
  
-        # Step 8: Aggregate
+        # Step 7: Aggregate
         log.info("[5/7] Weekly aggregation")
         from aggregate import run as agg_run
         agg_result = agg_run(run_id)
@@ -99,7 +99,7 @@ def run_pipeline(skip_llm: bool = False, news_only: bool = False) -> dict:
         results["steps"]["aggregate"] = {"cities": len(city_metrics)}
         log.info(f"      ✓ Metrics for {len(city_metrics)} cities")
  
-        # Step 7: LLM verdicts (skipped on daily runs)
+        # Step 8: LLM verdicts (skipped on daily runs)
         verdicts = {}
         if not skip_llm and not news_only:
             log.info("[6/7] LLM verdicts (optional)")
@@ -125,16 +125,37 @@ def run_pipeline(skip_llm: bool = False, news_only: bool = False) -> dict:
                 log.info("[6/7] Skipping LLM verdicts — daily news run")
             else:
                 log.info("[6/7] Skipping LLM verdicts — --skip-llm flag")
+        
+        # LLM Judge — automated VADER validation
+        from llm_judge import run as judge_run
+        judge_result = judge_run(run_id)
+        if not judge_result.get("skipped"):
+            results["steps"]["llm_judge"] = {
+                "total_judged": judge_result.get("total_judged", 0),
+                "overall_agreement": judge_result.get("overall_agreement", 0),
+                "city_agreement": judge_result.get("city_agreement", {})
+            }
+            log.info(f"      ✓ LLM Judge: {judge_result.get('overall_agreement', 0):.0%} overall agreement")
  
-        # Step 9: Monitor
-        log.info("[7/7] Monitoring and drift detection")
+       # Step 9: Monitor
+        log.info("[7/8] Monitoring and drift detection")
         from monitor import run as monitor_run
         mon_result = monitor_run(run_id, city_metrics)
         results["steps"]["monitor"] = {"alerts": mon_result["total_alerts"]}
         log.info(f"      ✓ {mon_result['total_alerts']} alerts generated")
  
-        # Step 11: Dashboard
-        log.info("[8/7] Generating dashboard")
+        # Evaluate — model quality metrics
+        log.info("[8/8] Model evaluation")
+        from evaluate import run as evaluate_run
+        eval_result = evaluate_run(run_id)
+        results["steps"]["evaluate"] = eval_result
+        if "error" not in eval_result:
+            log.info(f"      ✓ Accuracy={eval_result['accuracy']:.0%} Macro F1={eval_result['macro_f1']:.0%}")
+        else:
+            log.info(f"      — {eval_result['error']}")
+ 
+        # Step 10: Dashboard
+        log.info("[8/8] Generating dashboard")
         from dashboard import run as dash_run
         dash_result = dash_run(run_id)
         results["steps"]["dashboard"] = dash_result
