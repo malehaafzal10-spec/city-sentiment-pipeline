@@ -13,3 +13,4 @@ uvicorn==0.27.1
 pymongo
 newspaper4k
 groq
+streamlit
