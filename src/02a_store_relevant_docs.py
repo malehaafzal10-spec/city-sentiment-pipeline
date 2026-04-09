@@ -3,21 +3,12 @@
 
 Two-stage relevance filtering:
   Stage 1 — Keyword pre-filter (fast, free)
-             Drops obvious irrelevant articles before calling Groq.
-             Saves API calls and time.
+             Drops obvious irrelevant articles before calling the LLM.
 
-  Stage 2 — LLM relevance filter (Groq / Llama 3)
-             Sends title + description to Groq for each article that
-             passed Stage 1. Groq decides if the article is genuinely
-             about visiting the city as a travel destination.
-             Stores the reason for traceability.
-
-Only relevant articles get:
-  - Full text scraped via BeautifulSoup
-  - Cleaned and deduplicated
-  - Stored in processed_documents collection
-
-Reddit posts skip Stage 2 (already travel-relevant by search query).
+  Stage 2 — LLM relevance filter (Gemini -> Groq Fallback)
+             Attempts classification with Gemini 2.5 Flash. If rate limited,
+             falls back to Groq. If both are limited, waits and retries.
+             Avoids false positives by defaulting to "no" on complete failure.
 """
 
 import os
@@ -25,7 +16,7 @@ import re
 import json
 import time
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 import requests
 from bs4 import BeautifulSoup
@@ -36,9 +27,14 @@ load_dotenv()
 
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
+
+# LLM Configurations
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL = "gemini-2.5-flash"
+
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_MODEL = "llama-3.1-8b-instant"
+GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 RAW_COLLECTION = "raw_documents"
 PROCESSED_COLLECTION = "processed_documents"
@@ -53,9 +49,6 @@ logging.basicConfig(
 log = logging.getLogger("store_relevant_docs")
 
 # ─── STAGE 1: KEYWORD PRE-FILTER ─────────────────────────────────────────────
-# Fast check on title + snippet only.
-# Purpose: drop obvious non-travel articles BEFORE calling Groq.
-# This saves ~60% of Groq API calls.
 
 IRRELEVANT_PATTERNS = [
     "airline", "luxury seat", "business class", "first class seat",
@@ -81,13 +74,7 @@ RELEVANT_PATTERNS = [
     "local tips", "hidden gem", "tourist trap",
 ]
 
-
 def keyword_pre_filter(title: str, snippet: str, city: str) -> bool:
-    """
-    Stage 1: fast keyword check.
-    Returns True if article should proceed to LLM check.
-    Returns False if article should be dropped immediately.
-    """
     combined = f"{title} {snippet}".lower()
     for pattern in IRRELEVANT_PATTERNS:
         if pattern in combined:
@@ -95,16 +82,11 @@ def keyword_pre_filter(title: str, snippet: str, city: str) -> bool:
     for pattern in RELEVANT_PATTERNS:
         if pattern in combined:
             return True
-    # If city name is present but no travel signal — still send to LLM
-    # The LLM will make the final call
     if city.lower() in combined:
         return True
     return False
 
-
-# ─── STAGE 2: LLM RELEVANCE FILTER ───────────────────────────────────────────
-# Sends title + description to Groq for each article that passed Stage 1.
-# Returns {"relevant": "yes"/"no", "reason": "..."}
+# ─── STAGE 2: LLM RELEVANCE FILTER (GEMINI -> GROQ FALLBACK) ─────────────────
 
 def build_system_prompt(city: str) -> str:
     return f"""You are a travel news classifier.
@@ -129,92 +111,99 @@ Respond ONLY with valid JSON in this exact format, nothing else:
 or
 {{"relevant": "no", "reason": "short explanation"}}"""
 
-
 def llm_classify(title: str, description: str, city: str) -> dict:
-    """
-    Stage 2: ask Groq if this article is relevant for the given city.
-    Returns dict with 'relevant' (yes/no/unknown) and 'reason'.
-    Falls back gracefully if Groq is unavailable.
-    """
-    if not GROQ_API_KEY:
-        # No Groq key — skip LLM filter, treat as relevant
-        return {"relevant": "yes", "reason": "LLM filter skipped — no GROQ_API_KEY"}
+    # 1. Prepare Gemini Request
+    gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
+    gemini_body = {
+        "systemInstruction": {"parts": [{"text": build_system_prompt(city)}]},
+        "contents": [{"role": "user", "parts": [{"text": f"Title: {title}\nDescription: {description}"}]}],
+        "generationConfig": {"responseMimeType": "application/json", "temperature": 0}
+    }
 
-    user_message = f"Title: {title}\nDescription: {description}"
-
-    headers = {
+    # 2. Prepare Groq Request
+    groq_headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json",
     }
-
-    body = {
+    groq_body = {
         "model": GROQ_MODEL,
         "temperature": 0,
         "max_tokens": 100,
         "messages": [
             {"role": "system", "content": build_system_prompt(city)},
-            {"role": "user", "content": user_message},
+            {"role": "user", "content": f"Title: {title}\nDescription: {description}"},
         ],
+        "response_format": {"type": "json_object"}
     }
 
-    try:
-        response = requests.post(GROQ_URL, headers=headers, json=body, timeout=15)
-        response.raise_for_status()
-        raw_text = response.json()["choices"][0]["message"]["content"].strip()
+    max_attempts = 4
+    base_wait = 10
 
-        try:
-            result = json.loads(raw_text)
-        except json.JSONDecodeError:
-            log.warning(f"[LLM Filter] Could not parse response for '{title[:50]}': {raw_text}")
-            result = {"relevant": "yes", "reason": f"parse_error: {raw_text[:100]}"}
+    for attempt in range(max_attempts):
+        # ── Try Gemini ──
+        if GEMINI_API_KEY:
+            try:
+                resp = requests.post(gemini_url, headers={"Content-Type": "application/json"}, json=gemini_body, timeout=15)
+                if resp.status_code == 429:
+                    log.warning(f"[LLM Filter] Gemini Rate Limit (429). Falling back to Groq...")
+                elif not resp.ok:
+                    log.error(f"[LLM Filter] Gemini API Error {resp.status_code}: {resp.text}")
+                else:
+                    raw_text = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+                    result = json.loads(raw_text)
+                    result["model_used"] = "gemini"
+                    return result
+            except Exception as e:
+                log.warning(f"[LLM Filter] Gemini request failed: {e}")
 
-        return result
+        # ── Try Groq (Fallback) ──
+        if GROQ_API_KEY:
+            try:
+                resp = requests.post(GROQ_URL, headers=groq_headers, json=groq_body, timeout=15)
+                if resp.status_code == 429:
+                    log.warning(f"[LLM Filter] Groq Rate Limit (429). Both models exhausted.")
+                elif not resp.ok:
+                    log.error(f"[LLM Filter] Groq API Error {resp.status_code}: {resp.text}")
+                else:
+                    raw_text = resp.json()["choices"][0]["message"]["content"].strip()
+                    result = json.loads(raw_text)
+                    result["model_used"] = "groq"
+                    return result
+            except Exception as e:
+                log.warning(f"[LLM Filter] Groq request failed: {e}")
 
-    except Exception as e:
-        log.warning(f"[LLM Filter] Groq error for '{title[:50]}': {e}")
-        # On error — treat as relevant so we don't lose articles
-        return {"relevant": "yes", "reason": f"groq_error: {str(e)[:100]}"}
+        # ── Both Failed (Wait and Retry) ──
+        sleep_time = base_wait * (2 ** attempt)
+        log.info(f"[LLM Filter] APIs limited/failed. Waiting {sleep_time}s before retry (Attempt {attempt+1}/{max_attempts})...")
+        time.sleep(sleep_time)
 
+    # ── Complete Failure (Fix: Now defaults to NO) ──
+    log.error(f"[LLM Filter] Max retries exceeded for '{title[:30]}'. Defaulting to NOT RELEVANT.")
+    return {"relevant": "no", "reason": "api_limits_exceeded", "model_used": "none"}
 
-# ─── SCRAPING ─────────────────────────────────────────────────────────────────
+# ─── SCRAPING & CLEANING ──────────────────────────────────────────────────────
 
 def scrape_full_text(url: str) -> str:
-    """Scrape full article text using BeautifulSoup."""
     try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-        }
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, "html.parser")
         paragraphs = soup.find_all("p")
-        full_text = "\n\n".join([
-            p.get_text().strip()
-            for p in paragraphs
-            if p.get_text().strip()
-        ])
+        full_text = "\n\n".join([p.get_text().strip() for p in paragraphs if p.get_text().strip()])
         return full_text if len(full_text) > 100 else ""
     except Exception as e:
         log.debug(f"[Scrape] Failed {url}: {e}")
         return ""
 
-
-# ─── TEXT CLEANING ────────────────────────────────────────────────────────────
-
 def clean_text_vader_safe(text: str) -> str:
-    """
-    Clean text while preserving casing and punctuation for accurate VADER scoring.
-    VADER needs: capitalisation (GREAT vs great), punctuation (!!!) and negations (not good).
-    """
-    if not text:
-        return ""
+    if not text: return ""
     text = re.sub(r"http\S+|www\.\S+", "", text)
-    text = re.sub(r"\[\+\d+\s*chars\]", "", text)          # NewsAPI truncation
-    text = re.sub(r"\[([^\]]+)\]\([^\)]+\)", r"\1", text)  # markdown links
+    text = re.sub(r"\[\+\d+\s*chars\]", "", text)
+    text = re.sub(r"\[([^\]]+)\]\([^\)]+\)", r"\1", text)
     text = text.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
     text = re.sub(r"\s+", " ", text)
     return text.strip()
-
 
 def is_english(text: str) -> bool:
     try:
@@ -222,7 +211,6 @@ def is_english(text: str) -> bool:
         return detect(text) == "en"
     except Exception:
         return True
-
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
@@ -244,6 +232,7 @@ def process_documents(run_id: str) -> dict:
 
     processed_docs = []
     seen_texts = set()
+    debug_records = []
 
     metrics = {
         "total_raw": len(raw_docs),
@@ -252,10 +241,8 @@ def process_documents(run_id: str) -> dict:
         "scraped": 0,
         "skipped_keyword": 0,
         "skipped_llm": 0,
-        "skipped_short": 0,
-        "skipped_lang": 0,
-        "skipped_dupe": 0,
-        "groq_calls": 0
+        "gemini_successes": 0,
+        "groq_successes": 0
     }
 
     for doc in raw_docs:
@@ -264,45 +251,63 @@ def process_documents(run_id: str) -> dict:
         description = doc.get("description", "") or ""
         city = doc.get("city", "Unknown")
         source = doc.get("source", "")
+        url = doc.get("url", "")
 
-        # ── Stage 1: keyword pre-filter ───────────────────────────────────────
-        # Reddit posts skip LLM filter — already travel-relevant by search query
+        keyword_passed = False
+        llm_passed = False
+        llm_reason = ""
+        model_used = "none"
+
+        # ── Stage 1 & 2 Filtering ──
         if source == "reddit":
-            llm_relevant = True
+            keyword_passed = True
+            llm_passed = True
             llm_reason = "reddit — skipped LLM filter"
             metrics["passed_keyword_filter"] += 1
             metrics["passed_llm_filter"] += 1
-
         else:
-            # News articles go through both filters
-            if not keyword_pre_filter(title, original_text, city):
+            keyword_passed = keyword_pre_filter(title, original_text, city)
+            
+            if not keyword_passed:
                 metrics["skipped_keyword"] += 1
                 log.debug(f"[Filter] KEYWORD DROP: {title[:60]}")
-                continue
+            else:
+                metrics["passed_keyword_filter"] += 1
+                
+                desc_for_llm = description if description else original_text[:300]
+                classification = llm_classify(title, desc_for_llm, city)
+                
+                # Update model metrics
+                model_used = classification.get("model_used", "none")
+                if model_used == "gemini": metrics["gemini_successes"] += 1
+                elif model_used == "groq": metrics["groq_successes"] += 1
 
-            metrics["passed_keyword_filter"] += 1
+                llm_passed = classification.get("relevant", "no") == "yes"
+                llm_reason = classification.get("reason", "")
 
-            # ── Stage 2: LLM relevance filter ─────────────────────────────────
-            # Use title + description for LLM (cleaner than full raw text)
-            desc_for_llm = description if description else original_text[:300]
-            classification = llm_classify(title, desc_for_llm, city)
-            metrics["groq_calls"] += 1
+                if not llm_passed:
+                    metrics["skipped_llm"] += 1
+                    log.info(f"[Filter] LLM DROP ({model_used}) [{city}]: {title[:50]} — {llm_reason}")
+                else:
+                    metrics["passed_llm_filter"] += 1
+                    log.info(f"[Filter] LLM KEEP ({model_used}) [{city}]: {title[:50]}")
 
-            llm_relevant = classification.get("relevant", "yes") == "yes"
-            llm_reason = classification.get("reason", "")
+                # Tiny polite sleep to prevent overwhelming connections
+                time.sleep(0.5)
 
-            if not llm_relevant:
-                metrics["skipped_llm"] += 1
-                log.info(f"[Filter] LLM DROP [{city}]: {title[:60]} — {llm_reason}")
-                continue
+        debug_records.append({
+            "city": city,
+            "title": title,
+            "keyword_passed": keyword_passed,
+            "llm_passed": llm_passed,
+            "model_used": model_used,
+            "llm_reason": llm_reason
+        })
 
-            metrics["passed_llm_filter"] += 1
-            log.info(f"[Filter] LLM KEEP [{city}]: {title[:60]}")
+        if not keyword_passed or not llm_passed:
+            continue
 
-            # Rate limit — 0.3s between Groq calls (free tier)
-            time.sleep(0.3)
-
-        # ── Scrape full text (news only) ──────────────────────────────────────
+        # ── Scrape & Clean ──
         full_text = ""
         was_scraped = False
         if source == "news":
@@ -312,83 +317,59 @@ def process_documents(run_id: str) -> dict:
                 was_scraped = True
 
         raw_final_text = full_text if full_text else original_text
-
-        # ── Clean text ────────────────────────────────────────────────────────
         clean = clean_text_vader_safe(f"{title}. {raw_final_text}")
 
-        # ── Length filter ─────────────────────────────────────────────────────
-        if len(clean) < MIN_TEXT_LENGTH:
-            metrics["skipped_short"] += 1
+        if len(clean) < MIN_TEXT_LENGTH or not is_english(clean):
             continue
 
-        # ── Language filter ───────────────────────────────────────────────────
-        if not is_english(clean):
-            metrics["skipped_lang"] += 1
-            continue
-
-        # ── Deduplication ─────────────────────────────────────────────────────
         text_key = f"{city}:{clean[:120]}"
         if text_key in seen_texts:
-            metrics["skipped_dupe"] += 1
             continue
         seen_texts.add(text_key)
 
-        # ── Build processed document ──────────────────────────────────────────
         processed_doc = doc.copy()
         processed_doc.pop("_id", None)
         processed_doc.update({
             "text": clean,
             "full_text_scraped": was_scraped,
-            "text_length": len(clean),
-            "llm_relevant": llm_relevant,
-            "llm_reason": llm_reason,          # stored for traceability
+            "llm_relevant": llm_passed,
+            "model_used": model_used,
             "processed_time": datetime.now(timezone.utc).isoformat()
         })
         processed_docs.append(processed_doc)
 
-    # ── Summary log ───────────────────────────────────────────────────────────
+    # ── Summary & DB Save ──
     log.info(
-        f"[Process] Kept {len(processed_docs)} / {metrics['total_raw']} | "
-        f"Keyword dropped: {metrics['skipped_keyword']} | "
-        f"LLM dropped: {metrics['skipped_llm']} | "
+        f"[Process] Kept {len(processed_docs)}/{metrics['total_raw']} | "
         f"Scraped: {metrics['scraped']} | "
-        f"Groq calls: {metrics['groq_calls']}"
+        f"Gemini: {metrics['gemini_successes']} | Groq: {metrics['groq_successes']}"
     )
+    
+    debug_filename = f"filter_evaluation_{run_id}.json"
+    try:
+        with open(debug_filename, "w", encoding="utf-8") as f:
+            json.dump(debug_records, f, indent=4, ensure_ascii=False)
+    except Exception as e:
+        log.error(f"Failed to save debug file: {e}")
 
-    # ── Save to MongoDB ───────────────────────────────────────────────────────
     if processed_docs:
         try:
-            # Save artifact snapshot
             db[ARTIFACTS_COLLECTION].insert_one({
-                "run_id": run_id,
-                "artifact_type": "processed_scraped_docs",
-                "timestamp": datetime.now(timezone.utc),
-                "document_count": len(processed_docs),
-                "metrics": metrics,
-                "payload": processed_docs
+                "run_id": run_id, "artifact_type": "processed_scraped_docs",
+                "timestamp": datetime.now(timezone.utc), "document_count": len(processed_docs),
+                "metrics": metrics, "payload": processed_docs
             })
-
-            # Upsert into processed_documents
-            operations = [
-                UpdateOne({"doc_id": d["doc_id"]}, {"$set": d}, upsert=True)
-                for d in processed_docs
-            ]
-            result = db[PROCESSED_COLLECTION].bulk_write(operations)
-            log.info(
-                f"[DB] Upserted {result.upserted_count + result.modified_count} "
-                f"processed documents into '{PROCESSED_COLLECTION}'"
-            )
-
+            operations = [UpdateOne({"doc_id": d["doc_id"]}, {"$set": d}, upsert=True) for d in processed_docs]
+            db[PROCESSED_COLLECTION].bulk_write(operations)
         except Exception as e:
-            log.error(f"[DB] Failed to save processed data: {e}")
+            log.error(f"[DB] Save failed: {e}")
 
     client.close()
     return {"run_id": run_id, "cleaned_count": len(processed_docs), "metrics": metrics}
 
-
 if __name__ == "__main__":
-    test_run_id = input("Enter the run_id to process: ")
-    if test_run_id.strip():
-        result = process_documents(test_run_id.strip())
-        print(f"\nProcessed {result['cleaned_count']} documents")
-        print(f"Metrics: {result['metrics']}")
+    current_run_id = f"run_{datetime.now(timezone.utc).strftime('%d%m%Y')}"
+    print(f"Starting processor with run_id: {current_run_id}")
+    result = process_documents(current_run_id)
+    print(f"\nPipeline Finished! Processed {result['cleaned_count']} documents.")
+    print(f"Metrics: {json.dumps(result['metrics'], indent=2)}")

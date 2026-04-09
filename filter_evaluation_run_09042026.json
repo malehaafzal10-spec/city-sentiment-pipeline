@@ -1,0 +1,794 @@
+[
+    {
+        "city": "Paris",
+        "title": "Liverpool & Slot 'in survival mode' - but still just about alive",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Slot relieved despite Liverpool being 'ripped apart'",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Match Report: Liverpool beaten by PSG in Champions League Quarter Final",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Hawaiian Airlines Spring Sale for 1-Way from $59",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Southwest Airlines Come Sale Away for Flights from $59 1-Way",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "How to save money on flights as airlines raise prices",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Spain’s Culture Minister Rejects Guernica Transfer, but Basque Leaders Refuse to Take No for an Answer",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "How to watch PSG vs Liverpool match tonight – TV and live streaming details",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Air France Premium Cabin Flights from Denver to Paris for From $2,155 Roundtrip",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about airline routes and flight deals, not about visiting Paris as a travel destination"
+    },
+    {
+        "city": "Paris",
+        "title": "Fitness fans are traveling around the world for ‘runcations’ — where 3 miles a day is a laid-back holiday",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Paris briefly but is about running vacations in general"
+    },
+    {
+        "city": "Paris",
+        "title": "Where Instagram’s Creative Strategist Gets Vintage Gucci",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Paris but is about shopping and fashion, not travel"
+    },
+    {
+        "city": "Paris",
+        "title": "This Minimalist Analog World Clock Is the Upgrade You Didn’t Know Your Desk Needed",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Salon Jane: Resonance",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Sofía Quirós Úbeda, Paz Fábregas, Tres Tigres, Monte & Culebra and Mentes Fritas Compete at Panama’s Su Mirada Female Director Focus",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "I used an Android phone with a 9,000mAh battery — and I can’t go back",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Paris briefly but is about a smartphone review"
+    },
+    {
+        "city": "Paris",
+        "title": "Ben Gurion Airport Still Closed on April 8, 2026: Limited Flights Only as Israel-Iran Tensions Persist",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "JCDecaux wins advertising tender for Western Sydney International Airport, Sydney’s new 24-hour airport",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about airline routes and airport news, not Paris"
+    },
+    {
+        "city": "Paris",
+        "title": "Microsoft and Publicis Groupe expand their strategic partnership to power the future of agentic marketing for businesses worldwide",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Spring’s Best Beauty Products Are for the Girly Girls",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Amazon Bedrock AgentCore Browser adds OS-level interaction capabilities",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "LECTRA : Combined Shareholders’ Meeting of April 29, 2026 – Conditions of availability of the preparatory documents",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about business and shareholders meeting, not travel"
+    },
+    {
+        "city": "Paris",
+        "title": "9 Things I Wish I’d Known Before Going to Universal Singapore",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about Universal Singapore, not Paris"
+    },
+    {
+        "city": "Paris",
+        "title": "BIC: Disclosure of total number of voting rights and number of shares forming the capital as of 31 March 2026",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Euronext announces volumes for March 2026",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Paris briefly but is about Euronext volumes"
+    },
+    {
+        "city": "Paris",
+        "title": "BIC: Remuneration of Corporate Officers",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "French former detainees Cécile Kohler and Jacques Paris return home after more than 3 years in Iran",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Paris as a location in France, but is about politics and former detainees"
+    },
+    {
+        "city": "Paris",
+        "title": " Activation in Paris, Liverpool take a stroll before PSG",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Microsoft and Publicis Groupe expand their strategic partnership to power the future of agentic marketing for businesses worldwide",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Why Portuguese-Made Footwear Is Flying Off the Shelves (and Why It’s Worth the Investment)",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Universal Genève Is Back! Introducing Four Collections, With The Famous Polerouter Leading The Way",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "37 Examples Of Brilliant Architectural Design That Doesn’t Exist Anymore",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Paris briefly but is about something else"
+    },
+    {
+        "city": "Paris",
+        "title": "Base Carbon Provides Update on Vietnam Regulatory Framework for International Carbon Credit Transfers",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Base Carbon Provides Update on Vietnam Regulatory Framework for International Carbon Credit Transfers",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Vance tries to boosts ailing MAGA ally ahead of Hungary election",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Paris",
+        "title": "Meloni’s Trump trouble: Why Italian PM is distancing herself from US leader",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Rome",
+        "title": "9 dramatic hotels where the interiors wield a stun gun",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions hotels but does not specify Rome as the destination"
+    },
+    {
+        "city": "Rome",
+        "title": "Pentagon Threatened the Pope After He Criticized Trump",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Rome",
+        "title": "Rome’s non-Catholic cemetery: A quiet alternative to crowded sights",
+        "keyword_passed": true,
+        "llm_passed": true,
+        "model_used": "groq",
+        "llm_reason": "article is about a lesser-known attraction in Rome, specifically a cemetery"
+    },
+    {
+        "city": "Rome",
+        "title": "Pope will address tensions between Christianity and Islam in Africa, Nigerian bishop says",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Rome briefly but is about something else (Pope's trip to Africa)"
+    },
+    {
+        "city": "Rome",
+        "title": "EWTN News documentary highlights Lebanon’s Christian roots and enduring faith",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Barcelona",
+        "title": "Atletico Madrid stun 10-man Barcelona at Nou Camp",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Barcelona",
+        "title": "Europe needs affordable, low-carbon homes – here’s how Barcelona is reimagining its housing system",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about Barcelona's housing system, but not as a travel destination"
+    },
+    {
+        "city": "Barcelona",
+        "title": "42 stages, unbeatable scenery, 144,000ft of climbing: Is the Grand Tour of Catalonia Gravel the world’s most epic gravel ride?",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Barcelona's region but is about a cycling event, not travel to Barcelona"
+    },
+    {
+        "city": "Barcelona",
+        "title": "Stan Wawrinka left out as five wildcards awarded for Madrid Masters",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Barcelona",
+        "title": "1-night France–Spain cruise ☀️",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Barcelona as a destination but is primarily about a cruise and flight deal"
+    },
+    {
+        "city": "Barcelona",
+        "title": "Grand Canyon tourists slapped with staggering new fee to visit iconic national park",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about Grand Canyon, not Barcelona"
+    },
+    {
+        "city": "Barcelona",
+        "title": "Real Madrid's nightmare season: The looming threat of finishing empty-handed",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Barcelona",
+        "title": "Open Smart Classroom Solutions Market Report 2026: Worth $8.91 Billion, the Industry is Expected to Reach $15.2 Billion by 2030",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Barcelona",
+        "title": "McLaren gives F2 champion Leo Fornaroli several F1 tests",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about sports, specifically Formula 1, and mentions Barcelona as a location for testing, but is not about visiting or experiencing Barcelona as a travel destination"
+    },
+    {
+        "city": "Barcelona",
+        "title": "️ Front pages: from Los Blancos belief to a giant Bayern win",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Barcelona",
+        "title": "Barcelona will host super agent tonight for talks over key duo contracts",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Barcelona",
+        "title": "Harry Kane leads Bayern to 2-1 win over Real Madrid in 1st leg of Champions League quarterfinals",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Lisbon",
+        "title": "Nottingham Forest eye historic Europa League repeat against high-flying Porto",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about sports, mentions Lisbon is not the focus"
+    },
+    {
+        "city": "Lisbon",
+        "title": "Gyokeres reacts to Sporting reception after 1st game vs old club",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Amsterdam",
+        "title": "Passenger numbers at Dublin Airport up 11% in March",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Amsterdam",
+        "title": "GoldFish Take a Big Dive into the Space Between Jazz and Dance Music",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Amsterdam",
+        "title": "Weekly share repurchase program transaction details",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about business and mentions Amsterdam briefly but is not about travel"
+    },
+    {
+        "city": "Prague",
+        "title": "Anyone Else Obsessed With Medieval Castles?",
+        "keyword_passed": true,
+        "llm_passed": true,
+        "model_used": "groq",
+        "llm_reason": "article mentions visiting Prague and a specific castle in the Czech Republic"
+    },
+    {
+        "city": "Prague",
+        "title": "In China’s 'Silicon Valley,' US landmarks stand in a strange world frozen in time",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Prague",
+        "title": "An oral history of… Biff, Chip and Kipper",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Prague",
+        "title": "Lee Pace Confirms Foundation Season 4 Filming Underway in Prague: Story \"Gets Bigger\"",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about filming of a TV show in Prague, not travel to Prague"
+    },
+    {
+        "city": "Athens",
+        "title": "Forest's Igor Jesus eyes Europa League 'dream', Villa brace for Bologna in quarters",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "Athens",
+        "title": "Greece – Georgia: Cultural partnerships planned between the two countries",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions Athens but is about cultural partnerships and not travel to Athens"
+    },
+    {
+        "city": "Athens",
+        "title": "BoG cautiously positive on real estate market prospects",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "How China Positioned Itself to Win the Global Energy Crisis",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Steven Soderbergh Burned 44 Years of Notebooks and Says It ‘Was the Right Thing to Do’",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions London briefly but is about something else (Steven Soderbergh's film)"
+    },
+    {
+        "city": "London",
+        "title": "Virgin Atlantic: San Francisco – Mumbai, India. $758 (Basic Economy) / $908 (Regular Economy). Roundtrip, including all Taxes",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about airline routes and flight deals, not London"
+    },
+    {
+        "city": "London",
+        "title": "Global stocks surge as ceasefire stokes relief rally",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Energy Crisis Sends Travelers Scrambling for Insurance Coverage",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Delta: Los Angeles – Mumbai, India. $691 (Basic Economy) / $841 (Regular Economy). Roundtrip, including all Taxes",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about airline routes and flight deals, not about traveling to or visiting London"
+    },
+    {
+        "city": "London",
+        "title": "Ye, Snoop Dogg, and Other Artists Who’ve Been Denied Entry into the U.K.",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Fiorentina lose Italy international Kean for Crystal Palace Conference League clash",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about sports, mentions London briefly but is not about travel to London"
+    },
+    {
+        "city": "London",
+        "title": "Liam Walsh gives thanks for support after baby loss",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Liam Walsh gives thanks for support after baby loss",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions London briefly but is about a sports-related story"
+    },
+    {
+        "city": "London",
+        "title": "Gear Haul: 10 Best New EDC Essentials (2026 Guide)",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "FTSE 100 Surges Nearly 3% to One-Month High on US-Iran Ceasefire Relief Rally",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about business and politics, not travel"
+    },
+    {
+        "city": "London",
+        "title": "The new Trump trades: how investors are navigating Iran shocks",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions London briefly but is about something else (investors navigating market uncertainty)"
+    },
+    {
+        "city": "London",
+        "title": "Catholic Caucus: Daily Mass Readings 8-April-2026",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "14 nights in Tulum with direct flights & brekkie under £1k ",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about a trip to Tulum, not London"
+    },
+    {
+        "city": "London",
+        "title": "Nxera Pharma Achieves Second Development Milestone in Collaboration with Eli Lilly Targeting Metabolic Diseases",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Reinforcement fine-tuning on Amazon Bedrock: best practices",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "SageMaker HyperPod now supports gang scheduling for distributed training workloads",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "New Yorkers issued stark warning about opening ‘Pandora’s box’ of doctor-assisted suicide: ‘Like a holocaust’",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "25 Free Spins on Registration No Deposit UK 2026 | No Deposit Bonus Casino By Cafe Casino",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Upper Deck Hopes to Make the Hobby Accessible to Everyone with National Hockey Card Day",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Disappearing megafauna may have prompted a stone tool revolution",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Starmer needs King Charles to deliver after US-UK Iran schism",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about politics, not travel"
+    },
+    {
+        "city": "London",
+        "title": "London is getting a mind-boggling new illusion museum",
+        "keyword_passed": true,
+        "llm_passed": true,
+        "model_used": "groq",
+        "llm_reason": "article is about a new attraction in London, specifically an illusion museum"
+    },
+    {
+        "city": "London",
+        "title": "How to watch West Ham vs Wolves live: Stream link, TV channel, team news, prediction",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about sports, mentions London Stadium but is not about tourism"
+    },
+    {
+        "city": "London",
+        "title": "Accounting for overdispersion in skilled antenatal care: Identifying determinants using Bangladesh Demographic and Health Survey 2022 data",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article is about healthcare in Bangladesh, not travel to London"
+    },
+    {
+        "city": "London",
+        "title": "Match Preview: Brentford v Everton",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "MMTC-PAMP launches buyback offer for silver coins, bars, jewellery",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions London briefly but is about something else (silver recycling)"
+    },
+    {
+        "city": "London",
+        "title": "\"Sigh of Relief\": U.S. & Iran Agree to 2-Week Ceasefire, But Israel Keeps Bombing Lebanon",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Last chance! Four excellent London exhibitions close this weekend",
+        "keyword_passed": true,
+        "llm_passed": true,
+        "model_used": "groq",
+        "llm_reason": "article is about exhibitions to visit in London"
+    },
+    {
+        "city": "London",
+        "title": "Wirex and Utorg Bring Seamless Crypto-to-Card Spending to 2M+ Users Worldwide",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions London as location but is about cryptocurrency and fintech"
+    },
+    {
+        "city": "London",
+        "title": "Wirex and Utorg Bring Seamless Crypto-to-Card Spending to Over Two Million Users Worldwide",
+        "keyword_passed": true,
+        "llm_passed": false,
+        "model_used": "groq",
+        "llm_reason": "article mentions London as location but is about business and technology"
+    },
+    {
+        "city": "London",
+        "title": "Fashion InStyle Facilitates Innovation Discovery and International Face-to-Face",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Abu Dhabi Airport Open Today April 8 2026: Zayed International (AUH) Operating Reduced Schedule",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    },
+    {
+        "city": "London",
+        "title": "Suddenly, Great Yarmouth’s obesity rates made sense",
+        "keyword_passed": false,
+        "llm_passed": false,
+        "model_used": "none",
+        "llm_reason": ""
+    }
+]
