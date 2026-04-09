@@ -57,12 +57,12 @@ pause_and_confirm() {
 
 echo ""
 echo -e "${GREEN}═══════════════════════════════════════════════════════${NC}"
-echo -e "${GREEN}   HISTORICAL NEWS BACKFILL — 2026-03-07 → 2026-04-08  ${NC}"
+echo -e "${GREEN}   HISTORICAL NEWS BACKFILL — 2026-03-09 → 2026-04-08  ${NC}"
 echo -e "${GREEN}   4 chunks × ~48 requests — free tier safe            ${NC}"
 echo -e "${GREEN}═══════════════════════════════════════════════════════${NC}"
 
 # Chunk 1 — run immediately
-run_chunk 1 "2026-03-07" "2026-03-13"
+run_chunk 1 "2026-03-09" "2026-03-13"
 pause_and_confirm 2 "2026-03-13" "2026-03-19"
 
 # Chunk 2
