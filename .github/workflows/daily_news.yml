@@ -45,10 +45,3 @@ jobs:
           path: artifacts/
           retention-days: 7
  
-      - name: Deploy dashboard to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        if: success()
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          publish_branch: gh-pages

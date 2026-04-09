@@ -211,13 +211,6 @@ def run_pipeline(skip_llm: bool = False, news_only: bool = False) -> dict:
             else:
                 log.info("[+] Skipping LLM city verdicts — --skip-llm flag")
 
-        # ── DASHBOARD ─────────────────────────────────────────────────────────
-        log.info("[+] Generating static dashboard for GitHub Pages")
-        from dashboard import run as dash_run
-        dash_result = dash_run(run_id)
-        results["steps"]["dashboard"] = dash_result
-        log.info(f"      ✓ Dashboard → docs/index.html ({dash_result.get('cities_count', 0)} cities)")
-
         results["success"] = True
         log.info("=" * 60)
         if news_only:
