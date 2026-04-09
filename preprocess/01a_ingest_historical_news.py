@@ -27,7 +27,7 @@ DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
 HISTORICAL_COLLECTION = "raw_documents_historical"
 
 # ── Date range defaults (overridden by CLI args) ───────────────────────────────
-DEFAULT_FROM = "2026-03-07"
+DEFAULT_FROM = "2026-03-09"
 DEFAULT_TO   = "2026-04-08"
 
 # NewsAPI free tier: max 100 results per request, max 30 days back
