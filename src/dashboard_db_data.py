@@ -43,7 +43,7 @@ def get_doc_added_datetime(doc):
     Prefer explicit created_at / timestamp fields if they exist,
     otherwise fall back to MongoDB ObjectId generation time.
     """
-    for field in ["created_at", "timestamp", "published_at", "date"]:
+    for field in ["created_at", "timestamp", "fetched_at", "ingested_at", "date_fetched"]:
         if field in doc and doc[field]:
             try:
                 return pd.to_datetime(doc[field], errors="coerce")
@@ -54,6 +54,20 @@ def get_doc_added_datetime(doc):
         return pd.to_datetime(doc["_id"].generation_time)
     except Exception:
         return pd.NaT
+
+
+def get_published_datetime(doc):
+    """
+    Try to read the article's own publishing date from common field names.
+    """
+    for field in ["published_at", "publishedAt", "publication_date", "published_date", "date"]:
+        if field in doc and doc[field]:
+            try:
+                return pd.to_datetime(doc[field], errors="coerce")
+            except Exception:
+                pass
+
+    return pd.NaT
 
 
 def collection_summary(db):
@@ -137,11 +151,32 @@ def latest_docs(db, collection_name, limit=10):
             if k == "_id":
                 flat["_id"] = str(v)
                 flat["added_at"] = str(get_doc_added_datetime(doc))
+                flat["published_at_parsed"] = str(get_published_datetime(doc))
             else:
                 flat[k] = str(v)[:300] if v is not None else ""
         cleaned.append(flat)
 
     return pd.DataFrame(cleaned)
+
+
+def latest_article_table(db, collection_name, limit=20):
+    col = db[collection_name]
+    docs = list(col.find().sort("_id", -1).limit(limit))
+
+    rows = []
+    for doc in docs:
+        rows.append({
+            "title": str(doc.get("title", ""))[:200],
+            "source": str(doc.get("source", ""))[:100],
+            "city": str(doc.get("city", ""))[:100],   # NEW
+            "published_at": str(get_published_datetime(doc)),
+            "added_at": str(get_doc_added_datetime(doc)),
+            "sentiment_score": doc.get("sentiment_score", None),  # NEW
+            "url": str(doc.get("url", ""))[:250],
+            "run_id": str(doc.get("run_id", ""))[:100]
+        })
+
+    return pd.DataFrame(rows)
 
 
 def source_breakdown(db, collection_name):
@@ -179,6 +214,44 @@ def docs_by_run_id(db, collection_name="raw_documents"):
     df = pd.DataFrame({"run_id": run_ids})
     result = df.groupby("run_id").size().reset_index(name="count")
     result = result.sort_values("run_id")
+    return result
+
+
+def docs_by_fetch_date(db, collection_name="raw_documents"):
+    col = db[collection_name]
+    docs = list(col.find())
+
+    dates = []
+    for doc in docs:
+        dt = get_doc_added_datetime(doc)
+        if pd.notna(dt):
+            dates.append(pd.to_datetime(dt).date())
+
+    if not dates:
+        return pd.DataFrame(columns=["fetch_date", "count"])
+
+    df = pd.DataFrame({"fetch_date": dates})
+    result = df.groupby("fetch_date").size().reset_index(name="count")
+    result = result.sort_values("fetch_date")
+    return result
+
+
+def docs_by_published_date(db, collection_name="raw_documents"):
+    col = db[collection_name]
+    docs = list(col.find())
+
+    dates = []
+    for doc in docs:
+        dt = get_published_datetime(doc)
+        if pd.notna(dt):
+            dates.append(pd.to_datetime(dt).date())
+
+    if not dates:
+        return pd.DataFrame(columns=["published_date", "count"])
+
+    df = pd.DataFrame({"published_date": dates})
+    result = df.groupby("published_date").size().reset_index(name="count")
+    result = result.sort_values("published_date")
     return result
 
 
@@ -225,7 +298,66 @@ else:
 
 
 # -----------------------------
-# Chart 3: all collections by day
+# Chart 3: raw_documents by fetch date and published date
+# -----------------------------
+st.subheader("Articles in raw_documents by Date")
+
+fetch_df = docs_by_fetch_date(db, "raw_documents")
+published_df = docs_by_published_date(db, "raw_documents")
+historical_published_df = docs_by_published_date(db, "raw_documents_historical")
+processed_published_df = docs_by_published_date(db, "processed_documents")
+
+left_dates, right_dates = st.columns(2)
+
+with left_dates:
+    st.markdown("### Articles by Fetch Date")
+    if fetch_df.empty:
+        st.info("No fetch date data found in raw_documents.")
+    else:
+        st.line_chart(fetch_df.set_index("fetch_date")["count"])
+        st.dataframe(fetch_df, use_container_width=True)
+
+with right_dates:
+    st.markdown("### Articles by Published Date")
+    if published_df.empty:
+        st.info("No published date field found in raw_documents.")
+    else:
+        st.line_chart(published_df.set_index("published_date")["count"])
+        st.dataframe(published_df, use_container_width=True)
+
+
+# -----------------------------
+# Chart 4: raw_documents_historical by published date
+# -----------------------------
+st.subheader("Historical Articles by Published Date")
+
+if historical_published_df.empty:
+    st.info("No published date field found in raw_documents_historical.")
+else:
+    st.line_chart(historical_published_df.set_index("published_date")["count"])
+
+
+# -----------------------------
+# Chart 5: processed_documents by published date
+# -----------------------------
+st.subheader("Processed Articles by Published Date")
+
+if processed_published_df.empty:
+    st.info("No published date field found in processed_documents.")
+else:
+    st.line_chart(processed_published_df.set_index("published_date")["count"])
+
+st.markdown("### 20 Newest Articles in `processed_documents`")
+processed_latest_df = latest_article_table(db, "processed_documents", limit=20)
+
+if processed_latest_df.empty:
+    st.info("No records found in processed_documents.")
+else:
+    st.dataframe(processed_latest_df, use_container_width=True)
+
+
+# -----------------------------
+# Chart 6: all collections by day
 # -----------------------------
 st.subheader("Daily Documents Added Across All Collections")
 daily_all_df = all_collections_daily(db)
