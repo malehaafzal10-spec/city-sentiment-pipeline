@@ -1,5 +1,4 @@
 import os
-from collections import defaultdict
 
 import pandas as pd
 import streamlit as st
@@ -16,6 +15,7 @@ st.set_page_config(
 st.title("Daily Data Collection Dashboard")
 st.caption("Live view of data entering MongoDB collections")
 
+
 # -----------------------------
 # MongoDB connection
 # -----------------------------
@@ -31,7 +31,9 @@ def get_db():
     client = MongoClient(mongo_uri)
     return client[db_name]
 
+
 db = get_db()
+
 
 # -----------------------------
 # Helpers
@@ -161,6 +163,25 @@ def source_breakdown(db, collection_name):
     return result
 
 
+def docs_by_run_id(db, collection_name="raw_documents"):
+    col = db[collection_name]
+    docs = list(col.find({}, {"run_id": 1}))
+
+    run_ids = []
+    for doc in docs:
+        run_id = doc.get("run_id")
+        if run_id:
+            run_ids.append(str(run_id))
+
+    if not run_ids:
+        return pd.DataFrame(columns=["run_id", "count"])
+
+    df = pd.DataFrame({"run_id": run_ids})
+    result = df.groupby("run_id").size().reset_index(name="count")
+    result = result.sort_values("run_id")
+    return result
+
+
 # -----------------------------
 # Summary section
 # -----------------------------
@@ -175,10 +196,12 @@ if summary_df.empty:
 col1, col2 = st.columns(2)
 with col1:
     st.metric("Number of Collections", len(summary_df))
+
 with col2:
     st.metric("Total Documents", int(summary_df["document_count"].sum()))
 
 st.dataframe(summary_df, use_container_width=True)
+
 
 # -----------------------------
 # Chart 1: total docs by collection
@@ -187,8 +210,22 @@ st.subheader("Documents by Collection")
 chart_df = summary_df[["collection", "document_count"]].set_index("collection")
 st.bar_chart(chart_df)
 
+
 # -----------------------------
-# Chart 2: all collections by day
+# Chart 2: documents by run_id
+# -----------------------------
+st.subheader("Documents by Run ID")
+run_df = docs_by_run_id(db, "raw_documents")
+
+if run_df.empty:
+    st.info("No run_id field found in raw_documents.")
+else:
+    st.bar_chart(run_df.set_index("run_id")["count"])
+    st.dataframe(run_df, use_container_width=True)
+
+
+# -----------------------------
+# Chart 3: all collections by day
 # -----------------------------
 st.subheader("Daily Documents Added Across All Collections")
 daily_all_df = all_collections_daily(db)
@@ -198,6 +235,7 @@ if daily_all_df.empty:
 else:
     pivot_df = daily_all_df.pivot(index="date", columns="collection", values="count").fillna(0)
     st.line_chart(pivot_df)
+
 
 # -----------------------------
 # Collection explorer
@@ -225,6 +263,7 @@ with right:
         st.info("No `source` field found in this collection.")
     else:
         st.bar_chart(source_df.set_index("source")["count"])
+
 
 # -----------------------------
 # Latest records
