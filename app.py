@@ -203,8 +203,8 @@ def load_data():
 
 @st.cache_data(ttl=3600)
 def get_visit_recommendation(city: str, avg_sentiment: float, crowding_score: float,
-                             cost_score: float, positive_ratio: float,
-                             negative_ratio: float, mention_count: int) -> dict:
+                               cost_score: float, positive_ratio: float,
+                               negative_ratio: float, mention_count: int) -> dict:
     GROQ_KEY = os.getenv("GROQ_API_KEY", "")
     if not GROQ_KEY:
         return {"recommendation": "", "verdict": "maybe"}
@@ -213,29 +213,48 @@ def get_visit_recommendation(city: str, avg_sentiment: float, crowding_score: fl
         from groq import Groq
         client = Groq(api_key=GROQ_KEY)
 
-        prompt = f"""You are a travel advisor giving honest advice.
+        # Build honest context with specific numbers
+        crowding_level = "very high" if crowding_score > 0.4 else "high" if crowding_score > 0.2 else "moderate" if crowding_score > 0.1 else "low"
+        cost_level = "very expensive" if cost_score > 0.4 else "expensive" if cost_score > 0.2 else "moderate" if cost_score > 0.1 else "affordable"
+        sentiment_desc = "strongly positive" if avg_sentiment > 0.3 else "positive" if avg_sentiment > 0.1 else "mixed" if avg_sentiment > -0.1 else "negative"
 
-Based on this week's traveller sentiment data for {city}:
-- Overall sentiment score: {avg_sentiment:+.2f} (range: -1 to +1)
-- Positive mentions: {positive_ratio:.0%}
-- Negative mentions: {negative_ratio:.0%}
-- Crowding complaints level: {crowding_score:.2f} (0=none, 1=high)
-- Cost complaints level: {cost_score:.2f} (0=none, 1=high)
-- Based on {mention_count} traveller mentions
+        prompt = f"""You are a brutally honest travel advisor. Give a SPECIFIC, DATA-DRIVEN recommendation.
 
-Write ONE short honest sentence (max 20 words) saying whether travellers should visit {city} this week and the main reason why.
-Start with either "Yes —", "No —", or "Maybe —"
-Reply with only that one sentence, nothing else."""
+City: {city}
+Data from {mention_count} traveller mentions this week:
+- Overall sentiment: {avg_sentiment:+.2f} ({sentiment_desc})
+- {positive_ratio:.0%} positive mentions, {negative_ratio:.0%} negative mentions
+- Crowding level: {crowding_level} (score: {crowding_score:.2f})
+- Cost level: {cost_level} (score: {cost_score:.2f})
+
+Rules:
+- If crowding score > 0.3, you MUST mention overcrowding as a problem
+- If cost score > 0.2, you MUST mention high costs
+- If negative ratio > 40%, you MUST reflect that negativity
+- If sentiment is below 0, recommend against visiting
+- Be specific — mention the actual numbers/issues
+- Do NOT be generically positive if the data shows problems
+- Maximum 20 words
+- Start with "Yes —", "No —", or "Maybe —"
+
+Reply with only that one sentence."""
 
         response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",  # <--- UPDATED MODEL
+            model="llama3-8b-8192",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=60,
-            temperature=0.3
+            temperature=0.1  # lower temperature = more consistent, less hallucination
         )
 
         text = response.choices[0].message.content.strip()
-        verdict = "yes" if text.lower().startswith("yes") else "no" if text.lower().startswith("no") else "maybe"
+
+        if text.lower().startswith("yes"):
+            verdict = "yes"
+        elif text.lower().startswith("no"):
+            verdict = "no"
+        else:
+            verdict = "maybe"
+
         return {"recommendation": text, "verdict": verdict}
 
     except Exception as e:
