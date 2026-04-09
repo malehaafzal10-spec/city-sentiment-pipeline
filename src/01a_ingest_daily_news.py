@@ -7,7 +7,7 @@ import os
 import json
 import hashlib
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 from newsapi import NewsApiClient
 from dotenv import load_dotenv
@@ -49,6 +49,10 @@ def fetch_news(config: dict, run_id: str) -> list:
 
     newsapi = NewsApiClient(api_key=api_key)
     all_docs = []
+    
+    # Calculate yesterday's date in YYYY-MM-DD format for the API
+    yesterday_str = (datetime.now(timezone.utc) - timedelta(days=1)).strftime('%Y-%m-%d')
+    log.info(f"[News] Fetching articles published on: {yesterday_str}")
 
     for city in config["cities"]:
         city_name = city["name"]
@@ -60,7 +64,9 @@ def fetch_news(config: dict, run_id: str) -> list:
                     q=keyword,
                     language="en",
                     sort_by="publishedAt",
-                    page_size=20
+                    page_size=20,
+                    from_param=yesterday_str,
+                    to=yesterday_str
                 )
                 for article in response.get("articles", []):
                     url = article.get("url", "")
@@ -95,8 +101,7 @@ def save_raw_artifacts(news_docs: list, run_id: str):
         log.info("[Artifacts] No documents to save as an artifact.")
         return
 
-
-    # 2. Save to MongoDB Artifacts Collection
+    # Save to MongoDB Artifacts Collection
     if MONGO_URI:
         try:
             client = MongoClient(MONGO_URI)
@@ -174,8 +179,8 @@ def run(run_id: str) -> dict:
 
 
 if __name__ == "__main__":
-    # Generate a unique ID for this execution
-    current_run_id = f"run_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
+    # Generate a unique ID for this execution using the requested DDMMYYYY format
+    current_run_id = f"run_{datetime.now(timezone.utc).strftime('%d%m%Y')}"
     
     # Trigger the pipeline
     run(current_run_id)
