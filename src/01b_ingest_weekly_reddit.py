@@ -151,11 +151,12 @@ def save_to_mongo(docs: list, run_id: str):
         if 'client' in locals():
             client.close()
 
-def run(run_id: str):
+def run(run_id: str) -> dict:
     log.info(f"=== STEP 1b: INGEST REDDIT | run_id={run_id} ===")
     config = load_config()
     reddit_docs = fetch_reddit_apify(config, run_id)
     save_to_mongo(reddit_docs, run_id)
+    return {"run_id": run_id, "total_docs": len(reddit_docs)}
 
 if __name__ == "__main__":
     current_run_id = f"run_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
