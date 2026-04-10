@@ -336,6 +336,16 @@ if historical_published_df.empty:
 else:
     st.line_chart(historical_published_df.set_index("published_date")["count"])
 
+# --- NEW SECTION ADDED HERE ---
+st.markdown("### 20 Newest Articles in `raw_documents_historical`")
+historical_latest_df = latest_article_table(db, "raw_documents_historical", limit=20)
+
+if historical_latest_df.empty:
+    st.info("No records found in raw_documents_historical.")
+else:
+    st.dataframe(historical_latest_df, use_container_width=True)
+# ------------------------------
+
 
 # -----------------------------
 # Chart 5: processed_documents by published date

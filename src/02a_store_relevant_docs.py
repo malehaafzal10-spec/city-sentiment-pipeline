@@ -36,7 +36,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_MODEL = "llama-3.1-8b-instant"
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
-RAW_COLLECTION = "raw_documents"
+RAW_COLLECTION = "raw_documents_historical"
 PROCESSED_COLLECTION = "processed_documents"
 ARTIFACTS_COLLECTION = "pipeline_artifacts"
 
@@ -213,7 +213,6 @@ def is_english(text: str) -> bool:
         return True
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
-
 def process_documents(run_id: str) -> dict:
     if not MONGO_URI:
         log.error("[DB] MONGO_URI missing.")
@@ -223,13 +222,8 @@ def process_documents(run_id: str) -> dict:
     db = client[DB_NAME]
 
     raw_docs = list(db[RAW_COLLECTION].find({"run_id": run_id}))
-    if not raw_docs:
-        log.error(f"[Process] No raw documents found for run_id: {run_id}")
-        client.close()
-        return {"run_id": run_id, "cleaned_count": 0}
-
-    log.info(f"[Process] {len(raw_docs)} raw documents for run_id: {run_id}")
-
+    
+    # Initialize trackers immediately so we can save them even if raw_docs is empty
     processed_docs = []
     seen_texts = set()
     debug_records = []
@@ -241,9 +235,17 @@ def process_documents(run_id: str) -> dict:
         "scraped": 0,
         "skipped_keyword": 0,
         "skipped_llm": 0,
+        "skipped_short": 0,
+        "skipped_lang": 0,
+        "skipped_dupe": 0,
         "gemini_successes": 0,
         "groq_successes": 0
     }
+
+    if not raw_docs:
+        log.warning(f"[Process] No raw documents found for run_id: {run_id}. Generating empty artifacts.")
+    else:
+        log.info(f"[Process] {len(raw_docs)} raw documents for run_id: {run_id}")
 
     for doc in raw_docs:
         title = doc.get("title", "") or ""
@@ -277,7 +279,6 @@ def process_documents(run_id: str) -> dict:
                 desc_for_llm = description if description else original_text[:300]
                 classification = llm_classify(title, desc_for_llm, city)
                 
-                # Update model metrics
                 model_used = classification.get("model_used", "none")
                 if model_used == "gemini": metrics["gemini_successes"] += 1
                 elif model_used == "groq": metrics["groq_successes"] += 1
@@ -292,7 +293,6 @@ def process_documents(run_id: str) -> dict:
                     metrics["passed_llm_filter"] += 1
                     log.info(f"[Filter] LLM KEEP ({model_used}) [{city}]: {title[:50]}")
 
-                # Tiny polite sleep to prevent overwhelming connections
                 time.sleep(0.5)
 
         debug_records.append({
@@ -338,31 +338,47 @@ def process_documents(run_id: str) -> dict:
         })
         processed_docs.append(processed_doc)
 
-    # ── Summary & DB Save ──
+    # ── Summary Log ──
     log.info(
         f"[Process] Kept {len(processed_docs)}/{metrics['total_raw']} | "
         f"Scraped: {metrics['scraped']} | "
         f"Gemini: {metrics['gemini_successes']} | Groq: {metrics['groq_successes']}"
     )
     
-    debug_filename = f"filter_evaluation_{run_id}.json"
+    # ── 1. ALWAYS Dump Debug JSON Locally ──
+    os.makedirs("artifacts", exist_ok=True)
+    debug_filepath = os.path.join("artifacts", f"filter_evaluation_{run_id}.json")
     try:
-        with open(debug_filename, "w", encoding="utf-8") as f:
+        with open(debug_filepath, "w", encoding="utf-8") as f:
             json.dump(debug_records, f, indent=4, ensure_ascii=False)
+        log.info(f"[Debug] Saved filter evaluation logs to '{debug_filepath}'")
     except Exception as e:
-        log.error(f"Failed to save debug file: {e}")
+        log.error(f"[Debug] Failed to save debug file: {e}")
 
+    # ── 2. ALWAYS Save Artifact Snapshot to MongoDB ──
+    try:
+        db[ARTIFACTS_COLLECTION].insert_one({
+            "run_id": run_id, 
+            "artifact_type": "processed_scraped_docs",
+            "timestamp": datetime.now(timezone.utc), 
+            "document_count": len(processed_docs),
+            "metrics": metrics, 
+            "payload": processed_docs
+        })
+        log.info(f"[Artifacts] Saved pipeline artifact to MongoDB collection '{ARTIFACTS_COLLECTION}'")
+    except Exception as e:
+        log.error(f"[Artifacts] Failed to save artifact: {e}")
+
+    # ── 3. ONLY Upsert to DB if there are relevant documents ──
     if processed_docs:
         try:
-            db[ARTIFACTS_COLLECTION].insert_one({
-                "run_id": run_id, "artifact_type": "processed_scraped_docs",
-                "timestamp": datetime.now(timezone.utc), "document_count": len(processed_docs),
-                "metrics": metrics, "payload": processed_docs
-            })
             operations = [UpdateOne({"doc_id": d["doc_id"]}, {"$set": d}, upsert=True) for d in processed_docs]
-            db[PROCESSED_COLLECTION].bulk_write(operations)
+            result = db[PROCESSED_COLLECTION].bulk_write(operations)
+            log.info(f"[DB] Upserted {result.upserted_count + result.modified_count} processed documents into '{PROCESSED_COLLECTION}'")
         except Exception as e:
             log.error(f"[DB] Save failed: {e}")
+    else:
+        log.info(f"[DB] No relevant documents found to upsert into '{PROCESSED_COLLECTION}'")
 
     client.close()
     return {"run_id": run_id, "cleaned_count": len(processed_docs), "metrics": metrics}
@@ -370,6 +386,12 @@ def process_documents(run_id: str) -> dict:
 if __name__ == "__main__":
     current_run_id = f"run_{datetime.now(timezone.utc).strftime('%d%m%Y')}"
     print(f"Starting processor with run_id: {current_run_id}")
+    
     result = process_documents(current_run_id)
-    print(f"\nPipeline Finished! Processed {result['cleaned_count']} documents.")
-    print(f"Metrics: {json.dumps(result['metrics'], indent=2)}")
+    
+    print(f"\nPipeline Finished! Processed {result.get('cleaned_count', 0)} documents.")
+    
+    if "metrics" in result:
+        print(f"Metrics: {json.dumps(result['metrics'], indent=2)}")
+    else:
+        print("No metrics available.")
