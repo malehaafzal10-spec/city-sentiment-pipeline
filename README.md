@@ -58,22 +58,17 @@ Instead of just logging to flat files, the pipeline stores "snapshots" of its ex
 
 ---
 
+
 Next Task: 
 
 1. Historical Data:
-  1.1 create the file 01b_ingest_historical_reddit with a week execution parameter (eg 30/03  to 05.04). The goal is to extract the reddit data into our DB raw_documents_historical (recommended) or in a new DB.
-  1.2 Create a script that store the relevant documents information. 
-2. Dashboard for monitoring:
-  1.1 Validate historical data: we have to know what is in the databases, how many documents per period for all the historical databases (raw_documents_historical and processed_documents)
-  1.2 Daily monitoring: monitor the run_id per period for all the databases 
-2. Daily execution
-  1.1 After the historical databases are created change the daily executions current databases into the historical ones.
-  1.2 check what artifacts are necessesary. 
-4. We have to judge with HDLP if the LLM is correctly identifying the relevant articles.
-5. modify the files on src to fetch daily data into historical data and also use historical data base for the other scripts
-6. Add the dashboard to Ucloud and create a public link
-7. create a historical process for reddit too. 
-1. monitoring vader and evaluate: we need to store the sample for HDLP evaluation on the DB for the file to work.
+  1.1 process the historical on newsAPI for process number 02, 03 and 04.
+  1.2 Process reddit historical data for process 03 and 04.
+Process numbers are in the folder src (the ones that run daily) and the "file numbers" are s01, s02, s03 and s04.
+2. Daily execution: check what artifacts are necessesary. 
+3. We have to judge with HDLP if the LLM is correctly identifying the relevant articles.
+4. create a public link for the dashboard unce all the historical data is processed.
+5. monitoring vader and evaluate: we need to store the sample for HDLP evaluation on the DB for the file to work.
 Future Ideas:
 5. llm summary . py (maybe for semester project)
 6. then monitor also (maybe for semester project)
