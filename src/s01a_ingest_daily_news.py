@@ -20,7 +20,7 @@ MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
 
 # We now have two collections: one for individual articles, one for pipeline run artifacts
-DOCUMENTS_COLLECTION = "raw_documents"
+DOCUMENTS_COLLECTION = "raw_documents_historical"
 ARTIFACTS_COLLECTION = "pipeline_artifacts"
 
 logging.basicConfig(

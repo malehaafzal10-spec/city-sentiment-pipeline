@@ -78,6 +78,7 @@ def run(run_id: str) -> dict:
             "doc_id": doc.get("doc_id"),
             "city": doc.get("city"),
             "source": doc.get("source"),
+            "title": doc.get("title", "No title available"),  # <--- WE ADDED THIS LINE
             "sentiment_label": get_label(compound),
             "sentiment_score": round(compound, 4),
             "vader_breakdown": {
@@ -103,7 +104,7 @@ def run(run_id: str) -> dict:
         result = db[SCORED_COLLECTION].bulk_write(operations)
         log.info(f"[DB] Upserted {result.upserted_count + result.modified_count} scored documents.")
         
-        # 5. Save Artifact to Database (Replacing the local CSV file)
+        # 5. Save Artifact to Database 
         pos = sum(1 for s in scored_results if s["sentiment_label"] == "positive")
         neg = sum(1 for s in scored_results if s["sentiment_label"] == "negative")
         neu = sum(1 for s in scored_results if s["sentiment_label"] == "neutral")
@@ -131,9 +132,11 @@ def run(run_id: str) -> dict:
 
 
 if __name__ == "__main__":
-    # Prompting for run_id to link this step to the previous ingestion/processing steps
-    test_run_id = input("Enter the run_id to score: ")
-    if test_run_id.strip():
-        run(test_run_id.strip())
-    else:
-        print("No run_id provided. Exiting.")
+    # Generate the run_id automatically to match the daily pipeline format
+    current_run_id = f"run_{datetime.now(timezone.utc).strftime('%d%m%Y')}"
+    print(f"Starting VADER scoring with run_id: {current_run_id}")
+    
+    # Trigger the scoring
+    result = run(current_run_id)
+    
+    print(f"\nPipeline Step 3 Finished! Scored {result.get('scored_count', 0)} documents.")
