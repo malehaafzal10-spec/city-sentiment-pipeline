@@ -689,32 +689,6 @@ with tab2:
 
         source_options = sorted(raw_hist_df["source"].dropna().unique().tolist())
         st.write("Detected sources:", ", ".join(source_options) if source_options else "none")
-# -----------------------------
-
-# -----------------------------
-# Chart 5: processed_documents by published date
-# -----------------------------
-st.subheader("Processed Articles by Published Date")
-
-if processed_published_df.empty:
-    st.info("No published date field found in processed_documents.")
-else:
-    st.line_chart(processed_published_df.set_index("published_date")["count"])
-
-st.markdown("### 20 Newest Articles in `processed_documents`")
-processed_latest_df = latest_article_table(db, "processed_documents", limit=20)
-
-if processed_latest_df.empty:
-    st.info("No records found in processed_documents.")
-else:
-    st.dataframe(processed_latest_df, use_container_width=True)
-
-
-# -----------------------------
-# Chart 6: all collections by day
-# -----------------------------
-st.subheader("Daily Documents Added Across All Collections")
-daily_all_df = all_collections_daily(db)
 
         news_df = filter_by_source(raw_hist_df, "news")
         reddit_df = filter_by_source(raw_hist_df, "reddit")
