@@ -14,3 +14,5 @@ pymongo
 newspaper4k
 groq
 streamlit
+beautifulsoup4
+
