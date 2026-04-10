@@ -1,5 +1,5 @@
 """
-ingest.py — Step 2: Fetch raw text from NewsAPI.
+s01a_ingest_daily_news.py — Step 1: Fetch raw text from NewsAPI.
 Stores resulting data and raw artifacts into MongoDB.
 """
 
@@ -165,8 +165,32 @@ def save_to_db(docs: list):
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
 def run(run_id: str) -> dict:
-    log.info(f"=== STEP 2: INGEST | run_id={run_id} | mode=news_only ===")
+    log.info(f"=== STEP 1: INGEST | run_id={run_id} | mode=news_only ===")
     
+    # --- NEW: IDEMPOTENCY CHECK ---
+    if MONGO_URI:
+        try:
+            client = MongoClient(MONGO_URI)
+            db = client[DB_NAME]
+            
+            # Check if this exact run_id has already generated a raw_ingestion artifact
+            existing_run = db[ARTIFACTS_COLLECTION].find_one({
+                "run_id": run_id,
+                "artifact_type": "raw_ingestion"
+            })
+            
+            if existing_run:
+                log.info(f"⏭️  [Ingest] Run ID '{run_id}' already exists. Skipping API ingestion to save quota.")
+                client.close()
+                return {"run_id": run_id, "total_docs": 0, "status": "skipped"}
+                
+        except Exception as e:
+            log.error(f"[DB] Could not check for existing run_id. Proceeding anyway. Error: {e}")
+        finally:
+            if 'client' in locals() and getattr(client, "close", None):
+                client.close()
+    # ------------------------------
+
     config = load_config()
 
     all_docs = fetch_news(config, run_id)
@@ -175,7 +199,7 @@ def run(run_id: str) -> dict:
     save_to_db(all_docs)
 
     log.info(f"[Ingest] Complete — {len(all_docs)} total documents")
-    return {"run_id": run_id, "total_docs": len(all_docs)}
+    return {"run_id": run_id, "total_docs": len(all_docs), "status": "completed"}
 
 
 if __name__ == "__main__":
@@ -183,4 +207,5 @@ if __name__ == "__main__":
     current_run_id = f"run_{datetime.now(timezone.utc).strftime('%d%m%Y')}"
     
     # Trigger the pipeline
-    run(current_run_id)
+    result = run(current_run_id)
+    print(f"\nIngestion status: {result.get('status')}")
