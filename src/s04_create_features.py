@@ -199,9 +199,14 @@ def run(run_id: str) -> dict:
     }
 
 if __name__ == "__main__":
-    test_run_id = input("Enter the run_id to generate features for: ")
-    if test_run_id.strip():
-        result = run(test_run_id.strip())
-        print("\n=== CITY AGGREGATES SUMMARY ===")
-        import json
-        print(json.dumps(result.get("city_aggregates", []), indent=2))
+    # Generate the run_id automatically to match the daily pipeline format
+    current_run_id = f"run_{datetime.now(timezone.utc).strftime('%d%m%Y')}"
+    print(f"Starting feature creation with run_id: {current_run_id}")
+    
+    # Trigger the feature extraction
+    result = run(current_run_id)
+    
+    print(f"\nPipeline Step 4 Finished! Extracted features for {result.get('doc_features_count', 0)} documents.")
+    print("\n=== CITY AGGREGATES SUMMARY ===")
+    import json
+    print(json.dumps(result.get("city_aggregates", []), indent=2))
