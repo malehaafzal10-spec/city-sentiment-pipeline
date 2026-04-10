@@ -1,5 +1,5 @@
 """
-02a_store_relevant_docs.py — Step 2: Silver Layer Processor.
+s02_store_relevant_docs.py — Step 2: Silver Layer Processor.
 
 Two-stage relevance filtering:
   Stage 1 — Keyword pre-filter (fast, free)
@@ -16,7 +16,7 @@ import re
 import json
 import time
 import logging
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 
 import requests
 from bs4 import BeautifulSoup
@@ -221,6 +221,21 @@ def process_documents(run_id: str) -> dict:
     client = MongoClient(MONGO_URI)
     db = client[DB_NAME]
 
+    # --- NEW: IDEMPOTENCY CHECK ---
+    try:
+        existing_run = db[ARTIFACTS_COLLECTION].find_one({
+            "run_id": run_id,
+            "artifact_type": "processed_scraped_docs"
+        })
+        
+        if existing_run:
+            log.info(f"⏭️  [Process] Run ID '{run_id}' already processed. Skipping LLM filtering and web scraping.")
+            client.close()
+            return {"run_id": run_id, "cleaned_count": 0, "status": "skipped", "metrics": {}}
+    except Exception as e:
+        log.error(f"[DB] Could not check for existing run_id. Proceeding anyway. Error: {e}")
+    # ------------------------------
+
     raw_docs = list(db[RAW_COLLECTION].find({"run_id": run_id}))
     
     # Initialize trackers immediately so we can save them even if raw_docs is empty
@@ -381,7 +396,7 @@ def process_documents(run_id: str) -> dict:
         log.info(f"[DB] No relevant documents found to upsert into '{PROCESSED_COLLECTION}'")
 
     client.close()
-    return {"run_id": run_id, "cleaned_count": len(processed_docs), "metrics": metrics}
+    return {"run_id": run_id, "cleaned_count": len(processed_docs), "status": "completed", "metrics": metrics}
 
 if __name__ == "__main__":
     current_run_id = f"run_{datetime.now(timezone.utc).strftime('%d%m%Y')}"
@@ -389,9 +404,10 @@ if __name__ == "__main__":
     
     result = process_documents(current_run_id)
     
-    print(f"\nPipeline Finished! Processed {result.get('cleaned_count', 0)} documents.")
-    
-    if "metrics" in result:
-        print(f"Metrics: {json.dumps(result['metrics'], indent=2)}")
+    status = result.get('status', 'unknown')
+    if status == 'skipped':
+        print(f"\nProcessing skipped. Run ID '{current_run_id}' already exists.")
     else:
-        print("No metrics available.")
+        print(f"\nPipeline Finished! Processed {result.get('cleaned_count', 0)} documents.")
+        if "metrics" in result and result["metrics"]:
+            print(f"Metrics: {json.dumps(result['metrics'], indent=2)}")
