@@ -14,3 +14,10 @@ pymongo
 newspaper4k
 groq
 streamlit
+newsapi-python==0.2.7
+pandas
+vaderSentiment==3.3.1
+python-dotenv==1.0.1
+requests==2.31.0
+langdetect==1.0.9
+beautifulsoup4
