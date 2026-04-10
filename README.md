@@ -1,9 +1,90 @@
 # City Sentiment Monitoring Pipeline
+
+## 🗄️ Data Architecture (MongoDB)
+
+This project implements a **Medallion Architecture** (Bronze, Silver, Gold layers) using **MongoDB** to handle our unstructured text data. The data flows through different collections within the `travel_pipeline_db` database, progressively becoming cleaner and more enriched.
+
+### 🥉 Bronze Layer: Raw Data
+**Collections:** `raw_documents` (Daily) & `raw_documents_historical` (Backfill)
+
+This is the landing zone. It stores the exact, unfiltered data pulled straight from our sources (NewsAPI, Reddit) before any heavy processing occurs.
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `doc_id` | String | A unique SHA-256 hash generated from the source and URL to prevent exact duplicates. |
+| `source` | String | Where the data came from (e.g., `"news"`, `"reddit"`). |
+| `city` | String | The destination city being searched (e.g., `"Paris"`, `"Tokyo"`). |
+| `title` | String | The article's headline. |
+| `description` | String | A short summary snippet provided by the API. |
+| `text` | String | A rough concatenation of the title, description, and truncated API content. |
+| `url` | String | The direct URL to the original article. |
+| `published_at` | String | The original publication timestamp (ISO 8601). |
+| `ingestion_time` | String | The exact UTC time the pipeline fetched the data. |
+| `run_id` | String | The execution ID linking this document to a specific pipeline run. |
+
+---
+
+### 🥈 Silver Layer: Processed & Scraped
+**Collection:** `processed_documents`
+
+This collection holds our clean, filtered, and enriched dataset. Documents only enter this layer if they pass both a strict Keyword pre-filter and an LLM relevance check (Gemini/Groq). It also contains the **full scraped text** of the articles.
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `text` | String | The **fully scraped, cleaned, deduplicated, and VADER-safe** text of the article. |
+| `full_text_scraped` | Boolean | `true` if BeautifulSoup successfully scraped the webpage; `false` if it fell back to the API description. |
+| `text_length` | Integer | Character count of the cleaned text. |
+| `llm_relevant` | Boolean | `true` if the LLM deemed the article genuinely about travel. |
+| `llm_reason` | String | The brief explanation from the LLM justifying its decision (used for traceability/auditing). |
+| `model_used` | String | Tracks which LLM made the relevance decision (`"gemini"`, `"groq"`, or `"none"`). |
+| `processed_time` | String | UTC timestamp of when the processor script finished handling the document. |
+| *(Inherited)* | Various | Inherits `doc_id`, `source`, `city`, `title`, `url`, `published_at`, and `run_id` from the Bronze layer. |
+
+---
+
+### 🛠️ MLOps Tracking: Pipeline Artifacts
+**Collection:** `pipeline_artifacts`
+
+Instead of just logging to flat files, the pipeline stores "snapshots" of its execution directly in the database. This acts as our MLOps telemetry layer to track API limits, failure rates, and model performance over time.
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `run_id` | String | The execution ID matching the ingested documents. |
+| `artifact_type` | String | Identifies the pipeline stage (e.g., `"raw_ingestion"`, `"processed_scraped_docs"`). |
+| `timestamp` | Datetime | Native MongoDB datetime object marking the end of the run. |
+| `document_count` | Integer | Total number of documents handled in this specific batch. |
+| `metrics` | Object | Telemetry dictionary containing exact counts for API successes, fallbacks, scraped pages, and drops. |
+| `payload` | Array | The entire JSON payload of documents processed in that run, embedded for full state reproducibility. |
+
+---
+
+Next Task: 
+
+1. Historical Data:
+  1.1 create the file 01b_ingest_historical_reddit with a week execution parameter (eg 30/03  to 05.04). The goal is to extract the reddit data into our DB raw_documents_historical (recommended) or in a new DB.
+  1.2 Create a script that store the relevant documents information. 
+2. Dashboard for monitoring:
+  1.1 Validate historical data: we have to know what is in the databases, how many documents per period for all the historical databases (raw_documents_historical and processed_documents)
+  1.2 Daily monitoring: monitor the run_id per period for all the databases 
+2. Daily execution
+  1.1 After the historical databases are created change the daily executions current databases into the historical ones.
+  1.2 check what artifacts are necessesary. 
+4. We have to judge with HDLP if the LLM is correctly identifying the relevant articles.
+5. modify the files on src to fetch daily data into historical data and also use historical data base for the other scripts
+6. Add the dashboard to Ucloud and create a public link
+7. create a historical process for reddit too. 
+1. monitoring vader and evaluate: we need to store the sample for HDLP evaluation on the DB for the file to work.
+Future Ideas:
+5. llm summary . py (maybe for semester project)
+6. then monitor also (maybe for semester project)
+
+
 M6 — Data Engineering and Machine Learning Operations in Business | AAU F2026
 
 Tracks how travellers talk about 8 European cities using NewsAPI.
 Scores sentiment weekly, detects drift, and publishes a live dashboard.
 
+run_20260406_135639
 ## Quick start
 
 ```bash

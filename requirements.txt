@@ -10,3 +10,7 @@ langdetect==1.0.9
 nltk==3.8.1
 fastapi==0.109.2
 uvicorn==0.27.1
+pymongo
+newspaper4k
+groq
+streamlit

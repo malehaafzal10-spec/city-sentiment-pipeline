@@ -1,0 +1,47 @@
+name: Daily News Pipeline
+ 
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+ 
+jobs:
+  run-news-only:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+ 
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+ 
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+ 
+      - name: Create artifact directories
+        run: |
+          mkdir -p artifacts/raw artifacts/processed artifacts/features \
+            artifacts/model_outputs artifacts/weekly artifacts/monitoring \
+            artifacts/dashboard artifacts/logs docs
+ 
+      - name: Run news-only pipeline
+        env:
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+          PIPELINE_DB_PATH: artifacts/pipeline.db
+          PIPELINE_ARTIFACTS_DIR: artifacts
+          PIPELINE_LOG_LEVEL: INFO
+          ENABLE_LLM_VERDICTS: "false"
+        run: python run_pipeline.py --news-only --skip-llm
+ 
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: daily-news-${{ github.run_id }}
+          path: artifacts/
+          retention-days: 7
+ 
