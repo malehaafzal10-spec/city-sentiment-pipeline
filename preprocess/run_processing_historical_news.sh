@@ -1,83 +1,77 @@
 #!/bin/bash
+
 # ─────────────────────────────────────────────────────────────────────────────
-# run_historical_backfill.sh
-# Runs the historical news backfill in 4 chunks of ~6 days each.
-# Each chunk uses ~48 requests (8 cities × 6 days), staying under the
-# NewsAPI free tier limit of 50 requests per 12 hours.
+# run_preprocessing_historical_news.sh
+# Runs the LLM relevance filter + scraping for 2026-03-11 → 2026-04-06
+# week by week. Pauses after each week so you can check logs before continuing.
+# Safe to re-run — already processed docs are skipped automatically.
 #
 # Usage:
-#   chmod +x run_historical_backfill.sh   (only needed once)
-#   ./run_historical_backfill.sh
+#   chmod +x preprocess/run_preprocessing_historical_news.sh
+#   ./preprocess/run_preprocessing_historical_news.sh
+#
+# To resume from a specific week, comment out the earlier weeks.
 # ─────────────────────────────────────────────────────────────────────────────
 
-SCRIPT="preprocess/01a_ingest_historical_news.py"
+SCRIPT="preprocess/02a_store_relevant_docs_historical.py"
 
-# Colour helpers
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
-NC='\033[0m' # No colour
+NC='\033[0m'
 
-run_chunk() {
-    local chunk=$1
-    local from=$2
-    local to=$3
+process_week() {
+    local week=$1
+    local total=$2
+    local from=$3
+    local to=$4
 
     echo ""
     echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${GREEN} CHUNK ${chunk}/4 — ${from} → ${to}${NC}"
+    echo -e "${GREEN} WEEK ${week}/${total} — ${from} → ${to}${NC}"
     echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo ""
 
-    python $SCRIPT --from-date "$from" --to-date "$to"
+    python $SCRIPT --start-date "$from" --end-date "$to"
 
     if [ $? -ne 0 ]; then
-        echo ""
-        echo -e "${RED}✗ Chunk ${chunk} failed. Fix the error and re-run from this chunk.${NC}"
+        echo -e "${RED}✗ Week ${week} failed. Fix the error and re-run from this week.${NC}"
         exit 1
     fi
 
-    echo ""
-    echo -e "${GREEN}✓ Chunk ${chunk} complete.${NC}"
+    echo -e "${GREEN}✓ Week ${week} complete.${NC}"
 }
 
-pause_and_confirm() {
-    local next_chunk=$1
+pause() {
+    local next_week=$1
     local from=$2
     local to=$3
-
     echo ""
-    echo -e "${YELLOW}⚠️  Wait at least 12 hours before running chunk ${next_chunk}.${NC}"
-    echo -e "${YELLOW}   Next chunk: ${from} → ${to}${NC}"
-    echo ""
-    read -p "Press ENTER when ready to continue, or Ctrl+C to stop and resume later... "
+    echo -e "${YELLOW}⏸  Week ${next_week} ready to run (${from} → ${to}).${NC}"
+    echo -e "${YELLOW}   Check your logs, then press ENTER to continue or Ctrl+C to stop.${NC}"
+    read -p ""
 }
 
 # ─── Main ────────────────────────────────────────────────────────────────────
 
 echo ""
 echo -e "${GREEN}═══════════════════════════════════════════════════════${NC}"
-echo -e "${GREEN}   HISTORICAL NEWS BACKFILL — 2026-03-09 → 2026-04-08  ${NC}"
-echo -e "${GREEN}   4 chunks × ~48 requests — free tier safe            ${NC}"
+echo -e "${GREEN}   HISTORICAL PROCESSING — 2026-03-11 → 2026-04-06    ${NC}"
+echo -e "${GREEN}   4 weeks — already processed docs are skipped        ${NC}"
 echo -e "${GREEN}═══════════════════════════════════════════════════════${NC}"
 
-# Chunk 1 — run immediately
-run_chunk 1 "2026-03-09" "2026-03-13"
-pause_and_confirm 2 "2026-03-13" "2026-03-19"
+process_week 1 4 "2026-03-11" "2026-03-17"
+pause 2 "2026-03-18" "2026-03-24"
 
-# Chunk 2
-run_chunk 2 "2026-03-13" "2026-03-19"
-pause_and_confirm 3 "2026-03-19" "2026-03-25"
+process_week 2 4 "2026-03-18" "2026-03-24"
+pause 3 "2026-03-25" "2026-03-31"
 
-# Chunk 3
-run_chunk 3 "2026-03-19" "2026-03-25"
-pause_and_confirm 4 "2026-03-25" "2026-04-08"
+process_week 3 4 "2026-03-25" "2026-03-31"
+pause 4 "2026-04-01" "2026-04-06"
 
-# Chunk 4
-run_chunk 4 "2026-03-25" "2026-04-08"
+process_week 4 4 "2026-04-01" "2026-04-06"
 
 echo ""
 echo -e "${GREEN}═══════════════════════════════════════════════════════${NC}"
-echo -e "${GREEN}   ✓ BACKFILL COMPLETE — all chunks finished!           ${NC}"
+echo -e "${GREEN}   ✓ ALL DONE — historical data fully processed!       ${NC}"
 echo -e "${GREEN}═══════════════════════════════════════════════════════${NC}"
 echo ""
