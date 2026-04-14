@@ -108,6 +108,8 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
     height: 100%;
     display: flex; flex-direction: column;
 }
+
+.c-card-lowconf { background: #f8f9fb; border-radius: 20px; border: 1px solid #e2e8f0; border-top: 3px dashed #94a3b8; overflow: hidden; margin-bottom: 22px; box-shadow: none; display: flex; flex-direction: column; height: 100%; opacity: 0.75; filter: saturate(0.4); }
 .c-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.09); }
 .c-card-alert { background: #fff; border-radius: 20px; border: 1px solid #fde68a; border-top: 4px solid #f59e0b; overflow: hidden; margin-bottom: 22px; box-shadow: 0 2px 12px rgba(245,158,11,0.08); height: 100%; display: flex; flex-direction: column; }
 .c-body { padding: 14px 16px 16px; flex: 1; }
@@ -434,28 +436,6 @@ if alerts is not None and not alerts.empty:
     for _, row in alerts.iterrows():
         alerts_by_city.setdefault(row["city"], []).append(row)
 
-# JS to equalize card heights in each row
-st.markdown("""<script>
-function equalizeCards() {
-    const cols = document.querySelectorAll('[data-testid="column"]');
-    for (let i = 0; i < cols.length; i += 4) {
-        let maxH = 0;
-        for (let j = i; j < Math.min(i+4, cols.length); j++) {
-            const card = cols[j].querySelector('.c-card, .c-card-alert, .c-card-lowconf');
-            if (card) { card.style.height = 'auto'; maxH = Math.max(maxH, card.offsetHeight); }
-        }
-        for (let j = i; j < Math.min(i+4, cols.length); j++) {
-            const card = cols[j].querySelector('.c-card, .c-card-alert, .c-card-lowconf');
-            if (card && maxH > 0) card.style.height = maxH + 'px';
-        }
-    }
-}
-window.addEventListener('load', equalizeCards);
-window.addEventListener('resize', equalizeCards);
-setTimeout(equalizeCards, 500);
-setTimeout(equalizeCards, 1500);
-</script>""", unsafe_allow_html=True)
-
 cols = st.columns(4)
 for i, (_, row) in enumerate(metrics.iterrows()):
     city = row["city"]
@@ -469,7 +449,7 @@ for i, (_, row) in enumerate(metrics.iterrows()):
     low_conf = bool(row.get("low_confidence", False))
     alert_tag = '<span class="c-alert-tag">⚠ Alert</span>' if city_alerts else ""
     if low_conf:
-        alert_tag += '<span style="display:inline-block;font-size:0.52rem;font-weight:700;padding:1px 5px;border-radius:6px;background:#f0f9ff;color:#0369a1;margin-left:4px;vertical-align:middle;">LOW DATA</span>'
+        alert_tag += '<span style="display:inline-block;font-size:0.58rem;font-weight:700;padding:2px 7px;border-radius:6px;background:#f1f5f9;color:#64748b;margin-left:4px;vertical-align:middle;border:1px solid #cbd5e1;">⚠ Low data</span>'
     cc = "c-card-alert" if city_alerts else ("c-card-lowconf" if low_conf else "c-card")
     alert_html = "".join(f'<div class="c-alert">⚠ {fmt_alert(str(a.get("alert_message","")))} </div>' for a in city_alerts)
 
@@ -528,20 +508,20 @@ if history is not None and not history.empty:
                 tooltip=["City:N", "week_start:O", alt.Tooltip("Sentiment:Q", format=".2f")]
             )
 
-            points = line.mark_circle(size=40).encode(
-                opacity=alt.condition(alt.selection_point(), alt.value(1), alt.value(0.6))
+            area = alt.Chart(chart_data).mark_area(
+                interpolate="monotone", opacity=0.07
+            ).encode(
+                x=alt.X("week_start:O", sort=None),
+                y=alt.Y("Sentiment:Q", scale=alt.Scale(domain=[-0.2, 1.2])),
+                color=alt.Color("City:N", scale=color_scale, legend=None)
             )
 
-            chart = (line + points).properties(
-                height=240,
-                background="transparent"
-            ).configure_view(
-                strokeWidth=0
-            ).configure_axis(
-                labelFont="Inter, sans-serif"
-            )
+            chart = (area + line).properties(
+                height=250, background="transparent"
+            ).configure_view(strokeWidth=0).configure_axis(labelFont="sans-serif")
             st.altair_chart(chart, use_container_width=True)
-        except Exception:
+        except Exception as ex:
+            st.error(f"Chart error: {ex}")
             st.line_chart(pivot[selected], height=260, use_container_width=True)
 
 # Feedback
