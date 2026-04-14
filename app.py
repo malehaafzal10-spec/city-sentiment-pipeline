@@ -419,12 +419,42 @@ sort_map = {
     "Mentions (most discussed first)": ("mention_count", False),
 }
 sort_col, sort_asc = sort_map[sort_by]
-metrics = metrics.sort_values(sort_col, ascending=sort_asc).reset_index(drop=True)
+
+# Flag low-confidence cities (fewer than 5 mentions)
+LOW_MENTION_THRESHOLD = 5
+metrics["low_confidence"] = metrics["mention_count"] < LOW_MENTION_THRESHOLD
+
+# Sort: low-confidence cities always go to the end regardless of filter
+metrics_confident = metrics[~metrics["low_confidence"]].sort_values(sort_col, ascending=sort_asc)
+metrics_low = metrics[metrics["low_confidence"]].sort_values(sort_col, ascending=sort_asc)
+metrics = pd.concat([metrics_confident, metrics_low]).reset_index(drop=True)
 
 alerts_by_city = {}
 if alerts is not None and not alerts.empty:
     for _, row in alerts.iterrows():
         alerts_by_city.setdefault(row["city"], []).append(row)
+
+# JS to equalize card heights in each row
+st.markdown("""<script>
+function equalizeCards() {
+    const cols = document.querySelectorAll('[data-testid="column"]');
+    for (let i = 0; i < cols.length; i += 4) {
+        let maxH = 0;
+        for (let j = i; j < Math.min(i+4, cols.length); j++) {
+            const card = cols[j].querySelector('.c-card, .c-card-alert, .c-card-lowconf');
+            if (card) { card.style.height = 'auto'; maxH = Math.max(maxH, card.offsetHeight); }
+        }
+        for (let j = i; j < Math.min(i+4, cols.length); j++) {
+            const card = cols[j].querySelector('.c-card, .c-card-alert, .c-card-lowconf');
+            if (card && maxH > 0) card.style.height = maxH + 'px';
+        }
+    }
+}
+window.addEventListener('load', equalizeCards);
+window.addEventListener('resize', equalizeCards);
+setTimeout(equalizeCards, 500);
+setTimeout(equalizeCards, 1500);
+</script>""", unsafe_allow_html=True)
 
 cols = st.columns(4)
 for i, (_, row) in enumerate(metrics.iterrows()):
@@ -436,9 +466,13 @@ for i, (_, row) in enumerate(metrics.iterrows()):
     img = info.get("image", "")
     accent = info.get("accent", "#6366f1")
 
+    low_conf = bool(row.get("low_confidence", False))
     alert_tag = '<span class="c-alert-tag">⚠ Alert</span>' if city_alerts else ""
+    if low_conf:
+        alert_tag += '<span style="display:inline-block;font-size:0.52rem;font-weight:700;padding:1px 5px;border-radius:6px;background:#f0f9ff;color:#0369a1;margin-left:4px;vertical-align:middle;">LOW DATA</span>'
+    cc = "c-card-alert" if city_alerts else ("c-card-lowconf" if low_conf else "c-card")
     alert_html = "".join(f'<div class="c-alert">⚠ {fmt_alert(str(a.get("alert_message","")))} </div>' for a in city_alerts)
-    cc = "c-card-alert" if city_alerts else "c-card"
+
 
     dims_html = dim("Crowds", row.get("crowding_score",0), "#ef4444") + dim("Cost", row.get("cost_score",0), "#f59e0b") + dim("Safety", row.get("safety_score",0), "#10b981")
 
