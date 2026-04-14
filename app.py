@@ -1,6 +1,6 @@
 """
 app.py — City Sentiment Monitor dashboard.
-Light background, vibrant colors, MongoDB, city info, feedback collection.
+Clean light design, clickable star feedback, MongoDB.
 Run: streamlit run app.py
 """
 
@@ -34,7 +34,7 @@ CITY_INFO = {
         "best_time": "Apr–Jun, Sep–Oct",
         "avg_temp": "15°C / 59°F",
         "attractions": "Eiffel Tower, Louvre, Montmartre",
-        "tips": "Book museums in advance. Avoid August — locals leave and tourist crowds surge.",
+        "tips": "Book museums in advance. Avoid August — tourist crowds surge.",
         "accent": "#E74C3C",
     },
     "Rome": {
@@ -42,7 +42,7 @@ CITY_INFO = {
         "best_time": "Apr–May, Sep–Oct",
         "avg_temp": "20°C / 68°F",
         "attractions": "Colosseum, Vatican, Trevi Fountain",
-        "tips": "Validate your bus ticket. Tap water from fountains is free and safe.",
+        "tips": "Validate your bus ticket. Tap water from fountains is free.",
         "accent": "#E67E22",
     },
     "Barcelona": {
@@ -50,7 +50,7 @@ CITY_INFO = {
         "best_time": "May–Jun, Sep–Oct",
         "avg_temp": "22°C / 72°F",
         "attractions": "Sagrada Família, Park Güell, La Boqueria",
-        "tips": "Watch for pickpockets on Las Ramblas. Dinner starts at 9pm locally.",
+        "tips": "Watch for pickpockets on Las Ramblas. Dinner starts at 9pm.",
         "accent": "#8E44AD",
     },
     "Lisbon": {
@@ -58,7 +58,7 @@ CITY_INFO = {
         "best_time": "Mar–May, Sep–Nov",
         "avg_temp": "18°C / 64°F",
         "attractions": "Belém Tower, Alfama district, Sintra day trip",
-        "tips": "Tram 28 is scenic but crowded. Walking the hills is worth the effort.",
+        "tips": "Tram 28 is scenic but crowded. Walking the hills is worth it.",
         "accent": "#16A085",
     },
     "Amsterdam": {
@@ -66,7 +66,7 @@ CITY_INFO = {
         "best_time": "Apr–May (tulips), Jun–Aug",
         "avg_temp": "14°C / 57°F",
         "attractions": "Rijksmuseum, Anne Frank House, Canal cruise",
-        "tips": "Rent a bike. Watch out for tram tracks. Book Anne Frank months ahead.",
+        "tips": "Rent a bike. Watch tram tracks. Book Anne Frank months ahead.",
         "accent": "#27AE60",
     },
     "Prague": {
@@ -74,7 +74,7 @@ CITY_INFO = {
         "best_time": "May–Sep",
         "avg_temp": "16°C / 61°F",
         "attractions": "Prague Castle, Old Town Square, Charles Bridge",
-        "tips": "Very affordable. Avoid tourist trap restaurants near the Astronomical Clock.",
+        "tips": "Very affordable. Avoid restaurants near the Astronomical Clock.",
         "accent": "#C0392B",
     },
     "Athens": {
@@ -82,7 +82,7 @@ CITY_INFO = {
         "best_time": "Apr–Jun, Sep–Oct",
         "avg_temp": "24°C / 75°F",
         "attractions": "Acropolis, Parthenon, Plaka district",
-        "tips": "Visit the Acropolis at opening time. Summer heat is intense — stay hydrated.",
+        "tips": "Visit Acropolis at opening time. Summer heat is intense.",
         "accent": "#F39C12",
     },
     "London": {
@@ -90,7 +90,7 @@ CITY_INFO = {
         "best_time": "May–Sep",
         "avg_temp": "12°C / 54°F",
         "attractions": "British Museum, Tower of London, Hyde Park",
-        "tips": "Get an Oyster card for transport. Many world-class museums are free.",
+        "tips": "Get an Oyster card. Many world-class museums are free.",
         "accent": "#2980B9",
     },
 }
@@ -100,191 +100,162 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
-    background-color: #f7f8fc !important;
+    background-color: #f4f6fb !important;
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
-.block-container { padding-top: 2rem; padding-bottom: 2rem; max-width: 1400px; }
+.block-container { padding-top: 1.5rem; padding-bottom: 2rem; max-width: 1400px; }
 #MainMenu, footer, header { visibility: hidden; }
-[data-testid="stToolbar"] { display: none; }
+[data-testid="stToolbar"] { display: none !important; }
+[data-testid="stDecoration"] { display: none !important; }
 
+/* Header */
 .dash-header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     border-radius: 20px;
     padding: 2.2rem 2.8rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
     position: relative;
     overflow: hidden;
 }
-.dash-header::after {
-    content: '🌍';
+.dash-header::before {
+    content: '';
     position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 5rem;
-    opacity: 0.12;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    pointer-events: none;
 }
-.dash-title { font-size: 2.2rem; font-weight: 800; color: #ffffff; margin: 0; letter-spacing: -0.5px; }
-.dash-subtitle { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 5px; }
+.dash-title { font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0; letter-spacing: -0.5px; }
+.dash-subtitle { color: rgba(255,255,255,0.45); font-size: 0.85rem; margin-top: 5px; }
 .dash-week {
     display: inline-block;
-    background: rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.75);
-    font-size: 0.7rem; font-weight: 600;
-    padding: 3px 12px; border-radius: 20px;
-    margin-top: 10px; letter-spacing: 1px;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.65rem; font-weight: 700;
+    padding: 3px 11px; border-radius: 20px;
+    margin-top: 12px; letter-spacing: 1.2px;
     text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.12);
 }
 
+/* Metrics */
 [data-testid="stMetric"] {
-    background: #ffffff;
-    border: 1px solid #e8eaf0;
+    background: #fff;
+    border: 1px solid #e4e8f0;
     border-radius: 14px;
-    padding: 1.1rem 1.4rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 1rem 1.3rem;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
 }
 [data-testid="stMetricLabel"] p {
-    font-size: 0.68rem !important;
-    color: #9ca3b0 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-weight: 600 !important;
+    font-size: 0.65rem !important; color: #9ca3b0 !important;
+    text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600 !important;
 }
 [data-testid="stMetricValue"] {
-    font-size: 1.6rem !important;
-    font-weight: 800 !important;
-    color: #1a1a2e !important;
+    font-size: 1.55rem !important; font-weight: 800 !important; color: #1a1a2e !important;
 }
 
+/* City cards */
 .city-card {
-    background: #ffffff;
-    border-radius: 16px;
-    border: 1px solid #e8eaf0;
-    overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    background: #fff; border-radius: 16px; border: 1px solid #e4e8f0;
+    overflow: hidden; margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
 }
+.city-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.09); }
 .city-card-alert {
-    background: #ffffff;
-    border-radius: 16px;
-    border: 1px solid #fcd34d;
-    border-top: 4px solid #f59e0b;
-    overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 12px rgba(245,158,11,0.1);
+    background: #fff; border-radius: 16px;
+    border: 1px solid #fcd34d; border-top: 4px solid #f59e0b;
+    overflow: hidden; margin-bottom: 20px;
 }
-.card-img { width: 100%; height: 135px; object-fit: cover; display: block; }
-.card-accent-bar { height: 4px; width: 100%; }
-.card-body { padding: 15px 16px 16px; }
-.card-city-name { font-size: 1rem; font-weight: 700; color: #1a1a2e; margin: 0 0 3px 0; }
+.card-img { width: 100%; height: 130px; object-fit: cover; display: block; }
+.card-accent-bar { height: 3px; width: 100%; }
+.card-body { padding: 14px 15px 15px; }
+.card-city-name { font-size: 0.98rem; font-weight: 700; color: #1a1a2e; margin: 0 0 2px 0; }
 .card-score-row { display: flex; align-items: baseline; gap: 7px; margin-bottom: 1px; }
-.card-score { font-size: 1.9rem; font-weight: 800; line-height: 1; }
+.card-score { font-size: 1.8rem; font-weight: 800; line-height: 1; }
 .score-pos { color: #059669; }
 .score-neg { color: #DC2626; }
 .score-mix { color: #D97706; }
-.card-label { font-size: 0.73rem; font-weight: 700; }
-.card-change { font-size: 0.72rem; margin-bottom: 10px; font-weight: 500; }
+.card-label { font-size: 0.7rem; font-weight: 700; }
+.card-change { font-size: 0.7rem; margin-bottom: 9px; font-weight: 500; }
 .change-up { color: #059669; }
 .change-down { color: #DC2626; }
 .change-flat { color: #9ca3b0; }
 .card-stats {
-    display: flex;
-    border-top: 1px solid #f1f3f8;
-    border-bottom: 1px solid #f1f3f8;
-    padding: 8px 0; margin-bottom: 11px;
+    display: flex; border-top: 1px solid #f1f3f8;
+    border-bottom: 1px solid #f1f3f8; padding: 7px 0; margin-bottom: 10px;
 }
 .card-stat { flex: 1; display: flex; flex-direction: column; align-items: center; }
-.card-stat-label { font-size: 0.6rem; color: #b0b7c3; text-transform: uppercase; letter-spacing: 0.4px; }
-.card-stat-val { font-size: 0.92rem; font-weight: 700; color: #1a1a2e; }
+.card-stat-label { font-size: 0.57rem; color: #b0b7c3; text-transform: uppercase; letter-spacing: 0.4px; }
+.card-stat-val { font-size: 0.9rem; font-weight: 700; color: #1a1a2e; }
 .dim-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-.dim-lbl { font-size: 0.65rem; color: #9ca3b0; width: 44px; font-weight: 500; }
-.dim-track { flex: 1; height: 4px; background: #f1f3f8; border-radius: 2px; overflow: hidden; }
+.dim-lbl { font-size: 0.62rem; color: #9ca3b0; width: 44px; font-weight: 500; }
+.dim-track { flex: 1; height: 3px; background: #f0f2f7; border-radius: 2px; overflow: hidden; }
 .dim-fill { height: 100%; border-radius: 2px; }
 
-.city-info-section { margin-top: 11px; padding-top: 10px; border-top: 1px solid #f1f3f8; }
-.city-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 7px; }
-.city-info-item { display: flex; flex-direction: column; }
-.city-info-label { font-size: 0.57rem; color: #b0b7c3; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-.city-info-val { font-size: 0.72rem; color: #4a5568; font-weight: 500; line-height: 1.3; }
-.city-info-full { display: flex; flex-direction: column; margin-bottom: 6px; }
-.city-tip {
-    font-size: 0.68rem; color: #6b7280; font-style: italic;
-    line-height: 1.4; padding: 6px 9px;
-    background: #f8f9fc; border-radius: 7px;
-    border-left: 3px solid #e2e5ef;
-}
+/* City info */
+.city-info-section { margin-top: 10px; padding-top: 9px; border-top: 1px solid #f1f3f8; }
+.info-row { display: flex; gap: 10px; margin-bottom: 6px; }
+.info-item { flex: 1; }
+.info-label { font-size: 0.55rem; color: #b0b7c3; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; display: block; }
+.info-val { font-size: 0.7rem; color: #4a5568; font-weight: 500; line-height: 1.3; }
+.info-full { margin-bottom: 5px; }
+.city-tip { font-size: 0.66rem; color: #6b7280; font-style: italic; line-height: 1.4; padding: 5px 8px; background: #f8f9fc; border-radius: 6px; border-left: 2px solid #d1d5e0; }
 
-.alert-tag {
-    display: inline-block;
-    font-size: 0.58rem; font-weight: 700;
-    padding: 2px 7px; border-radius: 8px;
-    background: #fef3c7; color: #92400e;
-    margin-left: 5px; vertical-align: middle;
-}
-.alert-box {
-    font-size: 0.7rem; color: #92400e;
-    background: #fffbeb; border: 1px solid #fde68a;
-    border-radius: 7px; padding: 5px 9px; margin-top: 7px; line-height: 1.5;
-}
-.recommendation-yes {
-    font-size: 0.71rem; color: #065f46; background: #ecfdf5;
-    border: 1px solid #a7f3d0; border-radius: 7px;
-    padding: 6px 10px; margin-top: 8px; line-height: 1.5;
-}
-.recommendation-no {
-    font-size: 0.71rem; color: #7f1d1d; background: #fef2f2;
-    border: 1px solid #fecaca; border-radius: 7px;
-    padding: 6px 10px; margin-top: 8px; line-height: 1.5;
-}
-.recommendation-maybe {
-    font-size: 0.71rem; color: #78350f; background: #fffbeb;
-    border: 1px solid #fde68a; border-radius: 7px;
-    padding: 6px 10px; margin-top: 8px; line-height: 1.5;
-}
+/* Alerts */
+.alert-tag { display: inline-block; font-size: 0.57rem; font-weight: 700; padding: 1px 6px; border-radius: 7px; background: #fef3c7; color: #92400e; margin-left: 5px; vertical-align: middle; }
+.alert-box { font-size: 0.68rem; color: #92400e; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 5px 8px; margin-top: 6px; line-height: 1.5; }
+.recommendation-yes { font-size: 0.69rem; color: #065f46; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 5px 9px; margin-top: 7px; line-height: 1.5; }
+.recommendation-no { font-size: 0.69rem; color: #7f1d1d; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 5px 9px; margin-top: 7px; line-height: 1.5; }
+.recommendation-maybe { font-size: 0.69rem; color: #78350f; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 5px 9px; margin-top: 7px; line-height: 1.5; }
 
-.section-title {
-    font-size: 0.72rem; font-weight: 700; color: #9ca3b0;
-    text-transform: uppercase; letter-spacing: 1.5px;
-    margin: 2rem 0 1.2rem; padding-bottom: 0.6rem;
-    border-bottom: 2px solid #f1f3f8;
-}
-.alert-row { padding: 10px 15px; border-radius: 8px; margin-bottom: 7px; font-size: 0.82rem; line-height: 1.5; }
+/* Section titles */
+.section-title { font-size: 0.7rem; font-weight: 700; color: #9ca3b0; text-transform: uppercase; letter-spacing: 1.5px; margin: 1.8rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e4e8f0; }
+.alert-row { padding: 9px 14px; border-radius: 8px; margin-bottom: 6px; font-size: 0.8rem; line-height: 1.5; }
 .alert-high { background: #fef2f2; border-left: 3px solid #DC2626; color: #7f1d1d; }
 .alert-medium { background: #fffbeb; border-left: 3px solid #D97706; color: #78350f; }
 .alert-low { background: #ecfdf5; border-left: 3px solid #059669; color: #065f46; }
 
-.feedback-box {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    border-radius: 18px;
-    padding: 2rem 2.5rem;
-    margin-top: 1rem;
+/* Feedback */
+.feedback-wrap {
+    background: linear-gradient(135deg, #0f2027, #203a43);
+    border-radius: 18px; padding: 2rem 2.5rem; margin-top: 0.5rem;
 }
-.feedback-title { font-size: 1.3rem; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
-.feedback-sub { color: rgba(255,255,255,0.45); font-size: 0.82rem; margin-bottom: 1.5rem; }
+.feedback-title { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 3px; }
+.feedback-sub { color: rgba(255,255,255,0.4); font-size: 0.8rem; margin-bottom: 1.5rem; }
 
+/* Star rating widget */
+.stars-container { display: flex; gap: 6px; margin-bottom: 16px; }
+.star-btn {
+    font-size: 2rem; cursor: pointer; background: none;
+    border: none; padding: 0; line-height: 1;
+    transition: transform 0.1s; filter: grayscale(30%);
+}
+.star-btn:hover { transform: scale(1.2); }
+
+/* Tabs */
 .stTabs [data-baseweb="tab-list"] { gap: 6px; }
 .stTabs [data-baseweb="tab"] {
-    background: #f1f3f8; border-radius: 10px;
-    color: #6b7280; font-weight: 600;
-    padding: 7px 16px; border: 1px solid #e2e5ef;
+    background: #eef0f5; border-radius: 10px; color: #6b7280;
+    font-weight: 600; padding: 7px 15px; border: 1px solid #e4e8f0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
-.stTabs [aria-selected="true"] {
-    background: #1a1a2e !important;
-    color: #ffffff !important;
-    border-color: #1a1a2e !important;
-}
+.stTabs [aria-selected="true"] { background: #0f2027 !important; color: #fff !important; border-color: #0f2027 !important; }
+
+/* Text area in feedback */
 .stTextArea textarea {
-    background: rgba(255,255,255,0.08) !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
-    color: #ffffff !important;
-    border-radius: 10px !important;
+    background: rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    color: #fff !important; border-radius: 10px !important;
 }
+.stTextArea textarea::placeholder { color: rgba(255,255,255,0.25) !important; }
+
+/* Buttons */
 .stButton > button {
-    background: linear-gradient(135deg, #1a1a2e, #0f3460) !important;
-    color: white !important; border: none !important;
-    border-radius: 10px !important; font-weight: 700 !important;
-    padding: 0.5rem 2rem !important;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    color: #fff !important; border: none !important; border-radius: 10px !important;
+    font-weight: 700 !important; padding: 0.45rem 1.8rem !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -307,9 +278,7 @@ def load_data():
         ))
         alerts = pd.DataFrame(list(db[ALERTS_COLLECTION].find({"week_start": week})))
         history = pd.DataFrame(list(
-            db[CITY_FEATURES_COLLECTION].find(
-                {}, {"city": 1, "week_start": 1, "avg_sentiment": 1}
-            ).sort("week_start", 1)
+            db[CITY_FEATURES_COLLECTION].find({}, {"city": 1, "week_start": 1, "avg_sentiment": 1}).sort("week_start", 1)
         ))
         prev_row = db[CITY_FEATURES_COLLECTION].find_one(
             {"week_start": {"$lt": week}}, sort=[("week_start", -1)]
@@ -317,10 +286,7 @@ def load_data():
         prev_metrics = {}
         if prev_row:
             prev_week = prev_row["week_start"]
-            prev_metrics = {
-                r["city"]: r.get("avg_sentiment", 0.0)
-                for r in db[CITY_FEATURES_COLLECTION].find({"week_start": prev_week})
-            }
+            prev_metrics = {r["city"]: r.get("avg_sentiment", 0.0) for r in db[CITY_FEATURES_COLLECTION].find({"week_start": prev_week})}
         client.close()
         return metrics, alerts, history, prev_metrics
     except Exception as e:
@@ -348,13 +314,11 @@ Data from {mention_count} traveller mentions this week:
 - Crowding level: {crowding_level} (score: {crowding_score:.2f})
 - Cost level: {cost_level} (score: {cost_score:.2f})
 Rules:
-- If crowding score > 0.3, you MUST mention overcrowding as a problem
+- If crowding score > 0.3, you MUST mention overcrowding
 - If cost score > 0.2, you MUST mention high costs
-- If negative ratio > 40%, you MUST reflect that negativity
+- If negative ratio > 40%, reflect that negativity
 - If sentiment is below 0, recommend against visiting
-- Do NOT be generically positive if the data shows problems
-- Maximum 20 words
-- Start with "Yes —", "No —", or "Maybe —"
+- Maximum 20 words. Start with "Yes —", "No —", or "Maybe —"
 Reply with only that one sentence."""
         response = client.chat.completions.create(
             model="llama3-8b-8192",
@@ -385,39 +349,33 @@ def save_feedback(rating, comment):
         return False
 
 
-def score_css(score):
-    if score >= 0.15: return "score-pos"
-    if score <= -0.05: return "score-neg"
+def score_css(s):
+    if s >= 0.15: return "score-pos"
+    if s <= -0.05: return "score-neg"
     return "score-mix"
 
-def sentiment_label(score):
-    if score >= 0.15: return "Positive"
-    if score <= -0.05: return "Negative"
+def sentiment_label(s):
+    if s >= 0.15: return "Positive"
+    if s <= -0.05: return "Negative"
     return "Mixed"
 
 def change_html(current, prev):
-    if prev is None:
-        return '<span class="card-change change-flat">First week of data</span>'
+    if prev is None: return '<span class="card-change change-flat">First week of data</span>'
     diff = current - prev
-    if diff > 0.05:
-        return f'<span class="card-change change-up">▲ +{diff:.2f} vs last week</span>'
-    if diff < -0.05:
-        return f'<span class="card-change change-down">▼ {diff:.2f} vs last week</span>'
+    if diff > 0.05: return f'<span class="card-change change-up">▲ +{diff:.2f} vs last week</span>'
+    if diff < -0.05: return f'<span class="card-change change-down">▼ {diff:.2f} vs last week</span>'
     return '<span class="card-change change-flat">● Stable vs last week</span>'
 
-def dim_bar_html(label, value, color):
+def dim_bar(label, value, color):
     pct = min(float(value) * 250, 100)
-    return f"""<div class="dim-row">
-        <span class="dim-lbl">{label}</span>
-        <div class="dim-track"><div class="dim-fill" style="width:{pct:.0f}%;background:{color}"></div></div>
-    </div>"""
+    return f'<div class="dim-row"><span class="dim-lbl">{label}</span><div class="dim-track"><div class="dim-fill" style="width:{pct:.0f}%;background:{color}"></div></div></div>'
 
-def format_alert_message(message):
+def fmt_alert(message):
     import re
-    match = re.search(r"dropped ([\d.]+) \(([+\-\d.]+) → ([+\-\d.]+)\)", message)
-    if match: return f"Sentiment dropped sharply ({match.group(2)} → {match.group(3)})."
-    match = re.search(r"Only (\d+) mentions", message)
-    if match: return f"Only {match.group(1)} traveller mentions — low confidence."
+    m = re.search(r"dropped ([\d.]+) \(([+\-\d.]+) → ([+\-\d.]+)\)", message)
+    if m: return f"Sentiment dropped sharply ({m.group(2)} → {m.group(3)})."
+    m = re.search(r"Only (\d+) mentions", message)
+    if m: return f"Only {m.group(1)} traveller mentions — low confidence."
     if "deviates" in message.lower(): return "Unusual deviation from 4-week average."
     return message
 
@@ -425,24 +383,20 @@ def format_alert_message(message):
 # ── MAIN UI ────────────────────────────────────────────────────────────────────
 
 metrics, alerts, history, prev_metrics = load_data()
-
 week_display = metrics["week_start"].iloc[0] if metrics is not None and not metrics.empty else "—"
-col_h1, col_h2 = st.columns([7, 1])
-with col_h1:
-    st.markdown(f"""
-    <div class="dash-header">
-        <div class="dash-title">City Sentiment Monitor</div>
-        <div class="dash-subtitle">Real-time traveller sentiment across European cities — powered by AI & MongoDB</div>
-        <div class="dash-week">Week of {week_display}</div>
-    </div>
-    """, unsafe_allow_html=True)
-with col_h2:
-    st.write("")
-    st.write("")
-    st.write("")
-    if st.button("⟳ Refresh", use_container_width=True):
-        st.cache_data.clear()
-        st.rerun()
+
+# Header
+st.markdown(f"""
+<div class="dash-header">
+    <div class="dash-title">City Sentiment Monitor</div>
+    <div class="dash-subtitle">Real-time traveller sentiment across European cities — powered by AI & MongoDB</div>
+    <div class="dash-week">Week of {week_display}</div>
+</div>
+""", unsafe_allow_html=True)
+
+if st.button("⟳ Refresh", key="refresh_main"):
+    st.cache_data.clear()
+    st.rerun()
 
 if metrics is None or metrics.empty:
     st.info("No data yet — run the pipeline to populate MongoDB.")
@@ -450,12 +404,14 @@ if metrics is None or metrics.empty:
 
 week_start = metrics["week_start"].iloc[0]
 
+# Summary
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Overall Sentiment", f"{metrics['avg_sentiment'].mean():+.2f}")
 c2.metric("Total Mentions", f"{int(metrics['mention_count'].sum()):,}")
 c3.metric("Positive Cities", f"{len(metrics[metrics['avg_sentiment'] >= 0.15])} / {len(metrics)}")
 c4.metric("Active Alerts", str(len(alerts) if alerts is not None and not alerts.empty else 0))
 
+# City cards
 st.markdown('<div class="section-title">City Breakdown</div>', unsafe_allow_html=True)
 
 alerts_by_city = {}
@@ -474,234 +430,89 @@ for i, (_, row) in enumerate(metrics.iterrows()):
     accent = info.get("accent", "#6366f1")
 
     alert_tag = '<span class="alert-tag">⚠ Alert</span>' if city_alerts else ""
-    alert_html = "".join(
-        f'<div class="alert-box">⚠ {format_alert_message(str(a.get("alert_message", "")))}</div>'
-        for a in city_alerts
-    )
+    alert_html = "".join(f'<div class="alert-box">⚠ {fmt_alert(str(a.get("alert_message", "")))}</div>' for a in city_alerts)
     card_class = "city-card-alert" if city_alerts else "city-card"
+    dims = dim_bar("Crowds", row.get("crowding_score", 0), "#EF4444") + dim_bar("Cost", row.get("cost_score", 0), "#F59E0B") + dim_bar("Safety", row.get("safety_score", 0), "#10B981")
 
-    dims = (
-        dim_bar_html("Crowds", row.get("crowding_score", 0), "#EF4444") +
-        dim_bar_html("Cost", row.get("cost_score", 0), "#F59E0B") +
-        dim_bar_html("Safety", row.get("safety_score", 0), "#10B981")
-    )
-
-    rec = get_visit_recommendation(
-        city=city, avg_sentiment=score,
-        crowding_score=float(row.get("crowding_score", 0)),
-        cost_score=float(row.get("cost_score", 0)),
-        positive_ratio=float(row.get("positive_ratio", 0)),
-        negative_ratio=float(row.get("negative_ratio", 0)),
-        mention_count=int(row.get("mention_count", 0))
-    )
+    rec = get_visit_recommendation(city=city, avg_sentiment=score, crowding_score=float(row.get("crowding_score", 0)), cost_score=float(row.get("cost_score", 0)), positive_ratio=float(row.get("positive_ratio", 0)), negative_ratio=float(row.get("negative_ratio", 0)), mention_count=int(row.get("mention_count", 0)))
     rec_html = f'<div class="recommendation-{rec["verdict"]}">{rec["recommendation"]}</div>' if rec["recommendation"] else ""
 
     city_info_html = ""
     if info:
-        city_info_html = f"""
-        <div class="city-info-section">
-            <div class="city-info-grid">
-                <div class="city-info-item">
-                    <span class="city-info-label">🗓 Best time</span>
-                    <span class="city-info-val">{info.get('best_time', '—')}</span>
-                </div>
-                <div class="city-info-item">
-                    <span class="city-info-label">🌡 Avg temp</span>
-                    <span class="city-info-val">{info.get('avg_temp', '—')}</span>
-                </div>
-            </div>
-            <div class="city-info-full">
-                <span class="city-info-label">📍 Top attractions</span>
-                <span class="city-info-val">{info.get('attractions', '—')}</span>
-            </div>
-            <div class="city-tip">💡 {info.get('tips', '')}</div>
-        </div>"""
+        city_info_html = f'<div class="city-info-section"><div class="info-row"><div class="info-item"><span class="info-label">🗓 Best time</span><span class="info-val">{info.get("best_time","—")}</span></div><div class="info-item"><span class="info-label">🌡 Avg temp</span><span class="info-val">{info.get("avg_temp","—")}</span></div></div><div class="info-full"><span class="info-label">📍 Attractions</span><span class="info-val">{info.get("attractions","—")}</span></div><div class="city-tip">💡 {info.get("tips","")}</div></div>'
 
     with cols[i % 4]:
-        st.markdown(f"""
-<div class="{card_class}">
-  <img class="card-img" src="{img_url}">
-  <div class="card-accent-bar" style="background:{accent}"></div>
-  <div class="card-body">
-    <p class="card-city-name">{city}{alert_tag}</p>
-    <div class="card-score-row">
-      <span class="card-score {score_css(score)}">{score:+.2f}</span>
-      <span class="card-label {score_css(score)}">{sentiment_label(score)}</span>
-    </div>
-    {change_html(score, prev)}
-    <div class="card-stats">
-      <div class="card-stat">
-        <span class="card-stat-label">Mentions</span>
-        <span class="card-stat-val">{int(row.get('mention_count', 0))}</span>
-      </div>
-      <div class="card-stat">
-        <span class="card-stat-label">Positive</span>
-        <span class="card-stat-val">{row.get('positive_ratio', 0):.0%}</span>
-      </div>
-      <div class="card-stat">
-        <span class="card-stat-label">Negative</span>
-        <span class="card-stat-val">{row.get('negative_ratio', 0):.0%}</span>
-      </div>
-    </div>
-    {dims}
-    {rec_html}
-    {alert_html}
-    {city_info_html}
-  </div>
-</div>
-""", unsafe_allow_html=True)
+        st.markdown(f"""<div class="{card_class}"><img class="card-img" src="{img_url}"><div class="card-accent-bar" style="background:{accent}"></div><div class="card-body"><p class="card-city-name">{city}{alert_tag}</p><div class="card-score-row"><span class="card-score {score_css(score)}">{score:+.2f}</span><span class="card-label {score_css(score)}">{sentiment_label(score)}</span></div>{change_html(score, prev)}<div class="card-stats"><div class="card-stat"><span class="card-stat-label">Mentions</span><span class="card-stat-val">{int(row.get("mention_count",0))}</span></div><div class="card-stat"><span class="card-stat-label">Positive</span><span class="card-stat-val">{row.get("positive_ratio",0):.0%}</span></div><div class="card-stat"><span class="card-stat-label">Negative</span><span class="card-stat-val">{row.get("negative_ratio",0):.0%}</span></div></div>{dims}{rec_html}{alert_html}{city_info_html}</div></div>""", unsafe_allow_html=True)
 
+# Trends
 st.markdown('<div class="section-title">Sentiment Trends Over Time</div>', unsafe_allow_html=True)
 if history is not None and not history.empty:
     pivot = history.pivot_table(index="week_start", columns="city", values="avg_sentiment")
-    selected = st.multiselect(
-        "Cities", options=pivot.columns.tolist(),
-        default=pivot.columns.tolist(), label_visibility="collapsed"
-    )
+    selected = st.multiselect("Cities", options=pivot.columns.tolist(), default=pivot.columns.tolist(), label_visibility="collapsed")
     if selected:
-        st.line_chart(pivot[selected], height=300, use_container_width=True)
+        st.line_chart(pivot[selected], height=280, use_container_width=True)
 
+# Alerts
 st.markdown('<div class="section-title">Monitoring Alerts</div>', unsafe_allow_html=True)
 if alerts is not None and not alerts.empty:
     for _, alert in alerts.iterrows():
-        st.markdown(
-            f'<div class="alert-row alert-{alert.get("severity", "medium")}">'
-            f'<strong>{alert.get("city", "")}</strong> — '
-            f'{format_alert_message(str(alert.get("alert_message", "")))}</div>',
-            unsafe_allow_html=True
-        )
+        st.markdown(f'<div class="alert-row alert-{alert.get("severity","medium")}"><strong>{alert.get("city","")}</strong> — {fmt_alert(str(alert.get("alert_message","")))}</div>', unsafe_allow_html=True)
 else:
-    st.markdown('<p style="font-size:0.85rem;color:#9ca3b0;padding:8px 0">No alerts this week.</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:0.82rem;color:#9ca3b0;padding:6px 0">No alerts this week.</p>', unsafe_allow_html=True)
 
-st.write("")
-st.markdown('<div class="section-title">Model Evaluation & Human Review</div>', unsafe_allow_html=True)
-tab1, tab2 = st.tabs(["📊 LLM Judge Results", "👁 Human Review Queue"])
-
-with tab1:
-    st.markdown("#### VADER vs LLM Agreement This Week")
-    try:
-        client = MongoClient(MONGO_URI)
-        db = client[DB_NAME]
-        pipeline = [
-            {"$match": {"week_start": week_start}},
-            {"$group": {
-                "_id": "$city",
-                "total_judged": {"$sum": 1},
-                "agreed": {"$sum": "$agreement"},
-                "agreement_pct": {"$avg": "$agreement"}
-            }},
-            {"$sort": {"agreement_pct": 1}}
-        ]
-        judge_results = list(db[JUDGE_COLLECTION].aggregate(pipeline))
-        client.close()
-        if not judge_results:
-            st.info("No LLM Judge results yet. Run step 06 (llm_judge).")
-        else:
-            for r in judge_results:
-                city = r["_id"]
-                pct = r["agreement_pct"] * 100
-                color = "#059669" if pct >= 70 else "#D97706" if pct >= 50 else "#DC2626"
-                confidence = "High confidence" if pct >= 70 else "Medium confidence" if pct >= 50 else "Low confidence"
-                st.markdown(f"""
-                <div style="display:flex;justify-content:space-between;align-items:center;
-                            padding:10px 16px;border-radius:10px;margin-bottom:8px;
-                            background:#f8f9fc;border:1px solid #e8eaf0">
-                    <span style="font-weight:700;font-size:0.9rem;color:#1a1a2e">{city}</span>
-                    <span style="font-size:0.8rem;color:#9ca3b0">{r['agreed']}/{r['total_judged']} agreed</span>
-                    <span style="font-weight:700;color:{color};font-size:0.9rem">{pct:.0f}% — {confidence}</span>
-                </div>""", unsafe_allow_html=True)
-    except Exception as e:
-        st.error(f"Could not load judge results: {e}")
-
-with tab2:
-    st.markdown("#### Articles Flagged for Human Review")
-    try:
-        client = MongoClient(MONGO_URI)
-        db = client[DB_NAME]
-        samples = list(db[VALIDATION_COLLECTION].find({"needs_review": True}).limit(20))
-        if not samples:
-            st.success("✓ No articles need review right now!")
-        else:
-            st.info(f"{len(samples)} articles need review")
-            for r in samples:
-                doc_id = r.get("doc_id", str(r["_id"]))
-                with st.expander(f"{r.get('city')} — VADER: {r.get('vader_label')} ({r.get('vader_score', 0):+.2f}) | LLM: {r.get('llm_label')}"):
-                    st.write(r.get("clean_text", "")[:400])
-                    st.caption("VADER and LLM disagreed. What is the correct label?")
-                    col1, col2, col3, col4 = st.columns(4)
-                    def update_label(doc_id, human_lbl):
-                        c = MongoClient(MONGO_URI)
-                        c[DB_NAME][VALIDATION_COLLECTION].update_one(
-                            {"doc_id": doc_id},
-                            {"$set": {"human_label": human_lbl, "needs_review": False}}
-                        )
-                        c.close()
-                    if col1.button("Positive", key=f"pos_{doc_id}"): update_label(doc_id, "positive"); st.rerun()
-                    if col2.button("Negative", key=f"neg_{doc_id}"): update_label(doc_id, "negative"); st.rerun()
-                    if col3.button("Neutral", key=f"neu_{doc_id}"): update_label(doc_id, "neutral"); st.rerun()
-                    if col4.button("Skip", key=f"skip_{doc_id}"): update_label(doc_id, None); st.rerun()
-
-        st.markdown("#### VADER Accuracy from Human Reviews")
-        acc_pipeline = [
-            {"$match": {"human_label": {"$in": ["positive", "negative", "neutral"]}}},
-            {"$group": {
-                "_id": "$week_start",
-                "total_reviewed": {"$sum": 1},
-                "correct_count": {"$sum": {"$cond": [{"$eq": ["$human_label", "$vader_label"]}, 1, 0]}}
-            }},
-            {"$sort": {"_id": 1}}
-        ]
-        acc_results = list(db[VALIDATION_COLLECTION].aggregate(acc_pipeline))
-        client.close()
-        if not acc_results:
-            st.info("No accuracy data yet — review some articles above first.")
-        else:
-            acc_df = pd.DataFrame(acc_results)
-            acc_df["accuracy_pct"] = (acc_df["correct_count"] / acc_df["total_reviewed"]) * 100
-            c1, c2, c3 = st.columns(3)
-            latest_acc = acc_df.iloc[-1]
-            c1.metric("Latest Accuracy", f"{latest_acc['accuracy_pct']:.1f}%")
-            c2.metric("Articles Reviewed", int(latest_acc["total_reviewed"]))
-            c3.metric("Correct Predictions", int(latest_acc["correct_count"]))
-            if len(acc_df) > 1:
-                acc_df.rename(columns={"_id": "week_start"}, inplace=True)
-                st.line_chart(acc_df.set_index("week_start")["accuracy_pct"], height=200)
-    except Exception as e:
-        st.error(f"Could not load validation samples: {e}")
-
+# ── FEEDBACK — clickable stars ─────────────────────────────────────────────────
 st.markdown('<div class="section-title">Share Your Feedback</div>', unsafe_allow_html=True)
+
 st.markdown("""
-<div class="feedback-box">
+<div class="feedback-wrap">
     <div class="feedback-title">Was this dashboard helpful?</div>
     <div class="feedback-sub">Help us improve — takes 10 seconds</div>
 </div>
 """, unsafe_allow_html=True)
 
-fb1, fb2 = st.columns([1, 2])
-with fb1:
-    rating = st.select_slider(
-        "Rating", options=[1, 2, 3, 4, 5], value=5,
-        format_func=lambda x: "⭐" * x,
-        label_visibility="collapsed"
-    )
-    labels = {1: "Poor", 2: "Fair", 3: "Good", 4: "Very Good", 5: "Excellent!"}
-    st.markdown(f'<p style="font-size:1.5rem;margin:4px 0">{"⭐" * rating}</p>', unsafe_allow_html=True)
-    st.markdown(f'<p style="color:#6b7280;font-size:0.8rem;margin:0">{labels[rating]}</p>', unsafe_allow_html=True)
-with fb2:
-    comment = st.text_area(
-        "Comment", height=90,
-        placeholder="What did you find most useful? Any suggestions?",
-        label_visibility="collapsed"
-    )
+st.write("")
 
-if st.button("Submit Feedback"):
-    if save_feedback(rating, comment):
-        st.success("✓ Thank you for your feedback!")
-        st.balloons()
+# Star rating using session state
+if "star_rating" not in st.session_state:
+    st.session_state.star_rating = 0
 
-st.divider()
-st.markdown(
-    f'<p style="text-align:center;color:#c0c7d4;font-size:0.72rem;">'
-    f'City Sentiment Monitor · Week of {week_start} · M6 MLOps Pipeline · Aalborg University · MongoDB Powered</p>',
-    unsafe_allow_html=True
+star_cols = st.columns([1, 1, 1, 1, 1, 4])
+labels = {1: "Poor", 2: "Fair", 3: "Good", 4: "Very good", 5: "Excellent"}
+
+for idx, col in enumerate(star_cols[:5]):
+    star_num = idx + 1
+    filled = star_num <= st.session_state.star_rating
+    icon = "⭐" if filled else "☆"
+    with col:
+        if st.button(icon, key=f"star_{star_num}", help=labels[star_num]):
+            st.session_state.star_rating = star_num
+            st.rerun()
+
+if st.session_state.star_rating > 0:
+    rating_label = labels[st.session_state.star_rating]
+    st.markdown(f'<p style="font-size:0.8rem;color:#6b7280;margin-top:2px">You rated: <strong>{st.session_state.star_rating}/5</strong> — {rating_label}</p>', unsafe_allow_html=True)
+else:
+    st.markdown('<p style="font-size:0.8rem;color:#b0b7c3;margin-top:2px">Click a star to rate</p>', unsafe_allow_html=True)
+
+comment = st.text_area(
+    "Comment",
+    height=80,
+    placeholder="What did you find most useful? Any suggestions?",
+    label_visibility="collapsed",
+    key="feedback_comment"
 )
+
+fb_col1, fb_col2 = st.columns([1, 5])
+with fb_col1:
+    if st.button("Submit", key="submit_feedback"):
+        if st.session_state.star_rating == 0:
+            st.warning("Please select a star rating first.")
+        else:
+            if save_feedback(st.session_state.star_rating, comment):
+                st.success(f"{'⭐' * st.session_state.star_rating} Thank you for your feedback!")
+                st.session_state.star_rating = 0
+                st.balloons()
+
+# Footer
+st.divider()
+st.markdown(f'<p style="text-align:center;color:#c0c7d4;font-size:0.7rem;">City Sentiment Monitor · Week of {week_start} · M6 MLOps Pipeline · Aalborg University · MongoDB Powered</p>', unsafe_allow_html=True)
