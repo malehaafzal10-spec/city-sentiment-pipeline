@@ -155,17 +155,21 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 .fb-title { font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 3px; }
 .fb-sub { color: rgba(255,255,255,0.35); font-size: 0.78rem; margin-bottom: 1.6rem; }
 
-/* Star buttons — tight row, no gap */
-div[data-testid="column"] > div > div > div > button {
-    padding: 0 !important;
-    min-width: 0 !important;
-    background: none !important;
+/* Star rating buttons — hide number text, show as transparent overlay */
+div[data-testid="column"]:nth-child(-n+5) > div > div > div > button {
+    position: relative !important;
+    margin-top: -44px !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    font-size: 1.6rem !important;
-    line-height: 1 !important;
-    width: 36px !important;
-    height: 36px !important;
+    color: transparent !important;
+    font-size: 0 !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
 }
 
 /* Comment box — dark bg, dark text */
@@ -471,7 +475,7 @@ if history is not None and not history.empty:
                     mode="lines",
                     line=dict(color=color, width=2.5, shape="spline", smoothing=0.8),
                     fill="tozeroy",
-                    fillcolor=color.replace("#", "rgba(") + ",0.06)" if "#" in color else f"rgba(99,102,241,0.06)",
+                    fillcolor=f"rgba({int(color[1:3],16)},{int(color[3:5],16)},{int(color[5:7],16)},0.07)",
                     hovertemplate=f"<b>{city}</b><br>Week: %{{x}}<br>Sentiment: %{{y:.2f}}<extra></extra>"
                 ))
             fig.update_layout(
@@ -506,10 +510,10 @@ for idx in range(5):
     filled = star_num <= current_rating
     bg = "#00b67a" if filled else "#dde1eb"
     with star_cols[idx]:
-        st.markdown(f'''<div style="width:38px;height:38px;background:{bg};border-radius:4px;display:flex;align-items:center;justify-content:center;margin-right:4px">
+        st.markdown(f'''<div style="width:40px;height:40px;background:{bg};border-radius:6px;display:flex;align-items:center;justify-content:center;">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>''', unsafe_allow_html=True)
-        if st.button("​", key=f"s{star_num}", help=rating_labels[star_num]):
+        if st.button(f"{star_num}", key=f"s{star_num}", help=rating_labels[star_num]):
             st.session_state.star_rating = star_num
             st.rerun()
 
