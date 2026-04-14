@@ -522,19 +522,33 @@ if "star_rating" not in st.session_state:
 rating_labels = {0: "Click a star to rate", 1: "Poor", 2: "Fair", 3: "Good", 4: "Very good", 5: "Excellent!"}
 current_rating = st.session_state.star_rating
 
-star_cols = st.columns([1,1,1,1,1,10])
+# Star buttons — ★ filled green, ☆ empty grey
+star_cols = st.columns([1, 1, 1, 1, 1, 8])
 for idx in range(5):
     star_num = idx + 1
     filled = star_num <= current_rating
-    bg = "#00b67a" if filled else "#dde1eb"
+    star_char = "★" if filled else "☆"
+    color = "#00b67a" if filled else "#94a3b8"
     with star_cols[idx]:
-        st.markdown(f'''<div style="width:40px;height:40px;background:{bg};border-radius:6px;display:flex;align-items:center;justify-content:center;">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>''', unsafe_allow_html=True)
-        if st.button(" ", key=f"s{star_num}", help=rating_labels[star_num]):
+        st.markdown(f"""<style>
+        div[data-testid="column"]:nth-child({idx+1}) button {{
+            color: {color} !important;
+            font-size: 2.2rem !important;
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            line-height: 1.2 !important;
+            min-width: 0 !important;
+        }}
+        div[data-testid="column"]:nth-child({idx+1}) button:hover {{
+            color: #00b67a !important;
+            transform: scale(1.15);
+        }}
+        </style>""", unsafe_allow_html=True)
+        if st.button(star_char, key=f"s{star_num}"):
             st.session_state.star_rating = star_num
             st.rerun()
-
 lbl = rating_labels[current_rating]
 lbl_color = "#00b67a" if current_rating > 0 else "#94a3b8"
 st.markdown(f'<p style="font-size:0.78rem;color:{lbl_color};margin:6px 0 10px;font-weight:600">{lbl}</p>', unsafe_allow_html=True)
