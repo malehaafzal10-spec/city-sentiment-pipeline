@@ -393,8 +393,27 @@ c2.metric("Total Mentions", f"{int(metrics['mention_count'].sum()):,}")
 c3.metric("Positive Cities", f"{len(metrics[metrics['avg_sentiment'] >= 0.15])} / {len(metrics)}")
 c4.metric("Active Alerts", str(len(alerts) if alerts is not None and not alerts.empty else 0))
 
-# City cards
+# City cards — with sort filter
 st.markdown('<div class="sec-title">City Breakdown — Last 30 Days</div>', unsafe_allow_html=True)
+
+sort_col1, sort_col2 = st.columns([2, 5])
+with sort_col1:
+    sort_by = st.selectbox(
+        "Sort by",
+        options=["Sentiment (best first)", "Cost (cheapest first)", "Crowds (least crowded first)", "Safety (safest first)", "Mentions (most discussed first)"],
+        label_visibility="collapsed",
+        key="sort_by"
+    )
+
+sort_map = {
+    "Sentiment (best first)": ("avg_sentiment", False),
+    "Cost (cheapest first)": ("cost_score", True),
+    "Crowds (least crowded first)": ("crowding_score", True),
+    "Safety (safest first)": ("safety_score", False),
+    "Mentions (most discussed first)": ("mention_count", False),
+}
+sort_col, sort_asc = sort_map[sort_by]
+metrics = metrics.sort_values(sort_col, ascending=sort_asc).reset_index(drop=True)
 
 alerts_by_city = {}
 if alerts is not None and not alerts.empty:
@@ -432,7 +451,42 @@ if history is not None and not history.empty:
     cities_available = pivot.columns.tolist()
     selected = st.multiselect("Select cities", options=cities_available, default=cities_available, label_visibility="collapsed")
     if selected:
-        st.line_chart(pivot[selected], height=260, use_container_width=True)
+        try:
+            import plotly.graph_objects as go
+            CITY_COLORS = {
+                "Paris": "#e74c3c", "Rome": "#e67e22", "Barcelona": "#8e44ad",
+                "Lisbon": "#16a085", "Amsterdam": "#27ae60", "Prague": "#c0392b",
+                "Athens": "#f39c12", "London": "#2980b9"
+            }
+            fig = go.Figure()
+            for city in selected:
+                if city not in pivot.columns:
+                    continue
+                y = pivot[city].dropna()
+                x = y.index.tolist()
+                color = CITY_COLORS.get(city, "#6366f1")
+                fig.add_trace(go.Scatter(
+                    x=x, y=y.values,
+                    name=city,
+                    mode="lines",
+                    line=dict(color=color, width=2.5, shape="spline", smoothing=0.8),
+                    fill="tozeroy",
+                    fillcolor=color.replace("#", "rgba(") + ",0.06)" if "#" in color else f"rgba(99,102,241,0.06)",
+                    hovertemplate=f"<b>{city}</b><br>Week: %{{x}}<br>Sentiment: %{{y:.2f}}<extra></extra>"
+                ))
+            fig.update_layout(
+                height=260,
+                margin=dict(l=0, r=0, t=10, b=0),
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
+                legend=dict(orientation="h", yanchor="bottom", y=-0.3, xanchor="left", x=0, font=dict(size=11)),
+                xaxis=dict(showgrid=False, tickfont=dict(size=10, color="#94a3b8"), tickangle=-30, zeroline=False),
+                yaxis=dict(showgrid=True, gridcolor="rgba(148,163,184,0.15)", tickfont=dict(size=10, color="#94a3b8"), zeroline=True, zerolinecolor="rgba(148,163,184,0.3)", zerolinewidth=1),
+                hovermode="x unified",
+            )
+            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        except ImportError:
+            st.line_chart(pivot[selected], height=260, use_container_width=True)
 
 # Feedback
 st.markdown('<div class="sec-title">Share Your Feedback</div>', unsafe_allow_html=True)
@@ -442,21 +496,26 @@ st.write("")
 if "star_rating" not in st.session_state:
     st.session_state.star_rating = 0
 
-# Stars — tight columns with no gap
-star_cols = st.columns([0.5, 0.5, 0.5, 0.5, 0.5, 6])
+# Stars — Trustpilot style using buttons hidden behind HTML
+rating_labels = {0: "Click a star to rate", 1: "Poor", 2: "Fair", 3: "Good", 4: "Very good", 5: "Excellent!"}
+current_rating = st.session_state.star_rating
+
+star_cols = st.columns([1,1,1,1,1,10])
 for idx in range(5):
     star_num = idx + 1
-    icon = "⭐" if star_num <= st.session_state.star_rating else "☆"
+    filled = star_num <= current_rating
+    bg = "#00b67a" if filled else "#dde1eb"
     with star_cols[idx]:
-        if st.button(icon, key=f"s{star_num}"):
+        st.markdown(f'''<div style="width:38px;height:38px;background:{bg};border-radius:4px;display:flex;align-items:center;justify-content:center;margin-right:4px">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>''', unsafe_allow_html=True)
+        if st.button("​", key=f"s{star_num}", help=rating_labels[star_num]):
             st.session_state.star_rating = star_num
             st.rerun()
 
-rating_labels = {0: "", 1: "Poor", 2: "Fair", 3: "Good", 4: "Very good", 5: "Excellent!"}
-if st.session_state.star_rating > 0:
-    st.markdown(f'<p style="font-size:0.78rem;color:#475569;margin:2px 0 10px">{rating_labels[st.session_state.star_rating]}</p>', unsafe_allow_html=True)
-else:
-    st.markdown('<p style="font-size:0.78rem;color:#94a3b8;margin:2px 0 10px">Click a star to rate</p>', unsafe_allow_html=True)
+lbl = rating_labels[current_rating]
+lbl_color = "#00b67a" if current_rating > 0 else "#94a3b8"
+st.markdown(f'<p style="font-size:0.78rem;color:{lbl_color};margin:6px 0 10px;font-weight:600">{lbl}</p>', unsafe_allow_html=True)
 
 comment = st.text_area("", height=75, placeholder="What did you find most useful? Any suggestions?", label_visibility="collapsed", key="fb_comment")
 
