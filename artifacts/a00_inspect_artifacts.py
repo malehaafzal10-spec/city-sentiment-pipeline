@@ -1,7 +1,7 @@
 """
 06_inspect_artifacts.py — MLOps Artifact Viewer
-Fetches the latest pipeline run and previews the stored payloads and metrics 
-for each of the four artifact stages (Bronze, Silver, Gold, Aggregates).
+Fetches a specific pipeline run (or the latest) and previews the stored payloads 
+and metrics for each of the four artifact stages (Bronze, Silver, Gold, Aggregates).
 """
 
 import os
@@ -24,7 +24,7 @@ ARTIFACT_TYPES = [
     "feature_aggregates"       # Step 4
 ]
 
-def inspect_artifacts():
+def inspect_artifacts(target_run_id=None):
     if not MONGO_URI:
         print("❌ Error: MONGO_URI is missing. Cannot connect to MongoDB.")
         return
@@ -33,17 +33,27 @@ def inspect_artifacts():
     client = MongoClient(MONGO_URI)
     db = client[DB_NAME]
 
-    # 1. Find the most recent run_id
-    latest_artifact = db[ARTIFACTS_COLLECTION].find_one(sort=[("timestamp", -1)])
-    
-    if not latest_artifact:
-        print("❌ No artifacts found in the database. Have you run the pipeline yet?")
-        client.close()
-        return
+    # 1. Determine which run_id to look for
+    if not target_run_id:
+        latest_artifact = db[ARTIFACTS_COLLECTION].find_one(sort=[("timestamp", -1)])
+        
+        if not latest_artifact:
+            print("❌ No artifacts found in the database. Have you run the pipeline yet?")
+            client.close()
+            return
+            
+        target_run_id = latest_artifact.get("run_id")
+        print(f"No run_id provided. Defaulting to the latest run: {target_run_id}")
+    else:
+        # Check if the requested run_id actually exists
+        count = db[ARTIFACTS_COLLECTION].count_documents({"run_id": target_run_id})
+        if count == 0:
+            print(f"❌ No artifacts found for run_id: '{target_run_id}'. Please check the spelling.")
+            client.close()
+            return
 
-    latest_run_id = latest_artifact.get("run_id")
     print("="*80)
-    print(f"🔎 INSPECTING LATEST PIPELINE RUN: {latest_run_id}")
+    print(f"🔎 INSPECTING PIPELINE RUN: {target_run_id}")
     print("="*80)
 
     # 2. Fetch and display each artifact type for this run_id
@@ -52,7 +62,7 @@ def inspect_artifacts():
         print("-" * 80)
         
         artifact = db[ARTIFACTS_COLLECTION].find_one({
-            "run_id": latest_run_id,
+            "run_id": target_run_id,
             "artifact_type": a_type
         })
 
@@ -93,4 +103,9 @@ def inspect_artifacts():
     print("\n✅ Inspection Complete.")
 
 if __name__ == "__main__":
-    inspect_artifacts()
+    print("Travel Pipeline - Artifact Inspector")
+    print("Leave blank and press Enter to fetch the most recent run.")
+    
+    user_input = input("Enter the run_id you want to inspect (e.g., run_13042026): ").strip()
+    
+    inspect_artifacts(user_input if user_input else None)
