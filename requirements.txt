@@ -8,4 +8,4 @@ pymongo
 beautifulsoup4
 groq
 streamlit
-plotly
+altair

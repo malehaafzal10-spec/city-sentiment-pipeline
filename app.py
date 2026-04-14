@@ -105,12 +105,14 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
     overflow: hidden; margin-bottom: 22px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     transition: transform 0.15s, box-shadow 0.15s;
+    height: 100%;
+    display: flex; flex-direction: column;
 }
 .c-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.09); }
-.c-card-alert { background: #fff; border-radius: 20px; border: 1px solid #fde68a; border-top: 4px solid #f59e0b; overflow: hidden; margin-bottom: 22px; box-shadow: 0 2px 12px rgba(245,158,11,0.08); }
-.c-img { width: 100%; height: 130px; object-fit: cover; display: block; }
+.c-card-alert { background: #fff; border-radius: 20px; border: 1px solid #fde68a; border-top: 4px solid #f59e0b; overflow: hidden; margin-bottom: 22px; box-shadow: 0 2px 12px rgba(245,158,11,0.08); height: 100%; display: flex; flex-direction: column; }
+.c-body { padding: 14px 16px 16px; flex: 1; }
+.c-img { width: 100%; height: 140px; object-fit: cover; display: block; }
 .c-bar { height: 3px; }
-.c-body { padding: 14px 16px 16px; }
 .c-name { font-size: 0.95rem; font-weight: 700; color: #1e293b; margin: 0 0 2px 0; }
 .c-score-row { display: flex; align-items: baseline; gap: 7px; margin-bottom: 2px; }
 .c-score { font-size: 1.75rem; font-weight: 800; line-height: 1; }
@@ -155,10 +157,9 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
 .fb-title { font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 3px; }
 .fb-sub { color: rgba(255,255,255,0.35); font-size: 0.78rem; margin-bottom: 1.6rem; }
 
-/* Star rating buttons — hide number text, show as transparent overlay */
-div[data-testid="column"]:nth-child(-n+5) > div > div > div > button {
-    position: relative !important;
-    margin-top: -44px !important;
+/* Star rating buttons — invisible clickable area over SVG squares */
+div[data-testid="stHorizontalBlock"] div[data-testid="column"]:nth-child(-n+5) button {
+    margin-top: -48px !important;
     width: 40px !important;
     height: 40px !important;
     background: transparent !important;
@@ -170,6 +171,7 @@ div[data-testid="column"]:nth-child(-n+5) > div > div > div > button {
     z-index: 10 !important;
     padding: 0 !important;
     min-width: 0 !important;
+    opacity: 0 !important;
 }
 
 /* Comment box — dark bg, dark text */
@@ -456,40 +458,56 @@ if history is not None and not history.empty:
     selected = st.multiselect("Select cities", options=cities_available, default=cities_available, label_visibility="collapsed")
     if selected:
         try:
-            import plotly.graph_objects as go
+            import altair as alt
             CITY_COLORS = {
                 "Paris": "#e74c3c", "Rome": "#e67e22", "Barcelona": "#8e44ad",
                 "Lisbon": "#16a085", "Amsterdam": "#27ae60", "Prague": "#c0392b",
                 "Athens": "#f39c12", "London": "#2980b9"
             }
-            fig = go.Figure()
-            for city in selected:
-                if city not in pivot.columns:
-                    continue
-                y = pivot[city].dropna()
-                x = y.index.tolist()
-                color = CITY_COLORS.get(city, "#6366f1")
-                fig.add_trace(go.Scatter(
-                    x=x, y=y.values,
-                    name=city,
-                    mode="lines",
-                    line=dict(color=color, width=2.5, shape="spline", smoothing=0.8),
-                    fill="tozeroy",
-                    fillcolor=f"rgba({int(color[1:3],16)},{int(color[3:5],16)},{int(color[5:7],16)},0.07)",
-                    hovertemplate=f"<b>{city}</b><br>Week: %{{x}}<br>Sentiment: %{{y:.2f}}<extra></extra>"
-                ))
-            fig.update_layout(
-                height=260,
-                margin=dict(l=0, r=0, t=10, b=0),
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                legend=dict(orientation="h", yanchor="bottom", y=-0.3, xanchor="left", x=0, font=dict(size=11)),
-                xaxis=dict(showgrid=False, tickfont=dict(size=10, color="#94a3b8"), tickangle=-30, zeroline=False),
-                yaxis=dict(showgrid=True, gridcolor="rgba(148,163,184,0.15)", tickfont=dict(size=10, color="#94a3b8"), zeroline=True, zerolinecolor="rgba(148,163,184,0.3)", zerolinewidth=1),
-                hovermode="x unified",
+            chart_data = pivot[selected].reset_index().melt(
+                id_vars="week_start", var_name="City", value_name="Sentiment"
+            ).dropna()
+            chart_data["week_start"] = chart_data["week_start"].astype(str)
+
+            color_scale = alt.Scale(
+                domain=list(CITY_COLORS.keys()),
+                range=list(CITY_COLORS.values())
             )
-            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-        except ImportError:
+
+            line = alt.Chart(chart_data).mark_line(
+                interpolate="monotone", strokeWidth=2.5
+            ).encode(
+                x=alt.X("week_start:O", axis=alt.Axis(
+                    labelAngle=-30, labelFontSize=10,
+                    labelColor="#94a3b8", ticks=False,
+                    domainColor="#eaedf5", grid=False
+                )),
+                y=alt.Y("Sentiment:Q", scale=alt.Scale(domain=[-0.2, 1.2]),
+                    axis=alt.Axis(labelFontSize=10, labelColor="#94a3b8",
+                                  gridColor="#eaedf5", ticks=False, domainOpacity=0)
+                ),
+                color=alt.Color("City:N", scale=color_scale,
+                    legend=alt.Legend(orient="bottom", columns=4,
+                        labelFontSize=11, symbolSize=80,
+                        labelColor="#475569", titleOpacity=0)
+                ),
+                tooltip=["City:N", "week_start:O", alt.Tooltip("Sentiment:Q", format=".2f")]
+            )
+
+            points = line.mark_circle(size=40).encode(
+                opacity=alt.condition(alt.selection_point(), alt.value(1), alt.value(0.6))
+            )
+
+            chart = (line + points).properties(
+                height=240,
+                background="transparent"
+            ).configure_view(
+                strokeWidth=0
+            ).configure_axis(
+                labelFont="Inter, sans-serif"
+            )
+            st.altair_chart(chart, use_container_width=True)
+        except Exception:
             st.line_chart(pivot[selected], height=260, use_container_width=True)
 
 # Feedback
@@ -513,7 +531,7 @@ for idx in range(5):
         st.markdown(f'''<div style="width:40px;height:40px;background:{bg};border-radius:6px;display:flex;align-items:center;justify-content:center;">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>''', unsafe_allow_html=True)
-        if st.button(f"{star_num}", key=f"s{star_num}", help=rating_labels[star_num]):
+        if st.button(" ", key=f"s{star_num}", help=rating_labels[star_num]):
             st.session_state.star_rating = star_num
             st.rerun()
 
