@@ -1,134 +1,120 @@
 # City Sentiment Monitoring Pipeline
 
-## 🗄️ Data Architecture (MongoDB)
+## 📖 Project Overview
 
-This project implements a **Medallion Architecture** (Bronze, Silver, Gold layers) using **MongoDB** to handle our unstructured text data. The data flows through different collections within the `travel_pipeline_db` database, progressively becoming cleaner and more enriched.
+The **City Sentiment Monitoring Pipeline** is an MLOps project designed to analyze traveler sentiment across eight major European cities. By leveraging data from NewsAPI and Reddit, the pipeline processes, scores, and aggregates sentiment data to provide actionable insights. The project includes a modern dashboard for real-time monitoring, automated workflows for daily and historical data processing, and robust evaluation mechanisms to ensure model quality.
 
-### 🥉 Bronze Layer: Raw Data
-**Collections:** `raw_documents` (Daily) & `raw_documents_historical` (Backfill)
-
-This is the landing zone. It stores the exact, unfiltered data pulled straight from our sources (NewsAPI, Reddit) before any heavy processing occurs.
-
-| Field | Type | Description |
-| :--- | :--- | :--- |
-| `doc_id` | String | A unique SHA-256 hash generated from the source and URL to prevent exact duplicates. |
-| `source` | String | Where the data came from (e.g., `"news"`, `"reddit"`). |
-| `city` | String | The destination city being searched (e.g., `"Paris"`, `"Tokyo"`). |
-| `title` | String | The article's headline. |
-| `description` | String | A short summary snippet provided by the API. |
-| `text` | String | A rough concatenation of the title, description, and truncated API content. |
-| `url` | String | The direct URL to the original article. |
-| `published_at` | String | The original publication timestamp (ISO 8601). |
-| `ingestion_time` | String | The exact UTC time the pipeline fetched the data. |
-| `run_id` | String | The execution ID linking this document to a specific pipeline run. |
+This project demonstrates the integration of data engineering, machine learning, and MLOps principles to build a scalable and maintainable system for sentiment analysis.
 
 ---
 
-### 🥈 Silver Layer: Processed & Scraped
-**Collection:** `processed_documents`
+## 🛠️ Problem Statement
 
-This collection holds our clean, filtered, and enriched dataset. Documents only enter this layer if they pass both a strict Keyword pre-filter and an LLM relevance check (Gemini/Groq). It also contains the **full scraped text** of the articles.
+Travelers often rely on online reviews, news, and social media to make decisions about destinations. However, the sheer volume of unstructured data makes it challenging to extract meaningful insights. 
 
-| Field | Type | Description |
-| :--- | :--- | :--- |
-| `text` | String | The **fully scraped, cleaned, deduplicated, and VADER-safe** text of the article. |
-| `full_text_scraped` | Boolean | `true` if BeautifulSoup successfully scraped the webpage; `false` if it fell back to the API description. |
-| `text_length` | Integer | Character count of the cleaned text. |
-| `llm_relevant` | Boolean | `true` if the LLM deemed the article genuinely about travel. |
-| `llm_reason` | String | The brief explanation from the LLM justifying its decision (used for traceability/auditing). |
-| `model_used` | String | Tracks which LLM made the relevance decision (`"gemini"`, `"groq"`, or `"none"`). |
-| `processed_time` | String | UTC timestamp of when the processor script finished handling the document. |
-| *(Inherited)* | Various | Inherits `doc_id`, `source`, `city`, `title`, `url`, `published_at`, and `run_id` from the Bronze layer. |
+This project addresses the following challenges:
+1. **Relevance Filtering**: Identifying travel-related content from noisy data sources.
+2. **Sentiment Analysis**: Scoring sentiment accurately using VADER and validating it with LLMs.
+3. **Drift Detection**: Monitoring changes in sentiment over time to detect anomalies.
+4. **Scalability**: Automating the pipeline for daily and historical data processing.
 
 ---
 
-### 🛠️ MLOps Tracking: Pipeline Artifacts
-**Collection:** `pipeline_artifacts`
+## 💻 Tech Stack
 
-Instead of just logging to flat files, the pipeline stores "snapshots" of its execution directly in the database. This acts as our MLOps telemetry layer to track API limits, failure rates, and model performance over time.
+### **Languages & Frameworks**
+- **Python**: Core programming language.
+- **Streamlit**: Interactive dashboard for visualization.
+- **VADER Sentiment**: Rule-based sentiment analysis.
+- **MongoDB**: NoSQL database for data storage.
 
-| Field | Type | Description |
-| :--- | :--- | :--- |
-| `run_id` | String | The execution ID matching the ingested documents. |
-| `artifact_type` | String | Identifies the pipeline stage (e.g., `"raw_ingestion"`, `"processed_scraped_docs"`). |
-| `timestamp` | Datetime | Native MongoDB datetime object marking the end of the run. |
-| `document_count` | Integer | Total number of documents handled in this specific batch. |
-| `metrics` | Object | Telemetry dictionary containing exact counts for API successes, fallbacks, scraped pages, and drops. |
-| `payload` | Array | The entire JSON payload of documents processed in that run, embedded for full state reproducibility. |
+### **Tools & Libraries**
+- **Requests**: API integration with NewsAPI and Reddit.
+- **Pandas**: Data manipulation and analysis.
+- **dotenv**: Environment variable management.
+- **Chart.js**: Visualization in reports.
+- **Altair**: Data visualization in Streamlit.
+
+### **MLOps & Automation**
+- **Docker**: Containerization for consistent environments.
+- **GitHub Actions**: CI/CD for automated pipeline execution.
+- **MongoDB Atlas**: Cloud database for scalability.
 
 ---
 
+## 📂 Project Structure
 
-Next Task: 
+.
+├── app.py                     # Streamlit dashboard
+├── run_pipeline.py            # Orchestrator for pipeline steps
+├── preprocess/                # Historical data processing scripts
+│   ├── 02a_store_relevant_docs_historical.py
+│   ├── 03_score_historical.py
+│   ├── 04_create_features_historical.py
+├── src/                       # Core pipeline scripts
+│   ├── s02_store_relevant_docs.py
+│   ├── s03_score.py
+│   ├── s04_create_features.py
+│   ├── 05_evaluate_vader.py
+│   ├── 06_llm_judge.py
+│   ├── 07_monitor.py
+├── artifacts/                 # Inspectors for pipeline outputs
+│   ├── a00_inspect_artifacts.py
+│   ├── a01_inspect_raw_docs.py
+│   ├── a02_inspect_proc_docs.py
+│   ├── a03_inspect_score.py
+│   ├── a04_inspect_relevant.py
+├── .github/workflows/         # GitHub Actions workflows
+├── Dockerfile                 # Docker configuration
+├── requirements.txt           # Python dependencies
+├── README.md                  # Project documentation
 
-1. Historical Data:
-  1.1 process the historical on newsAPI for process number 02, 03 and 04.
-  1.2 Process reddit historical data for process 03 and 04.
-Process numbers are in the folder src (the ones that run daily) and the "file numbers" are s01, s02, s03 and s04.
-2. Daily execution: check what artifacts are necessesary. 
-3. We have to judge with HDLP if the LLM is correctly identifying the relevant articles.
-4. create a public link for the dashboard unce all the historical data is processed.
-5. monitoring vader and evaluate: we need to store the sample for HDLP evaluation on the DB for the file to work.
-Future Ideas:
-5. llm summary . py (maybe for semester project)
-6. then monitor also (maybe for semester project)
+---
 
+## 🤖 GitHub Actions / Automation
 
-M6 — Data Engineering and Machine Learning Operations in Business | AAU F2026
+The pipeline includes CI/CD workflows for automation:
+1. **Daily Runs**: Automatically processes new data every day.
+2. **Weekly Runs**: Aggregates weekly metrics and generates reports.
+3. **GitHub Pages**: Publishes the dashboard as a static site.
 
-Tracks how travellers talk about 8 European cities using NewsAPI.
-Scores sentiment weekly, detects drift, and publishes a live dashboard.
+To enable automation:
+- Add API keys as repository secrets under **Settings → Secrets → Actions**.
+- Trigger workflows manually or schedule them via GitHub Actions.
 
-run_20260406_135639
-## Quick start
+---
 
-```bash
-# 1. Copy and fill in your API key
-cp .env.example .env
-# open .env and set NEWSAPI_KEY=your_key
+## 📊 Artifacts
 
-# 2. Create virtual environment
-python -m venv venv
-source venv/bin/activate   # Mac/Linux
-# venv\Scripts\activate    # Windows
+The pipeline generates the following artifacts:
 
-# 3. Install packages
-pip install -r requirements.txt
+1. **Raw Ingestion**: Unfiltered data from NewsAPI and Reddit.
+2. **Processed Documents**: Cleaned and relevance-filtered data.
+3. **Sentiment Scores**: VADER-scored sentiment data.
+4. **Feature Aggregates**: Weekly city-level metrics (e.g., sentiment, crowding, cost).
 
-# 4. Run the pipeline
-python run_pipeline.py
+Artifacts are stored in MongoDB for traceability and reproducibility.
 
-# 5. Open the dashboard
-# Open docs/index.html in your browser
-```
+---
 
-## Run with Docker
-```bash
-docker compose build
-docker compose up
-```
+## 📈 Evaluation and Monitoring
 
-## GitHub Actions (automatic weekly runs)
-1. Push to GitHub
-2. Add NEWSAPI_KEY as a repository secret (Settings → Secrets → Actions)
-3. Enable GitHub Pages (Settings → Pages → branch: gh-pages)
-4. Trigger manually: Actions tab → City Sentiment Pipeline → Run workflow
+### **Evaluation**
+- **VADER Sentiment Validation**: Sentiment scores are cross-validated with LLMs (e.g., Groq API) to ensure accuracy.
+- **Human-in-the-Loop (HITL)**: Disagreements between VADER and LLM predictions are flagged for manual review to improve model performance.
 
-## When Reddit is approved
-Set REDDIT_ENABLED=true in .env and add your credentials.
-The pipeline will automatically use both sources.
+### **Monitoring**
+- **Drift Detection**: Alerts are triggered for significant sentiment drops, low data volume, or deviations from rolling averages.
+- **Dashboard**: Real-time metrics for sentiment, mentions, and anomalies are displayed on the Streamlit dashboard for easy monitoring.
 
-## Project structure
-```
-src/
-  db.py           — SQLite schema
-  ingest.py       — NewsAPI + Reddit (when enabled)
-  preprocess.py   — Clean + relevance filter
-  features.py     — Keyword feature engineering
-  score.py        — VADER sentiment scoring
-  aggregate.py    — Weekly city metrics
-  monitor.py      — Drift detection
-  llm_summary.py  — Optional LLM verdicts
-  dashboard.py    — HTML dashboard generation
-run_pipeline.py   — Single entry point
-```
+---
+
+## 👩‍💻👨‍💻 Contributors
+
+This project was developed as part of the **M6 Data Engineering and MLOps** course at Aalborg University. It showcases the integration of data engineering, machine learning, and MLOps principles to solve real-world problems.
+
+Contributors:
+- **Karolina Bohdan** 
+- **Faraiba Farnan**
+- **Maleha Afzal**
+- **Cristian Smoilis**
