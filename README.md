@@ -88,7 +88,7 @@ pip install -r requirements.txt
 
 ### 3) Configure environment
 
-Create a `.env` file in the repository root.
+Create a `.env` file in the repository root (this repository does not currently include a `.env.example` template).
 
 Minimum:
 
@@ -140,7 +140,6 @@ To run in GitHub Actions, set required repository secrets (for example `MONGO_UR
 
 - The orchestrator currently runs the 4 core steps listed above.
 - Historical/backfill scripts are in `preprocess/` and can be run separately.
-- This repository currently does not include a dedicated test suite configuration.
 
 ## Team
 
