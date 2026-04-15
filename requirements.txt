@@ -8,5 +8,6 @@ pymongo
 beautifulsoup4
 groq
 streamlit
+huggingface_hub
 scikit-learn
 altair
