@@ -9,3 +9,4 @@ beautifulsoup4
 groq
 streamlit
 scikit-learn
+altair
