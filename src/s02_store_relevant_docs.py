@@ -3,16 +3,17 @@ s02_store_relevant_docs.py — Step 2: Silver Layer Processor.
 
 Two-stage relevance filtering:
   Stage 1 — Keyword pre-filter (fast, free)
-             Drops obvious irrelevant articles before calling the LLM.
+            Drops obvious irrelevant articles before calling the LLM.
 
   Stage 2 — LLM relevance filter (Gemini -> Groq Fallback)
-             Attempts classification with Gemini 2.5 Flash. If rate limited,
-             falls back to Groq. If both are limited, waits and retries.
-             Avoids false positives by defaulting to "no" on complete failure.
+            Attempts classification with Groq. If rate limited,
+            falls back to Gemini. If both are limited, waits 20 seconds
+            and retries to ensure pipeline continuity.
 """
 
 import os
 import re
+import sys
 import json
 import time
 import logging
@@ -86,7 +87,7 @@ def keyword_pre_filter(title: str, snippet: str, city: str) -> bool:
         return True
     return False
 
-# ─── STAGE 2: LLM RELEVANCE FILTER (GEMINI -> GROQ FALLBACK) ─────────────────
+# ─── STAGE 2: LLM RELEVANCE FILTER (GROQ -> GEMINI FALLBACK & RETRY) ─────────
 
 def build_system_prompt(city: str) -> str:
     return f"""You are a travel news classifier.
@@ -111,16 +112,8 @@ Respond ONLY with valid JSON in this exact format, nothing else:
 or
 {{"relevant": "no", "reason": "short explanation"}}"""
 
-def llm_classify(title: str, description: str, city: str) -> dict:
-    # 1. Prepare Gemini Request
-    gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
-    gemini_body = {
-        "systemInstruction": {"parts": [{"text": build_system_prompt(city)}]},
-        "contents": [{"role": "user", "parts": [{"text": f"Title: {title}\nDescription: {description}"}]}],
-        "generationConfig": {"responseMimeType": "application/json", "temperature": 0}
-    }
-
-    # 2. Prepare Groq Request
+def llm_classify(title: str, description: str, city: str, max_retries: int = 3) -> dict:
+    # Prepare Groq Request
     groq_headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json",
@@ -136,50 +129,54 @@ def llm_classify(title: str, description: str, city: str) -> dict:
         "response_format": {"type": "json_object"}
     }
 
-    max_attempts = 4
-    base_wait = 10
+    # Prepare Gemini Request
+    gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
+    gemini_body = {
+        "systemInstruction": {"parts": [{"text": build_system_prompt(city)}]},
+        "contents": [{"role": "user", "parts": [{"text": f"Title: {title}\nDescription: {description}"}]}],
+        "generationConfig": {"responseMimeType": "application/json", "temperature": 0}
+    }
 
-    for attempt in range(max_attempts):
-        # ── Try Gemini ──
-        if GEMINI_API_KEY:
-            try:
-                resp = requests.post(gemini_url, headers={"Content-Type": "application/json"}, json=gemini_body, timeout=15)
-                if resp.status_code == 429:
-                    log.warning(f"[LLM Filter] Gemini Rate Limit (429). Falling back to Groq...")
-                elif not resp.ok:
-                    log.error(f"[LLM Filter] Gemini API Error {resp.status_code}: {resp.text}")
-                else:
-                    raw_text = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-                    result = json.loads(raw_text)
-                    result["model_used"] = "gemini"
-                    return result
-            except Exception as e:
-                log.warning(f"[LLM Filter] Gemini request failed: {e}")
-
-        # ── Try Groq (Fallback) ──
+    for attempt in range(1, max_retries + 1):
+        # ── Try Groq First ──
         if GROQ_API_KEY:
             try:
                 resp = requests.post(GROQ_URL, headers=groq_headers, json=groq_body, timeout=15)
-                if resp.status_code == 429:
-                    log.warning(f"[LLM Filter] Groq Rate Limit (429). Both models exhausted.")
-                elif not resp.ok:
-                    log.error(f"[LLM Filter] Groq API Error {resp.status_code}: {resp.text}")
-                else:
+                if resp.ok:
                     raw_text = resp.json()["choices"][0]["message"]["content"].strip()
                     result = json.loads(raw_text)
                     result["model_used"] = "groq"
                     return result
+                elif resp.status_code == 429:
+                    log.warning(f"[LLM Filter] Groq Rate Limit (429) on attempt {attempt}.")
+                else:
+                    log.error(f"[LLM Filter] Groq API Error {resp.status_code}: {resp.text}")
             except Exception as e:
                 log.warning(f"[LLM Filter] Groq request failed: {e}")
 
-        # ── Both Failed (Wait and Retry) ──
-        sleep_time = base_wait * (2 ** attempt)
-        log.info(f"[LLM Filter] APIs limited/failed. Waiting {sleep_time}s before retry (Attempt {attempt+1}/{max_attempts})...")
-        time.sleep(sleep_time)
+        # ── Try Gemini (Fallback) ──
+        if GEMINI_API_KEY:
+            try:
+                resp = requests.post(gemini_url, headers={"Content-Type": "application/json"}, json=gemini_body, timeout=15)
+                if resp.ok:
+                    raw_text = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+                    result = json.loads(raw_text)
+                    result["model_used"] = "gemini"
+                    return result
+                elif resp.status_code == 429:
+                    log.warning(f"[LLM Filter] Gemini Rate Limit (429) on attempt {attempt}.")
+                else:
+                    log.error(f"[LLM Filter] Gemini API Error {resp.status_code}: {resp.text}")
+            except Exception as e:
+                log.error(f"[LLM Filter] Gemini request failed: {e}")
 
-    # ── Complete Failure (Fix: Now defaults to NO) ──
-    log.error(f"[LLM Filter] Max retries exceeded for '{title[:30]}'. Defaulting to NOT RELEVANT.")
-    return {"relevant": "no", "reason": "api_limits_exceeded", "model_used": "none"}
+        # ── Both Failed: Wait and Retry ──
+        if attempt < max_retries:
+            log.warning(f"[LLM Filter] Both APIs failed. Waiting 20 seconds before retry {attempt + 1}/{max_retries}...")
+            time.sleep(20)
+        else:
+            log.critical(f"[LLM Filter] CRITICAL FAILURE: Both APIs exhausted after {max_retries} attempts for '{title[:30]}'. Halting pipeline execution.")
+            sys.exit(1)
 
 # ─── SCRAPING & CLEANING ──────────────────────────────────────────────────────
 
@@ -221,7 +218,7 @@ def process_documents(run_id: str) -> dict:
     client = MongoClient(MONGO_URI)
     db = client[DB_NAME]
 
-    # --- NEW: IDEMPOTENCY CHECK ---
+    # --- IDEMPOTENCY CHECK ---
     try:
         existing_run = db[ARTIFACTS_COLLECTION].find_one({
             "run_id": run_id,
