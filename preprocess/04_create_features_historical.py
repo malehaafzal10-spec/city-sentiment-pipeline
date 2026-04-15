@@ -85,7 +85,7 @@ def run(start_date: str = None, end_date: str = None) -> dict:
     db     = client[DB_NAME]
 
     # ── Fetch processed docs ──────────────────────────────────────────────────
-    proc_query: dict = {"processed_by": "02a_historical"}
+    proc_query: dict = {"run_id": {"$in": ["02a_historical", "historical_bulk_backfill"]}}
     if start_date and end_date:
         proc_query["fetch_date"] = {"$gte": start_date, "$lte": end_date}
         log.info(f"[Features] Filtering by fetch_date: {start_date} → {end_date}")

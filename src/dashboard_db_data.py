@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from datetime import datetime, timezone
 
 import pandas as pd
 import streamlit as st
@@ -56,6 +57,17 @@ st.markdown("""
         border-radius: 16px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
+    .feedback-card {
+        background: white;
+        border: 1px solid #e7eef4;
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .star-rating { font-size: 1.2rem; }
+    .feedback-comment { font-size: 0.85rem; color: #555; margin-top: 4px; font-style: italic; }
+    .feedback-meta { font-size: 0.72rem; color: #aaa; margin-top: 6px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -69,11 +81,9 @@ st.caption("Interactive monitoring for MongoDB collections powering the travel-i
 def get_db():
     mongo_uri = os.getenv("MONGO_URI")
     db_name = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
-
     if not mongo_uri:
         st.error("MONGO_URI not found in .env")
         st.stop()
-
     client = MongoClient(mongo_uri)
     return client[db_name]
 
@@ -86,7 +96,6 @@ db = get_db()
 def get_doc_added_datetime(doc):
     if not doc:
         return pd.NaT
-
     for field in ["created_at", "timestamp", "fetched_at", "ingested_at", "date_fetched", "aggregated_at"]:
         if field in doc and doc[field]:
             try:
@@ -98,7 +107,6 @@ def get_doc_added_datetime(doc):
                         return dt
             except Exception:
                 pass
-
     try:
         return pd.to_datetime(doc["_id"].generation_time).tz_localize(None)
     except Exception:
@@ -108,7 +116,6 @@ def get_doc_added_datetime(doc):
 def get_published_datetime(doc):
     if not doc:
         return pd.NaT
-
     for field in ["published_at", "publishedAt", "publication_date", "published_date", "date"]:
         if field in doc and doc[field]:
             try:
@@ -120,21 +127,17 @@ def get_published_datetime(doc):
                         return dt
             except Exception:
                 pass
-
     return pd.NaT
 
 
 def normalize_source(value):
     if value is None:
         return "unknown"
-
     s = str(value).strip().lower()
-
     if "reddit" in s:
         return "reddit"
     if "news" in s:
         return "news"
-
     return s
 
 
@@ -143,7 +146,6 @@ def classify_sentiment(score):
         score = float(score)
     except Exception:
         return "unknown"
-
     if score > 0:
         return "positive"
     if score < 0:
@@ -153,24 +155,19 @@ def classify_sentiment(score):
 
 def collection_summary(db):
     rows = []
-
     for collection_name in db.list_collection_names():
         col = db[collection_name]
         count = col.count_documents({})
-
         first_doc = col.find_one(sort=[("_id", 1)])
         last_doc = col.find_one(sort=[("_id", -1)])
-
         first_added = get_doc_added_datetime(first_doc) if first_doc else pd.NaT
         last_added = get_doc_added_datetime(last_doc) if last_doc else pd.NaT
-
         rows.append({
             "collection": collection_name,
             "document_count": count,
             "first_added": first_added,
             "last_added": last_added
         })
-
     df = pd.DataFrame(rows)
     if not df.empty:
         df = df.sort_values("document_count", ascending=False)
@@ -180,19 +177,15 @@ def collection_summary(db):
 def docs_per_day(db, collection_name):
     col = db[collection_name]
     docs = list(col.find())
-
     if not docs:
         return pd.DataFrame(columns=["date", "count"])
-
     dates = []
     for doc in docs:
         dt = get_doc_added_datetime(doc)
         if pd.notna(dt):
             dates.append(pd.to_datetime(dt).date())
-
     if not dates:
         return pd.DataFrame(columns=["date", "count"])
-
     df = pd.DataFrame({"date": dates})
     daily = df.groupby("date").size().reset_index(name="count").sort_values("date")
     return daily
@@ -200,32 +193,26 @@ def docs_per_day(db, collection_name):
 
 def all_collections_daily(db):
     frames = []
-
     for collection_name in db.list_collection_names():
         daily = docs_per_day(db, collection_name)
         if not daily.empty:
             daily["collection"] = collection_name
             frames.append(daily)
-
     if not frames:
         return pd.DataFrame(columns=["date", "count", "collection"])
-
     return pd.concat(frames, ignore_index=True)
 
 
 def source_breakdown(db, collection_name):
     col = db[collection_name]
     docs = list(col.find({}, {"source": 1}))
-
     sources = []
     for doc in docs:
         src = normalize_source(doc.get("source"))
         if src:
             sources.append(src)
-
     if not sources:
         return pd.DataFrame(columns=["source", "count"])
-
     df = pd.DataFrame({"source": sources})
     result = df.groupby("source").size().reset_index(name="count")
     result = result.sort_values("count", ascending=False)
@@ -235,7 +222,6 @@ def source_breakdown(db, collection_name):
 def latest_docs(db, collection_name, limit=10):
     col = db[collection_name]
     docs = list(col.find().sort("_id", -1).limit(limit))
-
     cleaned = []
     for doc in docs:
         flat = {}
@@ -247,14 +233,12 @@ def latest_docs(db, collection_name, limit=10):
             else:
                 flat[k] = str(v)[:300] if v is not None else ""
         cleaned.append(flat)
-
     return pd.DataFrame(cleaned)
 
 
 def load_collection_docs(db, collection_name):
     col = db[collection_name]
     docs = list(col.find())
-
     rows = []
     for doc in docs:
         rows.append({
@@ -268,25 +252,19 @@ def load_collection_docs(db, collection_name):
             "url": str(doc.get("url", ""))[:250],
             "sentiment_score": pd.to_numeric(doc.get("sentiment_score", None), errors="coerce"),
         })
-
     df = pd.DataFrame(rows)
-
     if df.empty:
         return df
-
     if "published_at" in df.columns:
         df["published_date"] = pd.to_datetime(df["published_at"], errors="coerce").dt.date
-
     if "added_at" in df.columns:
         df["added_date"] = pd.to_datetime(df["added_at"], errors="coerce").dt.date
-
     return df
 
 
 def load_document_features(db):
     col = db["document_features"]
     docs = list(col.find())
-
     rows = []
     for doc in docs:
         rows.append({
@@ -303,13 +281,29 @@ def load_document_features(db):
             "run_id": str(doc.get("run_id", "")).strip(),
             "aggregated_at": pd.to_datetime(doc.get("aggregated_at", None), errors="coerce"),
         })
-
     df = pd.DataFrame(rows)
-
     if df.empty:
         return df
-
     return df
+
+
+def load_feedback(db):
+    col = db["user_feedback"]
+    docs = list(col.find().sort("submitted_at", -1))
+    rows = []
+    for doc in docs:
+        submitted = doc.get("submitted_at")
+        try:
+            submitted_str = pd.to_datetime(submitted, utc=True).strftime("%Y-%m-%d %H:%M UTC") if submitted else "—"
+        except Exception:
+            submitted_str = str(submitted)
+        rows.append({
+            "rating": int(doc.get("rating", 0)),
+            "comment": str(doc.get("comment", "")).strip(),
+            "submitted_at": submitted_str,
+            "source": str(doc.get("source", "public_dashboard")),
+        })
+    return pd.DataFrame(rows)
 
 
 @st.cache_data(ttl=300)
@@ -331,11 +325,9 @@ def filter_by_source(df, source_name):
 def docs_by_published_date_from_df(df):
     if df.empty or "published_date" not in df.columns:
         return pd.DataFrame(columns=["published_date", "count"])
-
     temp = df.dropna(subset=["published_date"]).copy()
     if temp.empty:
         return pd.DataFrame(columns=["published_date", "count"])
-
     result = (
         temp.groupby("published_date")
         .size()
@@ -348,14 +340,11 @@ def docs_by_published_date_from_df(df):
 def docs_by_run_id_from_df(df):
     if df.empty or "run_id" not in df.columns:
         return pd.DataFrame(columns=["run_id", "count"])
-
     temp = df.copy()
     temp["run_id"] = temp["run_id"].fillna("").astype(str).str.strip()
     temp = temp[temp["run_id"] != ""]
-
     if temp.empty:
         return pd.DataFrame(columns=["run_id", "count"])
-
     result = (
         temp.groupby("run_id")
         .size()
@@ -368,14 +357,11 @@ def docs_by_run_id_from_df(df):
 def docs_by_city_from_df(df):
     if df.empty or "city" not in df.columns:
         return pd.DataFrame(columns=["city", "count"])
-
     temp = df.copy()
     temp["city"] = temp["city"].fillna("").astype(str).str.strip()
     temp = temp[temp["city"] != ""]
-
     if temp.empty:
         return pd.DataFrame(columns=["city", "count"])
-
     result = (
         temp.groupby("city")
         .size()
@@ -388,14 +374,9 @@ def docs_by_city_from_df(df):
 
 def latest_article_table_from_df(df, limit=20):
     if df.empty:
-        return pd.DataFrame(columns=[
-            "title", "source", "city", "published_at",
-            "added_at", "sentiment_score", "url", "run_id"
-        ])
-
+        return pd.DataFrame(columns=["title", "source", "city", "published_at", "added_at", "sentiment_score", "url", "run_id"])
     cols = ["title", "source", "city", "published_at", "added_at", "sentiment_score", "url", "run_id"]
     available_cols = [c for c in cols if c in df.columns]
-
     latest = df.sort_values("added_at", ascending=False).head(limit).copy()
     return latest[available_cols]
 
@@ -403,11 +384,9 @@ def latest_article_table_from_df(df, limit=20):
 def sentiment_score_distribution(df):
     if df.empty or "sentiment_score" not in df.columns:
         return pd.DataFrame(columns=["sentiment_score", "count"])
-
     temp = df.dropna(subset=["sentiment_score"]).copy()
     if temp.empty:
         return pd.DataFrame(columns=["sentiment_score", "count"])
-
     temp["sentiment_score_rounded"] = temp["sentiment_score"].round(2)
     result = (
         temp.groupby("sentiment_score_rounded")
@@ -422,14 +401,11 @@ def sentiment_score_distribution(df):
 def city_sentiment_summary(df):
     if df.empty or "city" not in df.columns or "sentiment_score" not in df.columns:
         return pd.DataFrame(columns=["city", "avg_sentiment"])
-
     temp = df.copy()
     temp["city"] = temp["city"].fillna("").astype(str).str.strip()
     temp = temp[(temp["city"] != "") & (temp["sentiment_score"].notna())]
-
     if temp.empty:
         return pd.DataFrame(columns=["city", "avg_sentiment"])
-
     result = (
         temp.groupby("city")["sentiment_score"]
         .mean()
@@ -442,18 +418,11 @@ def city_sentiment_summary(df):
 def sentiment_label_counts(df):
     if df.empty or "sentiment_score" not in df.columns:
         return pd.DataFrame(columns=["sentiment", "count"])
-
     temp = df.dropna(subset=["sentiment_score"]).copy()
     if temp.empty:
         return pd.DataFrame(columns=["sentiment", "count"])
-
     temp["sentiment"] = temp["sentiment_score"].apply(classify_sentiment)
-    result = (
-        temp.groupby("sentiment")
-        .size()
-        .reset_index(name="count")
-    )
-
+    result = temp.groupby("sentiment").size().reset_index(name="count")
     order = ["positive", "neutral", "negative", "unknown"]
     result["sort_order"] = result["sentiment"].apply(lambda x: order.index(x) if x in order else 999)
     result = result.sort_values("sort_order").drop(columns="sort_order")
@@ -463,20 +432,15 @@ def sentiment_label_counts(df):
 def feature_history_for_city(df, city_name, feature_name):
     if df.empty:
         return pd.DataFrame(columns=["aggregated_at", feature_name, "run_id"])
-
     temp = df.copy()
     temp["city"] = temp["city"].fillna("").astype(str).str.strip()
     temp = temp[temp["city"] == city_name].copy()
-
     if temp.empty:
         return pd.DataFrame(columns=["aggregated_at", feature_name, "run_id"])
-
     temp["aggregated_at"] = pd.to_datetime(temp["aggregated_at"], errors="coerce")
     temp = temp.dropna(subset=["aggregated_at", feature_name])
-
     if temp.empty:
         return pd.DataFrame(columns=["aggregated_at", feature_name, "run_id"])
-
     temp = temp.sort_values("aggregated_at")
     return temp[["aggregated_at", feature_name, "run_id"]].copy()
 
@@ -484,20 +448,15 @@ def feature_history_for_city(df, city_name, feature_name):
 def latest_feature_snapshot(df):
     if df.empty:
         return df
-
     temp = df.copy()
     temp["city"] = temp["city"].fillna("").astype(str).str.strip()
     temp = temp[temp["city"] != ""].copy()
-
     if temp.empty:
         return temp
-
     temp["aggregated_at"] = pd.to_datetime(temp["aggregated_at"], errors="coerce")
     temp = temp.dropna(subset=["aggregated_at"])
-
     if temp.empty:
         return temp
-
     temp = temp.sort_values("aggregated_at")
     latest = temp.groupby("city", as_index=False).tail(1)
     latest = latest.sort_values("city")
@@ -509,8 +468,7 @@ def render_timeseries_chart(df, x_col, y_col, title):
     if df.empty:
         st.info("No data available for this view.")
     else:
-        chart_df = df.set_index(x_col)[y_col]
-        st.line_chart(chart_df, use_container_width=True)
+        st.line_chart(df.set_index(x_col)[y_col], use_container_width=True)
 
 
 def render_runid_chart(df, title):
@@ -541,14 +499,11 @@ def render_latest_table(df, title):
 
 def render_source_section(df, section_title, latest_limit):
     st.markdown(f"## {section_title}")
-
     metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
-
     total_docs = len(df)
     total_dates = df["published_date"].nunique() if not df.empty and "published_date" in df.columns else 0
     total_runs = df["run_id"].replace("", pd.NA).dropna().nunique() if not df.empty and "run_id" in df.columns else 0
     total_cities = df["city"].replace("", pd.NA).dropna().nunique() if not df.empty and "city" in df.columns else 0
-
     with metric_col1:
         st.metric("Documents", total_docs)
     with metric_col2:
@@ -557,20 +512,15 @@ def render_source_section(df, section_title, latest_limit):
         st.metric("Run IDs", total_runs)
     with metric_col4:
         st.metric("Cities", total_cities)
-
     date_df = docs_by_published_date_from_df(df)
     run_df = docs_by_run_id_from_df(df)
     city_df = docs_by_city_from_df(df)
     latest_df = latest_article_table_from_df(df, limit=latest_limit)
-
     left, right = st.columns([1.4, 1])
-
     with left:
         render_timeseries_chart(date_df, "published_date", "count", f"{section_title} — Articles by Published Date")
-
     with right:
         render_latest_table(latest_df, f"{section_title} — Latest {latest_limit} Articles")
-
     render_city_chart(city_df, f"{section_title} — Articles per City", value_col="count")
     render_runid_chart(run_df, f"{section_title} — Documents by Run ID")
     st.divider()
@@ -588,12 +538,15 @@ if summary_df.empty:
 # --------------------------------------------------
 # Tabs
 # --------------------------------------------------
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
     "🧭 Overview",
     "📰 Raw Historical",
     "✨ Processed Documents",
     "💬 Scored Documents",
-    "🏙️ Document Features"
+    "🏙️ Document Features",
+    "⭐ User Feedback",
+    "📊 LLM Judge",
+    "👁 Human Review"
 ])
 
 # --------------------------------------------------
@@ -601,7 +554,6 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 # --------------------------------------------------
 with tab1:
     st.subheader("Collections Overview")
-
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("Collections", len(summary_df))
@@ -610,57 +562,38 @@ with tab1:
     with col3:
         largest_collection = summary_df.iloc[0]["collection"] if not summary_df.empty else "-"
         st.metric("Largest Collection", largest_collection)
-
     st.dataframe(summary_df, use_container_width=True, hide_index=True)
-
     st.subheader("Documents by Collection")
     chart_df = summary_df[["collection", "document_count"]].set_index("collection")
     st.bar_chart(chart_df, use_container_width=True)
-
     st.subheader("Daily Documents Added Across All Collections")
     daily_all_df = all_collections_daily(db)
-
     if daily_all_df.empty:
         st.info("No timestamped records found.")
     else:
         pivot_df = daily_all_df.pivot(index="date", columns="collection", values="count").fillna(0)
         st.line_chart(pivot_df, use_container_width=True)
-
     st.subheader("Collection Explorer")
-
     collection_names = sorted(db.list_collection_names())
     selected_collection = st.selectbox("Choose a collection", collection_names, key="overview_collection")
-
     daily_df = docs_per_day(db, selected_collection)
     source_df = source_breakdown(db, selected_collection)
-
     left, right = st.columns(2)
-
     with left:
         st.markdown(f"### Daily Additions: `{selected_collection}`")
         if daily_df.empty:
             st.info("No date information found for this collection.")
         else:
             st.line_chart(daily_df.set_index("date")["count"], use_container_width=True)
-
     with right:
         st.markdown(f"### Source Breakdown: `{selected_collection}`")
         if source_df.empty:
             st.info("No source field found in this collection.")
         else:
             st.bar_chart(source_df.set_index("source")["count"], use_container_width=True)
-
     st.markdown(f"### Latest Records in `{selected_collection}`")
-    latest_limit_overview = st.slider(
-        "How many latest records to show",
-        min_value=5,
-        max_value=50,
-        value=10,
-        step=5,
-        key="overview_latest_slider"
-    )
+    latest_limit_overview = st.slider("How many latest records to show", min_value=5, max_value=50, value=10, step=5, key="overview_latest_slider")
     latest_df = latest_docs(db, selected_collection, limit=latest_limit_overview)
-
     if latest_df.empty:
         st.info("No records found.")
     else:
@@ -672,32 +605,18 @@ with tab1:
 with tab2:
     st.subheader("Raw Historical Collection")
     st.caption("Exploring published-date trends and ingestion runs from `raw_documents_historical`")
-
     raw_hist_df = get_collection_dataframe("raw_documents_historical")
-
     if raw_hist_df.empty:
         st.warning("No records found in `raw_documents_historical`.")
     else:
-        latest_limit_raw = st.slider(
-            "Latest article table size",
-            min_value=5,
-            max_value=50,
-            value=20,
-            step=5,
-            key="raw_latest_limit"
-        )
-
+        latest_limit_raw = st.slider("Latest article table size", min_value=5, max_value=50, value=20, step=5, key="raw_latest_limit")
         source_options = sorted(raw_hist_df["source"].dropna().unique().tolist())
         st.write("Detected sources:", ", ".join(source_options) if source_options else "none")
-
         news_df = filter_by_source(raw_hist_df, "news")
         reddit_df = filter_by_source(raw_hist_df, "reddit")
-
         subtab1, subtab2 = st.tabs(["🗞️ News", "💬 Reddit"])
-
         with subtab1:
             render_source_section(news_df, "News Articles", latest_limit_raw)
-
         with subtab2:
             render_source_section(reddit_df, "Reddit Articles", latest_limit_raw)
 
@@ -707,32 +626,18 @@ with tab2:
 with tab3:
     st.subheader("Processed Documents Collection")
     st.caption("Exploring processed travel content by publishing timeline and pipeline runs")
-
     processed_df = get_collection_dataframe("processed_documents")
-
     if processed_df.empty:
         st.warning("No records found in `processed_documents`.")
     else:
-        latest_limit_processed = st.slider(
-            "Latest processed article table size",
-            min_value=5,
-            max_value=50,
-            value=20,
-            step=5,
-            key="processed_latest_limit"
-        )
-
+        latest_limit_processed = st.slider("Latest processed article table size", min_value=5, max_value=50, value=20, step=5, key="processed_latest_limit")
         source_options = sorted(processed_df["source"].dropna().unique().tolist())
         st.write("Detected sources:", ", ".join(source_options) if source_options else "none")
-
         news_df = filter_by_source(processed_df, "news")
         reddit_df = filter_by_source(processed_df, "reddit")
-
         subtab1, subtab2 = st.tabs(["🗞️ News", "💬 Reddit"])
-
         with subtab1:
             render_source_section(news_df, "News Articles", latest_limit_processed)
-
         with subtab2:
             render_source_section(reddit_df, "Reddit Articles", latest_limit_processed)
 
@@ -742,9 +647,7 @@ with tab3:
 with tab4:
     st.subheader("Scored Documents")
     st.caption("Sentiment-driven exploration of scored travel-related content")
-
     scored_df = get_collection_dataframe("scored_documents")
-
     if scored_df.empty:
         st.warning("No records found in `scored_documents`.")
     else:
@@ -757,43 +660,29 @@ with tab4:
         with metric3:
             avg_sentiment = round(scored_df["sentiment_score"].dropna().mean(), 3) if "sentiment_score" in scored_df.columns and scored_df["sentiment_score"].dropna().shape[0] > 0 else 0
             st.metric("Average Sentiment", avg_sentiment)
-
         sentiment_dist_df = sentiment_score_distribution(scored_df)
         city_sentiment_df = city_sentiment_summary(scored_df)
         sentiment_counts_df = sentiment_label_counts(scored_df)
-
         left, right = st.columns(2)
-
         with left:
             st.markdown("### Number of Articles per Sentiment Score")
             if sentiment_dist_df.empty:
                 st.info("No sentiment score data available.")
             else:
-                st.line_chart(
-                    sentiment_dist_df.set_index("sentiment_score")["count"],
-                    use_container_width=True
-                )
+                st.line_chart(sentiment_dist_df.set_index("sentiment_score")["count"], use_container_width=True)
                 st.dataframe(sentiment_dist_df, use_container_width=True, hide_index=True)
-
         with right:
             st.markdown("### Cities and Sentiment")
             if city_sentiment_df.empty:
                 st.info("No city sentiment data available.")
             else:
-                st.bar_chart(
-                    city_sentiment_df.set_index("city")["avg_sentiment"],
-                    use_container_width=True
-                )
+                st.bar_chart(city_sentiment_df.set_index("city")["avg_sentiment"], use_container_width=True)
                 st.dataframe(city_sentiment_df, use_container_width=True, hide_index=True)
-
         st.markdown("### Positive vs Negative vs Neutral Sentiments")
         if sentiment_counts_df.empty:
             st.info("No sentiment labels available.")
         else:
-            st.bar_chart(
-                sentiment_counts_df.set_index("sentiment")["count"],
-                use_container_width=True
-            )
+            st.bar_chart(sentiment_counts_df.set_index("sentiment")["count"], use_container_width=True)
             st.dataframe(sentiment_counts_df, use_container_width=True, hide_index=True)
 
 # --------------------------------------------------
@@ -802,14 +691,11 @@ with tab4:
 with tab5:
     st.subheader("Document Features")
     st.caption("City-level feature trends from the `document_features` collection")
-
     features_df = get_document_features_dataframe()
-
     if features_df.empty:
         st.warning("No records found in `document_features`.")
     else:
         latest_snapshot_df = latest_feature_snapshot(features_df)
-
         metric1, metric2, metric3 = st.columns(3)
         with metric1:
             st.metric("Feature Records", len(features_df))
@@ -817,43 +703,246 @@ with tab5:
             st.metric("Cities", latest_snapshot_df["city"].nunique() if not latest_snapshot_df.empty else 0)
         with metric3:
             st.metric("Runs", features_df["run_id"].replace("", pd.NA).dropna().nunique() if "run_id" in features_df.columns else 0)
-
         st.markdown("### Latest Feature Snapshot by City")
         if latest_snapshot_df.empty:
             st.info("No latest feature snapshot available.")
         else:
             st.dataframe(latest_snapshot_df, use_container_width=True, hide_index=True)
-
         city_options = sorted([c for c in features_df["city"].dropna().unique().tolist() if str(c).strip() != ""])
-
         if not city_options:
             st.info("No city values found in `document_features`.")
         else:
             selected_city = st.selectbox("Choose a city", city_options, key="features_city_selector")
-
-            feature_columns = [
-                "mention_count",
-                "avg_sentiment",
-                "positive_ratio",
-                "negative_ratio",
-                "neutral_ratio",
-                "crowding_score",
-                "cost_score",
-                "safety_score"
-            ]
-
+            feature_columns = ["mention_count", "avg_sentiment", "positive_ratio", "negative_ratio", "neutral_ratio", "crowding_score", "cost_score", "safety_score"]
             st.markdown(f"## Feature Trends for {selected_city}")
-
             for feature_name in feature_columns:
                 feature_df = feature_history_for_city(features_df, selected_city, feature_name)
-
                 st.markdown(f"### {feature_name.replace('_', ' ').title()}")
-
                 if feature_df.empty:
                     st.info(f"No data available for {feature_name}.")
                 else:
-                    st.line_chart(
-                        feature_df.set_index("aggregated_at")[feature_name],
-                        use_container_width=True
-                    )
+                    st.line_chart(feature_df.set_index("aggregated_at")[feature_name], use_container_width=True)
                     st.dataframe(feature_df, use_container_width=True, hide_index=True)
+
+# --------------------------------------------------
+# TAB 6: User Feedback
+# --------------------------------------------------
+with tab6:
+    st.subheader("⭐ User Feedback")
+    st.caption("All ratings and comments submitted from the public dashboard")
+
+    try:
+        feedback_df = load_feedback(db)
+
+        if feedback_df.empty:
+            st.info("No feedback submitted yet. Share the public dashboard URL to start collecting responses.")
+        else:
+            # Summary metrics
+            avg_rating = feedback_df["rating"].mean()
+            total_responses = len(feedback_df)
+            with_comments = feedback_df[feedback_df["comment"] != ""]
+
+            m1, m2, m3, m4 = st.columns(4)
+            m1.metric("Total Responses", total_responses)
+            m2.metric("Average Rating", f"{avg_rating:.1f} / 5")
+            m3.metric("With Comments", len(with_comments))
+            m4.metric("5-Star Ratings", len(feedback_df[feedback_df["rating"] == 5]))
+
+            # Rating distribution chart
+            st.markdown("### Rating Distribution")
+            rating_counts = feedback_df.groupby("rating").size().reset_index(name="count")
+            rating_counts["stars"] = rating_counts["rating"].apply(lambda x: "⭐" * x)
+            st.bar_chart(rating_counts.set_index("rating")["count"], use_container_width=True)
+
+            # Rating over time
+            st.markdown("### Ratings Over Time")
+            try:
+                time_df = feedback_df.copy()
+                time_df["date"] = pd.to_datetime(
+                    time_df["submitted_at"].str[:10], errors="coerce"
+                )
+                time_df = time_df.dropna(subset=["date"])
+                if not time_df.empty:
+                    daily_avg = time_df.groupby("date")["rating"].mean().reset_index()
+                    st.line_chart(daily_avg.set_index("date")["rating"], use_container_width=True)
+            except Exception:
+                st.info("Not enough data to show trend yet.")
+
+            # Individual responses
+            st.markdown("### All Responses")
+            filter_col1, filter_col2 = st.columns(2)
+            with filter_col1:
+                min_rating = st.selectbox("Filter by minimum rating", [1, 2, 3, 4, 5], index=0, key="fb_min_rating")
+            with filter_col2:
+                show_comments_only = st.checkbox("Show only responses with comments", key="fb_comments_only")
+
+            filtered = feedback_df[feedback_df["rating"] >= min_rating]
+            if show_comments_only:
+                filtered = filtered[filtered["comment"] != ""]
+
+            if filtered.empty:
+                st.info("No responses match your filter.")
+            else:
+                for _, row in filtered.iterrows():
+                    stars = "⭐" * row["rating"]
+                    comment = row["comment"]
+                    submitted = row["submitted_at"]
+                    st.markdown(f"""
+                    <div class="feedback-card">
+                        <div class="star-rating">{stars}</div>
+                        {"<div class='feedback-comment'>\"" + comment + "\"</div>" if comment else ""}
+                        <div class="feedback-meta">Submitted: {submitted}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+            # Raw table
+            with st.expander("View raw data table"):
+                st.dataframe(feedback_df, use_container_width=True, hide_index=True)
+
+    except Exception as e:
+        st.error(f"Could not load feedback: {e}")
+
+
+# --------------------------------------------------
+# TAB 7: LLM Judge Results
+# --------------------------------------------------
+with tab7:
+    st.subheader("📊 LLM Judge Results")
+    st.caption("VADER vs Groq LLM agreement — cross-validation of sentiment labels")
+
+    try:
+        all_judge = list(db["llm_judge_results"].find().sort("_id", -1))
+
+        if not all_judge:
+            st.info("No LLM Judge results yet. Run step 06 (llm_judge) from the pipeline.")
+        else:
+            # Summary metrics
+            judge_df = pd.DataFrame(all_judge)
+            judge_df["agreement"] = pd.to_numeric(judge_df.get("agreement", 0), errors="coerce").fillna(0)
+
+            m1, m2, m3 = st.columns(3)
+            m1.metric("Total Judged", len(judge_df))
+            overall_agreement = judge_df["agreement"].mean() * 100
+            m2.metric("Overall Agreement", f"{overall_agreement:.1f}%")
+            weeks = judge_df["week_start"].nunique() if "week_start" in judge_df.columns else 0
+            m3.metric("Weeks Covered", weeks)
+
+            # Agreement by city
+            st.markdown("### Agreement by City")
+            week_options = sorted(judge_df["week_start"].dropna().unique().tolist(), reverse=True) if "week_start" in judge_df.columns else []
+            selected_week = st.selectbox("Filter by week", ["All weeks"] + week_options, key="judge_week")
+
+            filtered_judge = judge_df if selected_week == "All weeks" else judge_df[judge_df["week_start"] == selected_week]
+
+            city_agreement = (
+                filtered_judge.groupby("city")["agreement"]
+                .agg(["mean", "count"])
+                .reset_index()
+                .rename(columns={"mean": "agreement_pct", "count": "total"})
+                .sort_values("agreement_pct")
+            )
+            city_agreement["agreement_pct"] = city_agreement["agreement_pct"] * 100
+
+            for _, row in city_agreement.iterrows():
+                pct = row["agreement_pct"]
+                color = "#059669" if pct >= 70 else "#D97706" if pct >= 50 else "#DC2626"
+                confidence = "High" if pct >= 70 else "Medium" if pct >= 50 else "Low"
+                st.markdown(f"""
+                <div style="display:flex;justify-content:space-between;align-items:center;
+                            padding:10px 16px;border-radius:10px;margin-bottom:8px;
+                            background:#f8f9fc;border:1px solid #e7eef4">
+                    <span style="font-weight:700;color:#16324f">{row["city"]}</span>
+                    <span style="font-size:0.8rem;color:#aaa">{int(row["total"])} articles judged</span>
+                    <span style="font-weight:700;color:{color}">{pct:.1f}% agreement — {confidence} confidence</span>
+                </div>
+                """, unsafe_allow_html=True)
+
+            # Raw data table
+            with st.expander("View raw LLM Judge data"):
+                display_cols = [c for c in ["city", "week_start", "doc_id", "vader_label", "llm_label", "agreement", "run_id"] if c in judge_df.columns]
+                st.dataframe(judge_df[display_cols].sort_values("week_start", ascending=False), use_container_width=True, hide_index=True)
+
+    except Exception as e:
+        st.error(f"Could not load LLM Judge results: {e}")
+
+# --------------------------------------------------
+# TAB 8: Human Review Queue
+# --------------------------------------------------
+with tab8:
+    st.subheader("👁 Human Review Queue")
+    st.caption("Articles where VADER and LLM disagreed — requiring human labelling")
+
+    try:
+        MONGO_URI_VAL = os.getenv("MONGO_URI")
+
+        # Pending review
+        pending = list(db["validation_samples"].find({"needs_review": True}).limit(50))
+        reviewed = list(db["validation_samples"].find({"needs_review": False, "human_label": {"$ne": None}}).limit(200))
+
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Pending Review", len(pending))
+        m2.metric("Already Reviewed", len(reviewed))
+        total = len(pending) + len(reviewed)
+        pct_done = (len(reviewed) / total * 100) if total > 0 else 0
+        m3.metric("Review Progress", f"{pct_done:.0f}%")
+
+        if pending:
+            st.markdown("### Articles Needing Review")
+            st.caption("Label each article to improve VADER accuracy metrics")
+
+            for row in pending:
+                doc_id = row.get("doc_id", str(row["_id"]))
+                with st.expander(f"{row.get('city', '?')} — VADER: {row.get('vader_label','?')} ({row.get('vader_score', 0):+.2f}) | LLM: {row.get('llm_label','?')}"):
+                    st.write(row.get("clean_text", "")[:500])
+                    st.caption("What is the correct sentiment label?")
+                    col1, col2, col3, col4 = st.columns(4)
+
+                    def label_doc(doc_id, human_lbl):
+                        c = MongoClient(MONGO_URI_VAL)
+                        c[os.getenv("MONGO_DB_NAME", "travel_pipeline_db")]["validation_samples"].update_one(
+                            {"doc_id": doc_id},
+                            {"$set": {"human_label": human_lbl, "needs_review": False}}
+                        )
+                        c.close()
+
+                    if col1.button("✅ Positive", key=f"val_pos_{doc_id}"):
+                        label_doc(doc_id, "positive"); st.rerun()
+                    if col2.button("❌ Negative", key=f"val_neg_{doc_id}"):
+                        label_doc(doc_id, "negative"); st.rerun()
+                    if col3.button("➖ Neutral", key=f"val_neu_{doc_id}"):
+                        label_doc(doc_id, "neutral"); st.rerun()
+                    if col4.button("⏭ Skip", key=f"val_skip_{doc_id}"):
+                        label_doc(doc_id, None); st.rerun()
+        else:
+            st.success("✓ All articles have been reviewed!")
+
+        # Accuracy from reviewed articles
+        if reviewed:
+            st.markdown("### VADER Accuracy from Human Labels")
+            rev_df = pd.DataFrame(reviewed)
+            rev_df = rev_df[rev_df["human_label"].notna()]
+
+            if not rev_df.empty and "vader_label" in rev_df.columns:
+                rev_df["correct"] = rev_df["human_label"] == rev_df["vader_label"]
+                accuracy = rev_df["correct"].mean() * 100
+
+                a1, a2, a3 = st.columns(3)
+                a1.metric("Overall Accuracy", f"{accuracy:.1f}%")
+                a2.metric("Correct", int(rev_df["correct"].sum()))
+                a3.metric("Incorrect", int((~rev_df["correct"]).sum()))
+
+                # By city
+                if "city" in rev_df.columns:
+                    city_acc = rev_df.groupby("city")["correct"].mean().reset_index()
+                    city_acc["accuracy_pct"] = city_acc["correct"] * 100
+                    st.bar_chart(city_acc.set_index("city")["accuracy_pct"], use_container_width=True)
+
+        # Reviewed articles table
+        if reviewed:
+            with st.expander("View reviewed articles"):
+                rev_display = pd.DataFrame(reviewed)
+                display_cols = [c for c in ["city", "vader_label", "llm_label", "human_label", "vader_score"] if c in rev_display.columns]
+                st.dataframe(rev_display[display_cols], use_container_width=True, hide_index=True)
+
+    except Exception as e:
+        st.error(f"Could not load validation samples: {e}")
