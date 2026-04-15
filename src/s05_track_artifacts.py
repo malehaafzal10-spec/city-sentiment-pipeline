@@ -1,7 +1,7 @@
 """
 track_artifacts.py — MLOps HTML Report Generator
-Fetches the latest pipeline run from MongoDB and generates a standalone 
-HTML report summarizing metrics, sentiment scores, and aggregations.
+Fetches the latest pipeline run from MongoDB, generates a standalone 
+HTML report, and automatically backs it up to Hugging Face Datasets.
 """
 
 import os
@@ -9,6 +9,7 @@ import json
 from datetime import datetime
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from huggingface_hub import HfApi, login  # Ensure you pip installed huggingface_hub
 
 # Load environment variables
 load_dotenv()
@@ -22,7 +23,6 @@ def generate_table_rows(data_list):
     if not data_list:
         return "<tr><td>No payload data available.</td></tr>"
     
-    # Flatten keys for the table header (ignore deep nesting for simple table views)
     headers = list(data_list[0].keys())
     header_html = "<tr>" + "".join([f"<th>{h}</th>" for h in headers]) + "</tr>"
     
@@ -31,11 +31,9 @@ def generate_table_rows(data_list):
         row = "<tr>"
         for h in headers:
             val = item.get(h, "")
-            # If the value is a dictionary (like vader_breakdown), stringify it
             if isinstance(val, dict):
                 val = json.dumps(val)
-            # Truncate extremely long text strings for readability
-            elif isinstance(val, str) and len(val) > 80:
+            if isinstance(val, str) and len(val) > 80:
                 val = val[:80] + "... [Truncated]"
             row += f"<td>{val}</td>"
         row += "</tr>"
@@ -43,15 +41,45 @@ def generate_table_rows(data_list):
     return header_html + rows_html
 
 def get_first_item_json(payload):
-    """Extracts the first item of a payload and formats it as pretty JSON for schema preview."""
+    """Extracts the first item of a payload and formats it as pretty JSON."""
     if payload and isinstance(payload, list) and len(payload) > 0:
         preview_item = payload[0].copy()
-        # Truncate long text fields so the JSON preview doesn't flood the screen
         for key in ["text", "description", "content"]:
             if key in preview_item and isinstance(preview_item[key], str) and len(preview_item[key]) > 100:
                 preview_item[key] = preview_item[key][:100] + "... [TRUNCATED FOR PREVIEW]"
         return json.dumps(preview_item, indent=4)
     return "{\n  // No payload available\n}"
+
+def push_to_huggingface(local_file_path, run_id):
+    """Uploads the generated HTML report to a Hugging Face Dataset repository."""
+    hf_token = os.getenv("HF_TOKEN")
+    repo_id = os.getenv("HF_REPO_ID")
+
+    if not hf_token or not repo_id:
+        print("⚠️ HF_TOKEN or HF_REPO_ID missing in .env. Skipping Hugging Face upload.")
+        return
+
+    print("\n☁️ Authenticating with Hugging Face...")
+    try:
+        login(token=hf_token)
+        api = HfApi()
+        
+        # Ensure the dataset repository exists (creates it if it doesn't)
+        api.create_repo(repo_id=repo_id, repo_type="dataset", exist_ok=True)
+        
+        hf_path_in_repo = f"reports/{run_id}.html"
+        
+        print(f"🚀 Uploading {local_file_path} to HF Dataset: {repo_id}...")
+        api.upload_file(
+            path_or_fileobj=local_file_path,
+            path_in_repo=hf_path_in_repo,
+            repo_id=repo_id,
+            repo_type="dataset",
+            commit_message=f"Upload automated report for {run_id}"
+        )
+        print(f"✅ Successfully pushed to Hugging Face: https://huggingface.co/datasets/{repo_id}/tree/main/reports")
+    except Exception as e:
+        print(f"❌ Failed to upload to Hugging Face: {e}")
 
 def generate_report():
     if not MONGO_URI:
@@ -62,7 +90,7 @@ def generate_report():
     client = MongoClient(MONGO_URI)
     db = client[DB_NAME]
 
-    # 1. Fetch the latest standard run_id (Ignoring historical backfills)
+    # 1. Fetch the latest standard run_id
     latest_artifact = db[ARTIFACTS_COLLECTION].find_one(
         {"run_id": {"$regex": "^run_\\d{8}$"}}, 
         sort=[("timestamp", -1)]
@@ -82,11 +110,8 @@ def generate_report():
         artifacts[a_type] = db[ARTIFACTS_COLLECTION].find_one({"run_id": run_id, "artifact_type": a_type}) or {}
 
     # --- Extract Data ---
-    
-    # Section 1: Raw Ingestion
     raw_docs = artifacts["raw_ingestion"].get("document_count", 0)
 
-    # Section 2: Processed Docs
     proc_metrics = artifacts["processed_scraped_docs"].get("metrics", {})
     proc_labels_json = json.dumps(list(proc_metrics.keys()))
     proc_data_json = json.dumps(list(proc_metrics.values()))
@@ -95,18 +120,14 @@ def generate_report():
     proc_first_json = get_first_item_json(proc_payload)
     proc_table = generate_table_rows(proc_payload[:10])
 
-    # Section 3: Sentiment Scores
     sentiment_docs = artifacts["sentiment_scores"].get("document_count", 0)
     sentiment_metrics = artifacts["sentiment_scores"].get("metrics", {})
-    
     sentiment_payload = artifacts["sentiment_scores"].get("payload", [])
     sentiment_first_json = get_first_item_json(sentiment_payload)
     sentiment_table = generate_table_rows(sentiment_payload[:10])
 
-    # Section 4: Feature Aggregates
     agg_metrics = artifacts["feature_aggregates"].get("metrics", {})
     total_cities = agg_metrics.get("total_cities_aggregated", 0)
-    
     agg_payload = artifacts["feature_aggregates"].get("payload", [])
     agg_first_json = get_first_item_json(agg_payload)
     agg_table = generate_table_rows(agg_payload[:10])
@@ -160,10 +181,8 @@ def generate_report():
             <div class="metric-box">Total Documents Scored: {sentiment_docs}</div>
             <p><strong>Sentiment Distribution Metrics:</strong></p>
             <pre style="background: #eee; color: #333;"><code>{json.dumps(sentiment_metrics, indent=4)}</code></pre>
-            
             <p><strong>Payload Preview (First Item Schema):</strong></p>
             <pre><code>{sentiment_first_json}</code></pre>
-            
             <p><strong>Payload Data (Max 10):</strong></p>
             <div style="overflow-x:auto;">
                 <table>{sentiment_table}</table>
@@ -171,10 +190,8 @@ def generate_report():
 
             <h2>4. Artifact: FEATURE_AGGREGATES</h2>
             <div class="metric-box">Total Cities Aggregated: {total_cities}</div>
-            
             <p><strong>Payload Preview (First Item Schema):</strong></p>
             <pre><code>{agg_first_json}</code></pre>
-            
             <p><strong>Payload Data (Max 10):</strong></p>
             <div style="overflow-x:auto;">
                 <table>{agg_table}</table>
@@ -182,7 +199,6 @@ def generate_report():
         </div>
 
         <script>
-            // Render the Bar Chart using Chart.js
             const ctx = document.getElementById('metricsChart').getContext('2d');
             new Chart(ctx, {{
                 type: 'bar',
@@ -207,7 +223,7 @@ def generate_report():
     </html>
     """
 
-    # --- Save the Report ---
+    # --- Save the Report locally ---
     os.makedirs("reports", exist_ok=True)
     report_path = os.path.join("reports", f"report_{run_id}.html")
     
@@ -215,6 +231,9 @@ def generate_report():
         f.write(html_template)
         
     print(f"✅ Report successfully generated: {report_path}")
+    
+    # --- Push to Hugging Face ---
+    push_to_huggingface(report_path, run_id)
 
 if __name__ == "__main__":
     print("Initializing Report Generation...")

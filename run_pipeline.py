@@ -24,7 +24,8 @@ PIPELINE_STEPS = [
     "s01a_ingest_daily_news.py",
     "s02_store_relevant_docs.py",
     "s03_score.py",
-    "s04_create_features.py"
+    "s04_create_features.py",
+    "s05_track_artifacts.py"
 ]
 
 def run_script(script_name: str):
