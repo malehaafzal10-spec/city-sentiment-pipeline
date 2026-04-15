@@ -88,12 +88,12 @@ pip install -r requirements.txt
 
 ### 3) Configure environment
 
-Create a `.env` file in the repository root (this repository does not currently include a `.env.example` template).
+Create a `.env` file in the repository root.
 
 Minimum:
 
 ```env
-MONGO_URI=<your_mongodb_connection_string>
+MONGO_URI=mongodb://localhost:27017
 MONGO_DB_NAME=travel_pipeline_db
 NEWSAPI_KEY=<your_newsapi_key>
 ```
