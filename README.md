@@ -1,240 +1,149 @@
-# 🏙️ City Sentiment Pipeline
+# City Sentiment Pipeline
 
-> **Track how travellers talk about European cities — automatically.**  
-> Ingests news and Reddit data, scores sentiment with VADER, detects drift, and publishes a live Streamlit dashboard.
+A Python data pipeline that tracks travel sentiment for major European cities using news content, LLM relevance filtering, VADER sentiment scoring, and weekly feature aggregation in MongoDB.
 
-*M6 — Data Engineering and Machine Learning Operations in Business | AAU F2026*
+## What this project does
 
----
+- Ingests daily city-related news articles
+- Filters to travel-relevant content (keyword pre-filter + LLM classification)
+- Scores sentiment with VADER
+- Builds weekly city-level aggregates (sentiment, crowding/cost/safety signals)
+- Stores pipeline artifacts and metrics for traceability
+- Provides Streamlit dashboards for monitoring and exploration
 
-## 📌 Overview
+## Target cities
 
-The City Sentiment Pipeline is an end-to-end MLOps project that monitors public sentiment toward **8 European cities** using data from **NewsAPI** and **Reddit**. Articles are scraped, filtered for relevance by an LLM, scored with VADER sentiment analysis, aggregated weekly, and surfaced through an interactive dashboard.
+Configured in `config/cities.json`:
 
-Data flows through a **Medallion Architecture** (Bronze → Silver → Gold) stored in **MongoDB**, with full pipeline telemetry tracked as artifacts.
+- Paris
+- Rome
+- Barcelona
+- Lisbon
+- Amsterdam
+- Prague
+- Athens
+- London
 
----
+## Pipeline flow
 
-## ✨ Features
+Main orchestrator: `run_pipeline.py`
 
-- 📰 **Multi-source ingestion** — NewsAPI (live) + Reddit (when enabled)
-- 🤖 **LLM relevance filtering** — Gemini / Groq to discard non-travel articles
-- 🧹 **Full-text scraping** — BeautifulSoup scrapes article body; falls back to API snippet
-- 💬 **VADER sentiment scoring** — per article and aggregated weekly per city
-- 📊 **Drift detection** — monitors sentiment shifts over time
-- 🗄️ **Medallion Architecture** on MongoDB — Bronze / Silver / Gold layers
-- 🏃 **Human-in-the-Loop (HITL)** — sample evaluation workflow for LLM quality checks
-- 🐳 **Docker support** — one-command reproducible runs
-- ⚙️ **GitHub Actions** — automated weekly scheduled runs + manual trigger
+Executed steps (in order):
 
----
+1. `src/s01a_ingest_daily_news.py`
+2. `src/s02_store_relevant_docs.py`
+3. `src/s03_score.py`
+4. `src/s04_create_features.py`
 
-## 🗂️ Project Structure
+Optional monitoring logic exists in `src/07_monitor.py`.
 
-```
+## Data storage (MongoDB)
+
+Default DB: `travel_pipeline_db`
+
+Primary collections used by the core pipeline:
+
+- `raw_documents_historical`
+- `processed_documents`
+- `scored_documents`
+- `document_features`
+- `city_weekly_features`
+- `pipeline_artifacts`
+
+Additional collections used by dashboard/monitoring flows include:
+
+- `monitoring_alerts`
+- `user_feedback`
+
+## Project structure
+
+```text
 city-sentiment-pipeline/
-├── src/                        # Core pipeline modules (daily execution)
-│   ├── db.py                   # MongoDB schema and connection helpers
-│   ├── ingest.py               # NewsAPI + Reddit ingestion
-│   ├── preprocess.py           # Cleaning, scraping, LLM relevance filter
-│   ├── features.py             # Keyword feature engineering
-│   ├── score.py                # VADER sentiment scoring
-│   ├── aggregate.py            # Weekly city-level metrics
-│   ├── monitor.py              # Drift detection
-│   ├── llm_summary.py          # Optional LLM verdict summaries
-│   └── dashboard.py            # Dashboard data preparation
-├── preprocess/                 # Preprocessing utilities
-├── human_in_the_loop/          # HITL evaluation scripts
-├── config/                     # Configuration files
-├── artifacts/                  # Local pipeline artifact snapshots
-├── reports/                    # Generated reports
-├── legacy/                     # Archived earlier versions
-├── .github/workflows/          # GitHub Actions CI/CD
-├── .streamlit/                 # Streamlit theme config
-├── app.py                      # Streamlit dashboard app
-├── run_pipeline.py             # Single entry point for the full pipeline
-├── refilter_groq.py            # Re-run LLM filtering with Groq
-├── track_artifacts.py          # MLOps artifact tracking
+├── src/                         # Pipeline steps and utility scripts
+├── preprocess/                  # Historical/backfill preprocessing scripts
+├── human_in_the_loop/           # Manual evaluation workflows and outputs
+├── config/cities.json           # City + keyword configuration
+├── app.py                       # Main Streamlit city sentiment app
+├── run_pipeline.py              # Pipeline orchestrator entrypoint
+├── requirements.txt             # Python dependencies
 ├── Dockerfile
-├── docker-compose.yml
-└── requirements.txt
+└── docker-compose.yml
 ```
 
----
+## Quick start (local)
 
-## 🗄️ Data Architecture (MongoDB Medallion)
-
-All data lives in the `travel_pipeline_db` database, progressing through three layers.
-
-### 🥉 Bronze — Raw Ingestion
-
-**Collections:** `raw_documents` (daily) · `raw_documents_historical` (backfill)
-
-The landing zone. Stores unfiltered data exactly as received from NewsAPI and Reddit.
-
-| Field | Description |
-|---|---|
-| `doc_id` | SHA-256 hash of source + URL — prevents exact duplicates |
-| `source` | `"news"` or `"reddit"` |
-| `city` | Target city (e.g. `"Paris"`) |
-| `title` | Article headline |
-| `description` | Short API-provided snippet |
-| `text` | Rough concatenation of title + description + truncated content |
-| `url` | Link to original article |
-| `published_at` | Publication timestamp (ISO 8601) |
-| `ingestion_time` | UTC time the pipeline fetched the document |
-| `run_id` | Links document to a specific pipeline execution |
-
-### 🥈 Silver — Processed & Scraped
-
-**Collection:** `processed_documents`
-
-Clean, filtered, and enriched documents. Only articles that pass both a keyword pre-filter **and** LLM relevance check reach this layer.
-
-| Field | Description |
-|---|---|
-| `text` | Fully scraped, cleaned, deduplicated, VADER-safe article text |
-| `full_text_scraped` | `true` if BeautifulSoup succeeded; `false` if fell back to API snippet |
-| `text_length` | Character count of cleaned text |
-| `llm_relevant` | `true` if LLM judged article genuinely travel-related |
-| `llm_reason` | LLM's brief explanation (used for auditing / HITL) |
-| `model_used` | Which model made the decision: `"gemini"`, `"groq"`, or `"none"` |
-| `processed_time` | UTC timestamp of processing |
-| *(+ inherited)* | `doc_id`, `source`, `city`, `title`, `url`, `published_at`, `run_id` |
-
-### 🥇 Gold — Aggregated Metrics
-
-Weekly sentiment scores, drift signals, and city-level summaries consumed by the dashboard.
-
-### 🛠️ MLOps Tracking — Pipeline Artifacts
-
-**Collection:** `pipeline_artifacts`
-
-Telemetry snapshots stored in the database for every pipeline run.
-
-| Field | Description |
-|---|---|
-| `run_id` | Execution ID linking to processed documents |
-| `artifact_type` | Pipeline stage tag (e.g. `"raw_ingestion"`, `"processed_scraped_docs"`) |
-| `timestamp` | Native MongoDB datetime |
-| `document_count` | Documents handled in the batch |
-| `metrics` | API successes, fallbacks, scrape counts, drops |
-| `payload` | Full JSON payload of the run for reproducibility |
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
+### 1) Prerequisites
 
 - Python 3.10+
-- MongoDB running locally or a MongoDB Atlas connection string
-- A [NewsAPI](https://newsapi.org/) key
+- MongoDB instance (local or Atlas)
+- API keys as needed (NewsAPI required for ingestion)
 
-### Local Setup
+### 2) Install
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/malehaafzal10-spec/city-sentiment-pipeline.git
-cd city-sentiment-pipeline
-
-# 2. Create and activate a virtual environment
-python -m venv venv
-source venv/bin/activate      # Mac / Linux
-# venv\Scripts\activate       # Windows
-
-# 3. Install dependencies
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+```
 
-# 4. Configure environment variables
-cp .env.example .env
-# Edit .env and set:
-#   NEWSAPI_KEY=your_newsapi_key
-#   MONGO_URI=your_mongodb_connection_string
+### 3) Configure environment
 
-# 5. Run the full pipeline
+Create a `.env` file in the repository root.
+
+Minimum:
+
+```env
+MONGO_URI=mongodb://localhost:27017
+MONGO_DB_NAME=travel_pipeline_db
+NEWSAPI_KEY=<your_newsapi_key>
+```
+
+Optional (for LLM relevance filtering):
+
+```env
+GROQ_API_KEY=<your_groq_key>
+GEMINI_API_KEY=<your_gemini_key>
+PIPELINE_LOG_LEVEL=INFO
+```
+
+### 4) Run the pipeline
+
+```bash
 python run_pipeline.py
+```
 
-# 6. Launch the dashboard
+### 5) Run the dashboard
+
+```bash
 streamlit run app.py
 ```
 
-### Docker
+## Docker
+
+`docker-compose.yml` defines a `pipeline` service that runs the orchestrator.
 
 ```bash
 docker compose build
 docker compose up
 ```
 
----
+## GitHub Actions
 
-## ⚙️ GitHub Actions (Automated Weekly Runs)
+Workflows are available in `.github/workflows/`:
 
-1. Push the repo to GitHub.
-2. Add `NEWSAPI_KEY` (and optionally `MONGO_URI`) as **repository secrets** under *Settings → Secrets → Actions*.
-3. Enable **GitHub Pages** under *Settings → Pages → branch: gh-pages* for the dashboard.
-4. Trigger manually: *Actions tab → City Sentiment Pipeline → Run workflow*
+- `daily_news.yml`
+- `pipeline.yml`
 
-The workflow runs on a weekly schedule automatically after the first manual trigger.
+To run in GitHub Actions, set required repository secrets (for example `MONGO_URI`, `NEWSAPI_KEY`, and optional LLM keys).
 
----
+## Notes
 
-## 📡 Reddit Integration
+- The orchestrator currently runs the 4 core steps listed above.
+- Historical/backfill scripts are in `preprocess/` and can be run separately.
 
-Reddit ingestion is disabled by default pending API approval.
+## Team
 
-To enable it, set the following in your `.env`:
-
-```env
-REDDIT_ENABLED=true
-REDDIT_CLIENT_ID=your_client_id
-REDDIT_CLIENT_SECRET=your_client_secret
-REDDIT_USER_AGENT=your_user_agent
-```
-
-The pipeline will automatically blend Reddit posts with NewsAPI articles once credentials are present.
-
----
-
-## 🧪 Human-in-the-Loop (HITL) Evaluation
-
-The `human_in_the_loop/` folder contains scripts for sampling LLM-labelled articles and manually verifying relevance decisions. Evaluation samples are stored back to MongoDB so the workflow is fully traceable and repeatable.
-
-To run an evaluation session:
-
-```bash
-python human_in_the_loop/evaluate.py
-```
-
----
-
-## 🧰 Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Ingestion | NewsAPI, PRAW (Reddit) |
-| Scraping | BeautifulSoup4, Requests |
-| LLM Filtering | Google Gemini, Groq |
-| Sentiment | VADER (NLTK) |
-| Database | MongoDB |
-| Dashboard | Streamlit |
-| Containerisation | Docker, Docker Compose |
-| CI/CD | GitHub Actions |
-| Language | Python 3.10+ |
-
----
-
-## 📄 License
-
-This project was developed as part of the **M6 — Data Engineering and MLOps in Business** module at **Aalborg University (AAU), Spring 2026**.
-
----
-
-## Contributors:
-
-- **Karolina Bohdan** 
-- **Faraiba Farnan**
-- **Maleha Afzal**
-- **Cristian Smoilis**
-
-*Built with ☕ and a lot of sentiment.*
+- Karolina Bohdan
+- Faraiba Farnan
+- Maleha Afzal
+- Cristian Smoilis
