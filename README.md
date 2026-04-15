@@ -76,7 +76,7 @@ The landing zone. Stores unfiltered data exactly as received from NewsAPI and Re
 |---|---|
 | `doc_id` | SHA-256 hash of source + URL — prevents exact duplicates |
 | `source` | `"news"` or `"reddit"` |
-| `city` | Target city (e.g. `"Paris"`, `"Tokyo"`) |
+| `city` | Target city (e.g. `"Paris"`) |
 | `title` | Article headline |
 | `description` | Short API-provided snippet |
 | `text` | Rough concatenation of title + description + truncated content |
