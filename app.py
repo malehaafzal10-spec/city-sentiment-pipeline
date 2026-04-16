@@ -484,7 +484,7 @@ if history is not None and not history.empty:
         color_range = [CITY_COLORS.get(c, "#6366f1") for c in selected]
 
         chart = alt.Chart(chart_data).mark_line(
-            strokeWidth=2.5, interpolate="monotone"
+            strokeWidth=2.5, interpolate="linear"
         ).encode(
             x=alt.X("week_start:O", sort=None, title=None, axis=alt.Axis(
                 labelAngle=-30, labelFontSize=10, labelColor="#94a3b8",
