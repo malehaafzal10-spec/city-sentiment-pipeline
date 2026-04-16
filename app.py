@@ -471,58 +471,39 @@ if history is not None and not history.empty:
     cities_available = pivot.columns.tolist()
     selected = st.multiselect("Select cities", options=cities_available, default=cities_available, label_visibility="collapsed")
     if selected:
-        try:
-            import altair as alt
-            CITY_COLORS = {
-                "Paris": "#e74c3c", "Rome": "#e67e22", "Barcelona": "#8e44ad",
-                "Lisbon": "#16a085", "Amsterdam": "#27ae60", "Prague": "#c0392b",
-                "Athens": "#f39c12", "London": "#2980b9"
-            }
-            chart_data = pivot[selected].reset_index().melt(
-                id_vars="week_start", var_name="City", value_name="Sentiment"
-            ).dropna()
-            chart_data["week_start"] = chart_data["week_start"].astype(str)
+        import altair as alt
+        CITY_COLORS = {
+            "Paris": "#e74c3c", "Rome": "#e67e22", "Barcelona": "#8e44ad",
+            "Lisbon": "#16a085", "Amsterdam": "#27ae60", "Prague": "#c0392b",
+            "Athens": "#f39c12", "London": "#2980b9"
+        }
+        chart_data = pivot[selected].reset_index().melt(
+            id_vars="week_start", var_name="City", value_name="Sentiment"
+        ).dropna()
+        chart_data["week_start"] = chart_data["week_start"].astype(str)
+        color_range = [CITY_COLORS.get(c, "#6366f1") for c in selected]
 
-            color_scale = alt.Scale(
-                domain=list(CITY_COLORS.keys()),
-                range=list(CITY_COLORS.values())
-            )
-
-            line = alt.Chart(chart_data).mark_line(
-                interpolate="monotone", strokeWidth=2.5
-            ).encode(
-                x=alt.X("week_start:O", axis=alt.Axis(
-                    labelAngle=-30, labelFontSize=10,
-                    labelColor="#94a3b8", ticks=False,
-                    domainColor="#eaedf5", grid=False
-                )),
-                y=alt.Y("Sentiment:Q", scale=alt.Scale(domain=[-0.2, 1.2]),
-                    axis=alt.Axis(labelFontSize=10, labelColor="#94a3b8",
-                                  gridColor="#eaedf5", ticks=False, domainOpacity=0)
-                ),
-                color=alt.Color("City:N", scale=color_scale,
-                    legend=alt.Legend(orient="bottom", columns=4,
-                        labelFontSize=11, symbolSize=80,
-                        labelColor="#475569", titleOpacity=0)
-                ),
-                tooltip=["City:N", "week_start:O", alt.Tooltip("Sentiment:Q", format=".2f")]
-            )
-
-            area = alt.Chart(chart_data).mark_area(
-                interpolate="monotone", opacity=0.07
-            ).encode(
-                x=alt.X("week_start:O", sort=None),
-                y=alt.Y("Sentiment:Q", scale=alt.Scale(domain=[-0.2, 1.2])),
-                color=alt.Color("City:N", scale=color_scale, legend=None)
-            )
-
-            chart = (area + line).properties(
-                height=250, background="transparent"
-            ).configure_view(strokeWidth=0).configure_axis(labelFont="sans-serif")
-            st.altair_chart(chart, use_container_width=True)
-        except Exception as ex:
-            st.error(f"Chart error: {ex}")
-            st.line_chart(pivot[selected], height=260, use_container_width=True)
+        chart = alt.Chart(chart_data).mark_line(
+            strokeWidth=2.5, interpolate="monotone"
+        ).encode(
+            x=alt.X("week_start:O", sort=None, title=None, axis=alt.Axis(
+                labelAngle=-30, labelFontSize=10, labelColor="#94a3b8",
+                grid=False, ticks=False, domainColor="#e2e8f0"
+            )),
+            y=alt.Y("Sentiment:Q", title=None, scale=alt.Scale(domain=[-0.2, 1.2]),
+                axis=alt.Axis(labelFontSize=10, labelColor="#94a3b8",
+                              gridColor="#f1f5f9", ticks=False, domainOpacity=0)
+            ),
+            color=alt.Color("City:N",
+                scale=alt.Scale(domain=selected, range=color_range),
+                legend=alt.Legend(orient="bottom", columns=4, labelFontSize=11,
+                                  symbolSize=80, labelColor="#475569", title=None)
+            ),
+            tooltip=["City:N", "week_start:O", alt.Tooltip("Sentiment:Q", format=".2f")]
+        ).properties(height=250, background="transparent"
+        ).configure_view(strokeWidth=0, fill="transparent"
+        ).configure_axis(labelFont="sans-serif")
+        st.altair_chart(chart, use_container_width=True)
 
 # Feedback
 st.markdown('<div class="sec-title">Share Your Feedback</div>', unsafe_allow_html=True)
