@@ -263,24 +263,37 @@ def load_collection_docs(db, collection_name):
 
 
 def load_document_features(db):
-    col = db["document_features"]
-    docs = list(col.find())
+    # Try document_features first, fall back to city_weekly_features
     rows = []
-    for doc in docs:
-        rows.append({
-            "_id": str(doc.get("_id", "")),
-            "city": str(doc.get("city", "")).strip(),
-            "mention_count": pd.to_numeric(doc.get("mention_count", None), errors="coerce"),
-            "avg_sentiment": pd.to_numeric(doc.get("avg_sentiment", None), errors="coerce"),
-            "positive_ratio": pd.to_numeric(doc.get("positive_ratio", None), errors="coerce"),
-            "negative_ratio": pd.to_numeric(doc.get("negative_ratio", None), errors="coerce"),
-            "neutral_ratio": pd.to_numeric(doc.get("neutral_ratio", None), errors="coerce"),
-            "crowding_score": pd.to_numeric(doc.get("crowding_score", None), errors="coerce"),
-            "cost_score": pd.to_numeric(doc.get("cost_score", None), errors="coerce"),
-            "safety_score": pd.to_numeric(doc.get("safety_score", None), errors="coerce"),
-            "run_id": str(doc.get("run_id", "")).strip(),
-            "aggregated_at": pd.to_datetime(doc.get("aggregated_at", None), errors="coerce"),
-        })
+    for collection_name in ["document_features", "city_weekly_features"]:
+        col = db[collection_name]
+        docs = list(col.find())
+        if not docs:
+            continue
+        for doc in docs:
+            city = str(doc.get("city", "")).strip()
+            if not city:
+                continue
+            rows.append({
+                "_id": str(doc.get("_id", "")),
+                "city": city,
+                "mention_count": pd.to_numeric(doc.get("mention_count", None), errors="coerce"),
+                "avg_sentiment": pd.to_numeric(doc.get("avg_sentiment", None), errors="coerce"),
+                "positive_ratio": pd.to_numeric(doc.get("positive_ratio", None), errors="coerce"),
+                "negative_ratio": pd.to_numeric(doc.get("negative_ratio", None), errors="coerce"),
+                "neutral_ratio": pd.to_numeric(doc.get("neutral_ratio", None), errors="coerce"),
+                "crowding_score": pd.to_numeric(doc.get("crowding_score", None), errors="coerce"),
+                "cost_score": pd.to_numeric(doc.get("cost_score", None), errors="coerce"),
+                "safety_score": pd.to_numeric(doc.get("safety_score", None), errors="coerce"),
+                "run_id": str(doc.get("run_id", "")).strip(),
+                "aggregated_at": pd.to_datetime(
+                    doc.get("aggregated_at") or doc.get("week_start") or doc.get("timestamp"),
+                    errors="coerce"
+                ),
+                "source_collection": collection_name,
+            })
+        if rows:
+            break  # use first collection that has city data
     df = pd.DataFrame(rows)
     if df.empty:
         return df
@@ -538,15 +551,13 @@ if summary_df.empty:
 # --------------------------------------------------
 # Tabs
 # --------------------------------------------------
-tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "🧭 Overview",
     "📰 Raw Historical",
     "✨ Processed Documents",
     "💬 Scored Documents",
     "🏙️ Document Features",
-    "⭐ User Feedback",
-    "📊 LLM Judge",
-    "👁 Human Review"
+    "⭐ User Feedback"
 ])
 
 # --------------------------------------------------
@@ -787,10 +798,11 @@ with tab6:
                     stars = "⭐" * row["rating"]
                     comment = row["comment"]
                     submitted = row["submitted_at"]
+                    comment_html = f'<div class="feedback-comment">"{comment}"</div>' if comment and str(comment).strip() else ""
                     st.markdown(f"""
                     <div class="feedback-card">
                         <div class="star-rating">{stars}</div>
-                        {"<div class='feedback-comment'>\"" + comment + "\"</div>" if comment else ""}
+                        {comment_html}
                         <div class="feedback-meta">Submitted: {submitted}</div>
                     </div>
                     """, unsafe_allow_html=True)
@@ -801,148 +813,3 @@ with tab6:
 
     except Exception as e:
         st.error(f"Could not load feedback: {e}")
-
-
-# --------------------------------------------------
-# TAB 7: LLM Judge Results
-# --------------------------------------------------
-with tab7:
-    st.subheader("📊 LLM Judge Results")
-    st.caption("VADER vs Groq LLM agreement — cross-validation of sentiment labels")
-
-    try:
-        all_judge = list(db["llm_judge_results"].find().sort("_id", -1))
-
-        if not all_judge:
-            st.info("No LLM Judge results yet. Run step 06 (llm_judge) from the pipeline.")
-        else:
-            # Summary metrics
-            judge_df = pd.DataFrame(all_judge)
-            judge_df["agreement"] = pd.to_numeric(judge_df.get("agreement", 0), errors="coerce").fillna(0)
-
-            m1, m2, m3 = st.columns(3)
-            m1.metric("Total Judged", len(judge_df))
-            overall_agreement = judge_df["agreement"].mean() * 100
-            m2.metric("Overall Agreement", f"{overall_agreement:.1f}%")
-            weeks = judge_df["week_start"].nunique() if "week_start" in judge_df.columns else 0
-            m3.metric("Weeks Covered", weeks)
-
-            # Agreement by city
-            st.markdown("### Agreement by City")
-            week_options = sorted(judge_df["week_start"].dropna().unique().tolist(), reverse=True) if "week_start" in judge_df.columns else []
-            selected_week = st.selectbox("Filter by week", ["All weeks"] + week_options, key="judge_week")
-
-            filtered_judge = judge_df if selected_week == "All weeks" else judge_df[judge_df["week_start"] == selected_week]
-
-            city_agreement = (
-                filtered_judge.groupby("city")["agreement"]
-                .agg(["mean", "count"])
-                .reset_index()
-                .rename(columns={"mean": "agreement_pct", "count": "total"})
-                .sort_values("agreement_pct")
-            )
-            city_agreement["agreement_pct"] = city_agreement["agreement_pct"] * 100
-
-            for _, row in city_agreement.iterrows():
-                pct = row["agreement_pct"]
-                color = "#059669" if pct >= 70 else "#D97706" if pct >= 50 else "#DC2626"
-                confidence = "High" if pct >= 70 else "Medium" if pct >= 50 else "Low"
-                st.markdown(f"""
-                <div style="display:flex;justify-content:space-between;align-items:center;
-                            padding:10px 16px;border-radius:10px;margin-bottom:8px;
-                            background:#f8f9fc;border:1px solid #e7eef4">
-                    <span style="font-weight:700;color:#16324f">{row["city"]}</span>
-                    <span style="font-size:0.8rem;color:#aaa">{int(row["total"])} articles judged</span>
-                    <span style="font-weight:700;color:{color}">{pct:.1f}% agreement — {confidence} confidence</span>
-                </div>
-                """, unsafe_allow_html=True)
-
-            # Raw data table
-            with st.expander("View raw LLM Judge data"):
-                display_cols = [c for c in ["city", "week_start", "doc_id", "vader_label", "llm_label", "agreement", "run_id"] if c in judge_df.columns]
-                st.dataframe(judge_df[display_cols].sort_values("week_start", ascending=False), use_container_width=True, hide_index=True)
-
-    except Exception as e:
-        st.error(f"Could not load LLM Judge results: {e}")
-
-# --------------------------------------------------
-# TAB 8: Human Review Queue
-# --------------------------------------------------
-with tab8:
-    st.subheader("👁 Human Review Queue")
-    st.caption("Articles where VADER and LLM disagreed — requiring human labelling")
-
-    try:
-        MONGO_URI_VAL = os.getenv("MONGO_URI")
-
-        # Pending review
-        pending = list(db["validation_samples"].find({"needs_review": True}).limit(50))
-        reviewed = list(db["validation_samples"].find({"needs_review": False, "human_label": {"$ne": None}}).limit(200))
-
-        m1, m2, m3 = st.columns(3)
-        m1.metric("Pending Review", len(pending))
-        m2.metric("Already Reviewed", len(reviewed))
-        total = len(pending) + len(reviewed)
-        pct_done = (len(reviewed) / total * 100) if total > 0 else 0
-        m3.metric("Review Progress", f"{pct_done:.0f}%")
-
-        if pending:
-            st.markdown("### Articles Needing Review")
-            st.caption("Label each article to improve VADER accuracy metrics")
-
-            for row in pending:
-                doc_id = row.get("doc_id", str(row["_id"]))
-                with st.expander(f"{row.get('city', '?')} — VADER: {row.get('vader_label','?')} ({row.get('vader_score', 0):+.2f}) | LLM: {row.get('llm_label','?')}"):
-                    st.write(row.get("clean_text", "")[:500])
-                    st.caption("What is the correct sentiment label?")
-                    col1, col2, col3, col4 = st.columns(4)
-
-                    def label_doc(doc_id, human_lbl):
-                        c = MongoClient(MONGO_URI_VAL)
-                        c[os.getenv("MONGO_DB_NAME", "travel_pipeline_db")]["validation_samples"].update_one(
-                            {"doc_id": doc_id},
-                            {"$set": {"human_label": human_lbl, "needs_review": False}}
-                        )
-                        c.close()
-
-                    if col1.button("✅ Positive", key=f"val_pos_{doc_id}"):
-                        label_doc(doc_id, "positive"); st.rerun()
-                    if col2.button("❌ Negative", key=f"val_neg_{doc_id}"):
-                        label_doc(doc_id, "negative"); st.rerun()
-                    if col3.button("➖ Neutral", key=f"val_neu_{doc_id}"):
-                        label_doc(doc_id, "neutral"); st.rerun()
-                    if col4.button("⏭ Skip", key=f"val_skip_{doc_id}"):
-                        label_doc(doc_id, None); st.rerun()
-        else:
-            st.success("✓ All articles have been reviewed!")
-
-        # Accuracy from reviewed articles
-        if reviewed:
-            st.markdown("### VADER Accuracy from Human Labels")
-            rev_df = pd.DataFrame(reviewed)
-            rev_df = rev_df[rev_df["human_label"].notna()]
-
-            if not rev_df.empty and "vader_label" in rev_df.columns:
-                rev_df["correct"] = rev_df["human_label"] == rev_df["vader_label"]
-                accuracy = rev_df["correct"].mean() * 100
-
-                a1, a2, a3 = st.columns(3)
-                a1.metric("Overall Accuracy", f"{accuracy:.1f}%")
-                a2.metric("Correct", int(rev_df["correct"].sum()))
-                a3.metric("Incorrect", int((~rev_df["correct"]).sum()))
-
-                # By city
-                if "city" in rev_df.columns:
-                    city_acc = rev_df.groupby("city")["correct"].mean().reset_index()
-                    city_acc["accuracy_pct"] = city_acc["correct"] * 100
-                    st.bar_chart(city_acc.set_index("city")["accuracy_pct"], use_container_width=True)
-
-        # Reviewed articles table
-        if reviewed:
-            with st.expander("View reviewed articles"):
-                rev_display = pd.DataFrame(reviewed)
-                display_cols = [c for c in ["city", "vader_label", "llm_label", "human_label", "vader_score"] if c in rev_display.columns]
-                st.dataframe(rev_display[display_cols], use_container_width=True, hide_index=True)
-
-    except Exception as e:
-        st.error(f"Could not load validation samples: {e}")
