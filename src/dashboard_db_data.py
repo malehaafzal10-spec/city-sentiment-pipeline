@@ -263,40 +263,31 @@ def load_collection_docs(db, collection_name):
 
 
 def load_document_features(db):
-    # Try document_features first, fall back to city_weekly_features
+    # Use city_weekly_features which has actual metric values per city per week
     rows = []
-    for collection_name in ["document_features", "city_weekly_features"]:
-        col = db[collection_name]
-        docs = list(col.find())
-        if not docs:
+    docs = list(db["city_weekly_features"].find())
+    for doc in docs:
+        city = str(doc.get("city", "")).strip()
+        if not city:
             continue
-        for doc in docs:
-            city = str(doc.get("city", "")).strip()
-            if not city:
-                continue
-            rows.append({
-                "_id": str(doc.get("_id", "")),
-                "city": city,
-                "mention_count": pd.to_numeric(doc.get("mention_count", None), errors="coerce"),
-                "avg_sentiment": pd.to_numeric(doc.get("avg_sentiment", None), errors="coerce"),
-                "positive_ratio": pd.to_numeric(doc.get("positive_ratio", None), errors="coerce"),
-                "negative_ratio": pd.to_numeric(doc.get("negative_ratio", None), errors="coerce"),
-                "neutral_ratio": pd.to_numeric(doc.get("neutral_ratio", None), errors="coerce"),
-                "crowding_score": pd.to_numeric(doc.get("crowding_score", None), errors="coerce"),
-                "cost_score": pd.to_numeric(doc.get("cost_score", None), errors="coerce"),
-                "safety_score": pd.to_numeric(doc.get("safety_score", None), errors="coerce"),
-                "run_id": str(doc.get("run_id", "")).strip(),
-                "aggregated_at": pd.to_datetime(
-                    doc.get("aggregated_at") or doc.get("week_start") or doc.get("timestamp"),
-                    errors="coerce"
-                ),
-                "source_collection": collection_name,
-            })
-        if rows:
-            break  # use first collection that has city data
+        # Use week_start as the time axis
+        week_start = doc.get("week_start", "")
+        rows.append({
+            "_id": str(doc.get("_id", "")),
+            "city": city,
+            "week_start": week_start,
+            "mention_count": pd.to_numeric(doc.get("mention_count", None), errors="coerce"),
+            "avg_sentiment": pd.to_numeric(doc.get("avg_sentiment", None), errors="coerce"),
+            "positive_ratio": pd.to_numeric(doc.get("positive_ratio", None), errors="coerce"),
+            "negative_ratio": pd.to_numeric(doc.get("negative_ratio", None), errors="coerce"),
+            "neutral_ratio": pd.to_numeric(doc.get("neutral_ratio", None), errors="coerce"),
+            "crowding_score": pd.to_numeric(doc.get("crowding_score", None), errors="coerce"),
+            "cost_score": pd.to_numeric(doc.get("cost_score", None), errors="coerce"),
+            "safety_score": pd.to_numeric(doc.get("safety_score", None), errors="coerce"),
+            "run_id": str(doc.get("run_id", "")).strip(),
+            "aggregated_at": pd.to_datetime(week_start, errors="coerce"),
+        })
     df = pd.DataFrame(rows)
-    if df.empty:
-        return df
     return df
 
 
