@@ -450,13 +450,25 @@ def feature_history_for_city(df, city_name, feature_name):
     temp = temp[temp["city"] == city_name].copy()
     if temp.empty:
         return pd.DataFrame(columns=["aggregated_at", feature_name, "run_id"])
-    temp["aggregated_at"] = pd.to_datetime(temp["aggregated_at"], errors="coerce")
-    temp = temp.dropna(subset=["aggregated_at", feature_name])
+    # Use week_start as aggregated_at if aggregated_at is missing
+    if "aggregated_at" not in temp.columns or temp["aggregated_at"].isna().all():
+        if "week_start" in temp.columns:
+            temp["aggregated_at"] = pd.to_datetime(temp["week_start"], errors="coerce")
+        else:
+            return pd.DataFrame(columns=["aggregated_at", feature_name, "run_id"])
+    else:
+        temp["aggregated_at"] = pd.to_datetime(temp["aggregated_at"], errors="coerce")
+        if "week_start" in temp.columns:
+            mask = temp["aggregated_at"].isna()
+            temp.loc[mask, "aggregated_at"] = pd.to_datetime(temp.loc[mask, "week_start"], errors="coerce")
+    temp = temp.dropna(subset=["aggregated_at"])
+    if feature_name not in temp.columns or temp[feature_name].isna().all():
+        return pd.DataFrame(columns=["aggregated_at", feature_name, "run_id"])
+    temp = temp.dropna(subset=[feature_name])
     if temp.empty:
         return pd.DataFrame(columns=["aggregated_at", feature_name, "run_id"])
     temp = temp.sort_values("aggregated_at")
     return temp[["aggregated_at", feature_name, "run_id"]].copy()
-
 
 def latest_feature_snapshot(df):
     if df.empty:
@@ -466,14 +478,23 @@ def latest_feature_snapshot(df):
     temp = temp[temp["city"] != ""].copy()
     if temp.empty:
         return temp
-    temp["aggregated_at"] = pd.to_datetime(temp["aggregated_at"], errors="coerce")
+    # Use aggregated_at or fall back to week_start
+    if "aggregated_at" not in temp.columns or temp["aggregated_at"].isna().all():
+        if "week_start" in temp.columns:
+            temp["aggregated_at"] = pd.to_datetime(temp["week_start"], errors="coerce")
+        else:
+            return temp.groupby("city", as_index=False).tail(1).sort_values("city")
+    else:
+        temp["aggregated_at"] = pd.to_datetime(temp["aggregated_at"], errors="coerce")
+        if "week_start" in temp.columns:
+            mask = temp["aggregated_at"].isna()
+            temp.loc[mask, "aggregated_at"] = pd.to_datetime(temp.loc[mask, "week_start"], errors="coerce")
     temp = temp.dropna(subset=["aggregated_at"])
     if temp.empty:
         return temp
     temp = temp.sort_values("aggregated_at")
     latest = temp.groupby("city", as_index=False).tail(1)
-    latest = latest.sort_values("city")
-    return latest
+    return latest.sort_values("city")
 
 
 def render_timeseries_chart(df, x_col, y_col, title):
@@ -795,17 +816,20 @@ with tab6:
                 st.info("No responses match your filter.")
             else:
                 for _, row in filtered.iterrows():
-                    stars = "⭐" * row["rating"]
-                    comment = row["comment"]
-                    submitted = row["submitted_at"]
-                    comment_html = f'<div class="feedback-comment">"{comment}"</div>' if comment and str(comment).strip() else ""
-                    st.markdown(f"""
-                    <div class="feedback-card">
-                        <div class="star-rating">{stars}</div>
-                        {comment_html}
-                        <div class="feedback-meta">Submitted: {submitted}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    rating = int(row["rating"])
+                    stars = "⭐" * rating
+                    comment = str(row["comment"]).strip() if row["comment"] else ""
+                    submitted = str(row["submitted_at"])
+                    # Build HTML safely without nested f-string
+                    comment_part = f'<div class="feedback-comment">"{comment}"</div>' if comment else ""
+                    html = (
+                        f'<div class="feedback-card">'
+                        f'<div class="star-rating">{stars}</div>'
+                        f'{comment_part}'
+                        f'<div class="feedback-meta">Submitted: {submitted}</div>'
+                        f'</div>'
+                    )
+                    st.markdown(html, unsafe_allow_html=True)
 
             # Raw table
             with st.expander("View raw data table"):
