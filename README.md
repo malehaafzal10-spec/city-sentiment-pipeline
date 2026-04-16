@@ -52,7 +52,7 @@ Primary collections used by the core pipeline:
 - `city_weekly_features`
 - `pipeline_artifacts`
 
-You can view our document database here: https://city-sentiment-data-dashboard.streamlit.app/
+You can view our data monitoring dashboard here: https://city-sentiment-data-dashboard.streamlit.app/
 
 Additional collections used by dashboard/monitoring flows include:
 
