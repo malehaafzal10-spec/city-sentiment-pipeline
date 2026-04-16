@@ -35,7 +35,7 @@ Executed steps (in order):
 3. `src/s03_score.py`
 4. `src/s04_create_features.py`
 
-Optional monitoring logic exists in `src/07_monitor.py`.
+Optional monitoring dashboard exists in `src/dashboard_db_data.py`.
 
 ## Data storage (MongoDB)
 
@@ -76,7 +76,14 @@ city-sentiment-pipeline/
 
 - Python 3.10+
 - MongoDB instance (local or Atlas)
-- API keys as needed (NewsAPI required for ingestion)
+- .env file with API keys needed:
+  MONGO_URI: Database Access URI
+  MONGO_DB_NAME: Database User
+  NEWSAPI_KEY: NewsAPI Key
+  GEMINI_API_KEY: GEMINI API KEY 
+  GROQ_API_KEY: GROQ API KEY 
+  HF_TOKEN: Hugging face token
+  HF_REPO_ID: Hugging face repo ID
 
 ### 2) Install
 
@@ -103,7 +110,7 @@ Optional (for LLM relevance filtering):
 ```env
 GROQ_API_KEY=<your_groq_key>
 GEMINI_API_KEY=<your_gemini_key>
-PIPELINE_LOG_LEVEL=INFO
+#--- rest API KEY here ---
 ```
 
 ### 4) Run the pipeline
@@ -119,7 +126,18 @@ streamlit run app.py
 ```
 
 ## Docker
+### 1) Prerequisites
 
+
+- .env file with API keys needed:
+  MONGO_URI: Database Access URI
+  MONGO_DB_NAME: Database User
+  NEWSAPI_KEY: NewsAPI Key
+  GEMINI_API_KEY: GEMINI API KEY 
+  GROQ_API_KEY: GROQ API KEY 
+  HF_TOKEN: Hugging face token
+  HF_REPO_ID: Hugging face repo ID
+  
 `docker-compose.yml` defines a `pipeline` service that runs the orchestrator.
 
 ```bash
