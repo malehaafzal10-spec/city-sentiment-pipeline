@@ -2,6 +2,8 @@
 
 A Python data pipeline that tracks travel sentiment for major European cities using news content, LLM relevance filtering, VADER sentiment scoring, and weekly feature aggregation in MongoDB.
 
+## https://city-travel-sentiment-live-dashboard.streamlit.app/
+
 ## What this project does
 
 - Ingests daily city-related news articles
@@ -49,6 +51,8 @@ Primary collections used by the core pipeline:
 - `document_features`
 - `city_weekly_features`
 - `pipeline_artifacts`
+
+You can view our data monitoring dashboard here: https://city-sentiment-data-dashboard.streamlit.app/
 
 Additional collections used by dashboard/monitoring flows include:
 
