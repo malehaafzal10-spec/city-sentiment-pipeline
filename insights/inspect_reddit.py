@@ -1,7 +1,8 @@
 """
-inspect_reddit_silver_flat.py — Data Quality Audit (with text wrapping)
+inspect_reddit_silver_flat.py — Data Quality Audit (with text wrapping, URL filtering, & stratified sampling)
 A sequential (flat) script that checks the 'processed_documents' collection, 
-summarizes the data, and exports wrapped, readable text of each sample.
+summarizes the data, and exports wrapped, readable text ONLY for actual Reddit URLs.
+The exported files are distributed evenly across three specific team folders.
 """
 
 import os
@@ -18,7 +19,7 @@ load_dotenv()
 print("--- 🚀 INITIALIZING REDDIT SILVER LAYER AUDIT ---")
 
 # 2. Configuration & Variables
-SAMPLE_LIMIT = 25
+SAMPLE_LIMIT = 2000
 TEXT_WRAP_WIDTH = 80 # Width in characters for the exported .txt files
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
@@ -75,29 +76,50 @@ if failed_docs == 0:
 # 7. Format Data for Analysis & Export Wrapped Text Files
 df = pd.DataFrame(samples)
 
-# --- EXPORT TEXT TO FOLDER WITH WORD WRAPPING ---
-output_dir = "reddit_text"
-os.makedirs(output_dir, exist_ok=True)
-print(f"\n--- 📁 EXPORTING FORMATTED TEXT FILES TO '{output_dir}/' ---")
+# --- EXPORT TEXT TO TEAM FOLDERS WITH WORD WRAPPING & URL FILTERING ---
+base_dir = os.path.join("reddit_text", "100_samples")
+team_folders = ["cristian", "malehaha", "karolina"]
+folder_paths = [os.path.join(base_dir, folder) for folder in team_folders]
+
+# Create all three subdirectories safely
+for path in folder_paths:
+    os.makedirs(path, exist_ok=True)
+
+print(f"\n--- 📁 EXPORTING FORMATTED TEXT FILES TO TEAM FOLDERS IN '{base_dir}/' ---")
 
 saved_count = 0
+skipped_count = 0
+
 for index, row in df.iterrows():
     doc_id = row.get('doc_id', str(row.get('_id', f'unknown_{index}')))
     text_content = row.get('text', '')
+    url_content = str(row.get('url', '')).lower()
     
+    # Check if text exists AND the URL actually contains 'reddit'
     if text_content:
-        file_path = os.path.join(output_dir, f"{doc_id}.txt")
-        try:
-            # Wrap the text so it doesn't print as one continuous line
-            wrapped_text = textwrap.fill(text_content, width=TEXT_WRAP_WIDTH)
+        if 'reddit' in url_content:
+            # Determine which folder to save to using modulo for an even split
+            current_folder = folder_paths[saved_count % len(folder_paths)]
+            file_path = os.path.join(current_folder, f"{doc_id}.txt")
             
-            with open(file_path, "w", encoding="utf-8") as f:
-                f.write(wrapped_text)
-            saved_count += 1
-        except Exception as e:
-            print(f"⚠️ Failed to save {doc_id}.txt: {e}")
+            try:
+                # Wrap the text so it doesn't print as one continuous line
+                wrapped_text = textwrap.fill(text_content, width=TEXT_WRAP_WIDTH)
+                
+                with open(file_path, "w", encoding="utf-8") as f:
+                    f.write(wrapped_text)
+                
+                # Only increment the saved_count on a successful write to ensure perfect rotation
+                saved_count += 1
+            except Exception as e:
+                print(f"⚠️ Failed to save {doc_id}.txt: {e}")
+        else:
+            # Track how many external URLs we bypass
+            skipped_count += 1
 
-print(f"✅ Saved {saved_count} text files. (Wrapped at {TEXT_WRAP_WIDTH} characters)")
+print(f"✅ Saved {saved_count} text files evenly distributed across: {', '.join(team_folders)}")
+if skipped_count > 0:
+    print(f"⏭️ Skipped {skipped_count} documents with external URLs.")
 # ------------------------------------------------
 
 # Create a truncated preview for the terminal and calculate text lengths

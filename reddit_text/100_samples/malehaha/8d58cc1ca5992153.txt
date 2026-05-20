@@ -1,0 +1,8 @@
+. You should be able to use the DSB app as a tourist. I'm not sure you can use
+Rejsekortet as a tourist. But if you can they're pretty much the same. I use the
+DSB app. The app just issues a ticket (for all public transportation) paid
+directly from your credit card with a swiping system for entry/exit (and
+crucially change of transportation mode which is a little confusing). You can
+actually but the city pass in the DSB app which I guess will still be cheaper if
+you travel more than once per day on average. And you avoid the swiping riddle
+while it's active.

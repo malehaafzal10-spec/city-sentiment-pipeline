@@ -1,0 +1,3 @@
+. avatar drift killed my early travel reels too, switched to building a fixed
+character in cliptalk and reusing it across scripts, the face and outfit stay
+locked between scenes which kling just won't do reliably

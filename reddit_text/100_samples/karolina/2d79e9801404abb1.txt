@@ -1,0 +1,35 @@
+. 1st of April (: This app is a legal and clinical suicide mission that manages
+to violate nearly every pillar of Dutch healthcare regulation in one go. From a
+scientific standpoint, any AI claiming to provide a medically accurate response
+while admitting its goal is to dismiss patients is a statistical liability
+engine. By blanket-recommending paracetamol for every symptom, the system
+ignores the basic requirement of a differential diagnosis, creating a massive
+risk for "missed red flags" like meningitis or internal hemorrhaging. Under the
+Medical Device Regulation (MDR) in the EU, this software qualifies as a Class
+IIa or higher device because it claims to perform diagnosis and assessment.
+Without a CE marking and rigorous clinical validation, it is illegal to operate
+in the Netherlands, and the Inspectie Gezondheidszorg en Jeugd (IGJ) would shut
+it down immediately. ​From a legal perspective, it fails the Wet op de
+geneeskundige behandelingsovereenkomst (WGBO), which mandates that a provider
+must act with the care of a good healthcare provider. Dismissing a patient's
+symptoms without a physical exam or a professional standard of care constitutes
+gross negligence. Furthermore, calling the service an AI GP is a direct
+violation of the Wet BIG. The title of Huisarts is protected, and using it to
+market a commercial app that provides medical advice without a BIG-registered
+professional in the loop is a criminal offense. Even the mental health module
+mentioned is a regulatory nightmare, as the 6 to 8 month wait time mockery
+doesn't excuse the fact that providing psychological assessments requires
+specific licensing. ​The data handling alone would trigger a massive
+investigation by the Autoriteit Persoonsgegevens. Collecting special category
+health data for 20 minutes of symptom reporting requires a Data Protection
+Impact Assessment (DPIA) and security standards that this "dismissive" app
+clearly hasn't implemented. Suggesting medical tourism to Germany or Spain is
+the final nail in the coffin, as the app could be held liable for any delay in
+urgent care that leads to patient harm. In short, it is a textbook example of
+April1 and how to lose your medical license, your capital, and your freedom all
+in the same business quarter. It’s top-tier satire precisely because no
+legitimate developer would ever dare to touch this pile of legal radioactive
+waste. TLDR: This "app" is about April 1 & satirical legal disaster that
+violates EU Medical Device Regulations, the Dutch BIG Act for title protection,
+WGBO duty of care standards, and GDPR health privacy laws, making it a one-way
+ticket to massive fines and criminal negligence charges.
