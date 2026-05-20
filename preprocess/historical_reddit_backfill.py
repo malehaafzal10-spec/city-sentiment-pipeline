@@ -43,6 +43,18 @@ CITIES = [
     "Amsterdam", "Prague", "Athens", "London"
 ]
 
+# Balanced allocation — more posts for cities with less existing data
+CITY_MAX_ITEMS = {
+    "Paris": 75,
+    "Rome": 100,
+    "Barcelona": 100,
+    "Lisbon": 150,
+    "Amsterdam": 150,
+    "Prague": 75,
+    "Athens": 75,
+    "London": 100,
+}
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s"
@@ -115,7 +127,7 @@ def fetch_reddit_for_city(city: str) -> list:
                 ],
                 "searchPosts": True,
                 "searchComments": False,
-                "maxItems": 150,
+                "maxItems": CITY_MAX_ITEMS.get(city, 100),
                 "sort": "new"
             },
             timeout=30
