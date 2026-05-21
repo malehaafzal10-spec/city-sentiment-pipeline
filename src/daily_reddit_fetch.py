@@ -4,7 +4,6 @@ daily_reddit_fetch.py — Daily fetch of r/travel posts.
 - Runs every day at 8pm Denmark time via GitHub Actions
 - Rotates through a list of Apify keys (one per day)
 - Only fetches POSTS published in the last 24 hours
-- Filters posts where title mentions a city or country (FlashText)
 - Saves to MongoDB collection: reddit_travel_posts
 - Also saves local JSON backup
 
@@ -27,9 +26,6 @@ import requests
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-import pycountry
-import geonamescache
-from flashtext import KeywordProcessor
 from pymongo import MongoClient, UpdateOne
 from dotenv import load_dotenv
 
@@ -107,38 +103,6 @@ def get_todays_key() -> str:
     )
 
 
-# ── BUILD FLASHTEXT PROCESSOR ─────────────────────────────────────────────────
-
-def build_processor():
-    cities = []
-    countries = []
-
-    for country in pycountry.countries:
-        countries.append(country.name)
-        if hasattr(country, 'common_name'):
-            countries.append(country.common_name)
-
-    gc = geonamescache.GeonamesCache()
-    for city in gc.get_cities().values():
-        name = city.get("name", "")
-        population = city.get("population", 0)
-        if name and population > 50000:
-            cities.append(name)
-
-    processor = KeywordProcessor(case_sensitive=False)
-    for city in cities:
-        processor.add_keyword(city, f"City:{city}")
-    for country in countries:
-        processor.add_keyword(country, f"Country:{country}")
-
-    log.info(f"FlashText processor built: {len(cities)} cities, {len(countries)} countries")
-    return processor
-
-
-log.info("Building location processor...")
-PROCESSOR = build_processor()
-
-
 # ── HELPERS ───────────────────────────────────────────────────────────────────
 
 def make_doc_id(url: str) -> str:
@@ -158,28 +122,6 @@ def is_post(url: str) -> bool:
     # A comment URL has the comment ID appended: /r/travel/comments/<post_id>/<title>/<comment_id>/
     after_comments = parts[comments_idx + 1:]
     return len(after_comments) <= 2
-
-
-def extract_locations(text: str) -> dict:
-    extracted = PROCESSOR.extract_keywords(text)
-    results = {"cities": [], "countries": []}
-    seen = set()
-    for item in extracted:
-        if ":" not in item:
-            continue
-        category, name = item.split(":", 1)
-        if name not in seen:
-            seen.add(name)
-            if category == "City":
-                results["cities"].append(name)
-            elif category == "Country":
-                results["countries"].append(name)
-    return results
-
-
-def title_has_location(title: str) -> bool:
-    locs = extract_locations(title)
-    return bool(locs["cities"] or locs["countries"])
 
 
 def parse_published_at(raw: str) -> datetime | None:
@@ -255,7 +197,7 @@ def fetch_rtravel(apify_token: str) -> list:
             json={
                 "startUrls": [{"url": "https://www.reddit.com/r/travel/"}],
                 "searchPosts": True,
-                "searchComments": False, # Double enforcing that we don't want comments
+                "searchComments": False,
                 "maxItems": MAX_ITEMS,
                 "sort": "new"
             },
@@ -296,12 +238,10 @@ def fetch_rtravel(apify_token: str) -> list:
             log.error("Unexpected response format")
             return []
 
-        # ── Single pass logic ────────────────────────────────────────
         final_posts = []
         dropped_non_reddit = 0
         dropped_comments = 0
         dropped_old = 0
-        dropped_no_location = 0
 
         for item in items:
             url = item.get("url", "") or ""
@@ -321,14 +261,6 @@ def fetch_rtravel(apify_token: str) -> list:
                 dropped_old += 1
                 continue
 
-            if not title_has_location(title):
-                dropped_no_location += 1
-                continue
-            
-            # Combine title and text to map full locations, but we already confirmed 
-            # the title triggered the `title_has_location` condition above.
-            locations = extract_locations(f"{title} {text}")
-
             final_posts.append({
                 "doc_id": make_doc_id(url),
                 "title": title,
@@ -337,17 +269,14 @@ def fetch_rtravel(apify_token: str) -> list:
                 "url": url,
                 "fetched_at": datetime.now(timezone.utc).isoformat(),
                 "source": "reddit",
-                "subreddit": "r/travel",
-                "locations": locations,
-                "location_source": "post"
+                "subreddit": "r/travel"
             })
 
         log.info(
             f"Kept Posts: {len(final_posts)} | "
             f"Dropped (comments): {dropped_comments} | "
             f"Dropped (non-Reddit): {dropped_non_reddit} | "
-            f"Dropped (older than 24h): {dropped_old} | "
-            f"Dropped (no location in title): {dropped_no_location}"
+            f"Dropped (older than 24h): {dropped_old}"
         )
         return final_posts
 
