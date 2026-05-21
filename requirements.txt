@@ -14,3 +14,4 @@ altair
 flashtext
 pycountry
 geonamescache
+spacy

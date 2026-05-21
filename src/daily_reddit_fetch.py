@@ -4,6 +4,7 @@ daily_reddit_fetch.py — Daily fetch of r/travel posts.
 - Runs every day at 8pm Denmark time via GitHub Actions
 - Rotates through a list of Apify keys (one per day)
 - Only fetches POSTS published in the last 24 hours
+- Extracts locations using spaCy (GPE and LOC entities)
 - Saves to MongoDB collection: reddit_travel_posts
 - Also saves local JSON backup
 
@@ -26,6 +27,7 @@ import requests
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
+import spacy
 from pymongo import MongoClient, UpdateOne
 from dotenv import load_dotenv
 
@@ -54,6 +56,26 @@ logging.basicConfig(
 log = logging.getLogger("daily_reddit_fetch")
 
 
+# ── SPACY NLP SETUP ───────────────────────────────────────────────────────────
+
+log.info("Loading spaCy 'en_core_web_sm' model...")
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    log.error("spaCy model not found. Please run: python -m spacy download en_core_web_sm")
+    raise
+
+def extract_locations_ml(text: str) -> list[str]:
+    """Extract Geopolitical Entities (GPE) and Locations (LOC) using spaCy."""
+    if not text.strip():
+        return []
+    
+    doc = nlp(text)
+    # Extract entities and use dict.fromkeys to remove duplicates while preserving order
+    locations = list(dict.fromkeys([ent.text for ent in doc.ents if ent.label_ in ["GPE", "LOC"]]))
+    return locations
+
+
 # ── APIFY KEY ROTATION ────────────────────────────────────────────────────────
 
 def get_todays_key() -> str:
@@ -65,7 +87,6 @@ def get_todays_key() -> str:
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
-    # Parse the schedule file
     schedule = {}
     with open(KEY_SCHEDULE_FILE, "r") as f:
         for line in f:
@@ -85,12 +106,10 @@ def get_todays_key() -> str:
     key_name = schedule[today]
     log.info(f"Schedule: using key '{key_name}' for {today}")
 
-    # The schedule file stores key names like APIFY_KEY_1
     env_val = os.getenv(key_name)
     if env_val:
         return env_val
 
-    # Fallback: treat as 1-based index into APIFY_KEYS list
     match = re.search(r"(\d+)$", key_name)
     if match and APIFY_KEYS:
         idx = int(match.group(1)) - 1
@@ -114,12 +133,9 @@ def is_post(url: str) -> bool:
     parts = [p for p in url.rstrip('/').split('/') if p]
     comments_idx = next((i for i, p in enumerate(parts) if p == 'comments'), None)
     
-    # If there's no '/comments/' in the URL, treat it as a post (or subreddit link)
     if comments_idx is None:
         return True
         
-    # A standard post URL looks like: /r/travel/comments/<post_id>/<title>/
-    # A comment URL has the comment ID appended: /r/travel/comments/<post_id>/<title>/<comment_id>/
     after_comments = parts[comments_idx + 1:]
     return len(after_comments) <= 2
 
@@ -189,7 +205,7 @@ def save_to_mongo(docs: list) -> bool:
 # ── APIFY FETCH ───────────────────────────────────────────────────────────────
 
 def fetch_rtravel(apify_token: str) -> list:
-    log.info(f"Fetching up to {MAX_ITEMS} posts from r/travel (last {HOURS_BACK}h)...")
+    log.info(f"Fetching up to {MAX_ITEMS} posts from Reddit (https://www.reddit.com) via Apify (https://apify.com)...")
 
     try:
         response = requests.post(
@@ -261,6 +277,9 @@ def fetch_rtravel(apify_token: str) -> list:
                 dropped_old += 1
                 continue
 
+            # Extract locations from combined title and text using spaCy
+            locations = extract_locations_ml(f"{title} {text}")
+
             final_posts.append({
                 "doc_id": make_doc_id(url),
                 "title": title,
@@ -269,7 +288,8 @@ def fetch_rtravel(apify_token: str) -> list:
                 "url": url,
                 "fetched_at": datetime.now(timezone.utc).isoformat(),
                 "source": "reddit",
-                "subreddit": "r/travel"
+                "subreddit": "r/travel",
+                "extracted_locations": locations  # Appended here
             })
 
         log.info(

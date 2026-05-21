@@ -21,6 +21,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Download spaCy Model
+        run: |
+          python -m spacy download en_core_web_sm
+
       - name: Run daily Reddit fetch
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
