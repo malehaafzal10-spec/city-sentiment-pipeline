@@ -3,7 +3,7 @@ daily_reddit_fetch.py — Daily fetch of r/travel posts.
 
 - Runs every day at 8pm Denmark time via GitHub Actions
 - Rotates through a list of Apify keys (one per day)
-- Only fetches posts published in the last 24 hours
+- Only fetches POSTS published in the last 24 hours
 - Filters posts where title mentions a city or country (FlashText)
 - Saves to MongoDB collection: reddit_travel_posts
 - Also saves local JSON backup
@@ -45,7 +45,6 @@ COLLECTION = "reddit_travel_posts"
 KEY_SCHEDULE_FILE = Path("config/apify_key_schedule.txt")
 
 # All Apify keys stored as GitHub Secret (comma-separated)
-# e.g. "key1,key2,key3,..."
 APIFY_KEYS = [k.strip() for k in os.getenv("APIFY_KEYS", "").split(",") if k.strip()]
 
 MAX_ITEMS = 500  # fetch enough to cover 24 hours worth of posts
@@ -64,14 +63,6 @@ log = logging.getLogger("daily_reddit_fetch")
 def get_todays_key() -> str:
     """
     Pick Apify key based on today's date from the schedule file.
-    
-    Schedule file format (config/apify_key_schedule.txt):
-        2026-05-21, APIFY_KEY_1
-        2026-05-22, APIFY_KEY_2
-        ...
-    
-    The value in the file is the INDEX (1-based) into the APIFY_KEYS list
-    stored in GitHub Secrets, or the literal key itself.
     """
     if not KEY_SCHEDULE_FILE.exists():
         raise FileNotFoundError(f"Key schedule file not found: {KEY_SCHEDULE_FILE}")
@@ -98,18 +89,12 @@ def get_todays_key() -> str:
     key_name = schedule[today]
     log.info(f"Schedule: using key '{key_name}' for {today}")
 
-    # Debug: show all available env vars that start with APIFY
-    apify_env_vars = [k for k in os.environ.keys() if "APIFY" in k]
-    log.info(f"Available APIFY env vars: {apify_env_vars}")
-
     # The schedule file stores key names like APIFY_KEY_1
-    # Try to resolve from environment variable first, then from APIFY_KEYS list
     env_val = os.getenv(key_name)
     if env_val:
         return env_val
 
     # Fallback: treat as 1-based index into APIFY_KEYS list
-    # e.g. APIFY_KEY_1 -> index 0
     match = re.search(r"(\d+)$", key_name)
     if match and APIFY_KEYS:
         idx = int(match.group(1)) - 1
@@ -160,18 +145,19 @@ def make_doc_id(url: str) -> str:
     return hashlib.sha256(url.encode()).hexdigest()[:16]
 
 
-def extract_post_id(url: str) -> str:
-    match = re.search(r'/comments/([a-z0-9]+)/', url)
-    return match.group(1) if match else make_doc_id(url)
-
-
-def get_type(url: str) -> str:
+def is_post(url: str) -> bool:
+    """Check if the URL belongs to a Post and not a Comment."""
     parts = [p for p in url.rstrip('/').split('/') if p]
     comments_idx = next((i for i, p in enumerate(parts) if p == 'comments'), None)
+    
+    # If there's no '/comments/' in the URL, treat it as a post (or subreddit link)
     if comments_idx is None:
-        return "post"
+        return True
+        
+    # A standard post URL looks like: /r/travel/comments/<post_id>/<title>/
+    # A comment URL has the comment ID appended: /r/travel/comments/<post_id>/<title>/<comment_id>/
     after_comments = parts[comments_idx + 1:]
-    return "comment" if len(after_comments) >= 3 else "post"
+    return len(after_comments) <= 2
 
 
 def extract_locations(text: str) -> dict:
@@ -201,7 +187,6 @@ def parse_published_at(raw: str) -> datetime | None:
     if not raw:
         return None
     try:
-        # Handle both ISO format and Unix timestamp
         if isinstance(raw, (int, float)):
             return datetime.fromtimestamp(raw, tz=timezone.utc)
         raw = raw.replace("Z", "+00:00")
@@ -214,7 +199,7 @@ def is_within_24_hours(published_at_str: str) -> bool:
     """Check if a post was published within the last 24 hours."""
     dt = parse_published_at(published_at_str)
     if not dt:
-        return True  # keep if we can't parse the date
+        return True  
     cutoff = datetime.now(timezone.utc) - timedelta(hours=HOURS_BACK)
     return dt >= cutoff
 
@@ -270,7 +255,7 @@ def fetch_rtravel(apify_token: str) -> list:
             json={
                 "startUrls": [{"url": "https://www.reddit.com/r/travel/"}],
                 "searchPosts": True,
-                "searchComments": False,
+                "searchComments": False, # Double enforcing that we don't want comments
                 "maxItems": MAX_ITEMS,
                 "sort": "new"
             },
@@ -311,10 +296,10 @@ def fetch_rtravel(apify_token: str) -> list:
             log.error("Unexpected response format")
             return []
 
-        # ── First pass: build post_map ────────────────────────────────────────
-        post_map = {}
-        raw_items = []
+        # ── Single pass logic ────────────────────────────────────────
+        final_posts = []
         dropped_non_reddit = 0
+        dropped_comments = 0
         dropped_old = 0
         dropped_no_location = 0
 
@@ -328,24 +313,24 @@ def fetch_rtravel(apify_token: str) -> list:
                 dropped_non_reddit += 1
                 continue
 
+            if not is_post(url):
+                dropped_comments += 1
+                continue
+
             if not is_within_24_hours(published_at):
                 dropped_old += 1
                 continue
 
-            doc_type = get_type(url)
-            post_id = extract_post_id(url)
+            if not title_has_location(title):
+                dropped_no_location += 1
+                continue
+            
+            # Combine title and text to map full locations, but we already confirmed 
+            # the title triggered the `title_has_location` condition above.
+            locations = extract_locations(f"{title} {text}")
 
-            if doc_type == "post":
-                if not title_has_location(title):
-                    dropped_no_location += 1
-                    continue
-                locations = extract_locations(f"{title} {text}")
-                post_map[post_id] = {"locations": locations, "title": title}
-
-            raw_items.append({
+            final_posts.append({
                 "doc_id": make_doc_id(url),
-                "post_id": post_id,
-                "type": doc_type,
                 "title": title,
                 "text": text,
                 "published_at": published_at,
@@ -353,42 +338,18 @@ def fetch_rtravel(apify_token: str) -> list:
                 "fetched_at": datetime.now(timezone.utc).isoformat(),
                 "source": "reddit",
                 "subreddit": "r/travel",
+                "locations": locations,
+                "location_source": "post"
             })
 
-        # ── Second pass: assign locations ─────────────────────────────────────
-        final = []
-        for doc in raw_items:
-            post_id = doc["post_id"]
-            doc_type = doc["type"]
-
-            if doc_type == "post":
-                doc["locations"] = post_map.get(post_id, {}).get("locations", {"cities": [], "countries": []})
-                doc["location_source"] = "post_title"
-
-            elif doc_type == "comment":
-                if not doc["title"] and post_id in post_map:
-                    doc["title"] = post_map[post_id]["title"]
-
-                comment_locations = extract_locations(doc["text"])
-                if comment_locations["cities"] or comment_locations["countries"]:
-                    doc["locations"] = comment_locations
-                    doc["location_source"] = "comment_text"
-                elif post_id in post_map:
-                    doc["locations"] = post_map[post_id]["locations"]
-                    doc["location_source"] = "inherited_from_post"
-                else:
-                    doc["locations"] = {"cities": [], "countries": []}
-                    doc["location_source"] = "none"
-
-            final.append(doc)
-
         log.info(
-            f"Kept: {len(final)} | "
+            f"Kept Posts: {len(final_posts)} | "
+            f"Dropped (comments): {dropped_comments} | "
             f"Dropped (non-Reddit): {dropped_non_reddit} | "
             f"Dropped (older than 24h): {dropped_old} | "
-            f"Dropped (no location): {dropped_no_location}"
+            f"Dropped (no location in title): {dropped_no_location}"
         )
-        return final
+        return final_posts
 
     except Exception as e:
         log.error(f"Fetch error: {e}")
@@ -399,7 +360,7 @@ def fetch_rtravel(apify_token: str) -> list:
 
 def main():
     log.info("=" * 60)
-    log.info("DAILY r/travel FETCH")
+    log.info("DAILY r/travel POST FETCH")
     log.info(f"Date:       {datetime.now(timezone.utc).strftime('%Y-%m-%d')}")
     log.info(f"Window:     last {HOURS_BACK} hours")
     log.info(f"Collection: {COLLECTION}")
@@ -426,7 +387,7 @@ def main():
     # Save local backup
     BACKUP_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    backup_path = BACKUP_DIR / f"rtravel_{timestamp}.json"
+    backup_path = BACKUP_DIR / f"rtravel_posts_{timestamp}.json"
     with open(backup_path, "w", encoding="utf-8") as f:
         json.dump(docs, f, indent=2, ensure_ascii=False)
     log.info(f"Backup saved → {backup_path}")
@@ -434,16 +395,9 @@ def main():
     # Push to MongoDB
     save_to_mongo(docs)
 
-    posts = [d for d in docs if d["type"] == "post"]
-    comments = [d for d in docs if d["type"] == "comment"]
-    inherited = [d for d in comments if d.get("location_source") == "inherited_from_post"]
-
     log.info("=" * 60)
     log.info("DONE")
-    log.info(f"Total docs:          {len(docs)}")
-    log.info(f"Posts:               {len(posts)}")
-    log.info(f"Comments:            {len(comments)}")
-    log.info(f"Inherited locations: {len(inherited)}")
+    log.info(f"Total posts saved: {len(docs)}")
     log.info("=" * 60)
 
 
