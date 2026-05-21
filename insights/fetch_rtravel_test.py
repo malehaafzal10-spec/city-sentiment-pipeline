@@ -9,10 +9,10 @@ Fields per document:
   - title         : post title (comments inherit from parent post)
   - text          : post body or comment text
   - published_at  : when posted
-  - locations     : { cities: [...], countries: [...] } extracted via geotext
+  - locations     : { cities: [...], countries: [...] } extracted via FlashText
                     if comment has no locations, inherits from parent post
 
-No LLM used — location extraction via geotext + pycountry/geonamescache title filter.
+No LLM used — location extraction via FlashText + pycountry/geonamescache.
 
 Output: insights/data/rtravel_<timestamp>.json
 
@@ -21,7 +21,7 @@ Usage:
 
 Requirements:
     - APIFY_TOKEN in .env
-    - pip install geotext pycountry geonamescache
+    - pip install flashtext pycountry geonamescache
 """
 
 import os
@@ -36,7 +36,7 @@ from pathlib import Path
 
 import pycountry
 import geonamescache
-from geotext import GeoText
+from flashtext import KeywordProcessor
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -52,23 +52,39 @@ logging.basicConfig(
 log = logging.getLogger("rtravel_test")
 
 
-# ── BUILD LOCATION SET FOR TITLE FILTER ──────────────────────────────────────
+# ── BUILD LOCATION LISTS + FLASHTEXT PROCESSOR ───────────────────────────────
 
-def build_location_set() -> set:
-    locations = set()
+def build_processor():
+    """Build FlashText processor and location lists from pycountry + geonamescache."""
+    cities = []
+    countries = []
+
+    # Countries from pycountry
     for country in pycountry.countries:
-        locations.add(country.name.lower())
+        countries.append(country.name)
         if hasattr(country, 'common_name'):
-            locations.add(country.common_name.lower())
+            countries.append(country.common_name)
+
+    # Cities from geonamescache
     gc = geonamescache.GeonamesCache()
     for city in gc.get_cities().values():
         name = city.get("name", "")
         if name:
-            locations.add(name.lower())
-    log.info(f"Location set built: {len(locations)} entries")
-    return locations
+            cities.append(name)
 
-LOCATIONS = build_location_set()
+    # Build FlashText processor — case insensitive
+    processor = KeywordProcessor(case_sensitive=False)
+    for city in cities:
+        processor.add_keyword(city, f"City:{city}")
+    for country in countries:
+        processor.add_keyword(country, f"Country:{country}")
+
+    log.info(f"FlashText processor built: {len(cities)} cities, {len(countries)} countries")
+    return processor, cities, countries
+
+
+log.info("Building location processor...")
+PROCESSOR, ALL_CITIES, ALL_COUNTRIES = build_processor()
 
 
 # ── HELPERS ───────────────────────────────────────────────────────────────────
@@ -84,37 +100,37 @@ def extract_post_id(url: str) -> str:
 
 
 def get_type(url: str) -> str:
-    """Determine if URL is a post or comment based on URL depth."""
-    # Post:    /r/travel/comments/abc123/title/
-    # Comment: /r/travel/comments/abc123/title/def456/
+    """Determine if URL is a post or comment based on URL structure."""
     parts = [p for p in url.rstrip('/').split('/') if p]
     comments_idx = next((i for i, p in enumerate(parts) if p == 'comments'), None)
     if comments_idx is None:
         return "post"
-    # After 'comments' we have: post_id, title_slug, [comment_id]
     after_comments = parts[comments_idx + 1:]
     return "comment" if len(after_comments) >= 3 else "post"
 
 
 def extract_locations(text: str) -> dict:
-    """Extract cities and countries from text using geotext."""
-    try:
-        places = GeoText(text)
-        return {
-            "cities": places.cities,
-            "countries": places.countries
-        }
-    except Exception:
-        return {"cities": [], "countries": []}
+    """Extract cities and countries from text using FlashText."""
+    extracted = PROCESSOR.extract_keywords(text)
+    results = {"cities": [], "countries": []}
+    seen = set()
+    for item in extracted:
+        if ":" not in item:
+            continue
+        category, name = item.split(":", 1)
+        if name not in seen:
+            seen.add(name)
+            if category == "City":
+                results["cities"].append(name)
+            elif category == "Country":
+                results["countries"].append(name)
+    return results
 
 
 def title_has_location(title: str) -> bool:
     """Check if title mentions any known city or country."""
-    title_lower = title.lower()
-    for loc in LOCATIONS:
-        if re.search(rf'\b{re.escape(loc)}\b', title_lower):
-            return True
-    return False
+    locs = extract_locations(title)
+    return bool(locs["cities"] or locs["countries"])
 
 
 # ── APIFY FETCH ───────────────────────────────────────────────────────────────
@@ -173,11 +189,9 @@ def fetch_rtravel() -> list:
             log.error("Unexpected response format")
             return []
 
-        # ── Process items ─────────────────────────────────────────────────────
-        # First pass: build post_id -> locations + title map from posts
+        # ── First pass: process posts, build post_map ─────────────────────────
         post_map = {}  # post_id -> {locations, title}
         raw_items = []
-
         dropped_non_reddit = 0
         dropped_no_location = 0
 
@@ -195,12 +209,10 @@ def fetch_rtravel() -> list:
             post_id = extract_post_id(url)
 
             if doc_type == "post":
-                # Title must mention a location
                 if not title_has_location(title):
                     dropped_no_location += 1
                     log.debug(f"No location in title: {title[:60]}")
                     continue
-
                 locations = extract_locations(f"{title} {text}")
                 post_map[post_id] = {"locations": locations, "title": title}
 
@@ -215,9 +227,7 @@ def fetch_rtravel() -> list:
                 "fetched_at": datetime.now(timezone.utc).isoformat(),
             })
 
-        # Second pass: assign locations
-        # Posts use their own extracted locations
-        # Comments: try geotext on text, fallback to parent post locations
+        # ── Second pass: assign locations ─────────────────────────────────────
         final = []
         for doc in raw_items:
             post_id = doc["post_id"]
@@ -225,19 +235,18 @@ def fetch_rtravel() -> list:
 
             if doc_type == "post":
                 doc["locations"] = post_map.get(post_id, {}).get("locations", {"cities": [], "countries": []})
+                doc["location_source"] = "post_title"
 
             elif doc_type == "comment":
                 # Inherit title from parent post if missing
                 if not doc["title"] and post_id in post_map:
                     doc["title"] = post_map[post_id]["title"]
 
-                # Try to extract location from comment text
                 comment_locations = extract_locations(doc["text"])
                 if comment_locations["cities"] or comment_locations["countries"]:
                     doc["locations"] = comment_locations
                     doc["location_source"] = "comment_text"
                 elif post_id in post_map:
-                    # Inherit from parent post
                     doc["locations"] = post_map[post_id]["locations"]
                     doc["location_source"] = "inherited_from_post"
                 else:
@@ -246,7 +255,7 @@ def fetch_rtravel() -> list:
 
             loc = doc.get("locations", {})
             log.info(
-                f"✓ [{doc_type}] [{loc.get('cities', [])} {loc.get('countries', [])}] "
+                f"✓ [{doc_type}] cities={loc.get('cities', [])} countries={loc.get('countries', [])} | "
                 f"{doc.get('title', '')[:60]}"
             )
             final.append(doc)
