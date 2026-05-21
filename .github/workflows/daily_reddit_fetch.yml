@@ -23,7 +23,17 @@ jobs:
 
       - name: Run daily Reddit fetch
         env:
-          APIFY_KEYS: ${{ secrets.APIFY_KEYS }}
           MONGO_URI: ${{ secrets.MONGO_URI }}
           MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
+          APIFY_KEY_1: ${{ secrets.APIFY_KEY_1 }}
+          APIFY_KEY_2: ${{ secrets.APIFY_KEY_2 }}
+          APIFY_KEY_3: ${{ secrets.APIFY_KEY_3 }}
+          APIFY_KEY_4: ${{ secrets.APIFY_KEY_4 }}
+          APIFY_KEY_5: ${{ secrets.APIFY_KEY_5 }}
+          APIFY_KEY_6: ${{ secrets.APIFY_KEY_6 }}
+          APIFY_KEY_7: ${{ secrets.APIFY_KEY_7 }}
+          APIFY_KEY_8: ${{ secrets.APIFY_KEY_8 }}
+          APIFY_KEY_9: ${{ secrets.APIFY_KEY_9 }}
+          APIFY_KEY_10: ${{ secrets.APIFY_KEY_10 }}
+          APIFY_KEY_11: ${{ secrets.APIFY_KEY_11 }}
         run: python src/daily_reddit_fetch.py
