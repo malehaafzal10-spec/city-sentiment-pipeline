@@ -11,3 +11,6 @@ streamlit
 huggingface_hub
 scikit-learn
 altair
+flashtext
+pycountry
+geonamescache
