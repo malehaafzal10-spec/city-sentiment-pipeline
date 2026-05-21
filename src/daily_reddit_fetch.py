@@ -45,7 +45,7 @@ KEY_SCHEDULE_FILE = Path("config/apify_key_schedule.txt")
 # All Apify keys stored as GitHub Secret (comma-separated)
 APIFY_KEYS = [k.strip() for k in os.getenv("APIFY_KEYS", "").split(",") if k.strip()]
 
-MAX_ITEMS = 500  # fetch enough to cover 24 hours worth of posts
+MAX_ITEMS = 3000  # fetch enough to cover 24 hours worth of posts
 HOURS_BACK = 24
 BACKUP_DIR = Path("artifacts/daily_reddit")
 
