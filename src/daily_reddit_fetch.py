@@ -215,6 +215,7 @@ def fetch_rtravel(apify_token: str) -> list:
                 "searchPosts": True,
                 "searchComments": False,
                 "maxItems": MAX_ITEMS,
+                "maxComments": 0,
                 "sort": "new"
             },
             timeout=30
