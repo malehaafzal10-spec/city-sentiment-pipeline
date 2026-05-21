@@ -1,0 +1,1410 @@
+[
+  {
+    "doc_id": "03152a2ec35dd1ca",
+    "url": "https://www.reddit.com/r/travel/",
+    "title": "travel",
+    "text": "",
+    "published_at": "2008-01-25T06:55:16.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "Post is too short and does not contain any specific location information.",
+    "processed_at": "2026-05-21T11:25:27.522912+00:00"
+  },
+  {
+    "doc_id": "4ab46451d804a3a0",
+    "url": "https://www.reddit.com/r/travel/comments/1tjhd0f/réservation_hôtel_avec_opodo/",
+    "title": "Réservation Hôtel avec Opodo",
+    "text": "Bonjour, \n\nJ’organise un voyage à NY, j’aimerais payer le moins cher possible. \n\nOpodo est-il fiable pour les hôtels, car j’ai vu que pas mal de personnes se sont fait avoir en acheter des billets sur Opodo.\n\nMerci d’avance et bonne journée ! ",
+    "published_at": "2026-05-21T11:17:09.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "NY",
+        "type": "city"
+      }
+    ],
+    "llm_reason": "The post is asking for advice on booking a hotel in New York, indicating a specific destination.",
+    "processed_at": "2026-05-21T11:25:29.587035+00:00"
+  },
+  {
+    "doc_id": "14d31b90792ad7ce",
+    "url": "https://www.reddit.com/r/travel/comments/1tjh944/rolandgarros_2026_transport_tips/",
+    "title": "Roland-Garros 2026 transport tips?",
+    "text": "Fitting Roland-Garros into a wider Europe trip this May and June so I will only be in Paris for two days. One of those days is a full match day at the tournament and I want to make the most of it without wasting half the day on transport stress. I land at CDG the morning of the match and need to get to the stadium and back to my hotel by the evening without anything going wrong. What would you do in that situation? ",
+    "published_at": "2026-05-21T11:12:12.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Paris",
+        "type": "city"
+      },
+      {
+        "name": "Europe",
+        "type": "region"
+      },
+      {
+        "name": "Roland-Garros",
+        "type": "location"
+      },
+      {
+        "name": "CDG",
+        "type": "airport"
+      }
+    ],
+    "llm_reason": "Planning transport for a specific event in Paris",
+    "processed_at": "2026-05-21T11:25:31.544056+00:00"
+  },
+  {
+    "doc_id": "ca65a3ac06ed9314",
+    "url": "https://www.reddit.com/r/travel/comments/1tjh944/rolandgarros_2026_transport_tips/on1c90f/",
+    "title": "",
+    "text": "For a solo traveller the morning from CDG is actually the straightforward part. The venue is reachable without going into central Paris at all which saves you a full loop across the city with luggage. The part worth planning carefully is the return because solo you are absorbing the full cost of whatever option you choose and the spontaneous options after a big match are both expensive and slow at the same time. ",
+    "published_at": "2026-05-21T11:23:13.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "CDG",
+        "type": "airport"
+      },
+      {
+        "name": "Paris",
+        "type": "city"
+      }
+    ],
+    "llm_reason": "The post mentions a specific airport and city, and discusses travel options within that city.",
+    "processed_at": "2026-05-21T11:25:33.452721+00:00"
+  },
+  {
+    "doc_id": "76913c2ef8e4836d",
+    "url": "https://www.reddit.com/r/travel/comments/1tjghc2/kaunas_airport/",
+    "title": "Kaunas Airport",
+    "text": "Hello! Was wondering on anyone’s thoughts on spending the night in the Kaunas airport ahead of an early flight the next day? Thank you!",
+    "published_at": "2026-05-21T10:33:17.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Kaunas Airport",
+        "type": "airport"
+      }
+    ],
+    "llm_reason": "asking for advice on spending the night in a specific airport",
+    "processed_at": "2026-05-21T11:25:35.311367+00:00"
+  },
+  {
+    "doc_id": "7fc394e68ba00261",
+    "url": "https://www.reddit.com/r/travel/comments/1tjh2cn/how_many_of_you_have_been_to_the_3_southern/",
+    "title": "How many of you have been to the 3 southern provinces of Thailand (Pattani, Yala and Narathiwat)?",
+    "text": "As a Thai, I’m curious to know because many embassies advise their citizens not to go there. But I’ve also been on travel subreddits long enough to know that people break government travel advisories all the time. People who have been, do you think it was worth the trek and your insurance being unavailable?",
+    "published_at": "2026-05-21T11:03:18.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Thailand",
+        "type": "country"
+      },
+      {
+        "name": "Pattani",
+        "type": "region"
+      },
+      {
+        "name": "Yala",
+        "type": "region"
+      },
+      {
+        "name": "Narathiwat",
+        "type": "region"
+      }
+    ],
+    "llm_reason": "asking for opinions about visiting specific provinces in Thailand",
+    "processed_at": "2026-05-21T11:25:37.253112+00:00"
+  },
+  {
+    "doc_id": "f10a233222c2d92a",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfyqn/need_recommendation_for_stays_in_lankawi_and/",
+    "title": "Need recommendation for Stays in Lankawi and Kuala Lampur for a family group",
+    "text": "I wanted to reach out for recommendations. My family and I are planning a trip to Langkawi from 10th June to 13th June and in Kuala Lampur from 13th June to 16th June\n\nOur group consists of 8 adults and 3 children:\n\n* 4 senior citizens (above 60 years)\n* 4 adults aged between 30–40 years\n* 2 children aged 10 years\n* 1 child around 2.5 years old\n\nWe would ideally need a property with at least 5–6 rooms. Since we are traveling with both children and elderly family members, having a kitchen would be very important for us.\n\nWe would also prefer accommodations located closer to the city, with easy access to restaurants and supermarkets.\n\nCould you please recommend suitable properties that would work well for our group? Looking for budget friendly recommendations since we will be in the room only to crash and to cook food.",
+    "published_at": "2026-05-21T10:06:59.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Langkawi",
+        "type": "island/region",
+        "country": "Malaysia"
+      },
+      {
+        "name": "Kuala Lumpur",
+        "type": "city",
+        "country": "Malaysia"
+      }
+    ],
+    "llm_reason": "The post is asking for recommendations for stays in specific destinations, Langkawi and Kuala Lumpur, with specific requirements for the accommodations.",
+    "processed_at": "2026-05-21T11:25:39.166950+00:00"
+  },
+  {
+    "doc_id": "1bb9eb522981914e",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfx1s/help_left_stranded_by_global_blue/",
+    "title": "Help!! Left stranded by global blue",
+    "text": "Has anyone successfully contacted Global Blue recently regarding a VAT refund problem?  \nMy refund appears to have been issued to the wrong credit card, possibly due to an error at the retailer. I’ve tried the official support form, phone numbers, and chat support but have received no response.  \nDoes anyone know:  \na working contact method,  \nan escalation email,  \nor what finally worked for you?  \nI have all transaction references and documentation.",
+    "published_at": "2026-05-21T10:04:45.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post is about a travel-related issue (VAT refund) but it's not about a specific destination, it's about a service provider (Global Blue)",
+    "processed_at": "2026-05-21T11:25:41.176001+00:00"
+  },
+  {
+    "doc_id": "109a1239394194dc",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfx1s/help_left_stranded_by_global_blue/on156vm/",
+    "title": "",
+    "text": "Are you stranded somewhere or you need a refund?",
+    "published_at": "2026-05-21T10:33:44.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is a general travel discussion not about a specific place",
+    "processed_at": "2026-05-21T11:25:42.999167+00:00"
+  },
+  {
+    "doc_id": "959d7857c08a88aa",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfqgd/albena_bulgaria/",
+    "title": "Albena- Bulgaria",
+    "text": "Thoughts about Albena - Bulgaria as a holiday destination? What to do ? Pubs, stores, hiking possibilities? Crowded?",
+    "published_at": "2026-05-21T09:55:32.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Albena",
+        "type": "city",
+        "country": "Bulgaria"
+      }
+    ],
+    "llm_reason": "Asking for advice about visiting a specific destination",
+    "processed_at": "2026-05-21T11:25:44.914875+00:00"
+  },
+  {
+    "doc_id": "5470883d7ff82173",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfhad/booking_host_told_me_he_has_technical_issues/",
+    "title": "Booking - Host told me he has \"technical issues\"",
+    "text": "Hello,\n\nBooked an early apartment in Budapest for the 30th may (there is the UEFA Champions League final). Got it around 135EUR, and considering 1000EUR per night is selling like pancakes, i got in very cheap.\n\nNow, 3 days ago, the host wrote me that \"I (aka me, not him) need to cancel the booking due to technical issues he cannot accomodate me\". He is for sure trying to get this one cancelled, so he can post it at a much higher value.  \nI replied that if that's the case, he should cancel the accomodation via Booking, not force me to cancel it, and got no response back since them.\n\nSo, yesterday, considering Booking still showed the accomodation as \"Confirmed\", i decided to also risk and pay the 135 EUR.\n\nNow, what should i expect when i will reach Budapest ? He will probably not answer, and I expect they won't accomodate me. I already booked a \"back-up\" in another town near Budapest. But, in relation to Booking, what should i do next?",
+    "published_at": "2026-05-21T09:41:35.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Budapest",
+        "type": "city",
+        "country": "Hungary"
+      }
+    ],
+    "llm_reason": "The post is about a specific travel experience in Budapest, Hungary.",
+    "processed_at": "2026-05-21T11:25:46.826257+00:00"
+  },
+  {
+    "doc_id": "f936208d3724ce6e",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfnd0/finland_estonia_latvia_lithuania_travel/",
+    "title": "Finland, Estonia, Latvia, Lithuania travel",
+    "text": "I’m very interested in seeing these countries. I was wondering how many I might be able to reasonably fit into a week long trip. \n\nI saw that there is a ferry from Helsinki and the other countries are connected by bus/ plane mostly. although I would prefer to travel by train. \n\n  \nalso if you’ve been do you have any recommendations to do in the cities?  which cities were nicest?  also has anyone spent time outside the cities in cabins, beaches or camping?  thanks",
+    "published_at": "2026-05-21T09:50:52.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Finland",
+        "type": "country"
+      },
+      {
+        "name": "Estonia",
+        "type": "country"
+      },
+      {
+        "name": "Latvia",
+        "type": "country"
+      },
+      {
+        "name": "Lithuania",
+        "type": "country"
+      },
+      {
+        "name": "Helsinki",
+        "type": "city"
+      }
+    ],
+    "llm_reason": "The post is asking for travel advice and recommendations for a specific region, including multiple countries and a city.",
+    "processed_at": "2026-05-21T11:25:49.043313+00:00"
+  },
+  {
+    "doc_id": "ac746e259b8b5d4c",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfnd0/finland_estonia_latvia_lithuania_travel/on1029j/",
+    "title": "",
+    "text": "Ferry from Helsinki to Tallinn is quick and easy. Train from Tallinn to Riga is 5 1/2 hours and train from Riga to Vilnius is 4 hours. The company is LTG Link. \n\nhttps://ltglink.lt/en\n\nIt's a lovely part of the world, imo, but a week is probably best for only one maybe two. Safe travels.",
+    "published_at": "2026-05-21T09:53:20.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Helsinki",
+        "type": "city",
+        "country": "Finland"
+      },
+      {
+        "name": "Tallinn",
+        "type": "city",
+        "country": "Estonia"
+      },
+      {
+        "name": "Riga",
+        "type": "city",
+        "country": "Latvia"
+      },
+      {
+        "name": "Vilnius",
+        "type": "city",
+        "country": "Lithuania"
+      }
+    ],
+    "llm_reason": "The post provides information about traveling between specific destinations in the region.",
+    "processed_at": "2026-05-21T11:25:50.999158+00:00"
+  },
+  {
+    "doc_id": "1b07e4f2eb837471",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfnd0/finland_estonia_latvia_lithuania_travel/on120fe/",
+    "title": "",
+    "text": "Thanks for the info! ",
+    "published_at": "2026-05-21T10:09:06.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is too short and doesn't contain any travel-related information",
+    "processed_at": "2026-05-21T11:25:52.893817+00:00"
+  },
+  {
+    "doc_id": "34ca1f2f47fcc86a",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfnd0/finland_estonia_latvia_lithuania_travel/on10fuv/",
+    "title": "",
+    "text": "I don't think you can see more than the capitals in a week - and even that will be rushed considering that it takes a few hours to get from one to the other.",
+    "published_at": "2026-05-21T09:56:26.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "capitals",
+        "type": "region"
+      }
+    ],
+    "llm_reason": "The post mentions seeing capitals in a week, implying a specific region or area.",
+    "processed_at": "2026-05-21T11:25:54.776305+00:00"
+  },
+  {
+    "doc_id": "8efdbbf23411dc6d",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfnd0/finland_estonia_latvia_lithuania_travel/on11yrl/",
+    "title": "",
+    "text": "If we did it over 12 days what would you suggest we see?\n\nIf we did it over a week which place should we cut?\n",
+    "published_at": "2026-05-21T10:08:43.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Paris",
+        "type": "city",
+        "country": "France"
+      }
+    ],
+    "llm_reason": "The post is asking for suggestions on what to see in Paris over a specific time period.",
+    "processed_at": "2026-05-21T11:25:56.615266+00:00"
+  },
+  {
+    "doc_id": "1bb985206d1c034c",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfnd0/finland_estonia_latvia_lithuania_travel/on13vvm/",
+    "title": "",
+    "text": "I have spent about 10 days + in each of these countries. They are on the smaller side, except for Finland, but they all have quite a few things to see.\n\n\nFor example, in Latvia, one can go to Riga for the culture/architecture, Jurmala for the beach (former sanatorium town), Sigulda and Cesis for castles and forests, Daugavpils for something different... They have two 'large' towns on the West coast that I have not been to, Ventspils and Liepaja. Nearby, there is also Kuldiga, which is a historical small town.\n\n\nIt all depends on what you want to see and do - museums, forests, castles, the sea, hiking, etc. - and on how many days you want to commit to this. I would open each country's wikivoyage page, see if there're places you'd like to go to, and factor in travelling time.",
+    "published_at": "2026-05-21T10:23:44.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Latvia",
+        "type": "country"
+      },
+      {
+        "name": "Riga",
+        "type": "city"
+      },
+      {
+        "name": "Jurmala",
+        "type": "city"
+      },
+      {
+        "name": "Sigulda",
+        "type": "city"
+      },
+      {
+        "name": "Cesis",
+        "type": "city"
+      },
+      {
+        "name": "Daugavpils",
+        "type": "city"
+      },
+      {
+        "name": "Ventspils",
+        "type": "city"
+      },
+      {
+        "name": "Liepaja",
+        "type": "city"
+      },
+      {
+        "name": "Kuldiga",
+        "type": "city"
+      },
+      {
+        "name": "Finland",
+        "type": "country"
+      }
+    ],
+    "llm_reason": "The post describes specific experiences and attractions in multiple locations within Latvia and mentions Finland as another country visited.",
+    "processed_at": "2026-05-21T11:25:58.629874+00:00"
+  },
+  {
+    "doc_id": "cb7591d236df280d",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfnd0/finland_estonia_latvia_lithuania_travel/on12kag/",
+    "title": "",
+    "text": "&gt; although I would prefer to travel by train.\n\nYou are in a luck, there is a train! Companies (national railways) and routes:\n* Elron: Tallinn - Valga\n* Vivi: Valga - Riga\n* LTG Link: Riga - Vilnius (and Tallinn - Vilnius as a single ticket)\n\nTickets are only sold about 7-14 before departure, so don't worry if you don't see timetables in advance. They don't change much.\n",
+    "published_at": "2026-05-21T10:13:25.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Tallinn",
+        "type": "city"
+      },
+      {
+        "name": "Valga",
+        "type": "city"
+      },
+      {
+        "name": "Riga",
+        "type": "city"
+      },
+      {
+        "name": "Vilnius",
+        "type": "city"
+      }
+    ],
+    "llm_reason": "The post provides information about train routes and companies in specific locations, indicating a travel experience or advice about a specific destination.",
+    "processed_at": "2026-05-21T11:26:00.553699+00:00"
+  },
+  {
+    "doc_id": "2be1de385f05988d",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfnd0/finland_estonia_latvia_lithuania_travel/on17th9/",
+    "title": "",
+    "text": "Four countries in a week are maybe a little optimistic to be fully realistic...",
+    "published_at": "2026-05-21T10:52:56.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is a general travel discussion and not about a specific destination",
+    "processed_at": "2026-05-21T11:26:02.379102+00:00"
+  },
+  {
+    "doc_id": "b4ec6e9137e73724",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfnd0/finland_estonia_latvia_lithuania_travel/on1a9o8/",
+    "title": "",
+    "text": "You can rush through all 4 capitals in a week, but you're definitely not getting the most of such a trip. I'd suggest to plan at least 2 days in each capital city, they're not big, but still not enough to see in a single day",
+    "published_at": "2026-05-21T11:10:04.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "capital cities",
+        "type": "region"
+      },
+      {
+        "name": "capital city",
+        "type": "region"
+      }
+    ],
+    "llm_reason": "The post mentions visiting multiple capital cities, but does not specify which ones, implying a general travel discussion about a region.",
+    "processed_at": "2026-05-21T11:26:04.374972+00:00"
+  },
+  {
+    "doc_id": "f8fc89d6f55f9fba",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfhad/booking_host_told_me_he_has_technical_issues/on0zcpi/",
+    "title": "",
+    "text": "If he ghosts you, you're right that  booking.com probably won't do a whole lot, because their customer service isn't great. That said, they will likely offer a bit of additional compensation for you to rebook. When I had a host cancel for a €150 reservation, they offered me €40 extra toward rebooking (essentially meaning I could book something up to €190 and they'd cover the additional €40). But, they only offer it as a credit on the rebooking, not as cash, from what I'm aware of. You can also ask them to review his account with them. They may take some further action against him to prevent it from happening in the future, but that's also not guaranteed. You were smart to have a backup. Although, if it accepted your payment there's still a chance you've got the room. What's the cancellation policy on the backup room? Unlikely that you can cancel that the day of.....",
+    "published_at": "2026-05-21T09:47:27.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Paris",
+        "type": "city",
+        "country": "France"
+      }
+    ],
+    "llm_reason": "The post mentions a specific experience with Booking.com in Paris, France.",
+    "processed_at": "2026-05-21T11:26:06.344344+00:00"
+  },
+  {
+    "doc_id": "9e30a63f5b6ca1cc",
+    "url": "https://www.reddit.com/r/travel/comments/1tjeqqe/montreal_canada_question/",
+    "title": "Montreal, Canada question",
+    "text": "We are flying into the Metropolitan airport early morning and then flying out late that night from the International airport.\n\nAm I correct to assume that from the downtown bus depot we can take a bus to the International airport? Is there anywhere to leave our luggage. We travel with hand luggage only, so our cabin bags.\n\nThanks for any advice. Not been to Montreal in 30 years.",
+    "published_at": "2026-05-21T09:01:15.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:08.138148+00:00"
+  },
+  {
+    "doc_id": "52a76b1cd5bea4d3",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfhad/booking_host_told_me_he_has_technical_issues/on14sq0/",
+    "title": "",
+    "text": "I have until midnight free cancellation.  \nI will try to contact the host 2-3 days before the final day, maybe, maybe, he changed his mind and will accept the accomodation.",
+    "published_at": "2026-05-21T10:30:45.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post is about a travel accommodation, but it does not mention a specific destination.",
+    "processed_at": "2026-05-21T11:26:10.010246+00:00"
+  },
+  {
+    "doc_id": "66453dff2c1af993",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfhad/booking_host_told_me_he_has_technical_issues/on16c9h/",
+    "title": "",
+    "text": "I would word it like \"Hello, I'm just letting you know that I should be arriving on (day of arrival) around (time of arrival) and I will message you once I'm en route to the apartment.I look forward to staying with you!\"\n\nOr something like that. Don't ask if things are fine and just phrase it as if you expect that everything is fine. \n\nI wish you luck with it... let us know how it goes! ",
+    "published_at": "2026-05-21T10:42:15.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:11.765935+00:00"
+  },
+  {
+    "doc_id": "759758eb8eaa0b04",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfhad/booking_host_told_me_he_has_technical_issues/on137a9/",
+    "title": "",
+    "text": "Don't cancel. You'll not lose the  135. You can get it back from your CC company or booking if host cancels. But there's no guarantee host won't cancel the booking. \n\nThe issue is can you get a new booking on the spot if host doesn't let you in? \n\nYou'll not get any other compensation other than the 135.",
+    "published_at": "2026-05-21T10:18:25.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post is discussing a general travel issue (booking and cancellation policies) rather than a specific destination.",
+    "processed_at": "2026-05-21T11:26:13.604147+00:00"
+  },
+  {
+    "doc_id": "f6a0351c835415ea",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfhad/booking_host_told_me_he_has_technical_issues/on1bgrn/",
+    "title": "",
+    "text": "psa, the company is called booking.com not booking",
+    "published_at": "2026-05-21T11:18:05.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:15.348480+00:00"
+  },
+  {
+    "doc_id": "fade8210a06e0e42",
+    "url": "https://www.reddit.com/r/travel/comments/1tjfhad/booking_host_told_me_he_has_technical_issues/on1btn4/",
+    "title": "",
+    "text": "While i don t disagree with you, the app icon just says “booking”",
+    "published_at": "2026-05-21T11:20:25.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is not about a specific destination, but rather a discussion about an app",
+    "processed_at": "2026-05-21T11:26:17.557391+00:00"
+  },
+  {
+    "doc_id": "887d67175a58c6de",
+    "url": "https://www.reddit.com/r/travel/comments/1tje557/can_a_russian_tourist_visa_be_processed_after_the/on0rl6t/",
+    "title": "",
+    "text": "Brave.  Best of luck.",
+    "published_at": "2026-05-21T08:38:31.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:19.294099+00:00"
+  },
+  {
+    "doc_id": "c711dc2146ed2f7e",
+    "url": "https://www.reddit.com/r/travel/comments/1tje557/can_a_russian_tourist_visa_be_processed_after_the/on0rylz/",
+    "title": "",
+    "text": "You are a brave man",
+    "published_at": "2026-05-21T08:41:54.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post does not contain any travel-related information",
+    "processed_at": "2026-05-21T11:26:21.120525+00:00"
+  },
+  {
+    "doc_id": "5b10324acba3c7ba",
+    "url": "https://www.reddit.com/r/travel/comments/1tje557/can_a_russian_tourist_visa_be_processed_after_the/on0v5w1/",
+    "title": "",
+    "text": "Seems like OP is just a weird Russia simp.\n\n&gt; Не так много стран в наши дни могут сравниться с Америкой по кровожадности. Кроме того, это одна из немногих стран, которая терроризирует Ближний Восток, а затем изображает своих собственных солдат жертвами.\n\n&gt; К черту армию США.\n\n\n&gt; Few countries these days can match America's bloodthirstiness. It's also one of the few countries that terrorizes the Middle East and then portrays its own soldiers as victims.\n\n&gt; Fuck the US military.\n\n\nAs a non-American, not saying I disagree with either of those two statements at face value. But supporting Russia on the flip side is most certainly.......a choice. Yikes.",
+    "published_at": "2026-05-21T09:10:51.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:22.870606+00:00"
+  },
+  {
+    "doc_id": "cf39e78fc0463b01",
+    "url": "https://www.reddit.com/r/travel/comments/1tje557/can_a_russian_tourist_visa_be_processed_after_the/on13gd7/",
+    "title": "",
+    "text": "Could also just be a troll…. You know Russia loves those.",
+    "published_at": "2026-05-21T10:20:25.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post does not contain any specific travel-related information about a destination.",
+    "processed_at": "2026-05-21T11:26:24.692344+00:00"
+  },
+  {
+    "doc_id": "0cd0e3fce9f9ad84",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbhtc/best_way_to_get_to_pompeii_from_naples_car_train/on0jsyi/",
+    "title": "",
+    "text": "Bus tour will be the worst. Take the Circumvesuviana train. Plan a lot of time in Pompei, the site is huge. I recommend hiring a guide there. Usually the guide will be wiith you for a couple of hours then you can continue by yourself ",
+    "published_at": "2026-05-21T07:28:48.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:26.466530+00:00"
+  },
+  {
+    "doc_id": "9ec49dd96031a63d",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbfj2/booking_international_holiday_what_are_some/on0mh5p/",
+    "title": "",
+    "text": "What's your nationality?",
+    "published_at": "2026-05-21T07:52:22.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is a general travel discussion not about a specific place",
+    "processed_at": "2026-05-21T11:26:28.325614+00:00"
+  },
+  {
+    "doc_id": "152605e77ece4526",
+    "url": "https://www.reddit.com/r/travel/comments/1tjckqx/copenhagen_layover/on0hpte/",
+    "title": "",
+    "text": "Yes.  You can enter Denmark and stay in a hotel.  \n\nJust go to the exit.   Go through immigration and enter Denmark. \n\n",
+    "published_at": "2026-05-21T07:10:37.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Denmark",
+        "type": "country"
+      }
+    ],
+    "llm_reason": "The post is about entering and staying in Denmark, providing specific instructions for doing so.",
+    "processed_at": "2026-05-21T11:26:30.185947+00:00"
+  },
+  {
+    "doc_id": "cf173c45859bae46",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbhtc/best_way_to_get_to_pompeii_from_naples_car_train/on0k6nz/",
+    "title": "",
+    "text": "Second this. I usually avoid guided tours, but Pompei is one of those places where they really are a plus. ",
+    "published_at": "2026-05-21T07:32:07.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:31.977095+00:00"
+  },
+  {
+    "doc_id": "9208a81cf23f9171",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbfj2/booking_international_holiday_what_are_some/on0pcyl/",
+    "title": "",
+    "text": "Australian ",
+    "published_at": "2026-05-21T08:18:04.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post is too short and does not provide any information about a specific destination.",
+    "processed_at": "2026-05-21T11:26:33.867890+00:00"
+  },
+  {
+    "doc_id": "5551530660defbcc",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbhtc/best_way_to_get_to_pompeii_from_naples_car_train/on0mc31/",
+    "title": "",
+    "text": "Train for sure...it's easy and relatively fast,if often crowded.\n\nIf you want to get a seat, better to get on the train at the first stop,Porta Nolana.. not at the main station in Naples.",
+    "published_at": "2026-05-21T07:51:06.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:35.626183+00:00"
+  },
+  {
+    "doc_id": "df082f20e59a70e4",
+    "url": "https://www.reddit.com/r/travel/comments/1tjckqx/copenhagen_layover/on0le8e/",
+    "title": "",
+    "text": "A UK citizen does not need a visa for Denmark or for Schengen to stay as a tourist within the allotted 90 day per 180 days period. Fwiw, Budapest is also Schengen. Same rules. Once you go through immigration in Denmark, you won't have to do it again in Budapest until your flight back to UK. ",
+    "published_at": "2026-05-21T07:42:47.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Denmark",
+        "type": "country"
+      },
+      {
+        "name": "Budapest",
+        "type": "city"
+      },
+      {
+        "name": "Schengen",
+        "type": "region"
+      }
+    ],
+    "llm_reason": "Providing information about visa requirements for a specific region and mentioning a city within that region.",
+    "processed_at": "2026-05-21T11:26:37.543785+00:00"
+  },
+  {
+    "doc_id": "c33acf5f941cec44",
+    "url": "https://www.reddit.com/r/travel/comments/1tjckqx/copenhagen_layover/on0gimy/",
+    "title": "",
+    "text": "**Notice:** Are you asking about a layover or connection?\n\n1. Read the **[Layover FAQ](https://www.reddit.com/r/travel/wiki/mfaq-flying/layovers)**.\n\n2. Read the **[Flying FAQ](https://www.reddit.com/r/travel/wiki/mfaq-flying/)** in the wiki.\n\n3. Read this [excellent comment](https://www.reddit.com/r/unitedairlines/comments/1rrmrua/comment/oa0ka3a/) for insight on other factors you should consider.\n\n4. Are you doing a self-transfer? Read this [excellent guide](https://www.reddit.com/r/Flights/comments/16ym47p/comment/k39c52x/).\n\nPlease make sure you have included the **cities, airports, flight numbers, airlines**, and **dates of travel**.\n\nTransit Visa, Passport, Self-Transfer Questions: **State your country of citizenship / country of passport**\n\nAny questions regarding layovers of more than 2h30m will be removed as it is sufficient time to connect at every airport globally.\n\n*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/travel) if you have any questions or concerns.*",
+    "published_at": "2026-05-21T07:00:30.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:39.287484+00:00"
+  },
+  {
+    "doc_id": "3b1241f40839529b",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbfj2/booking_international_holiday_what_are_some/on0nhtu/",
+    "title": "",
+    "text": "**Before you go**:\n\n* **Notify your bank,** Let them know you're travelling internationally so your cards don't get blocked for suspicious activity abroad.\n* **Get some Singapore dollars (SGD),** You can exchange at the airport or withdraw from ATMs there, but it's handy to have a little cash on arrival. Singapore is largely cashless though, so a card with no foreign transaction fees is a big plus.\n* **Check your phone plan,** Look into an international roaming add-on or buy a local SIM/eSIM on arrival. Staying connected is especially important as first-time solo travellers.\n* **Make digital and physical copies of your documents** , Passport, insurance, hotel booking, return tickets. Email them to yourself as a backup.",
+    "published_at": "2026-05-21T08:01:19.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:41.032494+00:00"
+  },
+  {
+    "doc_id": "801b0d7acefd9178",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbhtc/best_way_to_get_to_pompeii_from_naples_car_train/on0n7su/",
+    "title": "",
+    "text": "[removed]",
+    "published_at": "2026-05-21T07:58:52.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Tokyo",
+        "type": "city",
+        "country": "Japan"
+      },
+      {
+        "name": "Japan",
+        "type": "country"
+      }
+    ],
+    "llm_reason": "The post is asking for recommendations on what to do in Tokyo, Japan.",
+    "processed_at": "2026-05-21T11:26:43.006008+00:00"
+  },
+  {
+    "doc_id": "adef0611ec57ef37",
+    "url": "https://www.reddit.com/r/travel/comments/1tjckqx/copenhagen_layover/on0r7m5/",
+    "title": "",
+    "text": "uk passport is visa-free for the whole schengen area, so leaving the airport for a hotel is completely fine - no transit visa needed. metro from cph runs 24h and gets you to the city centre in about 20min. if you have any morning time before your connection, assistens cemetery (kierkegaard and andersen are buried there) is a genuinely lovely free wander, and jaegersborggade nearby has good coffee shops.",
+    "published_at": "2026-05-21T08:35:05.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:44.753564+00:00"
+  },
+  {
+    "doc_id": "0b5bf656a2b285f4",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbfj2/booking_international_holiday_what_are_some/on0p58b/",
+    "title": "",
+    "text": "You’re already thinking about the right things. I’d also check passport validity rules, not just whether the passport is still in date. Some places and airlines want several months left on it.\n\nFor Singapore, I’d add: screenshot or print your hotel booking, return flight, travel insurance, and the SG Arrival Card confirmation. Also tell your bank you’ll be abroad, bring a backup card if you can, and don’t pack all money and cards in one place. For a first international trip, those little boring things make the trip feel much less stressful.",
+    "published_at": "2026-05-21T08:16:09.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Singapore",
+        "type": "city",
+        "country": "Singapore"
+      }
+    ],
+    "llm_reason": "The post is providing travel tips and recommendations for a specific destination, Singapore.",
+    "processed_at": "2026-05-21T11:26:46.654582+00:00"
+  },
+  {
+    "doc_id": "2745a1bd27f6e9ac",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbhtc/best_way_to_get_to_pompeii_from_naples_car_train/on0rze9/",
+    "title": "",
+    "text": "We had to remove your submission to r/travel because of:\n\n&gt;**Rule 6**: Absolutely no AI\n\nChatGPT and AI usage is strictly against the rules. The sub is designed for discussion, advice and experiences from actual humans. **This includes itineraries drafted by ChatGPT**.\n\nDo not suggest the use of ChatGPT or other AI to the OP or other users, or cite it as a source. It can provide outdated, inaccurate and misleading information.\n\nUse of AI to comment or post in this subreddit will result in a permanent, irreversible ban, as stated in [our notice on AI use.](https://www.reddit.com/r/travel/s/VZ9meLaFVv)\n\nThank you for participating in the r/travel community!",
+    "published_at": "2026-05-21T08:42:07.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:48.423701+00:00"
+  },
+  {
+    "doc_id": "4603e6966eb86aaf",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbfj2/booking_international_holiday_what_are_some/on0h0uu/",
+    "title": "",
+    "text": "Be prepared for Singapore prices.",
+    "published_at": "2026-05-21T07:04:47.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is a general travel warning without a specific destination",
+    "processed_at": "2026-05-21T11:26:50.301411+00:00"
+  },
+  {
+    "doc_id": "7c245bfc92fb3b2d",
+    "url": "https://www.reddit.com/r/travel/comments/1tjckqx/copenhagen_layover/on19gdy/",
+    "title": "",
+    "text": "You will enter the Schengen zone and clear immigration in CPH no matter what. The flight to BUD will have no immigration controls.",
+    "published_at": "2026-05-21T11:04:31.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:52.051688+00:00"
+  },
+  {
+    "doc_id": "69f52d53459c9a8c",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbhtc/best_way_to_get_to_pompeii_from_naples_car_train/on0qsy0/",
+    "title": "",
+    "text": "We took a train. It was pretty easy.",
+    "published_at": "2026-05-21T08:31:19.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post does not mention a specific destination",
+    "processed_at": "2026-05-21T11:26:53.908684+00:00"
+  },
+  {
+    "doc_id": "459bbc11d4a1fdb7",
+    "url": "https://www.reddit.com/r/travel/comments/1tjckqx/copenhagen_layover/on0qr71/",
+    "title": "",
+    "text": "Why do you need a 10 hour layover between two European cities with multiple direct flights? You clearly are not coming from England are you? Also the Danish UK embassy is not going to tell a Brit they need a Schengen visa. Are you really British?",
+    "published_at": "2026-05-21T08:30:52.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:55.654924+00:00"
+  },
+  {
+    "doc_id": "8bf30a6d6b766d2d",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbhtc/best_way_to_get_to_pompeii_from_naples_car_train/on0rfqu/",
+    "title": "",
+    "text": "I agree with previous comments about going for option 2. I just wanted to add that if you're planning to drive in Naples itself then the driving standards are abysmal, the streets are narrow, and in my opinion it would be a nightmare for the average tourist. (Writing as someone from the UK with extensive experience of driving in Italy.)",
+    "published_at": "2026-05-21T08:37:09.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Naples",
+        "type": "city",
+        "country": "Italy"
+      },
+      {
+        "name": "Italy",
+        "type": "country"
+      }
+    ],
+    "llm_reason": "The post is a travel tip about driving in Naples, Italy.",
+    "processed_at": "2026-05-21T11:26:57.594825+00:00"
+  },
+  {
+    "doc_id": "4305e23e062d5585",
+    "url": "https://www.reddit.com/r/travel/comments/1tjbhtc/best_way_to_get_to_pompeii_from_naples_car_train/on135si/",
+    "title": "",
+    "text": "There are three entrances and three train stations. I would take the inter-city, faster with less stops than the Circumvesuviana. Don't miss MANN in Naples.",
+    "published_at": "2026-05-21T10:18:06.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:26:59.344556+00:00"
+  },
+  {
+    "doc_id": "d480bdf1549a9b6e",
+    "url": "https://www.reddit.com/r/travel/comments/1tjb7hd/send_my_bag_anyone_got_experience_with_insuring/on0c6bl/",
+    "title": "",
+    "text": "I would get separate insurance if the contents are expensive or hard to replace. \n\nMost complaints I have seen about Send My Bag are less about delays and more about poor compensation if something gets lost.\n\nA lot of shipping companies only cover by weight unless you pay extra. Take photos of everything before sending and keep receipts for valuable items.\n\nIf it is mostly clothes/basic stuff, I would not stress too much. But anything important, I would either insure separately or keep with me.\n\nThe important thing is to check what Send My Bag covers by default.",
+    "published_at": "2026-05-21T06:24:00.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is about shipping companies and insurance, not a specific travel destination",
+    "processed_at": "2026-05-21T11:27:01.358274+00:00"
+  },
+  {
+    "doc_id": "ea4b57c01281651d",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on07pbt/",
+    "title": "",
+    "text": "Does it mean you have booked an airplane ticket without knowing why you have choosed to go there ?",
+    "published_at": "2026-05-21T05:47:31.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:03.101533+00:00"
+  },
+  {
+    "doc_id": "a8b5b27ba803f61f",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on08002/",
+    "title": "",
+    "text": "No, we're waiting to decide before booking a flight. We just blocked out those dates on our calendar to travel.",
+    "published_at": "2026-05-21T05:49:54.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is about planning to travel but does not mention a specific destination",
+    "processed_at": "2026-05-21T11:27:05.077555+00:00"
+  },
+  {
+    "doc_id": "a4547f52038eecab",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on0cz0v/",
+    "title": "",
+    "text": "With seven days, a country is more than enough. Technically, it will not be more than few places. Don't be too ambitious with your timeframe. ",
+    "published_at": "2026-05-21T06:30:39.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:06.819526+00:00"
+  },
+  {
+    "doc_id": "868d8440d92e95b6",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on085km/",
+    "title": "",
+    "text": "If in Vietnam, as cliché as it sounds; do the Ha Giang loop  \nYes it's for tourists and yes you'll be surrounded by partying and alcohol but I promise you the views and beautiful sights you'll experience is worth every bit  \n  \nAs someone whom has travelled for the sole purpose of experiencing spectacular views, the feeling of doing it on the back of a motorcycle is unbeatable\n\nJust remember to go with a safe company.",
+    "published_at": "2026-05-21T05:51:08.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Vietnam",
+        "type": "country"
+      },
+      {
+        "name": "Ha Giang",
+        "type": "region"
+      }
+    ],
+    "llm_reason": "The post is a travel recommendation for a specific destination in Vietnam, the Ha Giang loop.",
+    "processed_at": "2026-05-21T11:27:08.713890+00:00"
+  },
+  {
+    "doc_id": "cc45c0099c0b99e2",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on08lrs/",
+    "title": "",
+    "text": "Ha Giang loop",
+    "published_at": "2026-05-21T05:54:46.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:10.452267+00:00"
+  },
+  {
+    "doc_id": "5b2f4c8749b914ae",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on0c7sx/",
+    "title": "",
+    "text": "Thailand leans vacation, Vietnam leans travel. There's a lot more raw culture and experience in Vietnam, but it's less fun an comfortable. \n\nI live in Hanoi, North Vietnam is amazing and I can't recommend it enough, but if you are trying to relax and recover, Thailand is going to be easier and less stressful. \n\nFood is better in Thailand; food is healthier in Vietnam.\n\n  \nVietnam has better views and culture, Thailand has better beaches and nightlife.",
+    "published_at": "2026-05-21T06:24:21.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:12.222641+00:00"
+  },
+  {
+    "doc_id": "fcab23a14cd4e8f6",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on0nr0a/",
+    "title": "",
+    "text": "**Stick to one country.** A week sounds like a lot but it genuinely isn't when you factor in travel days, adjusting to the time zone, and the fact that you'll want to slow down and soak places in. Splitting between two countries means spending precious days on long buses, domestic flights, and border crossings rather than actually *doing* things. Pick one and go deep.\n\n**If you pick Thailand:**\n\n* **Chiang Mai** in the north is perfect for your interests, stunning temples, jungle trekking, zip-lining, elephant sanctuaries, and some of the best street food in the world (the Sunday Walking Street market is unmissable). The scenery is gorgeous and it has a really fun, backpacker-friendly energy.\n* **Krabi or Koh Lanta** in the south gives you dramatic limestone cliffs, kayaking through sea caves, island-hopping, and beautiful beaches. Late December is peak season there so the weather is ideal.\n* You could realistically do Chiang Mai + one southern destination in a week with a short domestic flight.\n\n**If you pick Vietnam:**\n\n* **Hanoi → Ninh Binh → Ha Long Bay** is an incredible northern route. Ninh Binh is jaw-droppingly beautiful (think karst mountains, rice paddies, river caves by rowboat) and often skipped by tourists. Ha Long Bay is iconic for good reason.\n* Vietnamese street food is arguably the best in Southeast Asia, bánh mì, phở, bún chả, fresh spring rolls. You will eat unbelievably well for almost no money.\n* The only consideration is that late December in northern Vietnam can be cool and misty, which affects Ha Long Bay visibility. If that's a concern, **Da Nang/Hoi An** in central Vietnam is warmer and absolutely stunning, lantern-lit ancient town, gorgeous beaches, and incredible food.",
+    "published_at": "2026-05-21T08:03:36.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Thailand",
+        "type": "country"
+      },
+      {
+        "name": "Chiang Mai",
+        "type": "city"
+      }
+    ],
+    "llm_reason": "The post is giving travel advice and recommending a specific destination, Thailand, and a city within it, Chiang Mai.",
+    "processed_at": "2026-05-21T11:27:14.167247+00:00"
+  },
+  {
+    "doc_id": "e51018ce59f10b41",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on0rjqw/",
+    "title": "",
+    "text": "hold on   \ndid you type this much bruhhhhhhhh come on ",
+    "published_at": "2026-05-21T08:38:09.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:15.910925+00:00"
+  },
+  {
+    "doc_id": "8fed1ebbaf393b16",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on0x9m6/",
+    "title": "",
+    "text": "Yeah I am new to reddit &amp; maybe I am taking it way serious ",
+    "published_at": "2026-05-21T09:29:31.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is not about a specific travel destination, but rather a general introduction and question about taking things seriously on Reddit",
+    "processed_at": "2026-05-21T11:27:17.772771+00:00"
+  },
+  {
+    "doc_id": "d4e7410654d932a2",
+    "url": "https://www.reddit.com/r/travel/comments/1tjavvy/7_days_in_sea_what_to_do/on0re5m/",
+    "title": "",
+    "text": "Thailand + Vietnam in just 7 days sounds rushed tbh 😭 ",
+    "published_at": "2026-05-21T08:36:45.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:19.520896+00:00"
+  },
+  {
+    "doc_id": "dab2952f6c05a461",
+    "url": "https://www.reddit.com/r/travel/comments/1tj9z6n/how_to_best_go_about_obtaining_visas_with_no/on02u4f/",
+    "title": "",
+    "text": "Book a refundable ticket or using points for your departure ticket then adjust when necessary ",
+    "published_at": "2026-05-21T05:08:52.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post is about general travel strategy and does not mention a specific destination.",
+    "processed_at": "2026-05-21T11:27:21.424164+00:00"
+  },
+  {
+    "doc_id": "a82929647d4717c9",
+    "url": "https://www.reddit.com/r/travel/comments/1tj9z6n/how_to_best_go_about_obtaining_visas_with_no/on01cc6/",
+    "title": "",
+    "text": "&gt;which is a problem when the visas as asking for exact dates and border crossings.\n\nI'm not aware of any SE Asia Visas that request that.\n\nIn any case sure, just submit the E-Visa application when you're getting close.\n\nHappy travels.",
+    "published_at": "2026-05-21T04:57:30.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:23.212730+00:00"
+  },
+  {
+    "doc_id": "98674a8f1c411df7",
+    "url": "https://www.reddit.com/r/travel/comments/1tj91h7/do_i_declare_to_customs/omztq3o/",
+    "title": "",
+    "text": "Yeah, just declare them to be safe. Regular snacks, souvenirs, and car accessories like a TPMS are usually fine; customs mainly care about restricted food items.",
+    "published_at": "2026-05-21T04:02:57.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is about general travel rules and customs, not a specific destination",
+    "processed_at": "2026-05-21T11:27:25.064044+00:00"
+  },
+  {
+    "doc_id": "a262aca495df2770",
+    "url": "https://www.reddit.com/r/travel/comments/1tj91h7/do_i_declare_to_customs/omzttqz/",
+    "title": "",
+    "text": "Depends on how much and what they are. No fruits, vegetable ,or meat products allowed and I think the general limit is like $800, over that you have to pay taxes ",
+    "published_at": "2026-05-21T04:03:37.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:26.807058+00:00"
+  },
+  {
+    "doc_id": "7c5c42cb32628997",
+    "url": "https://www.reddit.com/r/travel/comments/1tj9z6n/how_to_best_go_about_obtaining_visas_with_no/on02jvq/",
+    "title": "",
+    "text": "Doesn't Vietnam?",
+    "published_at": "2026-05-21T05:06:42.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post is a question mark and doesn't contain any information about a specific destination.",
+    "processed_at": "2026-05-21T11:27:28.953401+00:00"
+  },
+  {
+    "doc_id": "cfd1d0e88a0a7cff",
+    "url": "https://www.reddit.com/r/travel/comments/1tj91h7/do_i_declare_to_customs/omzu08e/",
+    "title": "",
+    "text": "All dried snacks like chips and baked goods. Total wouldn’t be over $800. ",
+    "published_at": "2026-05-21T04:04:50.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is about purchasing snacks, not about traveling to a specific destination",
+    "processed_at": "2026-05-21T11:27:31.114829+00:00"
+  },
+  {
+    "doc_id": "6b51b723cec27d3f",
+    "url": "https://www.reddit.com/r/travel/comments/1tj9z6n/how_to_best_go_about_obtaining_visas_with_no/on0333q/",
+    "title": "",
+    "text": "Nope. You can apply up to a year in advance and the Visa is valid for 90 days with the entry and exit dates easily managed to give you loads of wriggle room as explained here at [Point #2, Section i, ii, and iii.](https://www.reddit.com/r/travel/comments/12c4uzu/vietnam_tourist_visa_update/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button)\n\nThe entry/exit points can be anywhere so long as they appear on the drop-down menu.\n\nDownvote? Really?",
+    "published_at": "2026-05-21T05:10:48.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:32.868423+00:00"
+  },
+  {
+    "doc_id": "da605d83ad9f11d9",
+    "url": "https://www.reddit.com/r/travel/comments/1tj91h7/do_i_declare_to_customs/omzunmn/",
+    "title": "",
+    "text": "Just tell them you brought some snacks, they might ask how much , you tell them and that will be it",
+    "published_at": "2026-05-21T04:09:17.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is about general travel advice, not a specific destination",
+    "processed_at": "2026-05-21T11:27:34.737925+00:00"
+  },
+  {
+    "doc_id": "160bc42131ea6b2b",
+    "url": "https://www.reddit.com/r/travel/comments/1tj9z6n/how_to_best_go_about_obtaining_visas_with_no/on02lh1/",
+    "title": "",
+    "text": "american passport is pretty strong in SE asia region isnt it! i dont think they'll ask for exact date",
+    "published_at": "2026-05-21T05:07:02.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:36.481362+00:00"
+  },
+  {
+    "doc_id": "360b32c6dd128ae9",
+    "url": "https://www.reddit.com/r/travel/comments/1tj91h7/do_i_declare_to_customs/omzyyvb/",
+    "title": "",
+    "text": "Just tell them what you brought back.  Its not a big deal.  But you have to be honest.",
+    "published_at": "2026-05-21T04:39:57.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post does not mention any specific travel destination or experience.",
+    "processed_at": "2026-05-21T11:27:38.584696+00:00"
+  },
+  {
+    "doc_id": "485e3150067ba6e6",
+    "url": "https://www.reddit.com/r/travel/comments/1tj9z6n/how_to_best_go_about_obtaining_visas_with_no/on03fpj/",
+    "title": "",
+    "text": "I just checked the Vietnam e visa website and it specifically asks for intended date of entry and border gate of entry. ",
+    "published_at": "2026-05-21T05:13:30.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Vietnam",
+        "type": "country"
+      }
+    ],
+    "llm_reason": "The post is asking about a specific country's visa requirements.",
+    "processed_at": "2026-05-21T11:27:40.530774+00:00"
+  },
+  {
+    "doc_id": "46b6b7872c337904",
+    "url": "https://www.reddit.com/r/travel/comments/1tj91h7/do_i_declare_to_customs/omzyygy/",
+    "title": "",
+    "text": "Just came back from Japan and declared $1600 including a $1300 guitar and wasn’t asked to pay any duties. I’d be curious to hear how much others have declared without being charged duty for exceeding the $800 cap. ",
+    "published_at": "2026-05-21T04:39:53.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:42.290404+00:00"
+  },
+  {
+    "doc_id": "250a36c97bcfa245",
+    "url": "https://www.reddit.com/r/travel/comments/1tj91h7/do_i_declare_to_customs/omzv7ld/",
+    "title": "",
+    "text": "Just follow this tip:\n\n- unsure, declare it.\n\nDoing so at least has the customs officer have a look at it so fines/possible jail time can be avoided",
+    "published_at": "2026-05-21T04:13:07.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is about general travel advice, not a specific destination",
+    "processed_at": "2026-05-21T11:27:44.215528+00:00"
+  },
+  {
+    "doc_id": "2fd6f9be634c2fca",
+    "url": "https://www.reddit.com/r/travel/comments/1tj9z6n/how_to_best_go_about_obtaining_visas_with_no/on03kag/",
+    "title": "",
+    "text": "But those dates and entry/exit points are easily managed [as explained here.](https://www.reddit.com/r/travel/comments/1tj9z6n/comment/on0333q/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button)\n\nIt's a non issue for you.",
+    "published_at": "2026-05-21T05:14:30.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:45.970538+00:00"
+  },
+  {
+    "doc_id": "f2dbb0c2bf12aace",
+    "url": "https://www.reddit.com/r/travel/comments/1tj9z6n/how_to_best_go_about_obtaining_visas_with_no/on0e7uf/",
+    "title": "",
+    "text": "&gt; I am trying to keep my plans as flexible as possible and avoid any hard commitments which is a problem when the visas as asking for exact dates and border crossings.\n\nHow is that a problem? Just provide estimated dates you don't have to travel on the exact date. The only thing that matters is that the visa is valid.",
+    "published_at": "2026-05-21T06:41:08.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post is about a general travel problem (visa requirements) rather than a specific destination.",
+    "processed_at": "2026-05-21T11:27:47.835910+00:00"
+  },
+  {
+    "doc_id": "b67c326a58c1f1aa",
+    "url": "https://www.reddit.com/r/travel/comments/1tj7p9g/travel_to_japan_with_criminal_record/omzwhyc/",
+    "title": "",
+    "text": "You can read up on Japan's proper text on [what they forbid](https://www.nz.emb-japan.go.jp/visiting_japan/resources/Criminal%20record%20and%20entry%20into%20Japan.pdf). The drug one is probably the most relevant to you.\n\nSome people ignore these and just go to Japan, ignoring any questions about this. Others don't travel. Your call comes down to risk assessment etc. I personally, as a rule, don't lie to immigration officials and forms.\n\nAnd yes, lawyers and embassies will rarely give clear answers because the final decision is always on the border at the day of travel.",
+    "published_at": "2026-05-21T04:22:05.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:49.618303+00:00"
+  },
+  {
+    "doc_id": "4eab74c7d4d1f897",
+    "url": "https://www.reddit.com/r/travel/comments/1tj7p9g/travel_to_japan_with_criminal_record/on031ih/",
+    "title": "",
+    "text": "Hey thanks for the reply. So I read that same document earlier but it is not very specific as far as severity of each crime which makes the situation a bit confusing. I guess if i look at it simply, the answer would be that my offenses would prohibit entry. Despite felonies being non violent/drug offense being a misdemeanor.",
+    "published_at": "2026-05-21T05:10:28.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "France",
+        "type": "country"
+      }
+    ],
+    "llm_reason": "The post mentions a document related to entry into France, indicating a specific destination.",
+    "processed_at": "2026-05-21T11:27:51.625449+00:00"
+  },
+  {
+    "doc_id": "73a2f2c07e559d3e",
+    "url": "https://www.reddit.com/r/travel/comments/1tj7p9g/travel_to_japan_with_criminal_record/on052bp/",
+    "title": "",
+    "text": "These documents are always a little bit fuzzy because, as mentioned, the end decision is always on the officer on the ground, so they rarely talk in absolutes. And it's also a bit frustrating because their definitions are specific to Japan (e.g. a stimulant that's totally legal in other countries can be considered illegal in Japan).\n\nBest of luck with the effort. Hope you find a way to make it work.",
+    "published_at": "2026-05-21T05:26:19.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:53.393993+00:00"
+  },
+  {
+    "doc_id": "c93679227d289ae9",
+    "url": "https://www.reddit.com/r/travel/comments/1tj7p9g/travel_to_japan_with_criminal_record/on090lb/",
+    "title": "",
+    "text": "**This is not legal advice nor is it advice at all**\n\nmerely just **anecdote** but I personally know friends who have committed crimes, served prison sentences, completed their parole, travelled to Japan and just didn't declare they had criminal records, no issues entering the country and no problems leaving\n\nkeep in mind\n\n\\- they came from a country with a strong passport\n\n\\- non violent crime\n\n\\- their country of origin authorities does not share information with Japanese authorities ",
+    "published_at": "2026-05-21T05:58:04.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:27:55.140326+00:00"
+  },
+  {
+    "doc_id": "04fa3db281b69d50",
+    "url": "https://www.reddit.com/r/travel/comments/1tj7p9g/travel_to_japan_with_criminal_record/on0ecwc/",
+    "title": "",
+    "text": "I would be coming from the US",
+    "published_at": "2026-05-21T06:42:19.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post does not mention a specific destination, it only mentions the origin of the traveler.",
+    "processed_at": "2026-05-21T11:27:57.000923+00:00"
+  },
+  {
+    "doc_id": "47bd4c176a6297a9",
+    "url": "https://www.reddit.com/r/travel/comments/1tj7p9g/travel_to_japan_with_criminal_record/omzls2g/",
+    "title": "",
+    "text": "I’ve been to Japan with a record and it was a non-issue. I have never been convicted of a felony, however. Well that’s actually not true. I was convicted but then completed court ordered treatment and the charges were reduced. I’ve had lots of misdemeanor convictions though. These were all 20+ years ago before recovery but I’ve traveled all over the world now and it hasn’t been an issue.",
+    "published_at": "2026-05-21T03:11:27.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post is about the author's travel experiences, but it's not about a specific destination, rather about their personal history and travel experiences in general.",
+    "processed_at": "2026-05-21T11:27:59.112269+00:00"
+  },
+  {
+    "doc_id": "fa13b90e32291dcd",
+    "url": "https://www.reddit.com/r/travel/comments/1tj7p9g/travel_to_japan_with_criminal_record/on03un0/",
+    "title": "",
+    "text": "Did you lie on the intake form about whether or not you were “convicted or charged with a crime that resulted in a sentence”?",
+    "published_at": "2026-05-21T05:16:46.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:00.864031+00:00"
+  },
+  {
+    "doc_id": "5749c8ce1a499f0e",
+    "url": "https://www.reddit.com/r/travel/comments/1tj7p9g/travel_to_japan_with_criminal_record/omzs9n3/",
+    "title": "",
+    "text": "From what I've read, Japan mainly cares about convictions that resulted in prison time or recent serious offenses. Since yours were expunged/pardoned and over a decade old, you probably have a better chance than most. Still smart to consult an immigration lawyer, as Japan can be strict and inconsistent in its entry decisions.",
+    "published_at": "2026-05-21T03:53:10.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:02.608425+00:00"
+  },
+  {
+    "doc_id": "ec1e31bb9a46e613",
+    "url": "https://www.reddit.com/r/travel/comments/1tj7p9g/travel_to_japan_with_criminal_record/on0k7ru/",
+    "title": "",
+    "text": "I've not had to deal with this since I have a clean record, and every country is different, but it seems that most countries don't care about non-violent crime and non gang related crime. Some countries only want to know about crimes that resulted in prison incarceration that lasted longer than 6 months. Issues with the law become more important when applying for visas that go beyond being a short stay tourist. Seeing how your record was expunged, I think you can just say you don't have a record. Just what I would end up doing. good luck",
+    "published_at": "2026-05-21T07:32:23.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post is discussing general travel and visa requirements, but does not mention a specific destination.",
+    "processed_at": "2026-05-21T11:28:04.920930+00:00"
+  },
+  {
+    "doc_id": "5af7622a869837d9",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6mii/where_should_we_go_comparing_europe_to_japan/omzc6aa/",
+    "title": "",
+    "text": "Idk much about Italy/Spain in the summer, but everyone I know who’s gone to Japan in the summer has said it was miserable because of the heat + humidity that time of year. That’s not to say you can’t enjoy your time there, just be aware of that ahead of time and plan activities accordingly. ",
+    "published_at": "2026-05-21T02:16:54.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:06.665575+00:00"
+  },
+  {
+    "doc_id": "d22952b719b9dec7",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6mii/where_should_we_go_comparing_europe_to_japan/omzyuk9/",
+    "title": "",
+    "text": "It'll be real hot in the other two locations as well.  ",
+    "published_at": "2026-05-21T04:39:04.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post does not mention any specific travel destination.",
+    "processed_at": "2026-05-21T11:28:08.626639+00:00"
+  },
+  {
+    "doc_id": "45e0453bc47a1d9b",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6mii/where_should_we_go_comparing_europe_to_japan/on0a88d/",
+    "title": "",
+    "text": "I went in July/August and it was hot but not unbarebly so. \n\nI could still climb Mt. Fuji, go on camps/hikes and Sapporo has a great beer festival in the middle of the city. \n\n",
+    "published_at": "2026-05-21T06:07:59.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:10.382765+00:00"
+  },
+  {
+    "doc_id": "1518fb08b30b2a3d",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6mii/where_should_we_go_comparing_europe_to_japan/on0sntn/",
+    "title": "",
+    "text": "Italy and spain are just as hot. Imo it’s not bad. Better than rain and cold",
+    "published_at": "2026-05-21T08:48:14.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "general travel discussion not about a specific place",
+    "processed_at": "2026-05-21T11:28:12.220261+00:00"
+  },
+  {
+    "doc_id": "2fe83c1faff47600",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6mii/where_should_we_go_comparing_europe_to_japan/on04m81/",
+    "title": "",
+    "text": "Spain sounds like it fits your criteria best ",
+    "published_at": "2026-05-21T05:22:47.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Spain",
+        "type": "country"
+      }
+    ],
+    "llm_reason": "The post mentions a specific country, Spain, which is a destination.",
+    "processed_at": "2026-05-21T11:28:14.132309+00:00"
+  },
+  {
+    "doc_id": "62e43befb83b23c8",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6lka/businessclass_seats/omzbsw0/",
+    "title": "",
+    "text": "I found it really weird because if you’re a stomach sleeper it can put you in a really weird sleep pattern, I don’t know why they went with that concept",
+    "published_at": "2026-05-21T02:14:53.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:15.951999+00:00"
+  },
+  {
+    "doc_id": "30fe3ee638e4a54e",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6lka/businessclass_seats/omzfc5s/",
+    "title": "",
+    "text": "This baffles me too. The only practical solution is to sleep in an N-shaped squiggle, or to sleep hugging your knees. All they had to do was turn the seat like 20 degrees, but I guess that would reduce the \"it's a bed\" effect for marketing... Yeah it's a literal pain.\n\nHot take: while I get why the pods exist (everyone has an aisle seat, more privacy for the solo travelers who are often the business people in this class), I miss the \"old style\" of business class, which was just very wide seats with lots of legroom. The current compromise adds privacy, at the cost of trying to jam in more seats lengthwise, thus these weird seat setups because you're squirreling your feet under someone else's side table.",
+    "published_at": "2026-05-21T02:34:36.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:17.694624+00:00"
+  },
+  {
+    "doc_id": "d76d04fbd4364f04",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6lka/businessclass_seats/omzpi46/",
+    "title": "",
+    "text": "Be ready for the Singapore down-vote brigade.  Mention anything about Singapore not being the best-of-the-best and you get downvoted to oblivion.",
+    "published_at": "2026-05-21T03:34:51.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Singapore",
+        "type": "city",
+        "country": "Singapore"
+      }
+    ],
+    "llm_reason": "The post mentions a specific destination, Singapore, and its reputation for downvoting certain opinions.",
+    "processed_at": "2026-05-21T11:28:19.688282+00:00"
+  },
+  {
+    "doc_id": "54720a711a5d8a4d",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6lka/businessclass_seats/omzpq36/",
+    "title": "",
+    "text": "I have noticed that already.",
+    "published_at": "2026-05-21T03:36:20.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "The post does not contain any information about a specific destination.",
+    "processed_at": "2026-05-21T11:28:21.526635+00:00"
+  },
+  {
+    "doc_id": "5584f54948558d90",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6lka/businessclass_seats/omzhl94/",
+    "title": "",
+    "text": "I heard somewhere that a return to the old “straight” layout is being planned. But when?",
+    "published_at": "2026-05-21T02:47:07.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:23.272903+00:00"
+  },
+  {
+    "doc_id": "09142f81b86d9cbf",
+    "url": "https://www.reddit.com/r/travel/comments/1tj5h5z/westjet_auto_rebook_issues/omzfnln/",
+    "title": "",
+    "text": "Have you called WS back to speak to an agent to reseat you?",
+    "published_at": "2026-05-21T02:36:20.000Z",
+    "relevant": "no",
+    "locations": [],
+    "llm_reason": "post is about contacting an airline, not about a specific destination",
+    "processed_at": "2026-05-21T11:28:25.275559+00:00"
+  },
+  {
+    "doc_id": "00020aa5da17498e",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6j7p/advice_for_latvia_estonia_and_lithuania/on043gb/",
+    "title": "",
+    "text": "There's a cool Medieval themed tavern in Tallinn called 'III Draakon' in the old town. \n\nIt's admittedly set up for tourists but it's a cool little place.",
+    "published_at": "2026-05-21T05:18:40.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:27.032599+00:00"
+  },
+  {
+    "doc_id": "30956b370e7b0710",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6hiq/best_place_for_solo_travel_in_the_us_without_a_car/omzapib/",
+    "title": "",
+    "text": "Just to confirm, are you okay with flying but just looking for cities with good public transportation? \n\nChicago is a fun city to explore with cheap and reliable public transport. ",
+    "published_at": "2026-05-21T02:08:44.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Chicago",
+        "type": "city",
+        "country": "United States"
+      }
+    ],
+    "llm_reason": "The post is asking for cities with good public transportation, and Chicago is mentioned as an example.",
+    "processed_at": "2026-05-21T11:28:28.916030+00:00"
+  },
+  {
+    "doc_id": "b8572a6191a0e752",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6j7p/advice_for_latvia_estonia_and_lithuania/on06isb/",
+    "title": "",
+    "text": "Definitely stop there for a pint and an elk pasty. ",
+    "published_at": "2026-05-21T05:37:59.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:30.705377+00:00"
+  },
+  {
+    "doc_id": "3686aa4ee1b9864f",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6hiq/best_place_for_solo_travel_in_the_us_without_a_car/on00a4s/",
+    "title": "",
+    "text": "Chicago is also walkable depending on time of year, where you stay, and what you want to do. We went in autumn and took the L from O’Hare and walked everywhere else. Fantastic trip!",
+    "published_at": "2026-05-21T04:49:35.000Z",
+    "relevant": "yes",
+    "locations": [
+      {
+        "name": "Chicago",
+        "type": "city",
+        "country": "United States"
+      }
+    ],
+    "llm_reason": "The post describes a personal travel experience in Chicago, mentioning specific details about the trip.",
+    "processed_at": "2026-05-21T11:28:32.602709+00:00"
+  },
+  {
+    "doc_id": "d7eb928b29881571",
+    "url": "https://www.reddit.com/r/travel/comments/1tj6j7p/advice_for_latvia_estonia_and_lithuania/omzfbdr/",
+    "title": "",
+    "text": "May I ask if you have already booked the found trip tickets from Riga? How many days are you planning for?",
+    "published_at": "2026-05-21T02:34:29.000Z",
+    "relevant": "unknown",
+    "locations": [],
+    "llm_reason": "error: 'choices'",
+    "processed_at": "2026-05-21T11:28:34.353291+00:00"
+  }
+]
