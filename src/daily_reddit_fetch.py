@@ -1,7 +1,7 @@
 """
 daily_reddit_fetch.py — Daily fetch of r/travel posts.
 
-- Runs every day at 9pm Denmark time via GitHub Actions
+- Runs every day at 8pm Denmark time via GitHub Actions
 - Rotates through a list of Apify keys (one per day)
 - Only fetches posts published in the last 24 hours
 - Filters posts where title mentions a city or country (FlashText)
@@ -97,6 +97,10 @@ def get_todays_key() -> str:
 
     key_name = schedule[today]
     log.info(f"Schedule: using key '{key_name}' for {today}")
+
+    # Debug: show all available env vars that start with APIFY
+    apify_env_vars = [k for k in os.environ.keys() if "APIFY" in k]
+    log.info(f"Available APIFY env vars: {apify_env_vars}")
 
     # The schedule file stores key names like APIFY_KEY_1
     # Try to resolve from environment variable first, then from APIFY_KEYS list
