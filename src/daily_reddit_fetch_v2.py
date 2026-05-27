@@ -1,30 +1,11 @@
 """
-daily_reddit_fetch.py — Daily fetch of r/travel posts using Reddit's public JSON API.
-
-No Apify, no Reddit API key needed — uses Reddit's free public JSON endpoint.
-
-Fields per document:
-  - doc_id          : hash of URL for deduplication
-  - post_id         : Reddit post ID
-  - type            : "post"
-  - title           : post title
-  - text            : post body
-  - published_at    : when posted (ISO format)
-  - locations       : { cities: [...], countries: [...] } via FlashText
-  - location_source : where location was extracted from
-  - url             : full Reddit post URL
-  - fetched_at      : when we fetched it
-  - source          : "reddit"
-  - subreddit       : "r/travel"
-
-Output: saves to MongoDB collection reddit_travel_posts + local JSON backup
+daily_reddit_fetch_v2.py — Fetch r/travel posts using Reddit's public JSON API.
+LOCAL ONLY VERSION — saves to local JSON, no MongoDB push.
 
 Usage:
-    python src/daily_reddit_fetch.py
+    python src/daily_reddit_fetch_v2.py
 
-Environment variables:
-    MONGO_URI       — MongoDB connection string
-    MONGO_DB_NAME   — MongoDB database name
+Output: artifacts/daily_reddit/rtravel_<timestamp>.json
 """
 
 import os
@@ -40,27 +21,21 @@ from pathlib import Path
 import pycountry
 import geonamescache
 from flashtext import KeywordProcessor
-from pymongo import MongoClient, UpdateOne
 from dotenv import load_dotenv
 
 load_dotenv()
 
-MONGO_URI = os.getenv("MONGO_URI")
-DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
-COLLECTION = "reddit_travel_posts"
 BACKUP_DIR = Path("artifacts/daily_reddit")
-
-# Reddit JSON API — fetch up to 100 posts per request, paginate for more
 REDDIT_URL = "https://www.reddit.com/r/travel/new.json"
 POSTS_PER_PAGE = 100
-NUM_PAGES = 5  # 5 x 100 = 500 posts max per run
-HEADERS = {"User-Agent": "travel-sentiment-research/1.0"}
+NUM_PAGES = 10
+HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s"
 )
-log = logging.getLogger("daily_reddit_fetch")
+log = logging.getLogger("daily_reddit_fetch_v2")
 
 
 # ── BUILD FLASHTEXT PROCESSOR ─────────────────────────────────────────────────
@@ -129,7 +104,7 @@ def fetch_rtravel() -> list:
     log.info(f"Fetching posts from r/travel (up to {POSTS_PER_PAGE * NUM_PAGES} posts)...")
 
     all_posts = []
-    after = None  # pagination cursor
+    after = None
 
     for page in range(NUM_PAGES):
         params = {"limit": POSTS_PER_PAGE}
@@ -157,7 +132,7 @@ def fetch_rtravel() -> list:
                 log.info("No more pages")
                 break
 
-            time.sleep(1)  # be polite to Reddit
+            time.sleep(1)
 
         except Exception as e:
             log.error(f"Error on page {page + 1}: {e}")
@@ -182,11 +157,9 @@ def process_posts(raw_posts: list) -> list:
         created_utc = p.get("created_utc")
         published_at = datetime.fromtimestamp(created_utc, tz=timezone.utc).isoformat() if created_utc else ""
 
-        # Skip deleted/removed posts
         if text in ("[deleted]", "[removed]"):
             text = ""
 
-        # Title must mention a location
         if not title_has_location(title):
             dropped_no_location += 1
             continue
@@ -212,85 +185,35 @@ def process_posts(raw_posts: list) -> list:
     return docs
 
 
-# ── MONGODB ───────────────────────────────────────────────────────────────────
-
-def test_mongo() -> bool:
-    if not MONGO_URI:
-        log.error("MONGO_URI not set")
-        return False
-    try:
-        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-        client.server_info()
-        client.close()
-        log.info("MongoDB connection OK ✓")
-        return True
-    except Exception as e:
-        log.error(f"MongoDB connection failed: {e}")
-        return False
-
-
-def save_to_mongo(docs: list) -> bool:
-    if not docs or not MONGO_URI:
-        return False
-    try:
-        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=10000)
-        db = client[DB_NAME]
-        operations = [
-            UpdateOne(
-                {"doc_id": doc["doc_id"]},
-                {"$setOnInsert": doc},
-                upsert=True
-            )
-            for doc in docs
-        ]
-        result = db[COLLECTION].bulk_write(operations)
-        log.info(f"MongoDB: {result.upserted_count} new inserted, {len(docs) - result.upserted_count} already existed → '{COLLECTION}'")
-        client.close()
-        return True
-    except Exception as e:
-        log.error(f"MongoDB save failed: {e}")
-        return False
-
-
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 
 def main():
     log.info("=" * 60)
-    log.info("DAILY r/travel FETCH")
-    log.info(f"Date:       {datetime.now(timezone.utc).strftime('%Y-%m-%d')}")
-    log.info(f"Collection: {COLLECTION}")
+    log.info("r/travel FETCH — LOCAL ONLY")
+    log.info(f"Date:   {datetime.now(timezone.utc).strftime('%Y-%m-%d')}")
+    log.info(f"Output: {BACKUP_DIR}")
     log.info("=" * 60)
 
-    if not test_mongo():
-        log.error("Aborting — fix MongoDB connection first")
-        return
-
-    # Fetch
     raw_posts = fetch_rtravel()
     if not raw_posts:
         log.warning("No posts fetched")
         return
 
-    # Process
     docs = process_posts(raw_posts)
     if not docs:
         log.warning("No documents after filtering")
         return
 
-    # Local backup
     BACKUP_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     backup_path = BACKUP_DIR / f"rtravel_{timestamp}.json"
     with open(backup_path, "w", encoding="utf-8") as f:
         json.dump(docs, f, indent=2, ensure_ascii=False)
-    log.info(f"Backup saved → {backup_path}")
-
-    # Push to MongoDB
-    save_to_mongo(docs)
 
     log.info("=" * 60)
     log.info("DONE")
-    log.info(f"Total docs saved: {len(docs)}")
+    log.info(f"Total posts saved: {len(docs)}")
+    log.info(f"File: {backup_path}")
     log.info("=" * 60)
 
 
