@@ -1,11 +1,13 @@
 """
 daily_reddit_fetch_v2.py — Fetch r/travel posts using Reddit's public JSON API.
-LOCAL ONLY VERSION — saves to local JSON, no MongoDB push.
+Saves locally to JSON AND pushes to MongoDB.
 
 Usage:
     python src/daily_reddit_fetch_v2.py
 
-Output: artifacts/daily_reddit/rtravel_<timestamp>.json
+Output:
+    - Local: artifacts/daily_reddit/rtravel_<timestamp>.json
+    - MongoDB: reddit_travel_posts collection
 """
 
 import os
@@ -21,14 +23,19 @@ from pathlib import Path
 import pycountry
 import geonamescache
 from flashtext import KeywordProcessor
+from pymongo import MongoClient, UpdateOne
 from dotenv import load_dotenv
 
 load_dotenv()
 
+MONGO_URI = os.getenv("MONGO_URI")
+DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
+COLLECTION = "reddit_posts_final"
 BACKUP_DIR = Path("artifacts/daily_reddit")
+
 REDDIT_URL = "https://www.reddit.com/r/travel/new.json"
 POSTS_PER_PAGE = 100
-NUM_PAGES = 10
+NUM_PAGES = 10  # 10 x 100 = 1000 posts max
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
 logging.basicConfig(
@@ -185,13 +192,52 @@ def process_posts(raw_posts: list) -> list:
     return docs
 
 
+# ── MONGODB ───────────────────────────────────────────────────────────────────
+
+def test_mongo() -> bool:
+    if not MONGO_URI:
+        log.warning("MONGO_URI not set — skipping MongoDB push")
+        return False
+    try:
+        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
+        client.server_info()
+        client.close()
+        log.info("MongoDB connection OK ✓")
+        return True
+    except Exception as e:
+        log.error(f"MongoDB connection failed: {e}")
+        return False
+
+
+def save_to_mongo(docs: list):
+    if not MONGO_URI:
+        return
+    try:
+        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=10000)
+        db = client[DB_NAME]
+        operations = [
+            UpdateOne(
+                {"doc_id": doc["doc_id"]},
+                {"$setOnInsert": doc},
+                upsert=True
+            )
+            for doc in docs
+        ]
+        result = db[COLLECTION].bulk_write(operations)
+        log.info(f"MongoDB: {result.upserted_count} new inserted, {len(docs) - result.upserted_count} already existed → '{COLLECTION}'")
+        client.close()
+    except Exception as e:
+        log.error(f"MongoDB save failed: {e}")
+
+
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 
 def main():
     log.info("=" * 60)
-    log.info("r/travel FETCH — LOCAL ONLY")
-    log.info(f"Date:   {datetime.now(timezone.utc).strftime('%Y-%m-%d')}")
-    log.info(f"Output: {BACKUP_DIR}")
+    log.info("r/travel FETCH")
+    log.info(f"Date:       {datetime.now(timezone.utc).strftime('%Y-%m-%d')}")
+    log.info(f"Collection: {COLLECTION}")
+    log.info(f"Output:     {BACKUP_DIR}")
     log.info("=" * 60)
 
     raw_posts = fetch_rtravel()
@@ -204,16 +250,23 @@ def main():
         log.warning("No documents after filtering")
         return
 
+    # Save locally first — always
     BACKUP_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     backup_path = BACKUP_DIR / f"rtravel_{timestamp}.json"
     with open(backup_path, "w", encoding="utf-8") as f:
         json.dump(docs, f, indent=2, ensure_ascii=False)
+    log.info(f"Saved locally → {backup_path}")
+
+    # Push to MongoDB if connection available
+    if test_mongo():
+        save_to_mongo(docs)
+    else:
+        log.warning("MongoDB not available — data saved locally only")
 
     log.info("=" * 60)
     log.info("DONE")
-    log.info(f"Total posts saved: {len(docs)}")
-    log.info(f"File: {backup_path}")
+    log.info(f"Total posts: {len(docs)}")
     log.info("=" * 60)
 
 
