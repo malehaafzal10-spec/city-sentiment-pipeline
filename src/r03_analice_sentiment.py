@@ -19,6 +19,7 @@ import time
 import logging
 import requests
 from pymongo import MongoClient, UpdateOne
+from artifacts import log_sentiment_run
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -308,6 +309,18 @@ def main():
     if total_processed > 0:
         log.info(f"Relevancy Rate:          {(total_saved / total_processed) * 100:.2f}%")
     log.info("=" * 60)
+    log_sentiment_run(
+        run_id=run_id,
+        total_found=total_posts,
+        total_processed=total_processed,
+        total_relevant=total_saved,
+        total_excluded=total_processed - total_saved,
+        stopped_early=False,
+        prompt_template=PROMPT_TEMPLATE,
+        model=GROQ_MODEL,
+        source_collection=SOURCE_COLLECTION,
+        target_collection=TARGET_COLLECTION,
+    )
 
 if __name__ == "__main__":
     main()
