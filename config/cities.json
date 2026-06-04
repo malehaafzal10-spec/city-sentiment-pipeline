@@ -17,6 +17,7 @@
     { "name": "Porto", "country": "Portugal", "keywords": ["porto travel", "visit porto", "porto tourism"] },
     { "name": "Beijing", "country": "China", "keywords": ["beijing travel", "visit beijing", "beijing tourism"] },
     { "name": "Budapest", "country": "Hungary", "keywords": ["budapest travel", "visit budapest", "budapest tourism"] },
-    { "name": "Buenos Aires", "country": "Argentina", "keywords": ["buenos aires travel", "visit buenos aires", "buenos aires tourism"] }
+    { "name": "Buenos Aires", "country": "Argentina", "keywords": ["buenos aires travel", "visit buenos aires", "buenos aires tourism"] },
+    { "name": "Hanoi", "country": "Vietnam", "keywords": ["hanoi travel", "visit hanoi", "hanoi tourism"] }
   ]
 }

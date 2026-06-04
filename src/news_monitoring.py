@@ -7,9 +7,14 @@ load_dotenv()
 
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
-COLLECTION_NAME = "raw_documents_historical"
 
-def monitor_run_ids():
+# List all the collections you want to monitor here
+COLLECTIONS_TO_MONITOR = [
+    "raw_documents_historical",
+    "news_alert"
+]
+
+def monitor_collections():
     if not MONGO_URI:
         print("Error: MONGO_URI is missing from environment variables.")
         return
@@ -18,37 +23,39 @@ def monitor_run_ids():
         # Initialize MongoDB Client
         client = MongoClient(MONGO_URI)
         db = client[DB_NAME]
-        collection = db[COLLECTION_NAME]
 
-        # Aggregation Pipeline:
-        # 1. Group by the 'run_id' field and calculate the sum
-        # 2. Sort the results alphabetically/chronologically descending (newest runs first)
-        pipeline = [
-            {"$group": {"_id": "$run_id", "count": {"$sum": 1}}},
-            {"$sort": {"_id": -1}} 
-        ]
+        for collection_name in COLLECTIONS_TO_MONITOR:
+            collection = db[collection_name]
 
-        results = list(collection.aggregate(pipeline))
+            # Aggregation Pipeline: Group by run_id, sum them, and sort newest first
+            pipeline = [
+                {"$group": {"_id": "$run_id", "count": {"$sum": 1}}},
+                {"$sort": {"_id": -1}} 
+            ]
 
-        if not results:
-            print(f"No documents found in collection '{COLLECTION_NAME}'.")
-            return
+            results = list(collection.aggregate(pipeline))
 
-        # Print the results in a formatted table
-        print(f"\n--- Document Count per run_id in '{COLLECTION_NAME}' ---")
-        print(f"{'Run ID':<25} | {'Document Count'}")
-        print("-" * 45)
+            print(f"\n" + "="*50)
+            print(f"📊 COLLECTION: {collection_name}")
+            print("="*50)
 
-        total_docs = 0
-        for row in results:
-            run_id = row["_id"] if row["_id"] else "UNKNOWN/NULL"
-            count = row["count"]
-            total_docs += count
-            
-            print(f"{run_id:<25} | {count}")
+            if not results:
+                print(f"  No documents found in collection.\n")
+                continue
 
-        print("-" * 45)
-        print(f"{'TOTAL DOCUMENTS':<25} | {total_docs}\n")
+            print(f"{'Run ID':<25} | {'Document Count'}")
+            print("-" * 45)
+
+            total_docs = 0
+            for row in results:
+                run_id = row["_id"] if row["_id"] else "UNKNOWN/NULL"
+                count = row["count"]
+                total_docs += count
+                
+                print(f"{run_id:<25} | {count}")
+
+            print("-" * 45)
+            print(f"{'TOTAL DOCUMENTS':<25} | {total_docs}\n")
 
     except Exception as e:
         print(f"An error occurred while connecting to MongoDB: {e}")
@@ -57,4 +64,4 @@ def monitor_run_ids():
             client.close()
 
 if __name__ == "__main__":
-    monitor_run_ids()
+    monitor_collections()
