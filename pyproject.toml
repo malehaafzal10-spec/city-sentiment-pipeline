@@ -1,0 +1,28 @@
+[project]
+name = "city_sentiment"
+version = "0.1.0"
+requires-python = "==3.12"
+
+# List all your project's dependencies here
+dependencies = [
+    "vllm",
+    "torch",
+    "transformers",
+    "accelerate",
+    "newsapi-python",
+    "pandas",
+    "python-dotenv",
+    "requests",
+    "langdetect",
+    "pymongo",
+    "beautifulsoup4",
+    "groq",
+    "streamlit",
+    "huggingface_hub",
+    "scikit-learn",
+    "altair",
+    "flashtext",
+    "pycountry",
+    "geonamescache",
+    "spacy"
+]

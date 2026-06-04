@@ -35,8 +35,8 @@ GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 # MongoDB Configuration
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
-SOURCE_COLLECTION = "reddit_comments_final"
-TARGET_COLLECTION = "reddit_comments_relevant"
+SOURCE_COLLECTION = "reddit_posts_final"
+TARGET_COLLECTION = "reddit_relevant"
 
 # ==========================================
 # Test Mode
@@ -44,7 +44,7 @@ TARGET_COLLECTION = "reddit_comments_relevant"
 TEST_MODE = False
 TEST_LIMIT = 10
 TEST_OUTPUT_FILE = "test_output.json"
-
+TEST_FIXTURE_FILE = "test_fixture.json"
 
 logging.basicConfig(
     level=logging.INFO,
@@ -63,16 +63,19 @@ class GroqLimitError(Exception):
 
 PROMPT_TEMPLATE = """You are an expert sentiment analyst specializing in travel reviews. 
 
-Your task is to read the text of a Reddit travel post and do the following:
-
-1. Determine if the comments are relevant to general tourism.
-2. Identify all relevant travel aspects discussed and evaluate the sentiment for each.
+Your task is to read the title and text of a Reddit travel post and do two things:
+1. Categorize the intent of the post (review vs. help).
+2. Determine if the post's comments are worth scraping based on its relevance to general tourism.
+3. Identify all relevant travel aspects discussed and evaluate the sentiment for each.
 
 INSTRUCTIONS:
-- relevant: Set this to "yes" if the post contains relevant information, tips, or experiences about a tourist destination. Set this to "no" if it is not relevant information for tourists.
+- relevant: Evaluate the title and overall content. Set this to "yes" if the post contains relevant information, tips, or experiences about a tourist destination. Set this to "no" if the post is primarily a complaint about specific services (e.g., an airline lost bag, a specific hotel booking error) or information not relevant to a general tourist (e.g. car rental services, eSIM, insurance).
+- text_type: Categorize the overall intent of the post. Set to "review" if the user is sharing an experience or opinion about a location they have visited. Set to "help" if the text is primarily asking for recommendations, advice, or assistance for an upcoming trip.
 - aspects: For every travel aspect found in the text, extract:
-  - aspect: The general category 
+  - aspect: The general category (e.g., "transportation", "nature", "food", "accommodation").
   - sentiment_score: A rating from 1 to 5 (1 = very negative, 3 = neutral, 5 = very positive).
+  - city: The specific city associated with the aspect.
+  - country: The country associated with the aspect (infer this if only the city is mentioned).
 
 OUTPUT FORMAT:
 Return strictly a single JSON object. Do not include markdown formatting like ```json or any conversational text.
@@ -81,11 +84,14 @@ EXAMPLE:
 Title: "Traveling to Dhërmi, Albania"
 ... (omitted for brevity, assume the full example here from your code)
 {   
+  "text_type": "review",
   "relevant": "yes",
   "aspects": [
     {
       "aspect": "aspect1",
-      "sentiment_score": 4
+      "sentiment_score": 4,
+      "city": "Dhermi",
+      "country": "Albania"
     }
   ]
 }
@@ -103,7 +109,7 @@ def analyze_post(title, text, max_retries=5):
     if retries are exhausted.
     """
 
-    user_content = f"Text: \"{text}\""
+    user_content = f"Title: \"{title}\"\nText: \"{text}\""
     full_prompt = f"{PROMPT_TEMPLATE}\n\n{user_content}"
 
     headers = {
@@ -227,8 +233,14 @@ def main():
             log.warning(f"MongoDB unavailable in TEST_MODE. Trying local fixture...")
 
         if posts is None:
-            log.error("No MongoDB connection")
-            return
+            if os.path.exists(TEST_FIXTURE_FILE):
+                with open(TEST_FIXTURE_FILE, "r", encoding="utf-8") as f:
+                    all_fixture = json.load(f)
+                # Filter fixture data matching the requested date
+                posts = [p for p in all_fixture if str(p.get("published_at", "")).startswith(db_date_str)][:TEST_LIMIT]
+            else:
+                log.error("No MongoDB connection and no local fixture found.")
+                return
     else:
         posts = list(db[SOURCE_COLLECTION].find(date_query))
 

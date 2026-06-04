@@ -4,7 +4,7 @@ Uses Playwright to bypass Reddit's bot detection.
 Saves to MongoDB collection: reddit_comments_final
 
 Usage:
-    python insights/fetch_comments.py
+    python insights/fetch_comments.py --date YYYYMMDD
 
 Requirements:
     - MONGO_URI in .env
@@ -14,10 +14,12 @@ Requirements:
 """
 
 import os
+import re
 import json
 import time
 import hashlib
 import logging
+import argparse
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -236,14 +238,32 @@ def fetch_comments_for_post(page, post: dict) -> list:
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 
 def main():
-    run_id = f"comments_run_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
+    parser = argparse.ArgumentParser(description="Fetch comments for Reddit posts based on a previous run_id date.")
+    parser.add_argument(
+        "--date",
+        type=str,
+        required=True,
+        help="Target date in YYYYMMDD format to match the run_id (e.g., 20260527)"
+    )
+    args = parser.parse_args()
+
+    # Validate date format
+    if not re.match(r"^\d{8}$", args.date):
+        log.error("Invalid date format. Please use YYYYMMDD (e.g., 20260527).")
+        return
+
+    target_date = args.date
+    
+    # Updated to save with the run_YYYYMMDD_local format
+    run_id = f"run_{target_date}_local"
 
     log.info("=" * 60)
     log.info("FETCH COMMENTS FOR reddit_relevant POSTS")
-    log.info(f"run_id:     {run_id}")
-    log.info(f"Source:     {SOURCE_COLLECTION}")
-    log.info(f"Dest:       {DEST_COLLECTION}")
-    log.info(f"Per post:   top {COMMENTS_PER_POST} comments")
+    log.info(f"Target Run Date: {target_date}")
+    log.info(f"New run_id:      {run_id}")
+    log.info(f"Source:          {SOURCE_COLLECTION}")
+    log.info(f"Dest:            {DEST_COLLECTION}")
+    log.info(f"Per post:        top {COMMENTS_PER_POST} comments")
     log.info("=" * 60)
 
     if not test_mongo():
@@ -252,11 +272,14 @@ def main():
 
     client = MongoClient(MONGO_URI)
     db = client[DB_NAME]
-    posts = list(db[SOURCE_COLLECTION].find({}, {"post_id": 1, "url": 1, "title": 1, "locations": 1}))
+    
+    # Query matching documents where run_id starts with 'run_YYYYMMDD'
+    query = {"run_id": {"$regex": f"^run_{target_date}"}}
+    posts = list(db[SOURCE_COLLECTION].find(query, {"post_id": 1, "url": 1, "title": 1, "locations": 1}))
     client.close()
 
     if not posts:
-        log.error(f"No posts found in '{SOURCE_COLLECTION}'")
+        log.error(f"No posts found in '{SOURCE_COLLECTION}' for date {target_date}")
         return
 
     log.info(f"Found {len(posts)} posts to fetch comments for")
