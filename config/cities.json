@@ -7,6 +7,16 @@
     { "name": "Amsterdam", "country": "Netherlands", "keywords": ["amsterdam travel", "visit amsterdam", "amsterdam tourism"] },
     { "name": "Prague", "country": "Czech Republic", "keywords": ["prague travel", "visit prague", "prague tourism"] },
     { "name": "Athens", "country": "Greece", "keywords": ["athens travel", "visit athens", "athens tourism"] },
-    { "name": "London", "country": "United Kingdom", "keywords": ["london travel", "visit london", "london tourism"] }
+    { "name": "London", "country": "United Kingdom", "keywords": ["london travel", "visit london", "london tourism"] },
+    { "name": "Istanbul", "country": "Turkey", "keywords": ["istanbul travel", "visit istanbul", "istanbul tourism"] },
+    { "name": "Tokyo", "country": "Japan", "keywords": ["tokyo travel", "visit tokyo", "tokyo tourism"] },
+    { "name": "Copenhagen", "country": "Denmark", "keywords": ["copenhagen travel", "visit copenhagen", "copenhagen tourism"] },
+    { "name": "Taipei", "country": "Taiwan", "keywords": ["taipei travel", "visit taipei", "taipei tourism"] },
+    { "name": "Mexico City", "country": "Mexico", "keywords": ["mexico city travel", "visit mexico city", "mexico city tourism"] },
+    { "name": "Berlin", "country": "Germany", "keywords": ["berlin travel", "visit berlin", "berlin tourism"] },
+    { "name": "Porto", "country": "Portugal", "keywords": ["porto travel", "visit porto", "porto tourism"] },
+    { "name": "Beijing", "country": "China", "keywords": ["beijing travel", "visit beijing", "beijing tourism"] },
+    { "name": "Budapest", "country": "Hungary", "keywords": ["budapest travel", "visit budapest", "budapest tourism"] },
+    { "name": "Buenos Aires", "country": "Argentina", "keywords": ["buenos aires travel", "visit buenos aires", "buenos aires tourism"] }
   ]
 }

@@ -23,7 +23,7 @@ DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
 
 # Define the collections you want to monitor and a short display name for the table
 COLLECTIONS = {
-    "reddit_posts_final": "Posts",
+    "r01_reddit_posts_raw_final": "Posts",
     "reddit_relevant": "Rel. Posts",
     "reddit_comments_final": "Comments",
     "reddit_comments_relevant": "Rel. Comms",
