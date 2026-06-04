@@ -7,6 +7,7 @@ import os
 import json
 import hashlib
 import logging
+import argparse
 from datetime import datetime, timezone, timedelta
 
 from newsapi import NewsApiClient
@@ -19,7 +20,6 @@ ARTIFACTS_DIR = os.getenv("PIPELINE_ARTIFACTS_DIR", "artifacts")
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
 
-# We now have two collections: one for individual articles, one for pipeline run artifacts
 DOCUMENTS_COLLECTION = "raw_documents_historical"
 ARTIFACTS_COLLECTION = "pipeline_artifacts"
 
@@ -41,7 +41,7 @@ def make_doc_id(source: str, url: str) -> str:
 
 # ─── NEWSAPI ──────────────────────────────────────────────────────────────────
 
-def fetch_news(config: dict, run_id: str) -> list:
+def fetch_news(config: dict, run_id: str, query_date_str: str) -> list:
     api_key = os.getenv("NEWSAPI_KEY")
     if not api_key:
         log.info("[News] No NEWSAPI_KEY set — skipping")
@@ -50,9 +50,7 @@ def fetch_news(config: dict, run_id: str) -> list:
     newsapi = NewsApiClient(api_key=api_key)
     all_docs = []
     
-    # Calculate yesterday's date in YYYY-MM-DD format for the API
-    yesterday_str = (datetime.now(timezone.utc) - timedelta(days=1)).strftime('%Y-%m-%d')
-    log.info(f"[News] Fetching articles published on: {yesterday_str}")
+    log.info(f"[News] Fetching articles published on: {query_date_str}")
 
     for city in config["cities"]:
         city_name = city["name"]
@@ -65,8 +63,8 @@ def fetch_news(config: dict, run_id: str) -> list:
                     language="en",
                     sort_by="publishedAt",
                     page_size=20,
-                    from_param=yesterday_str,
-                    to=yesterday_str
+                    from_param=query_date_str,
+                    to=query_date_str
                 )
                 for article in response.get("articles", []):
                     url = article.get("url", "")
@@ -101,7 +99,6 @@ def save_raw_artifacts(news_docs: list, run_id: str):
         log.info("[Artifacts] No documents to save as an artifact.")
         return
 
-    # Save to MongoDB Artifacts Collection
     if MONGO_URI:
         try:
             client = MongoClient(MONGO_URI)
@@ -113,7 +110,7 @@ def save_raw_artifacts(news_docs: list, run_id: str):
                 "artifact_type": "raw_ingestion",
                 "timestamp": datetime.now(timezone.utc),
                 "document_count": len(news_docs),
-                "payload": news_docs  # Storing the entire JSON list inside this field
+                "payload": news_docs  
             }
             
             artifacts_col.insert_one(artifact_document)
@@ -164,48 +161,63 @@ def save_to_db(docs: list):
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 
-def run(run_id: str) -> dict:
+def run(target_date: datetime, force: bool) -> dict:
+    # Generate run_id based on the target date provided
+    run_id = f"run_{target_date.strftime('%d%m%Y')}"
+    # Calculate the query date (NewsAPI fetches data from the day before the run)
+    query_date_str = (target_date - timedelta(days=1)).strftime('%Y-%m-%d')
+    
     log.info(f"=== STEP 1: INGEST | run_id={run_id} | mode=news_only ===")
     
-    # --- NEW: IDEMPOTENCY CHECK ---
     if MONGO_URI:
         try:
             client = MongoClient(MONGO_URI)
             db = client[DB_NAME]
             
-            # Check if this exact run_id has already generated a raw_ingestion artifact
             existing_run = db[ARTIFACTS_COLLECTION].find_one({
                 "run_id": run_id,
                 "artifact_type": "raw_ingestion"
             })
             
-            if existing_run:
+            # Allow bypassing the check if --force is used
+            if existing_run and not force:
                 log.info(f"⏭️  [Ingest] Run ID '{run_id}' already exists. Skipping API ingestion to save quota.")
                 client.close()
                 return {"run_id": run_id, "total_docs": 0, "status": "skipped"}
+            elif existing_run and force:
+                log.info(f"⚠️  [Ingest] Run ID '{run_id}' exists, but --force flag is active. Proceeding with backfill.")
                 
         except Exception as e:
             log.error(f"[DB] Could not check for existing run_id. Proceeding anyway. Error: {e}")
         finally:
             if 'client' in locals() and getattr(client, "close", None):
                 client.close()
-    # ------------------------------
 
     config = load_config()
 
-    all_docs = fetch_news(config, run_id)
+    # Pass the accurately calculated query date to the fetch function
+    all_docs = fetch_news(config, run_id, query_date_str)
     
     save_raw_artifacts(all_docs, run_id)
     save_to_db(all_docs)
 
-    log.info(f"[Ingest] Complete — {len(all_docs)} total documents")
+    log.info(f"[Ingest] Complete — {len(all_docs)} total documents fetched.")
     return {"run_id": run_id, "total_docs": len(all_docs), "status": "completed"}
 
 
 if __name__ == "__main__":
-    # Generate a unique ID for this execution using the requested DDMMYYYY format
-    current_run_id = f"run_{datetime.now(timezone.utc).strftime('%d%m%Y')}"
+    parser = argparse.ArgumentParser(description="Ingest daily news into MongoDB.")
+    parser.add_argument("--date", type=str, help="Target date for the run in YYYY-MM-DD format (e.g., 2026-06-01). Defaults to today.")
+    parser.add_argument("--force", action="store_true", help="Force ingestion even if the run_id already exists.")
     
+    args = parser.parse_args()
+
+    # Set the target date based on input, or default to current time
+    if args.date:
+        target_dt = datetime.strptime(args.date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    else:
+        target_dt = datetime.now(timezone.utc)
+
     # Trigger the pipeline
-    result = run(current_run_id)
+    result = run(target_dt, args.force)
     print(f"\nIngestion status: {result.get('status')}")

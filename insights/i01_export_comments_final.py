@@ -12,7 +12,7 @@ load_dotenv()
 # ==========================================
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
-SOURCE_COLLECTION = "reddit_comments_final"
+SOURCE_COLLECTION = "reddit_posts_final"
 OUTPUT_FILE = "reddit_comments_final_export.json"
 
 def main():
