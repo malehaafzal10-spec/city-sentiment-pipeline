@@ -14,7 +14,7 @@ from newsapi import NewsApiClient
 from dotenv import load_dotenv
 from pymongo import MongoClient, UpdateOne
 
-load_dotenv()
+load_dotenv(override=True)
 
 ARTIFACTS_DIR = os.getenv("PIPELINE_ARTIFACTS_DIR", "artifacts")
 MONGO_URI = os.getenv("MONGO_URI")
