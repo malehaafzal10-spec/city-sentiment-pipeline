@@ -35,7 +35,7 @@ jobs:
           PIPELINE_ARTIFACTS_DIR: artifacts
           PIPELINE_LOG_LEVEL: INFO
           ENABLE_LLM_VERDICTS: "false"
-        run: python run_pipeline.py --news-only --skip-llm
+        run: python run_pipeline.py 
  
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
