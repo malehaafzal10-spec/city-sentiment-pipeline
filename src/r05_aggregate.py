@@ -21,48 +21,27 @@ COMMENTS_COLLECTION = "reddit_comments_relevant"
 TARGET_COLLECTION = "reddit_aggregated"
 
 def extract_aspects(cursor, doc_type, forced_run_id):
-    """
-    Iterates through MongoDB documents and extracts aspect-level data.
-    If an aspect lacks both city and country, it falls back to the 
-    document-level locations block. The run_id is standardized.
-    """
     rows = []
     for doc in cursor:
-        # 1. Extract document-level metadata
         id_ = str(doc.get("_id", ""))
         doc_id = doc.get("doc_id", "")
         post_id = doc.get("post_id", "")
         fetched_at = doc.get("fetched_at", doc.get("published_at", None))
-        
-        # 2. Extract document-level locations for fallback
         locations = doc.get("locations") or {}
         doc_cities = locations.get("cities") or []
         doc_countries = locations.get("countries") or []
-        
-        # 3. Access the nested analysis object
         analysis = doc.get("analysis") or {}
         aspects = analysis.get("aspects") or []
-        
-        # 4. Extract data directly from each aspect
         for aspect_data in aspects:
             aspect = aspect_data.get("aspect")
             sentiment_score = aspect_data.get("sentiment_score")
-            
-            # Extract city and country directly from the aspect dictionary
             city = aspect_data.get("city")
             country = aspect_data.get("country")
-            
-            # ----------------------------------------------------
-            # FALLBACK LOGIC: 
-            # If both city and country are missing in the aspect,
-            # pull from the document-level locations structure.
-            # ----------------------------------------------------
             if not city and not country:
                 if doc_cities:
-                    city = doc_cities[0]  # Take the first city if available
+                    city = doc_cities[0]
                 elif doc_countries:
-                    country = doc_countries[0]  # Take the first country if no cities exist
-            
+                    country = doc_countries[0]
             rows.append({
                 "aspect": aspect,
                 "sentiment_score": sentiment_score,
@@ -72,20 +51,15 @@ def extract_aspects(cursor, doc_type, forced_run_id):
                 "doc_id": doc_id,
                 "post_id": post_id,
                 "fetched_at": fetched_at,
-                "run_id": forced_run_id,  # Ensure uniform run_id formatting
+                "run_id": forced_run_id,
                 "type": doc_type
             })
-            
     return rows
 
 def get_unprocessed_run_ids(db) -> list:
-    """
-    Returns run_ids present in POSTS_COLLECTION or COMMENTS_COLLECTION
-    that are not yet in TARGET_COLLECTION. Oldest first.
-    """
-    post_run_ids     = set(db[POSTS_COLLECTION].distinct("run_id"))
-    comment_run_ids  = set(db[COMMENTS_COLLECTION].distinct("run_id"))
-    all_run_ids      = post_run_ids | comment_run_ids
+    post_run_ids      = set(db[POSTS_COLLECTION].distinct("run_id"))
+    comment_run_ids   = set(db[COMMENTS_COLLECTION].distinct("run_id"))
+    all_run_ids       = post_run_ids | comment_run_ids
     processed_run_ids = set(db[TARGET_COLLECTION].distinct("run_id"))
     unprocessed = [r for r in all_run_ids if r not in processed_run_ids]
     unprocessed.sort()
@@ -93,24 +67,18 @@ def get_unprocessed_run_ids(db) -> list:
 
 
 def process_run_id(db, run_id: str):
-    """Aggregate posts and comments for a single run_id."""
     print("=" * 60)
     print(f"R05 — Aggregating run_id: {run_id}")
     print("=" * 60)
 
-    posts_query = {
-        "run_id": run_id,
-        "analysis.text_type": "review"
-    }
+    posts_query    = {"run_id": run_id, "analysis.text_type": "review"}
     comments_query = {"run_id": run_id}
 
-    print(f"Fetching POSTS (reviews only)...")
-    posts_cursor  = db[POSTS_COLLECTION].find(posts_query)
-    posts_data    = extract_aspects(posts_cursor, "post", run_id)
+    print("Fetching POSTS (reviews only)...")
+    posts_data = extract_aspects(db[POSTS_COLLECTION].find(posts_query), "post", run_id)
 
-    print(f"Fetching COMMENTS...")
-    comments_cursor = db[COMMENTS_COLLECTION].find(comments_query)
-    comments_data   = extract_aspects(comments_cursor, "comment", run_id)
+    print("Fetching COMMENTS...")
+    comments_data = extract_aspects(db[COMMENTS_COLLECTION].find(comments_query), "comment", run_id)
 
     all_data = posts_data + comments_data
 
@@ -134,6 +102,7 @@ def process_run_id(db, run_id: str):
     records_to_insert = df.to_dict(orient="records")
     print(f"Inserting {len(records_to_insert)} records into '{TARGET_COLLECTION}'...")
     insert_result = target_coll.insert_many(records_to_insert)
+    print(f"Inserted {len(insert_result.inserted_ids)} records.")
 
     print("=" * 60)
     print(f"SUCCESS — {run_id}")
@@ -169,8 +138,7 @@ def main():
         process_run_id(db, run_id)
 
     print("ALL DONE")
-    print(f"Inserted {len(insert_result.inserted_ids)} records into '{TARGET_COLLECTION}'.")
-    print("=" * 60)
+
 
 if __name__ == "__main__":
     main()
