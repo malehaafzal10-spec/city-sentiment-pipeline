@@ -10,3 +10,100 @@
 2026-06-05 12:58:45,675 [INFO] ============================================================
 2026-06-05 12:58:46,640 [INFO] MongoDB connection OK \u2713
 2026-06-05 12:58:47,088 [ERROR] No posts found in 'reddit_relevant' for date 20260603
+2026-06-05 13:08:27,106 [INFO] Building location processor...
+2026-06-05 13:08:27,346 [INFO] FlashText processor built: 11626 cities, 260 countries
+2026-06-05 13:08:27,348 [INFO] ============================================================
+2026-06-05 13:08:27,348 [INFO] FETCH COMMENTS FOR reddit_relevant POSTS
+2026-06-05 13:08:27,348 [INFO] Target Run Date: 20260603
+2026-06-05 13:08:27,349 [INFO] New run_id:      run-20260603-AUTO
+2026-06-05 13:08:27,349 [INFO] Source:          reddit_relevant
+2026-06-05 13:08:27,349 [INFO] Dest:            reddit_comments_final
+2026-06-05 13:08:27,349 [INFO] Per post:        top 20 comments
+2026-06-05 13:08:27,349 [INFO] ============================================================
+2026-06-05 13:08:27,934 [INFO] MongoDB connection OK \u2713
+2026-06-05 13:08:28,315 [INFO] Found 37 posts to fetch comments for
+2026-06-05 13:08:36,112 [INFO] Warming up browser session...
+2026-06-05 13:08:42,572 [INFO] [1/37] 1tvwddu — Philippines travel budget check (Cebu \u2192 Malapascua \u2192 Bantaya
+2026-06-05 13:08:43,252 [INFO]   \u2192 1 comments
+2026-06-05 13:08:45,253 [INFO] [2/37] 1tvuqy4 — Indonesia trip information
+2026-06-05 13:08:45,527 [INFO]   \u2192 2 comments
+2026-06-05 13:08:47,528 [INFO] [3/37] 1tvt3uw — Prom/Ferry Corfu / Sarande Albania
+2026-06-05 13:08:47,798 [INFO]   \u2192 1 comments
+2026-06-05 13:08:49,799 [INFO] [4/37] 1tvsn9d — Fiancé is visiting Germany, Portugal, and Croatia. What shou
+2026-06-05 13:08:50,051 [INFO]   \u2192 4 comments
+2026-06-05 13:08:52,052 [INFO] [5/37] 1tvsj57 — Does being the partner of an Indian national complicate visi
+2026-06-05 13:08:52,269 [INFO]   \u2192 2 comments
+2026-06-05 13:08:54,269 [INFO] [6/37] 1tvs5mf — Uzbekistan Itinerary: Extra in Khiva vs. Samarkand?
+2026-06-05 13:08:54,529 [INFO]   \u2192 3 comments
+2026-06-05 13:08:56,530 [INFO] [7/37] 1tvpxcf — How social is the solo backpacker scene in Pakistan right no
+2026-06-05 13:08:56,767 [INFO]   \u2192 2 comments
+2026-06-05 13:08:58,768 [INFO] [8/37] 1tvoryn — Opinion on 14 full days first time Indonesia itinerary
+2026-06-05 13:08:59,023 [INFO]   \u2192 2 comments
+2026-06-05 13:09:01,024 [INFO] [9/37] 1tvniqy — Looking for a TRULY offbeat 2 week itinerary for Indonesia i
+2026-06-05 13:09:01,252 [INFO]   \u2192 2 comments
+2026-06-05 13:09:03,252 [INFO] [10/37] 1tvmx54 — Is traveling to Amman safe right now?
+2026-06-05 13:09:03,538 [INFO]   \u2192 10 comments
+2026-06-05 13:09:05,539 [INFO] [11/37] 1tvmd5p — Can I visit Japan again?
+2026-06-05 13:09:05,818 [INFO]   \u2192 5 comments
+2026-06-05 13:09:07,818 [INFO] [12/37] 1tvls7j — Going to Romania in end of September for a week, can you ple
+2026-06-05 13:09:08,184 [INFO]   \u2192 8 comments
+2026-06-05 13:09:10,184 [INFO] [13/37] 1tvkw5y — Underwhelmed By Barcelona.
+2026-06-05 13:09:10,528 [INFO]   \u2192 15 comments
+2026-06-05 13:09:12,529 [INFO] [14/37] 1tvkupr — work and travel in australia from cairns to sydney
+2026-06-05 13:09:12,774 [INFO]   \u2192 0 comments
+2026-06-05 13:09:14,775 [INFO] [15/37] 1tvjakl — Are Mexico highways actually safe for tourists or is it exag
+2026-06-05 13:09:15,091 [INFO]   \u2192 9 comments
+2026-06-05 13:09:17,092 [INFO] [16/37] 1tvhpfe — For those who've visited Namibia, which places stayed with y
+2026-06-05 13:09:17,318 [INFO]   \u2192 2 comments
+2026-06-05 13:09:19,319 [INFO] [17/37] 1tvh29i — Italy Trip
+2026-06-05 13:09:19,545 [INFO]   \u2192 2 comments
+2026-06-05 13:09:21,546 [INFO] [18/37] 1tvh1ch — My husband surprised me with anniversary tickets to Japan an
+2026-06-05 13:09:21,826 [INFO]   \u2192 16 comments
+2026-06-05 13:09:23,827 [INFO] [19/37] 1tvgz2a — Camping at Lake como
+2026-06-05 13:09:24,049 [INFO]   \u2192 1 comments
+2026-06-05 13:09:26,049 [INFO] [20/37] 1tvgvx4 — Pick between Vienna and Prague
+2026-06-05 13:09:26,398 [INFO]   \u2192 14 comments
+2026-06-05 13:09:28,398 [INFO] [21/37] 1tvfae9 — Need help deciding location for friend groups next trip. Por
+2026-06-05 13:09:28,727 [INFO]   \u2192 14 comments
+2026-06-05 13:09:30,728 [INFO] [22/37] 1tveica — Three Years of Ireland
+2026-06-05 13:09:31,058 [INFO]   \u2192 16 comments
+2026-06-05 13:09:33,058 [INFO] [23/37] 1tvcqjs — Bosnia, Croatia, or Montenegro?
+2026-06-05 13:09:33,368 [INFO]   \u2192 8 comments
+2026-06-05 13:09:35,368 [INFO] [24/37] 1tvc2n8 — Iguazu Falls - Argentina and Brazil tips
+2026-06-05 13:09:35,615 [INFO]   \u2192 0 comments
+2026-06-05 13:09:37,615 [INFO] [25/37] 1tvbash — A Trip to Guatemala During Rainy Season
+2026-06-05 13:09:37,944 [INFO]   \u2192 5 comments
+2026-06-05 13:09:39,945 [INFO] [26/37] 1tvan02 — Trying to decide between Porto or Valencia for one week in M
+2026-06-05 13:09:40,487 [INFO]   \u2192 2 comments
+2026-06-05 13:09:42,487 [INFO] [27/37] 1tw6zul — Solo (30F) travel to Nepal
+2026-06-05 13:09:42,721 [INFO]   \u2192 1 comments
+2026-06-05 13:09:44,721 [INFO] [28/37] 1tw40t8 — Taipei in the Rain: Historic Streets, Temples, and Dumplings
+2026-06-05 13:09:45,056 [INFO]   \u2192 3 comments
+2026-06-05 13:09:47,057 [INFO] [29/37] 1tw3t8d — Unique souvenirs from Italy
+2026-06-05 13:09:47,373 [INFO]   \u2192 13 comments
+2026-06-05 13:09:49,374 [INFO] [30/37] 1tw34uj — Croatia, we love you, but we won't be back
+2026-06-05 13:09:50,249 [INFO]   \u2192 7 comments
+2026-06-05 13:09:52,250 [INFO] [31/37] 1tvxug5 — Planning 2 week trip in Germany and Austria around Christmas
+2026-06-05 13:09:52,708 [INFO]   \u2192 2 comments
+2026-06-05 13:09:54,775 [INFO] [32/37] 1tvx6gh — Traveling to Albania this week
+2026-06-05 13:09:55,026 [INFO]   \u2192 3 comments
+2026-06-05 13:09:57,032 [INFO] [33/37] 1tvx4hh — Just finished 10 days in Japan (Tokyo, Kyoto, Nara, Kamakura
+2026-06-05 13:09:57,351 [INFO]   \u2192 6 comments
+2026-06-05 13:09:59,352 [INFO] [34/37] 1tvx2rw — Genoa, Italy Airport - Where to Stay
+2026-06-05 13:09:59,779 [INFO]   \u2192 0 comments
+2026-06-05 13:10:01,780 [INFO] [35/37] 1tvwy2w — Question about Lapland, Finland
+2026-06-05 13:10:02,010 [INFO]   \u2192 1 comments
+2026-06-05 13:10:04,011 [INFO] [36/37] 1tvwrds — Going back to Barcelona and Valencia after my first trip — l
+2026-06-05 13:10:04,247 [INFO]   \u2192 0 comments
+2026-06-05 13:10:06,247 [INFO] [37/37] 1tvt08r — A quick trip to Paris in Spring (April 2026)
+2026-06-05 13:10:06,564 [INFO]   \u2192 7 comments
+2026-06-05 13:10:11,625 [INFO] 
+Total comments fetched: 189
+2026-06-05 13:10:11,669 [INFO] Backup saved \u2192 artifacts\comments\comments_20260605_111011.json
+2026-06-05 13:10:14,099 [INFO] MongoDB: 189 new inserted, 0 already existed \u2192 'reddit_comments_final'
+2026-06-05 13:10:14,126 [INFO] ============================================================
+2026-06-05 13:10:14,126 [INFO] DONE
+2026-06-05 13:10:14,126 [INFO] run_id:         run-20260603-AUTO
+2026-06-05 13:10:14,126 [INFO] Total comments: 189
+2026-06-05 13:10:14,126 [INFO] Collection:     reddit_comments_final
+2026-06-05 13:10:14,126 [INFO] ============================================================

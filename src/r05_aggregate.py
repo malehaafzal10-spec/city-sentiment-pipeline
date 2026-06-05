@@ -133,7 +133,7 @@ def process_run_id(db, run_id: str):
 
     records_to_insert = df.to_dict(orient="records")
     print(f"Inserting {len(records_to_insert)} records into '{TARGET_COLLECTION}'...")
-    target_coll.insert_many(records_to_insert)
+    insert_result = target_coll.insert_many(records_to_insert)
 
     print("=" * 60)
     print(f"SUCCESS — {run_id}")
@@ -169,7 +169,7 @@ def main():
         process_run_id(db, run_id)
 
     print("ALL DONE")
-    print(f"Inserted {len(insert_result.inserted_ids)} records.")
+    print(f"Inserted {len(insert_result.inserted_ids)} records into '{TARGET_COLLECTION}'.")
     print("=" * 60)
 
 if __name__ == "__main__":
