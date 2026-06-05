@@ -1,5 +1,5 @@
 """
-fetch_comments.py — Fetch top 10 comments for all posts in reddit_relevant collection.
+fetch_comments.py — Fetch top 20 comments for all posts in reddit_relevant collection.
 Uses Playwright to bypass Reddit's bot detection.
 Saves to MongoDB collection: reddit_comments_final
 
@@ -37,7 +37,7 @@ DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
 SOURCE_COLLECTION = "reddit_relevant"
 DEST_COLLECTION = "reddit_comments_final"
 BACKUP_DIR = Path("artifacts/comments")
-COMMENTS_PER_POST = 10
+COMMENTS_PER_POST = 20
 
 logging.basicConfig(
     level=logging.INFO,
@@ -255,7 +255,8 @@ def main():
     target_date = args.date
     
     # Updated to save with the run_YYYYMMDD_local format
-    run_id = f"run_{target_date}_local"
+    cutoff = "20260601"
+    run_id = f"run_{target_date}_local" if target_date <= cutoff else f"run-{target_date}-AUTO"
 
     log.info("=" * 60)
     log.info("FETCH COMMENTS FOR reddit_relevant POSTS")

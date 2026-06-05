@@ -161,94 +161,53 @@ def analyze_post(text, max_retries=4):
     raise GroqConnectionError(f"Failed to connect to Groq API after {max_retries} attempts.")
 
 
-def main():
+def get_unprocessed_run_ids(db) -> list:
+    """
+    Returns run_ids from SOURCE_COLLECTION not yet in TARGET_COLLECTION.
+    Ordered oldest first.
+    """
+    all_run_ids = db[SOURCE_COLLECTION].distinct("run_id")
+    processed_run_ids = set(db[TARGET_COLLECTION].distinct("run_id"))
+    unprocessed = [r for r in all_run_ids if r not in processed_run_ids]
+    unprocessed.sort()
+    return unprocessed
+
+
+def process_run_id(db, run_id: str):
+    """Process all comments for a single run_id."""
     log.info("=" * 60)
-    log.info("PROCESS MONGO COMMENTS WITH GROQ API")
-    
-    # ── Handle Required pipeline argument ───────────────────────────────────
-    parser = argparse.ArgumentParser(description="Process Reddit comments.")
-    parser.add_argument(
-        "--date", 
-        type=str, 
-        required=True,
-        help="Target date in YYYYMMDD format to match the run_id (e.g., 20260526)"
-    )
-    args = parser.parse_args()
-    user_date = args.date
+    log.info(f"Processing run_id: {run_id}")
+    log.info("=" * 60)
 
-    if not re.match(r"^\d{8}$", user_date):
-        log.error("Invalid date format. Must be YYYYMMDD.")
-        sys.exit(1)
+    comments = list(db[SOURCE_COLLECTION].find({"run_id": run_id}))
 
-    # Output formatting logic: forcing run_YYYYMMDD_local
-    output_run_id = f"run_{user_date}_local"
-
-    log.info(f"Target Date:             {user_date}")
-    log.info(f"Output Run ID:           {output_run_id}")
-
-    # ── MongoDB setup ───────────────────────────────────────────────────────
-    db = None
-    if not TEST_MODE:
-        try:
-            client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-            client.server_info()
-            db = client[DB_NAME]
-        except Exception as e:
-            log.error(f"MongoDB connection failed: {e}")
-            return
-
-    # ── Fetch comments filtered by Date Prefix ───────────────────────────────
-    # Look for any incoming run_id that starts with 'run_YYYYMMDD' 
-    search_query = {"run_id": {"$regex": f"^run_{user_date}"}}
-
-    if TEST_MODE:
-        posts = None
-        try:
-            test_client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=3000)
-            test_client.server_info()
-            db_temp = test_client[DB_NAME]
-            posts = list(db_temp[SOURCE_COLLECTION].find(search_query).limit(TEST_LIMIT))
-        except Exception as e:
-            log.warning(f"MongoDB unavailable in TEST_MODE. Trying local fixture...")
-    else:
-        posts = list(db[SOURCE_COLLECTION].find(search_query))
-
-    total_posts = len(posts)
-
-    if total_posts == 0:
-        log.info(f"No posts found matching date {user_date} in '{SOURCE_COLLECTION}'.")
+    if not comments:
+        log.info(f"No comments found for run_id '{run_id}' in '{SOURCE_COLLECTION}'.")
         return
 
-    log.info(f"Found {total_posts} comments from this run to process.")
-    
-    # ── Prevent Re-processing Already Processed Comments ────────────────────
-    existing_docs = set()
-    if not TEST_MODE:
-        # Check target collection to find docs already processed for THIS exact output_run_id
-        existing_docs = {
-            doc["doc_id"] for doc in db[TARGET_COLLECTION].find({"run_id": output_run_id}, {"doc_id": 1})
-        }
-        if existing_docs:
-            log.info(f"Identified {len(existing_docs)} comments already processed in a previous execution. Skipping them.")
+    log.info(f"Found {len(comments)} comments to process.")
 
-    log.info("=" * 60)
+    # ── Skip already-processed doc_ids ───────────────────────────────────
+    existing_docs = {
+        doc["doc_id"] for doc in db[TARGET_COLLECTION].find({"run_id": run_id}, {"doc_id": 1})
+    }
+    if existing_docs:
+        log.info(f"Skipping {len(existing_docs)} already-processed comments.")
 
+    total_comments  = len(comments)
     total_processed = 0
-    total_saved = 0
-    total_skipped = 0
-    operations = []
-    test_results = []
+    total_saved     = 0
+    total_skipped   = 0
+    operations      = []
 
-    for idx, post in enumerate(posts):
+    for idx, post in enumerate(comments):
         doc_id = post.get('doc_id', post.get('post_id', f"unknown_{idx}"))
-        
-        # Skip logic
+
         if doc_id in existing_docs:
-            log.info(f"Skipping comment {idx + 1}/{total_posts}: {doc_id} (Already processed)")
             total_skipped += 1
             continue
 
-        log.info(f"Processing comment {idx + 1}/{total_posts}: {doc_id}...")
+        log.info(f"Processing comment {idx + 1}/{total_comments}: {doc_id}...")
 
         text = post.get('text', '')
 
@@ -259,73 +218,93 @@ def main():
                 analysis_result = analyze_post(text)
             except GroqConnectionError as e:
                 log.error(f"❌ GROQ API ERROR: {e}")
-                log.info("Stopping execution. Will save all currently processed posts...")
+                log.info("Stopping. Saving processed comments so far...")
                 break
-            
-            # Pacing to avoid hitting Groq's Requests Per Minute (RPM) limits
-            if not TEST_MODE:
-                time.sleep(6) 
+            time.sleep(6)
 
         post['analysis'] = analysis_result
         total_processed += 1
 
-        # ── Check relevance and attach RUN_ID ──────────────────────────────
         if analysis_result.get("relevant", "").lower() == "yes":
             post.pop('_id', None)
-            
-            # Explicitly force the normalized run_id on save
-            post['run_id'] = output_run_id
+            post['run_id'] = run_id
 
-            # ── Extract cities and countries for top-level access ──────────
             aspects = analysis_result.get("aspects")
             if not isinstance(aspects, list):
                 aspects = []
-                
-            mentioned_cities = list({str(a.get("city")) for a in aspects if isinstance(a, dict) and a.get("city")})
+            mentioned_cities    = list({str(a.get("city")) for a in aspects if isinstance(a, dict) and a.get("city")})
             mentioned_countries = list({str(a.get("country")) for a in aspects if isinstance(a, dict) and a.get("country")})
-            
-            post['mentioned_cities'] = mentioned_cities
+            post['mentioned_cities']    = mentioned_cities
             post['mentioned_countries'] = mentioned_countries
-            
-            if mentioned_cities:
-                log.info(f"Relevant comment analyzed! Cities extracted: {mentioned_cities}")
-            # ───────────────────────────────────────────────────────────────
 
-            if TEST_MODE:
-                test_results.append(post)
-            else:
-                operations.append(
-                    UpdateOne({"doc_id": doc_id}, {"$set": post}, upsert=True)
-                )
+            if mentioned_cities:
+                log.info(f"Relevant! Cities: {mentioned_cities}")
+
+            operations.append(UpdateOne({"doc_id": doc_id}, {"$set": post}, upsert=True))
             total_saved += 1
 
-        # ── Batch write ─────────────────────────────────────────────────────
-        if not TEST_MODE and len(operations) >= 50:
+        if len(operations) >= 50:
             db[TARGET_COLLECTION].bulk_write(operations)
             operations = []
 
-    # ── Flush remaining writes ──────────────────────────────────────────────
-    if not TEST_MODE and operations:
-        log.info(f"Flushing {len(operations)} remaining operations to MongoDB...")
+    if operations:
+        log.info(f"Flushing {len(operations)} remaining operations...")
         db[TARGET_COLLECTION].bulk_write(operations)
 
-    # ── Test mode: save locally ─────────────────────────────────────────────
-    if TEST_MODE:
-        with open(TEST_OUTPUT_FILE, "w", encoding="utf-8") as f:
-            json.dump(test_results, f, indent=2, default=str)
-        log.info(f"Test results saved to '{TEST_OUTPUT_FILE}'.")
-
-    # ── Summary ─────────────────────────────────────────────────────────────
     log.info("=" * 60)
-    log.info("PROCESSING SUMMARY")
-    log.info(f"Output Run ID:           {output_run_id}")
-    log.info(f"Total Comments Found:    {total_posts}")
-    log.info(f"Total Already Skipped:   {total_skipped}")
-    log.info(f"Total Comments Processed:{total_processed}")
-    log.info(f"Total Relevant Saved:    {total_saved}")
+    log.info(f"SUMMARY — {run_id}")
+    log.info(f"Comments found:     {total_comments}")
+    log.info(f"Skipped:            {total_skipped}")
+    log.info(f"Processed:          {total_processed}")
+    log.info(f"Relevant saved:     {total_saved}")
     if total_processed > 0:
-        log.info(f"Relevancy Rate:          {(total_saved / total_processed) * 100:.2f}%")
+        log.info(f"Relevancy rate:     {(total_saved / total_processed) * 100:.2f}%")
     log.info("=" * 60)
+
+
+def main():
+    log.info("=" * 60)
+    log.info("R04 — RELEVANCE + SCORING ON COMMENTS")
+
+    parser = argparse.ArgumentParser(description="Process Reddit comments — auto-detects unprocessed run_ids.")
+    parser.add_argument("--date", required=False, default=None,
+                        help="Optional: force a specific date YYYYMMDD instead of auto-detecting")
+    args = parser.parse_args()
+
+    # ── MongoDB setup ───────────────────────────────────────────────────────
+    try:
+        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
+        client.server_info()
+        db = client[DB_NAME]
+        log.info("MongoDB connection OK ✓")
+    except Exception as e:
+        log.error(f"MongoDB connection failed: {e}")
+        return
+
+    # ── Determine which run_ids to process ──────────────────────────────────
+    if args.date:
+        user_date = args.date
+        if not re.match(r"^[0-9]{8}$", user_date):
+            log.error("Invalid date format. Must be YYYYMMDD.")
+            sys.exit(1)
+        cutoff = "20260601"
+        run_ids_to_process = [
+            f"run_{user_date}_local" if user_date <= cutoff else f"run-{user_date}-AUTO"
+        ]
+        log.info(f"Manual override: processing run_id {run_ids_to_process[0]}")
+    else:
+        run_ids_to_process = get_unprocessed_run_ids(db)
+        if not run_ids_to_process:
+            log.info("✅ All run_ids already processed. Nothing to do.")
+            return
+        log.info(f"Found {len(run_ids_to_process)} unprocessed run_id(s): {run_ids_to_process}")
+
+    log.info("=" * 60)
+
+    for run_id in run_ids_to_process:
+        process_run_id(db, run_id)
+
+    log.info("ALL DONE")
 
 if __name__ == "__main__":
     main()
