@@ -1,0 +1,12 @@
+2026-06-05 12:58:45,370 [INFO] Building location processor...
+2026-06-05 12:58:45,672 [INFO] FlashText processor built: 11626 cities, 260 countries
+2026-06-05 12:58:45,675 [INFO] ============================================================
+2026-06-05 12:58:45,675 [INFO] FETCH COMMENTS FOR reddit_relevant POSTS
+2026-06-05 12:58:45,675 [INFO] Target Run Date: 20260603
+2026-06-05 12:58:45,675 [INFO] New run_id:      run-20260603-AUTO
+2026-06-05 12:58:45,675 [INFO] Source:          reddit_relevant
+2026-06-05 12:58:45,675 [INFO] Dest:            reddit_comments_final
+2026-06-05 12:58:45,675 [INFO] Per post:        top 20 comments
+2026-06-05 12:58:45,675 [INFO] ============================================================
+2026-06-05 12:58:46,640 [INFO] MongoDB connection OK \u2713
+2026-06-05 12:58:47,088 [ERROR] No posts found in 'reddit_relevant' for date 20260603

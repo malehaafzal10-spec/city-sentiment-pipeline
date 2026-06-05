@@ -275,7 +275,7 @@ def main():
     db = client[DB_NAME]
     
     # Query matching documents where run_id starts with 'run_YYYYMMDD'
-    query = {"run_id": {"$regex": f"^run_{target_date}"}}
+    query = {"run_id": {"$regex": f"run.{target_date}"}}
     posts = list(db[SOURCE_COLLECTION].find(query, {"post_id": 1, "url": 1, "title": 1, "locations": 1}))
     client.close()
 
