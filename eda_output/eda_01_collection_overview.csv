@@ -1,0 +1,5 @@
+collection,total_documents,posts,comments,unique_post_ids,unique_doc_ids,unique_urls,unique_subreddits,date_earliest,date_latest,has_analysis,relevant_yes
+reddit_posts_final,830,830,0,830,830,830,1,2026-05-14,2026-06-03,0,
+reddit_comments_final,2498,0,2498,567,2498,2498,1,2026-05-14,2026-06-04,0,
+reddit_relevant,608,608,0,608,608,608,1,2026-05-14,2026-06-01,608,608.0
+reddit_comments_relevant,1695,0,1695,503,1695,1695,1,2026-05-14,2026-06-04,1695,1695.0

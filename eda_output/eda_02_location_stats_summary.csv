@@ -1,0 +1,13 @@
+metric,value
+relevant_documents,2303
+unique_cities,1477
+unique_countries,202
+total_city_mentions,5140
+total_country_mentions,3170
+most_mentioned_city,Most
+most_mentioned_city_count,222
+most_mentioned_country,Italy
+most_mentioned_country_count,203
+docs_with_city_extracted,1972
+docs_with_country_extracted,2144
+docs_with_no_location,0

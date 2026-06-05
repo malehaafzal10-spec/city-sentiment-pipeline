@@ -1,0 +1,604 @@
+rank,city,aspect_mentions,unique_aspects,mean_sentiment,median_sentiment,std_sentiment,min_sentiment,max_sentiment,top_positive_aspect,top_negative_aspect
+1,Hohhot,8,8,5.0,5.0,0.0,5.0,5.0,delicacies,delicacies
+2,Cincinnati,5,5,5.0,5.0,0.0,5.0,5.0,food scene,food scene
+3,Kensington,7,7,5.0,5.0,0.0,5.0,5.0,area suitability for families,area suitability for families
+4,Passau,3,3,5.0,5.0,0.0,5.0,5.0,old town,old town
+5,Coral Coast,4,4,5.0,5.0,0.0,5.0,5.0,hiking,hiking
+6,Ferrara,3,3,5.0,5.0,0.0,5.0,5.0,day trip,day trip
+7,Belfort,3,3,5.0,5.0,0.0,5.0,5.0,castle,castle
+8,Yen Bai,6,6,5.0,5.0,0.0,5.0,5.0,attraction value,attraction value
+9,Shigatse,4,4,5.0,5.0,0.0,5.0,5.0,karola glacier,karola glacier
+10,Musanze,6,6,5.0,5.0,0.0,5.0,5.0,environmental conservation,environmental conservation
+11,Colmar,3,3,5.0,5.0,0.0,5.0,5.0,colmar,colmar
+12,Newcastle,3,3,5.0,5.0,0.0,5.0,5.0,accommodation,accommodation
+13,Palawan,3,3,5.0,5.0,0.0,5.0,5.0,island experience,island experience
+14,Siquijor,5,5,5.0,5.0,0.0,5.0,5.0,beaches,beaches
+15,Quilotoa,3,3,5.0,5.0,0.0,5.0,5.0,hiking,hiking
+16,Theth,3,2,5.0,5.0,0.0,5.0,5.0,hiking,hiking
+17,Ponta Delgada,3,3,5.0,5.0,0.0,5.0,5.0,accommodation,accommodation
+18,Samaipata,3,3,5.0,5.0,0.0,5.0,5.0,activities,activities
+19,Symi,4,3,5.0,5.0,0.0,5.0,5.0,harbor,harbor
+20,Orosei,4,4,5.0,5.0,0.0,5.0,5.0,beaches,beaches
+21,Orkney Islands,3,3,5.0,5.0,0.0,5.0,5.0,archaeological sites,archaeological sites
+22,Rovinj,3,3,5.0,5.0,0.0,5.0,5.0,accommodation,accommodation
+23,Chobe,5,5,5.0,5.0,0.0,5.0,5.0,day trip,day trip
+24,Viareggio,4,4,5.0,5.0,0.0,5.0,5.0,accommodation options,accommodation options
+25,Therasia,4,4,5.0,5.0,0.0,5.0,5.0,accommodation,accommodation
+26,Gosau,3,3,5.0,5.0,0.0,5.0,5.0,lake experience,lake experience
+27,Montalcino,3,3,5.0,5.0,0.0,5.0,5.0,atmosphere,atmosphere
+28,Girona,3,3,5.0,5.0,0.0,5.0,5.0,attraction,attraction
+29,Tasmania,3,3,5.0,5.0,0.0,5.0,5.0,food scene,food scene
+30,Chachapoyas valley,3,3,5.0,5.0,0.0,5.0,5.0,birdwatching,birdwatching
+31,Nagoya,3,3,5.0,5.0,0.0,5.0,5.0,attractions,attractions
+32,Jeju Island,3,3,5.0,5.0,0.0,5.0,5.0,overall experience,overall experience
+33,Kraków,5,5,5.0,5.0,0.0,5.0,5.0,affordability,affordability
+34,Pokhara,3,3,5.0,5.0,0.0,5.0,5.0,lakeside activities in pokhara,lakeside activities in pokhara
+35,Sauraha,3,3,5.0,5.0,0.0,5.0,5.0,chitwan national park,chitwan national park
+36,Turin,7,7,5.0,5.0,0.0,5.0,5.0,accessibility,accessibility
+37,Eguisheim,6,6,5.0,5.0,0.0,5.0,5.0,atmosphere,atmosphere
+38,Amboseli,4,4,5.0,5.0,0.0,5.0,5.0,hot air balloon ride,hot air balloon ride
+39,near the airport (likely Podgorica or Tivat),3,3,5.0,5.0,0.0,5.0,5.0,accommodation,accommodation
+40,Yosemite,7,7,5.0,5.0,0.0,5.0,5.0,destination preference,destination preference
+41,Alexandria,4,4,5.0,5.0,0.0,5.0,5.0,atmosphere,atmosphere
+42,Kyushu,7,7,5.0,5.0,0.0,5.0,5.0,food,food
+43,Poiana Brașov,3,2,5.0,5.0,0.0,5.0,5.0,food,food
+44,Luquillo,4,4,5.0,5.0,0.0,5.0,5.0,bioluminescent bay,bioluminescent bay
+45,San Pedro de Atacama,3,3,5.0,5.0,0.0,5.0,5.0,destination,destination
+46,Lijiang,5,5,5.0,5.0,0.0,5.0,5.0,destination recommendation,destination recommendation
+47,Alsace,7,7,5.0,5.0,0.0,5.0,5.0,food,food
+48,Port Angeles,9,9,4.889,5.0,0.333,4.0,5.0,hoh rainforest,rialto beach
+49,Georgetown,8,7,4.875,5.0,0.354,4.0,5.0,architecture,beach resorts
+50,Ascona,7,7,4.857,5.0,0.378,4.0,5.0,attraction,general impression
+51,Songyang,7,7,4.857,5.0,0.378,4.0,5.0,attractions,accommodation
+52,Meteora,5,4,4.8,5.0,0.447,4.0,5.0,meteora as a destination,destination appeal
+53,Killarney,5,4,4.8,5.0,0.447,4.0,5.0,killarney national park,biking
+54,Alghero,5,5,4.8,5.0,0.447,4.0,5.0,beach,grotta di nettuno
+55,Jogja,5,5,4.8,5.0,0.447,4.0,5.0,attractions,public transportation
+56,Cardiff,10,9,4.8,5.0,0.422,4.0,5.0,arcades,rugby culture
+57,Riquewihr,5,5,4.8,5.0,0.447,4.0,5.0,food,overall impression
+58,Coorg,5,3,4.8,5.0,0.447,4.0,5.0,overall experience,weather
+59,Narva,5,5,4.8,5.0,0.447,4.0,5.0,castles,border crossing
+60,Quetzaltenango,15,14,4.8,5.0,0.414,4.0,5.0,city atmosphere,cementerio general
+61,Nara,5,5,4.8,5.0,0.447,4.0,5.0,exploration opportunities,itinerary
+62,Rhodes,9,6,4.778,5.0,0.667,3.0,5.0,beaches,transportation
+63,Cinque Terre,9,8,4.778,5.0,0.667,3.0,5.0,best time to visit,public transportation
+64,Belfast,9,9,4.778,5.0,0.441,4.0,5.0,atmosphere,duration of stay
+65,Dali,9,9,4.778,5.0,0.667,3.0,5.0,accommodation,trip duration
+66,Pu Luong,21,18,4.762,5.0,0.436,4.0,5.0,overall experience,biking
+67,Chambery,4,4,4.75,5.0,0.5,4.0,5.0,natural attractions,tourist crowds
+68,Zanzibar,4,4,4.75,5.0,0.5,4.0,5.0,activity,destination
+69,Nashville,4,4,4.75,5.0,0.5,4.0,5.0,events and entertainment,driving routes
+70,Lauterbrunnen,8,8,4.75,5.0,0.463,4.0,5.0,attractions,food
+71,Porto de Galinhas,4,3,4.75,5.0,0.5,4.0,5.0,beach quality,beaches
+72,Kolkata,8,8,4.75,5.0,0.463,4.0,5.0,attractions,accommodation
+73,Atitlan,4,4,4.75,5.0,0.5,4.0,5.0,cultural experience,resorts
+74,Fontainebleau,4,3,4.75,5.0,0.5,4.0,5.0,cost,attractions
+75,Bohinj,8,8,4.75,5.0,0.463,4.0,5.0,accessibility,destination
+76,Bath,4,4,4.75,5.0,0.5,4.0,5.0,attraction,day trip to bath
+77,Mauritius,4,4,4.75,5.0,0.5,4.0,5.0,beach relaxation,guided excursions
+78,Fujiyoshida,4,4,4.75,5.0,0.5,4.0,5.0,natural beauty,pace of life
+79,Trento,4,4,4.75,5.0,0.5,4.0,5.0,city attractions,transportation cost
+80,Ghent,15,14,4.733,5.0,0.594,3.0,5.0,architecture,location
+81,Padang,11,11,4.727,5.0,0.467,4.0,5.0,architecture,connectivity
+82,Noboribetsu,7,7,4.714,5.0,0.488,4.0,5.0,onsen experience,bear zoo
+83,Bosa,7,7,4.714,5.0,0.488,4.0,5.0,accommodation location,car rental
+84,Strasbourg,7,7,4.714,5.0,0.488,4.0,5.0,architecture,attractions
+85,Sofia,10,10,4.7,5.0,0.483,4.0,5.0,atmosphere,architecture
+86,Valletta,10,10,4.7,5.0,0.483,4.0,5.0,aesthetics,bridge bar
+87,New Norfolk,3,3,4.667,5.0,0.577,4.0,5.0,dining experience,wineries
+88,Choquequirao,3,3,4.667,5.0,0.577,4.0,5.0,hiking,trekking route
+89,Utrecht,3,2,4.667,5.0,0.577,4.0,5.0,city worthiness,transportation
+90,Rabat,3,3,4.667,5.0,0.577,4.0,5.0,charming alleys,town charm
+91,Nagasaki,6,6,4.667,5.0,0.516,4.0,5.0,atmosphere,city attractions
+92,El Tunco,3,3,4.667,5.0,0.577,4.0,5.0,airport proximity,destination
+93,El Chorro,3,3,4.667,5.0,0.577,4.0,5.0,trail difficulty,tourist experience
+94,Yogya,3,3,4.667,5.0,0.577,4.0,5.0,city interest,city charm
+95,Shimla,3,3,4.667,5.0,0.577,4.0,5.0,local people,crowd
+96,Lake Titicaca,3,3,4.667,5.0,0.577,4.0,5.0,local experience,lake
+97,AlUla,6,6,4.667,5.0,0.516,4.0,5.0,atmosphere,crowds
+98,Sao Miguel,6,6,4.667,5.0,0.516,4.0,5.0,island,duration of stay
+99,Andaman and Nicobar Islands,3,3,4.667,5.0,0.577,4.0,5.0,pace of life,tourist destinations
+100,Korçë,3,3,4.667,5.0,0.577,4.0,5.0,cafe and restaurant scene,nightlife
+101,Antibes,3,3,4.667,5.0,0.577,4.0,5.0,accommodation,towns
+102,Koh Yao Noi,6,6,4.667,5.0,0.516,4.0,5.0,accommodation offers,relaxing
+103,Koh Tao,3,3,4.667,5.0,0.577,4.0,5.0,island relaxation,nightlife
+104,Ko Chang,3,3,4.667,5.0,0.577,4.0,5.0,beach experience,transportation
+105,Key West,3,3,4.667,5.0,0.577,4.0,5.0,island getaway,key west
+106,Parma,3,3,4.667,5.0,0.577,4.0,5.0,architecture,transportation cost
+107,Portland,3,3,4.667,5.0,0.577,4.0,5.0,city charm,driving distance
+108,Shangri-La,3,3,4.667,5.0,0.577,4.0,5.0,destination recommendation,region
+109,Douro Valley,3,3,4.667,5.0,0.577,4.0,5.0,scenic area,wine region
+110,Otaru,3,3,4.667,5.0,0.577,4.0,5.0,japanese fried chicken,tourist town
+111,Okavango Delta,3,3,4.667,5.0,0.577,4.0,5.0,boat cruises,tour guides
+112,Mdina,3,3,4.667,5.0,0.577,4.0,5.0,churches,mdina exploration
+113,Marrakech,6,6,4.667,5.0,0.816,3.0,5.0,architecture,marrakech
+114,Marsaxlokk,3,3,4.667,5.0,0.577,4.0,5.0,destination recommendation,town charm
+115,Huaraz,9,6,4.667,5.0,0.707,3.0,5.0,city overall,altitude
+116,Matosinhos,3,3,4.667,5.0,0.577,4.0,5.0,food options,location
+117,Tallinn,27,22,4.63,5.0,0.629,3.0,5.0,affordability,tourist arrivals
+118,Ushuaia,8,8,4.625,5.0,0.518,4.0,5.0,countryside,car rental
+119,Dingle,8,6,4.625,5.0,0.744,3.0,5.0,dingle peninsula,hiking
+120,Iquitos,8,7,4.625,5.0,0.518,4.0,5.0,accommodation,amazon trip
+121,Ninh Binh,13,12,4.615,5.0,0.506,4.0,5.0,attraction,boat ride
+122,Molinos,5,5,4.6,5.0,0.894,3.0,5.0,accommodation,road conditions
+123,Hokkaido,5,5,4.6,5.0,0.548,4.0,5.0,regional climate,driving experience
+124,Victoria Falls,5,4,4.6,5.0,0.548,4.0,5.0,victoria falls,river cruise
+125,Bled,10,8,4.6,5.0,0.699,3.0,5.0,hiking,lake bled
+126,unknown,17,14,4.588,5.0,1.064,1.0,5.0,accommodation,water parks
+127,Kamikochi,7,7,4.571,5.0,0.535,4.0,5.0,accommodation,crowds
+128,Lhasa,21,20,4.571,5.0,0.746,3.0,5.0,accommodation,altitude
+129,Bursa,7,7,4.571,5.0,0.535,4.0,5.0,bursa grand mosque,cable car
+130,Cebu City,7,7,4.571,5.0,0.787,3.0,5.0,café scene,cebu city
+131,Furano,4,4,4.5,4.5,0.577,4.0,5.0,farmlands and vistas,animals and ice cream
+132,Quebec City,4,4,4.5,4.5,0.577,4.0,5.0,glamping,accommodation
+133,Tigre,6,5,4.5,4.5,0.548,4.0,5.0,boat tour,city center
+134,Normandy,10,8,4.5,5.0,0.707,3.0,5.0,beaches,transportation
+135,München,4,4,4.5,4.5,0.577,4.0,5.0,augustiner beer,cafe
+136,Roskilde,4,4,4.5,4.5,0.577,4.0,5.0,museum,cathedral
+137,Oka,4,4,4.5,4.5,0.577,4.0,5.0,church,ferry ride
+138,Kunming,6,6,4.5,5.0,0.837,3.0,5.0,destination recommendation,trip duration
+139,Haarlem,4,4,4.5,4.5,0.577,4.0,5.0,city charm,accommodation
+140,Suzhou,18,16,4.5,5.0,0.857,2.0,5.0,bar/nightlife,noise level
+141,Mendoza,4,4,4.5,4.5,0.577,4.0,5.0,previous travel experience,horse riding experience
+142,Sedona,4,3,4.5,4.5,0.577,4.0,5.0,scenic drive,overall experience
+143,Sapporo,14,14,4.5,5.0,0.76,3.0,5.0,activities,accommodation
+144,Ulcinj,4,3,4.5,4.5,0.577,4.0,5.0,cost,ottoman architecture
+145,Hiroshima,10,10,4.5,5.0,0.85,3.0,5.0,exploration,accommodation
+146,Korcula,4,4,4.5,5.0,1.0,3.0,5.0,atmosphere,destination choice
+147,Marseille,4,4,4.5,4.5,0.577,4.0,5.0,city preference,destination recommendation
+148,Perast,10,9,4.5,5.0,0.707,3.0,5.0,atmosphere,perast
+149,Siracusa,4,4,4.5,4.5,0.577,4.0,5.0,food,culture
+150,Bogotá,8,8,4.5,5.0,0.756,3.0,5.0,food scene,stopover experience
+151,Mandaue,4,4,4.5,4.5,0.577,4.0,5.0,accommodation,breakfast
+152,Kingston,4,4,4.5,4.5,0.577,4.0,5.0,location,dining options
+153,Kigali,8,8,4.5,5.0,0.756,3.0,5.0,gorilla treks,visa and permit process
+154,La Maddalena,4,4,4.5,5.0,1.0,3.0,5.0,beaches,naval experience
+155,Himare,9,9,4.444,5.0,0.726,3.0,5.0,atmosphere,beach
+156,Cordoba,9,9,4.444,5.0,0.726,3.0,5.0,attractions,study abroad program
+157,Kathmandu,7,7,4.429,5.0,0.787,3.0,5.0,culture,ebc trek difficulty
+158,Grand Canyon,5,2,4.4,5.0,1.342,2.0,5.0,national park,natural attraction
+159,Cat Ba,5,4,4.4,4.0,0.548,4.0,5.0,tour activity,cycling
+160,San Sebastian,5,5,4.4,5.0,1.342,2.0,5.0,city preference,culture
+161,Amalfi Coast,5,5,4.4,5.0,0.894,3.0,5.0,beach activities,transportation
+162,Sveti Stefan,5,5,4.4,4.0,0.548,4.0,5.0,accommodation,attractions
+163,Chefchaouen,5,4,4.4,5.0,0.894,3.0,5.0,city beauty,chefchaouen
+164,Sevilla,21,19,4.4,5.0,1.095,2.0,5.0,activities,cost
+165,Trabzon,5,2,4.4,5.0,1.342,2.0,5.0,nature and scenery,overall experience
+166,Iguazu,5,5,4.4,5.0,0.894,3.0,5.0,attraction,iguaza falls
+167,Addis Ababa,5,5,4.4,5.0,0.894,3.0,5.0,airline reliability,airline comfort
+168,Glasgow,5,5,4.4,5.0,0.894,3.0,5.0,day trips,car rental
+169,Tripoli,5,5,4.4,5.0,0.894,3.0,5.0,architecture,neighborhoods
+170,Gozo,15,15,4.4,5.0,1.121,2.0,5.0,accommodation,accommodation location
+171,Zermatt,8,6,4.375,4.5,0.744,3.0,5.0,mountain scenery,public transportation
+172,Berat,8,7,4.375,4.5,0.744,3.0,5.0,destination,city
+173,Pralognan-la-Vanoise,24,14,4.375,5.0,0.77,3.0,5.0,high altitude pastures,national park regulations
+174,Takayama,11,11,4.364,5.0,0.924,3.0,5.0,attractions,accommodation
+175,Kotor,58,46,4.362,5.0,0.912,2.0,5.0,kotor fortress,crowds
+176,Siem Reap,14,14,4.357,4.5,0.745,3.0,5.0,accommodation,cambodia as a destination
+177,Lagos,14,13,4.357,5.0,1.008,2.0,5.0,attractions,tourist destinations
+178,Edinburgh,17,15,4.353,4.0,0.786,2.0,5.0,accommodation duration,transportation
+179,Dublin,38,31,4.342,5.0,0.815,2.0,5.0,route planning,weather
+180,Samarkand,3,3,4.333,5.0,1.155,3.0,5.0,destination,samarkand visit
+181,Prato,3,3,4.333,5.0,1.155,3.0,5.0,prato chinatown,accommodation
+182,Stirling,3,3,4.333,5.0,1.155,3.0,5.0,attractions,local scenery
+183,Hilo,3,3,4.333,4.0,0.577,4.0,5.0,natural beauty,accommodation
+184,Naxos,9,9,4.333,4.0,0.707,3.0,5.0,atmosphere,accommodation
+185,Bengaluru,3,2,4.333,4.0,0.577,4.0,5.0,weather,bengaluru
+186,Bukhara,3,3,4.333,5.0,1.155,3.0,5.0,destination,bukhara experience
+187,Volcanos National Park,3,3,4.333,5.0,1.155,3.0,5.0,gorilla trekking experience,weather and terrain
+188,Volterra,3,3,4.333,5.0,1.155,3.0,5.0,shopping,crowds
+189,Arles,3,3,4.333,4.0,0.577,4.0,5.0,walkability,art and culture
+190,Cotopaxi,3,3,4.333,5.0,1.155,3.0,5.0,nature,activities
+191,Trogir,3,3,4.333,4.0,0.577,4.0,5.0,historical area,accommodation
+192,Bad Ischl,3,3,4.333,5.0,1.155,3.0,5.0,scenic beauty,transportation
+193,Iguazú,3,3,4.333,5.0,1.155,3.0,5.0,attraction,iguazú
+194,Avignon,6,6,4.333,4.5,0.816,3.0,5.0,dining,accommodation
+195,Herceg Novi,6,6,4.333,4.0,0.516,4.0,5.0,promenade,beach
+196,Hamburg,6,6,4.333,4.5,0.816,3.0,5.0,alternative destinations,destination suggestion
+197,Lake Bled,3,3,4.333,5.0,1.155,3.0,5.0,natural beauty,town size
+198,Cologne,3,3,4.333,4.0,0.577,4.0,5.0,alternative destinations,cathedrals
+199,Sharm,3,3,4.333,4.0,0.577,4.0,5.0,accommodation,dining and nightlife
+200,Tangier,3,2,4.333,5.0,1.155,3.0,5.0,city visit,tangier
+201,Sandakan,3,3,4.333,5.0,1.155,3.0,5.0,jungle experience,getting around
+202,Lombok,3,3,4.333,4.0,0.577,4.0,5.0,island experience,nature
+203,Tomsk,3,3,4.333,4.0,0.577,4.0,5.0,natural scenery,food
+204,York,3,3,4.333,5.0,1.155,3.0,5.0,history,accommodation
+205,Bari,3,3,4.333,4.0,0.577,4.0,5.0,transportation,cultural experiences
+206,Luxembourg,3,3,4.333,4.0,0.577,4.0,5.0,food,city visit
+207,Jiufen,3,3,4.333,4.0,0.577,4.0,5.0,day trips,jiufen
+208,Reykjavik,6,5,4.333,4.5,0.816,3.0,5.0,natural beauty,sightseeing
+209,Hangzhou,3,3,4.333,5.0,1.155,3.0,5.0,day trip,transportation
+210,Quito,6,6,4.333,4.5,0.816,3.0,5.0,accommodation,overall trip planning
+211,Vienna,42,33,4.31,5.0,0.975,2.0,5.0,architecture,city excitement
+212,New Orleans,27,18,4.296,5.0,0.953,2.0,5.0,restaurant - brendan's,weather
+213,Corfu,7,4,4.286,5.0,0.951,3.0,5.0,location,corfu day trip
+214,Thessaloniki,14,11,4.286,5.0,1.069,2.0,5.0,city,attractions
+215,Antalya,18,15,4.278,5.0,1.406,1.0,5.0,beaches,beach activities
+216,Busan,11,10,4.273,5.0,0.905,3.0,5.0,art and culture,transportation
+217,San Juan,34,27,4.265,4.5,0.828,3.0,5.0,isla verde beach,condado beach
+218,Granada,27,24,4.259,5.0,1.13,1.0,5.0,accommodation,attraction booking process
+219,La Paz,4,4,4.25,4.5,0.957,3.0,5.0,bicycle riding,travel safety
+220,Thun,4,4,4.25,4.0,0.5,4.0,5.0,scenic views,cycling
+221,Acadia,4,4,4.25,4.0,0.5,4.0,5.0,natural beauty,hiking and camping
+222,Tikal,8,6,4.25,5.0,1.165,2.0,5.0,attractions,location
+223,Huacachina,4,4,4.25,4.5,0.957,3.0,5.0,relaxation,sand boarding
+224,Postojna,4,4,4.25,4.5,0.957,3.0,5.0,attractions,caves
+225,Valladolid,9,8,4.222,4.0,0.972,2.0,5.0,cenotes,accommodation
+226,London,151,93,4.205,5.0,0.961,1.0,5.0,itinerary flexibility,transportation cost
+227,Chobe National Park,5,5,4.2,4.0,0.447,4.0,5.0,wildlife,game drive
+228,Trieste,10,10,4.2,4.5,1.229,1.0,5.0,airport access,tourist information
+229,Yamanashi,5,5,4.2,5.0,1.304,2.0,5.0,birthday celebration,weather
+230,Easter Island,5,5,4.2,5.0,1.304,2.0,5.0,overall experience,cost
+231,Dominical,5,5,4.2,4.0,0.837,3.0,5.0,local attractions,transportation
+232,Vlora,5,5,4.2,4.0,0.447,4.0,5.0,beach diversity,beach quality
+233,Kumamoto,5,5,4.2,4.0,0.837,3.0,5.0,attractions,car rental and driving
+234,Montevideo,5,5,4.2,5.0,1.304,2.0,5.0,cemetery,city experience
+235,Hobart,15,13,4.2,5.0,1.014,2.0,5.0,markets,city activities
+236,Kota Kinabalu,11,9,4.182,4.0,0.603,3.0,5.0,diving,getting around
+237,Dhërmi,11,11,4.182,4.0,0.751,3.0,5.0,beaches,beach quality
+238,Masai Mara,11,9,4.182,4.0,0.982,2.0,5.0,food,value for money
+239,Denver,34,29,4.176,4.0,0.968,2.0,5.0,neighborhood,uniqueness
+240,Phong Nha,6,6,4.167,4.0,0.753,3.0,5.0,attractions,road conditions
+241,Brașov,12,10,4.167,5.0,1.528,1.0,5.0,biserica neagră,parking
+242,La Palma,6,6,4.167,4.5,0.983,3.0,5.0,hiking,accommodation
+243,Seattle,12,12,4.167,4.0,0.937,2.0,5.0,destination recommendation,rental car prices
+244,Puerto Maldonado,6,5,4.167,4.5,0.983,3.0,5.0,nature,accommodation
+245,Guangzhou,6,3,4.167,4.0,0.753,3.0,5.0,transportation,itinerary planning
+246,Kuching,6,6,4.167,4.5,0.983,3.0,5.0,accommodation,beaches
+247,Vancouver,31,26,4.161,4.0,0.779,3.0,5.0,activities,vancouver
+248,Porto,65,56,4.154,4.0,0.775,2.0,5.0,wine tasting,accommodation cost
+249,Bratislava,7,6,4.143,4.0,0.9,3.0,5.0,route suggestion,stopover
+250,Manchester,7,6,4.143,4.0,0.9,3.0,5.0,local experience,local cuisine
+251,Pompeii,7,7,4.143,4.0,0.9,3.0,5.0,attraction,attraction value
+252,India,7,7,4.143,4.0,0.69,3.0,5.0,backpacking,safety
+253,Kazbegi,8,8,4.125,4.5,0.991,3.0,5.0,comfort,activities
+254,Galway,16,15,4.125,4.0,0.719,3.0,5.0,attractions,itinerary
+255,Bariloche,9,8,4.111,4.0,0.782,3.0,5.0,food and drink,attraction
+256,Penang,9,6,4.111,4.0,1.054,2.0,5.0,flights,beaches
+257,Krabi,10,10,4.1,4.0,0.568,3.0,5.0,natural beauty,krabi experience
+258,Minca,10,10,4.1,4.0,0.568,3.0,5.0,birdwatching,accommodation options
+259,Arequipa,10,8,4.1,4.0,0.568,3.0,5.0,city overall,itinerary planning
+260,Warsaw,23,21,4.087,4.0,0.949,2.0,5.0,city atmosphere,atm availability
+261,Taipei,85,63,4.082,4.0,1.049,1.0,5.0,proximity to nature,temperature
+262,Bangkok,37,28,4.081,4.0,0.894,2.0,5.0,food tour,weather
+263,Chiang Mai,13,13,4.077,4.0,0.954,2.0,5.0,animal sanctuaries,trip duration
+264,Tokyo,109,82,4.075,4.0,0.992,1.0,5.0,honesty of locals,takeshita street
+265,Ohrid,15,13,4.067,5.0,1.387,2.0,5.0,atmosphere,border crossing
+266,Shanghai,32,28,4.062,5.0,1.162,2.0,5.0,architecture,city change experience
+267,Riga,18,14,4.056,4.0,0.998,2.0,5.0,architecture,nightlife
+268,San Marino,19,17,4.053,4.0,0.97,2.0,5.0,hiking,weather
+269,Osaka,26,18,4.038,4.0,0.916,2.0,5.0,attractions,local attitude towards tourism
+270,Palermo,26,23,4.038,4.0,1.076,2.0,5.0,food,beach
+271,Nagano,3,3,4.0,4.0,1.0,3.0,5.0,local interaction,public transportation
+272,Negombo,3,3,4.0,4.0,0.0,4.0,4.0,accommodation,accommodation
+273,New Delhi,3,3,4.0,4.0,0.0,4.0,4.0,architecture,architecture
+274,Prince Edward County,3,3,4.0,4.0,0.0,4.0,4.0,apple orchards,apple orchards
+275,None,82,65,4.0,4.0,1.197,1.0,5.0,mountains,price
+276,Pompei,4,3,4.0,5.0,2.0,1.0,5.0,attraction,transportation
+277,Sacred Valley,3,3,4.0,4.0,0.0,4.0,4.0,day tour,day tour
+278,San Francisco,15,13,4.0,4.0,1.069,1.0,5.0,city,cost
+279,Madeira,4,4,4.0,4.5,1.414,2.0,5.0,destination attractiveness,safety/concerns
+280,San Gimignano,3,3,4.0,4.0,1.0,3.0,5.0,san gimignano gelato,crowds
+281,San José,3,3,4.0,4.0,0.0,4.0,4.0,accommodation,accommodation
+282,Maasai Mara,5,5,4.0,4.0,1.225,2.0,5.0,maasai mara,crowd levels
+283,Southern Spain,3,3,4.0,4.0,1.0,3.0,5.0,train travel,bus travel
+284,Picton,3,3,4.0,4.0,0.0,4.0,4.0,attractions,attractions
+285,Dresden,3,3,4.0,4.0,1.0,3.0,5.0,location,transportation
+286,Hoi An,29,27,4.0,4.0,0.845,2.0,5.0,accommodation location,bike reliability
+287,Pisa,3,3,4.0,4.0,0.0,4.0,4.0,attractions,attractions
+288,Hakodate,7,7,4.0,4.0,0.816,3.0,5.0,seafood,accommodation
+289,Ha Long Bay,4,4,4.0,4.5,1.414,2.0,5.0,proximity,activity accessibility
+290,Grindelwald,7,7,4.0,4.0,0.816,3.0,5.0,hiking trails,grindelwald first
+291,Tam Coc,5,5,4.0,4.0,1.225,2.0,5.0,cycling,crowds
+292,Gordes,3,3,4.0,4.0,1.0,3.0,5.0,scenery,accommodation cost
+293,Glencoe,4,4,4.0,4.0,0.816,3.0,5.0,scenic beauty,tourist infrastructure
+294,Yangshuo,3,3,4.0,4.0,1.0,3.0,5.0,weather,city visit consideration
+295,Tirana,47,38,4.0,4.0,0.978,2.0,5.0,park quality,driving in rain
+296,Tivat,3,3,4.0,4.0,0.0,4.0,4.0,accommodation,accommodation
+297,El Calafate,8,6,4.0,4.0,0.926,3.0,5.0,attraction,logistics
+298,Egilsstadir,3,3,4.0,5.0,1.732,2.0,5.0,accommodation,road conditions
+299,Tromso,4,4,4.0,4.5,1.414,2.0,5.0,northern lights,flight options
+300,Hydra,3,3,4.0,4.0,1.0,3.0,5.0,"beaches in hydra, greece",beaches
+301,DaNang,3,3,4.0,4.0,0.0,4.0,4.0,attractions,attractions
+302,Xian,3,3,4.0,4.0,0.0,4.0,4.0,length of stay,length of stay
+303,Washington D.C.,5,5,4.0,4.0,1.225,2.0,5.0,museums,weather
+304,Colonia del Sacramento,5,5,4.0,4.0,0.707,3.0,5.0,city charm,attractions
+305,Clifden,3,3,4.0,4.0,0.0,4.0,4.0,castle stay,castle stay
+306,Cetinje,3,3,4.0,4.0,0.0,4.0,4.0,architecture,architecture
+307,Cesky Krumlov,3,3,4.0,4.0,1.0,3.0,5.0,overall experience,destination flexibility
+308,Boulder,3,3,4.0,4.0,1.0,3.0,5.0,brunch,town character
+309,Cat Ba Island,3,3,4.0,4.0,0.0,4.0,4.0,beach,beach
+310,Vlore,5,5,4.0,4.0,1.225,2.0,5.0,destination,overall experience
+311,Cartagena,15,11,4.0,4.0,1.069,2.0,5.0,architecture,prices
+312,Capri,8,8,4.0,4.5,1.195,2.0,5.0,beaches,price
+313,Cambridge,3,2,4.0,5.0,1.732,2.0,5.0,cambridge,transportation
+314,Banff,3,3,4.0,4.0,1.0,3.0,5.0,destination recommendation,banff
+315,Belgrade,4,4,4.0,4.0,0.816,3.0,5.0,uniqueness,belgrade
+316,Savannah,3,3,4.0,5.0,1.732,2.0,5.0,overall experience,weather
+317,Lake Atitlan,5,4,4.0,4.0,1.225,2.0,5.0,safety,beach/lake
+318,Interlaken,12,11,4.0,4.0,0.953,2.0,5.0,city,accommodation
+319,Baku,8,8,4.0,4.5,1.414,1.0,5.0,ateshgah (fire temple),traffic
+320,Sarandë,3,3,4.0,4.0,0.0,4.0,4.0,overall experience,overall experience
+321,multiple,4,4,4.0,4.0,0.816,3.0,5.0,itinerary,transportation
+322,Semporna,5,5,4.0,4.0,1.225,2.0,5.0,snorkeling and diving,city
+323,Zürich,4,4,4.0,4.5,1.414,2.0,5.0,public transport,transportation cost
+324,Koh Samui,14,13,4.0,4.0,1.109,2.0,5.0,accommodation,cost
+325,unspecified,6,6,4.0,4.0,1.095,2.0,5.0,local assistance,traffic
+326,Schwangau,8,8,4.0,4.0,0.926,3.0,5.0,attractions,attraction
+327,José Ignacio,4,4,4.0,4.5,1.414,2.0,5.0,restaurant,seasonal experience
+328,Jardin,6,6,4.0,4.0,1.095,2.0,5.0,atmosphere,rural area safety
+329,Prague,44,33,3.977,4.0,1.11,1.0,5.0,accommodation,logistics
+330,Venice,28,22,3.964,4.0,1.071,2.0,5.0,walking,travel time
+331,Mexico City,73,56,3.958,5.0,1.368,1.0,5.0,xochimilco experience,pollution
+332,Hong Kong,46,36,3.957,4.0,1.053,2.0,5.0,events,weather
+333,Vilnius,22,15,3.955,4.0,1.133,2.0,5.0,accommodation location,climate
+334,Kuala Lumpur,18,17,3.944,4.0,0.998,2.0,5.0,affordability,aquaria klcc
+335,Ljubljana,13,12,3.923,4.0,0.862,3.0,5.0,city experience,city size
+336,Isla Mujeres,12,11,3.917,4.0,0.996,2.0,5.0,beaches,atmosphere
+337,Cape Town,12,11,3.917,4.0,1.165,2.0,5.0,flora and fauna,airport transfer
+338,Machu Picchu,11,9,3.909,4.0,0.701,3.0,5.0,tourist attractions,attraction
+339,Como,10,10,3.9,4.0,1.101,2.0,5.0,city break,travel time
+340,Krakow,29,24,3.897,5.0,1.372,1.0,5.0,restaurant payment options,transportation
+341,Himarë,8,7,3.875,4.0,0.835,3.0,5.0,scooter rental,accommodation in himarë
+342,Uluwatu,8,8,3.875,4.0,1.126,2.0,5.0,accommodation/location preference,tourist crowds
+343,Verona,8,7,3.875,4.0,0.991,2.0,5.0,overall experience,accommodation availability
+344,Niagara Falls,15,11,3.867,4.0,1.187,1.0,5.0,activities,aquarium
+345,Flores,15,14,3.867,4.0,0.99,2.0,5.0,accessibility,tours
+346,Zurich,15,14,3.867,4.0,0.64,3.0,5.0,nature and landscapes,museum
+347,Lisbon,52,39,3.865,4.0,1.138,1.0,5.0,logistics,transportation from airport
+348,Kyoto,29,26,3.862,4.0,1.217,1.0,5.0,historical sites,crowd management
+349,Nairobi,7,7,3.857,4.0,0.9,2.0,5.0,accommodation,transportation
+350,Rotorua,7,7,3.857,3.0,1.069,3.0,5.0,orakei korako geothermal park,polynesian spa
+351,Firenze,7,7,3.857,4.0,1.345,2.0,5.0,city,physical accessibility
+352,Füssen,7,7,3.857,5.0,1.676,1.0,5.0,architecture,crowds
+353,Coimbra,7,7,3.857,4.0,1.215,2.0,5.0,alternative destinations,side trips
+354,San Miguel de Allende,7,5,3.857,4.0,0.9,3.0,5.0,restaurants,food
+355,Noumea,7,7,3.857,4.0,0.9,2.0,5.0,tourist experience,infrastructure
+356,Seville,48,33,3.854,4.0,1.368,0.0,5.0,event,local drink
+357,Salzburg,20,16,3.85,4.0,0.988,1.0,5.0,natural beauty,train travel
+358,Malaga,13,12,3.846,4.0,0.987,2.0,5.0,geology,overall experience
+359,Nice,19,15,3.842,4.0,1.015,2.0,5.0,beach,logistics
+360,Rome,95,65,3.842,4.0,1.075,1.0,5.0,food and wine,parking
+361,Puerto Escondido,6,4,3.833,3.5,0.983,3.0,5.0,previous travel experience,tourist crowds
+362,Auckland,6,6,3.833,4.0,0.983,2.0,5.0,overall experience,touristy activities
+363,Madrid,36,32,3.806,4.0,1.215,1.0,5.0,transportation,tourist scams/pricing
+364,Paracas,5,5,3.8,4.0,0.837,3.0,5.0,nature,ballestas tour
+365,Harbin,5,5,3.8,4.0,1.304,2.0,5.0,attractions,city appeal
+366,Bar,5,5,3.8,4.0,1.304,2.0,5.0,history,beach quality
+367,Mt Bromo,5,5,3.8,4.0,1.304,2.0,5.0,natural attractions,weather
+368,Tashkent,10,9,3.8,4.0,1.229,2.0,5.0,destination,city worth visiting
+369,California,5,5,3.8,5.0,1.643,2.0,5.0,emissions regulations,navigation
+370,Lake Garda,5,5,3.8,4.0,1.304,2.0,5.0,swimming,hiking
+371,Hanoi,57,41,3.789,4.0,0.959,1.0,5.0,private transfer services,traffic safety
+372,Berlin,71,44,3.789,4.0,1.194,1.0,5.0,vietnamese food,attraction
+373,Chengdu,14,13,3.786,4.0,1.122,2.0,5.0,atmosphere,train station
+374,Lucerne,37,29,3.784,4.0,1.109,1.0,5.0,getaway from city life,tourist traps
+375,Tbilisi,9,9,3.778,4.0,0.667,3.0,5.0,overall experience,city experience
+376,Yogyakarta,27,22,3.778,4.0,1.251,1.0,5.0,natural attractions,climate
+377,Sintra,9,8,3.778,4.0,1.093,2.0,5.0,attractions,accommodation duration
+378,Barcelona,62,55,3.77,4.0,1.175,1.0,5.0,accommodation,transportation from airport
+379,Bogota,13,12,3.769,4.0,1.092,2.0,5.0,airport experience,atmosphere
+380,Essaouira,4,4,3.75,4.0,1.5,2.0,5.0,biodiversity,overall experience
+381,Melbourne,8,7,3.75,4.0,1.389,1.0,5.0,balcony,deposit
+382,Ubud,4,4,3.75,3.5,0.957,3.0,5.0,cultural experiences,accommodation
+383,Hue,8,8,3.75,4.0,0.707,2.0,4.0,city visit,route from hue to hanoi
+384,HCMC,4,4,3.75,4.0,1.258,2.0,5.0,transportation,traffic safety
+385,São Paulo,4,4,3.75,4.5,1.893,1.0,5.0,rhino transportation service,uber service
+386,Budapest,55,45,3.745,4.0,1.364,1.0,5.0,accommodation,customer service
+387,Istanbul,116,86,3.741,4.0,1.421,1.0,5.0,yeni cami (new mosque),hotel concierge
+388,Budva,27,22,3.741,4.0,1.163,1.0,5.0,nightlife,public transport
+389,Helsinki,11,9,3.727,4.0,1.104,1.0,5.0,transportation,atmosphere
+390,New York City,33,25,3.727,4.0,1.232,1.0,5.0,walkability,cost
+391,Punta Cana,11,9,3.727,4.0,1.348,2.0,5.0,accommodation,beaches
+392,Perth,14,13,3.714,4.0,1.069,2.0,5.0,beaches,weather
+393,Sarande,7,7,3.714,4.0,0.951,2.0,5.0,weather,crowd level
+394,Cebu,24,22,3.708,4.0,0.955,2.0,5.0,access to boracay,punctuality
+395,Copenhagen,100,69,3.7,4.0,1.03,1.0,5.0,child friendly activities,cost
+396,Lyon,23,23,3.696,4.0,0.635,3.0,5.0,local food,les halles
+397,Nosara,13,10,3.692,4.0,1.109,2.0,5.0,beach,crowds and peak season
+398,Munich,50,36,3.68,4.0,1.392,1.0,5.0,local experience,airport location
+399,Santa Ana,3,3,3.667,4.0,0.577,3.0,4.0,activities,transportation cost
+400,San Salvador,6,5,3.667,3.5,1.211,2.0,5.0,safety,overall experience
+401,none,15,13,3.667,4.0,1.633,1.0,5.0,accommodation,driving
+402,Plitvice,3,3,3.667,3.0,1.155,3.0,5.0,attractions,national park
+403,San Sebastián,6,5,3.667,3.0,1.033,3.0,5.0,overall experience,culture
+404,Vietnam,3,3,3.667,4.0,1.528,2.0,5.0,tour operator,overall experience
+405,Zaandam,3,3,3.667,4.0,0.577,3.0,4.0,accommodation cost,city worthiness
+406,Sicily,6,5,3.667,4.0,1.033,2.0,5.0,destination,crowds
+407,Split,21,19,3.667,3.0,1.278,1.0,5.0,accommodation,beach resort
+408,Tomar,3,3,3.667,4.0,0.577,3.0,4.0,city exploration,accommodation/stopping point
+409,Sarajevo,3,3,3.667,3.0,1.155,3.0,5.0,overall experience,city
+410,Aarberg,3,3,3.667,4.0,0.577,3.0,4.0,market day,market
+411,Niseko,3,3,3.667,4.0,1.528,2.0,5.0,views and national parks,food prices
+412,La Jolla,3,3,3.667,4.0,1.528,2.0,5.0,best time to visit,ocean temperature
+413,Aguas Calientes,6,6,3.667,3.5,1.211,2.0,5.0,machu picchu,tourist crowds
+414,Mancora,3,3,3.667,4.0,0.577,3.0,4.0,city overall,transportation
+415,Amstelveen,3,3,3.667,4.0,0.577,3.0,4.0,accommodation cost,city worthiness
+416,Hyderabad,3,2,3.667,4.0,0.577,3.0,4.0,hyderabad,weather
+417,Pattani,3,3,3.667,4.0,1.528,2.0,5.0,cultural experience,safety and security
+418,Ha Giang,3,3,3.667,4.0,0.577,3.0,4.0,ha giang experience,local checkpoints
+419,Guadalajara,3,3,3.667,4.0,1.528,2.0,5.0,cultural experience,overall experience
+420,Fussen,6,6,3.667,4.0,1.366,2.0,5.0,museum,road conditions
+421,Bellagio,6,6,3.667,4.0,1.506,2.0,5.0,accommodation,cost
+422,Brunei,3,3,3.667,4.0,0.577,3.0,4.0,day trip,city atmosphere
+423,Ericeira,3,3,3.667,4.0,0.577,3.0,4.0,escape destinations,ericeira
+424,Mazunte,3,3,3.667,4.0,0.577,3.0,4.0,beach popularity,mazunte
+425,Algarve,11,11,3.636,4.0,1.629,0.0,5.0,beach destination,beach vacation
+426,Buenos Aires,49,35,3.633,4.0,1.035,1.0,5.0,previous travel experience,racism and discrimination
+427,Hvar,8,8,3.625,4.0,1.506,1.0,5.0,best time to visit,crowds
+428,Montreal,13,11,3.615,4.0,0.87,2.0,5.0,arts and culture,road conditions
+429,Langkawi,13,12,3.615,4.0,1.387,2.0,5.0,accommodation,beach quality
+430,Cusco,28,22,3.607,4.0,0.832,2.0,5.0,city overall,altitude
+431,Himara,5,5,3.6,3.0,0.894,3.0,5.0,overall experience,beach quality
+432,Stockholm,5,4,3.6,4.0,0.548,3.0,4.0,transportation options,attractions
+433,Singapore,20,18,3.6,4.0,0.883,2.0,5.0,city experience,weather
+434,Nha Trang,5,5,3.6,4.0,1.14,2.0,5.0,beach,transportation
+435,Inverness,5,5,3.6,4.0,1.517,1.0,5.0,historical sites,train service
+436,Labuan Bajo,5,5,3.6,3.0,0.894,3.0,5.0,wildlife experiences,accommodation
+437,Merritt Island,5,5,3.6,4.0,0.894,2.0,4.0,astronaut training experience,attraction booking system
+438,Ioannina,5,4,3.6,4.0,0.548,3.0,4.0,city visit,transportation
+439,Isla,5,5,3.6,4.0,1.517,2.0,5.0,beach,duration of stay
+440,Dhermi,10,10,3.6,4.0,1.43,1.0,5.0,beach quality,infrastructure/development
+441,Orlando,10,10,3.6,4.0,0.843,2.0,5.0,theme park,wait times
+442,Tromsø,15,14,3.6,4.0,1.298,1.0,5.0,aurora chances,light pollution
+443,Shenzhen,5,5,3.6,4.0,1.14,2.0,5.0,transportation,leisure travel
+444,Paris,109,71,3.587,4.0,1.389,1.0,5.0,destination suggestion,walking
+445,San Diego,12,10,3.583,3.5,0.9,2.0,5.0,attractions,accommodation
+446,Los Angeles,12,10,3.583,4.0,1.165,2.0,5.0,overall experience,city
+447,various,14,14,3.571,4.0,1.399,1.0,5.0,budget,capital cities
+448,Antigua,32,20,3.562,3.0,1.045,2.0,5.0,acatenango hike,weather
+449,Ronda,9,9,3.556,4.0,1.333,1.0,5.0,destination,train travel
+450,Valencia,10,10,3.556,4.0,1.59,1.0,5.0,destination,destination recommendation
+451,Puno,9,8,3.556,3.0,0.726,3.0,5.0,accommodation,island visit
+452,Florence,52,43,3.538,4.0,1.093,1.0,5.0,views,tourism level
+453,Multiple,58,31,3.534,3.0,0.941,2.0,5.0,sightseeing,safety
+454,Luxor,17,14,3.529,4.0,0.943,2.0,5.0,astronomical events,taxi service
+455,Almaty,21,21,3.524,4.0,0.928,2.0,5.0,visa requirements,time spent
+456,Da Nang,40,28,3.5,4.0,1.24,1.0,5.0,day trips and excursions,traffic
+457,Kochi,6,6,3.5,4.0,1.378,1.0,5.0,safety,traffic
+458,Dujiangyan,4,4,3.5,3.0,1.0,3.0,5.0,overall impression,attraction (dujiangyan blue tears)
+459,San Pedro,4,3,3.5,3.5,0.577,3.0,4.0,social atmosphere,weather
+460,Various,4,4,3.5,4.0,1.732,1.0,5.0,castle visits,food pricing
+461,Bangui,8,8,3.5,3.5,1.195,2.0,5.0,scenic views,accommodation
+462,Yunnan,8,6,3.5,3.5,1.512,1.0,5.0,attractions,hiking and nature activities
+463,Halong Bay,4,4,3.5,4.0,1.915,1.0,5.0,attraction,weather
+464,Santiago,6,5,3.5,3.5,1.378,2.0,5.0,destination,air quality
+465,Da Lat,4,4,3.5,3.5,1.291,2.0,5.0,attractions,transportation
+466,Playa del Carmen,4,4,3.5,4.0,1.732,1.0,5.0,beach relaxation,playa del carmen
+467,Panama City,8,8,3.5,4.0,0.756,2.0,4.0,accommodation,road conditions
+468,Palomino,4,4,3.5,4.0,1.0,2.0,4.0,accommodation location,overall experience
+469,Athens,25,21,3.48,4.0,1.122,1.0,5.0,food,airline service
+470,Lake Como,17,16,3.471,3.0,1.375,2.0,5.0,destination,accommodation cost
+471,Beijing,59,40,3.458,4.0,1.43,1.0,5.0,sanlitun,travel restrictions
+472,Tunis,11,8,3.455,3.0,1.036,2.0,5.0,local people,transportation
+473,Amman,7,6,3.429,3.0,0.535,3.0,4.0,accommodation,transportation
+474,Aswan,7,7,3.429,3.0,0.535,3.0,4.0,felucca ride,hotel pricing
+475,Golem,5,4,3.4,3.0,1.14,2.0,5.0,accommodation cost,overall experience
+476,Philadelphia,5,3,3.4,3.0,1.517,2.0,5.0,public transportation,itinerary
+477,Luang Prabang,5,5,3.4,4.0,1.517,1.0,5.0,nature,destination recommendation
+478,Tayrona,5,5,3.4,3.0,1.517,2.0,5.0,beach quality,beach experience
+479,Jakarta,28,24,3.393,3.5,1.197,1.0,5.0,train service,traffic
+480,Amsterdam,26,20,3.385,3.0,1.329,1.0,5.0,destination appeal,accommodation
+481,Milan,32,18,3.375,3.0,0.907,2.0,5.0,train travel,travel time
+482,Bologna,3,3,3.333,3.0,0.577,3.0,4.0,transportation,comparison to other cities
+483,Bergamo,3,3,3.333,3.0,0.577,3.0,4.0,alternative destinations,bergamo
+484,Malcesine,3,3,3.333,3.0,0.577,3.0,4.0,alternative destinations,attractions
+485,Eze,3,3,3.333,3.0,1.528,2.0,5.0,gardens,crowds
+486,Genoa,9,8,3.333,4.0,0.866,2.0,4.0,city exploration,crowds
+487,Faro,6,4,3.333,3.0,0.516,3.0,4.0,city appeal,beach activities
+488,Varenna,3,3,3.333,3.0,1.528,2.0,5.0,scenic beauty,crowds
+489,Ho Chi Minh,3,3,3.333,4.0,1.155,2.0,4.0,city experience,weather
+490,Taichung,3,3,3.333,3.0,1.528,2.0,5.0,city vibe,public transport
+491,Koh Lipe,3,3,3.333,4.0,1.155,2.0,4.0,beach/relaxation,transportation options
+492,Cambria,3,3,3.333,4.0,2.082,1.0,5.0,coastal areas,road trip stops
+493,Lefkada,3,3,3.333,3.0,0.577,3.0,4.0,lefkada,itinerary
+494,Fes,3,3,3.333,3.0,1.528,2.0,5.0,city visit,city worth visiting
+495,Boston,3,3,3.333,3.0,1.528,2.0,5.0,walkability,itinerary
+496,Abidjan,3,3,3.333,4.0,1.155,2.0,4.0,destination appeal,city experience
+497,Oaxaca,3,1,3.333,3.0,0.577,3.0,4.0,oaxaca,oaxaca
+498,Frankfurt,7,6,3.286,4.0,1.89,1.0,5.0,food,airport location
+499,Phuket,19,17,3.263,4.0,1.522,1.0,5.0,food,relaxation
+500,Fukuoka,16,14,3.25,3.0,1.0,1.0,5.0,itinerary,natural disasters
+501,Menton,4,4,3.25,3.5,0.957,2.0,4.0,french riviera,city atmosphere
+502,Ollantaytambo,4,4,3.25,3.5,0.957,2.0,4.0,altitude acclimatization,acclimatization
+503,Cascais,4,4,3.25,3.0,1.5,2.0,5.0,beaches,overall experience
+504,Cappadocia,4,4,3.25,3.0,1.258,2.0,5.0,natural beauty,outdoor activities
+505,Positano,4,4,3.25,3.0,1.258,2.0,5.0,overall experience,tourist areas
+506,Medellin,4,4,3.25,4.0,1.5,1.0,4.0,city exploration,cities/nightlife
+507,Wuhan,8,8,3.25,3.0,1.165,2.0,5.0,accommodation,safety
+508,Phi Phi,4,3,3.25,3.0,1.5,2.0,5.0,overall experience,crowds
+509,Santa Marta,4,4,3.25,3.5,0.957,2.0,4.0,scuba diving,city stay
+510,Dubrovnik,29,27,3.241,3.0,1.38,1.0,5.0,pop culture reference,tourist crowds
+511,Torres del Paine,13,9,3.231,3.0,1.536,1.0,5.0,accommodation,cost
+512,Geneva,13,12,3.231,4.0,1.481,1.0,5.0,dining tips,cost
+513,Ho Chi Minh City,14,10,3.214,3.5,1.251,1.0,5.0,destination,traffic
+514,Ortisei,5,4,3.2,2.0,1.643,2.0,5.0,alps (ortisei),hiking
+515,Chisinau,5,5,3.2,4.0,1.095,2.0,4.0,bike tours,tour pricing
+516,Bordeaux,5,5,3.2,4.0,1.095,2.0,4.0,city overall experience,comparison to other cities
+517,Mahdia,5,5,3.2,3.0,1.304,2.0,5.0,city of mahdia,all-inclusive package
+518,Sorrento,5,5,3.2,3.0,0.837,2.0,4.0,hotel,overall experience
+519,Seven Lakes,5,4,3.2,3.0,0.837,2.0,4.0,accommodation,weather
+520,Santorini,6,6,3.167,3.0,1.722,1.0,5.0,food,tourist trap
+521,Ha Long,6,5,3.167,3.5,1.472,1.0,5.0,tourist attraction,attraction
+522,Chongqing,6,6,3.167,3.0,1.169,2.0,5.0,overall experience,sightseeing time
+523,Lima,27,19,3.148,3.0,1.134,1.0,5.0,overall experience,environmental conditions
+524,Patagonia,8,8,3.125,3.0,1.458,1.0,5.0,destination,seasonal travel
+525,Colombo,16,14,3.125,3.5,1.088,1.0,4.0,accommodation,travel timing
+526,Surabaya,9,7,3.111,3.0,0.928,2.0,5.0,public transportation,city charm
+527,Wengen,9,6,3.111,3.0,1.269,1.0,5.0,"wengen, switzerland",transportation
+528,Cairo,36,29,3.111,3.0,1.545,1.0,5.0,accommodation,safety
+529,Seoul,25,18,3.091,3.0,1.109,1.0,5.0,cuisine,cost
+530,Zhangjiajie,12,10,3.083,3.0,1.379,1.0,5.0,autumn colors,tourist attractions
+531,Ksamil,14,11,3.071,3.0,1.328,1.0,5.0,accommodation,crowds
+532,Las Vegas,17,12,3.059,3.0,1.249,1.0,5.0,accommodation,city overall
+533,Joshua Tree,5,4,3.0,2.0,1.871,1.0,5.0,honeymoon destination,weather
+534,Guilin,3,3,3.0,4.0,1.732,1.0,4.0,guilin,travel experience
+535,Ortigia,3,3,3.0,3.0,0.0,3.0,3.0,culture,culture
+536,Salta,4,4,3.0,3.0,0.816,2.0,4.0,transportation,exploration time
+537,Ouagadougou,3,3,3.0,3.0,1.0,2.0,4.0,flight experience,safety
+538,Matamata,4,3,3.0,3.0,2.309,1.0,5.0,hobbiton,attraction
+539,Canggu,3,3,3.0,3.0,1.0,2.0,4.0,accommodation/location preference,tourist crowds
+540,Cancun,11,11,3.0,3.0,1.183,1.0,5.0,cancun accessibility,racism and discrimination
+541,Breckenridge,3,3,3.0,4.0,1.732,1.0,4.0,bar,traffic
+542,Probolinggo,3,3,3.0,3.0,1.0,2.0,4.0,coach service,city attractiveness
+543,Damascus,4,3,3.0,3.0,0.0,3.0,3.0,safety,safety
+544,Calgary,5,4,3.0,3.0,1.0,2.0,4.0,flight options,rental car prices
+545,Tropea,5,5,3.0,4.0,1.414,1.0,4.0,beach experience,crowd levels
+546,Chennai,4,2,3.0,3.0,1.826,1.0,5.0,tourist attractions,weather
+547,Lucca,5,5,3.0,4.0,1.871,1.0,5.0,overall experience,event planning
+548,Grand Terre,3,3,3.0,2.0,1.732,2.0,5.0,natural wonders,food and water availability
+549,Luzern,4,4,3.0,3.0,0.816,2.0,4.0,attractions,transportation
+550,The Hague,3,3,3.0,3.0,1.0,2.0,4.0,hostel experience,cost
+551,Narok,7,7,3.0,3.0,1.155,1.0,4.0,accommodation location,cost
+552,Puri,5,5,3.0,3.0,0.0,3.0,3.0,accommodation,accommodation
+553,Malmö,6,6,3.0,3.0,0.894,2.0,4.0,attractions,comparison to other cities
+554,Zagreb,3,3,3.0,3.0,0.0,3.0,3.0,city,city
+555,Huehuetenango,6,6,3.0,3.0,0.0,3.0,3.0,accommodation,accommodation
+556,Puglia,5,4,3.0,4.0,1.414,1.0,4.0,region,heat
+557,Podgorica,8,5,3.0,2.5,1.195,2.0,5.0,public transportation,city beauty
+558,Milos,5,5,3.0,3.0,1.0,2.0,4.0,cost,ferry experience
+559,Sapa,11,10,2.909,3.0,1.3,1.0,5.0,mountain visit,safety
+560,Vientiane,11,11,2.909,2.0,1.3,1.0,5.0,culture,destination recommendation
+561,Amalfi,7,7,2.857,3.0,1.345,1.0,5.0,scenic beauty,crowds
+562,Giza,6,6,2.833,3.0,1.722,1.0,5.0,tourist attractions,local atmosphere
+563,Hurghada,24,19,2.826,3.0,1.193,1.0,5.0,snorkeling,honeymoon destination
+564,Bali,21,18,2.81,3.0,1.632,1.0,5.0,"bali, indonesia as a destination",local authorities
+565,Mostar,9,8,2.778,3.0,0.667,2.0,4.0,train service,cost
+566,New York,9,8,2.778,2.0,1.302,1.0,5.0,overall experience,hotel prices
+567,Komodo,4,4,2.75,2.5,1.708,1.0,5.0,destination appeal,weather
+568,Kanazawa,4,4,2.75,3.0,0.5,2.0,3.0,accommodation,crowd level
+569,Xi'an,4,4,2.75,3.0,0.5,2.0,3.0,accommodation,train service
+570,Oslo,4,4,2.75,2.5,0.957,2.0,4.0,city exploration,itinerary
+571,Pamplona,4,4,2.75,2.5,0.957,2.0,4.0,festival experience,accommodation
+572,Dehradun,4,4,2.75,3.0,0.5,2.0,3.0,cultural differences,personal boundaries and privacy
+573,Naples,34,28,2.676,3.0,1.224,1.0,5.0,travel experience,public transportation
+574,San Jose,3,3,2.667,2.0,1.155,2.0,4.0,accommodation,dining options
+575,Flagstaff,3,3,2.667,2.0,1.155,2.0,4.0,tourist destination,driving conditions
+576,Ica,3,3,2.667,2.0,1.155,2.0,4.0,activity,overall experience
+577,Cemoro Lawang,3,3,2.667,3.0,0.577,2.0,3.0,accommodation,public transportation
+578,Ourense,3,3,2.667,3.0,0.577,2.0,3.0,night life,city overall
+579,Colima,6,4,2.667,2.0,1.862,1.0,5.0,beauty,safety
+580,Hallstatt,21,17,2.667,2.0,1.623,1.0,5.0,hallstatt,charm
+581,Norikura,3,3,2.667,3.0,0.577,2.0,3.0,bus service,tourist information
+582,Hammamet,3,3,2.667,2.0,1.155,2.0,4.0,cost,local behavior
+583,Rimini,6,5,2.667,2.5,1.211,1.0,4.0,bus transportation,crowds
+584,Brussels,8,7,2.625,3.0,1.188,1.0,4.0,airline safety,flight experience
+585,Phnom Penh,5,5,2.6,2.0,1.817,1.0,5.0,transportation,city overall experience
+586,Tulum,5,4,2.6,2.0,1.342,1.0,4.0,archeological site,tulum
+587,Guatemala City,11,7,2.455,2.0,0.522,2.0,3.0,airport,interest
+588,Monaco,11,9,2.364,2.0,1.286,1.0,4.0,day trip to monaco,overall experience
+589,Ella,3,3,2.333,3.0,1.155,1.0,3.0,city experience,weather
+590,Mumbai,12,8,2.333,2.0,1.155,1.0,5.0,flight connections,weather
+591,Salisbury,3,3,2.333,2.0,1.528,1.0,4.0,day trip to stonehenge,attraction
+592,Manila,6,6,2.333,2.5,0.816,1.0,3.0,manila,city logistics
+593,Jungfraujoch,5,5,2.2,2.0,1.095,1.0,4.0,scenic view,altitude sickness
+594,Delhi,9,8,2.111,2.0,1.453,1.0,5.0,tourist attractions,air quality
+595,Durres,3,3,2.0,2.0,0.0,2.0,2.0,city worth visiting,city worth visiting
+596,Los Ángeles,5,5,2.0,1.0,1.414,1.0,4.0,beaches,city aesthetics
+597,Phu Quoc,5,3,2.0,2.0,1.0,1.0,3.0,destination selection,weather
+598,Taganga,4,4,2.0,2.0,0.816,1.0,3.0,accommodation location,town atmosphere
+599,Gibraltar,12,11,1.917,1.5,1.084,1.0,4.0,day trip options,city worth
+600,Vilamoura,3,3,1.667,2.0,0.577,1.0,2.0,resort town quality,resort quality
+601,Saigon,3,3,1.667,2.0,0.577,1.0,2.0,logistics,city overall experience
+602,La Spezia,3,3,1.667,2.0,0.577,1.0,2.0,hiking trails,cruise tourism
+603,Andaman,3,3,1.0,1.0,0.0,1.0,1.0,environmental impact,environmental impact

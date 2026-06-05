@@ -1,0 +1,12 @@
+metric,value
+total_extracted_aspects,11085
+unique_aspects,2994
+avg_aspects_per_document,4.81
+most_frequent_aspect,transportation
+most_frequent_aspect_count,569
+total_sentiment_observations,11061
+mean_sentiment_score,3.863
+median_sentiment_score,4.0
+std_sentiment_score,1.176
+min_sentiment_score,0.0
+max_sentiment_score,5.0

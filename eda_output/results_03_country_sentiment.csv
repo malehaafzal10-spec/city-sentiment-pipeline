@@ -1,0 +1,157 @@
+rank,country,aspect_mentions,unique_aspects,mean_sentiment,median_sentiment,std_sentiment,min_sentiment,max_sentiment,top_positive_aspect,top_negative_aspect
+1,Xinjiang,3,3,5.0,5.0,0.0,5.0,5.0,cost,cost
+2,Cayman Islands,4,4,5.0,5.0,0.0,5.0,5.0,atmosphere,atmosphere
+3,Northern Ireland,4,4,5.0,5.0,0.0,5.0,5.0,accommodation,accommodation
+4,Turkiye,3,2,5.0,5.0,0.0,5.0,5.0,living experience,living experience
+5,Tibet,3,3,5.0,5.0,0.0,5.0,5.0,local culture,local culture
+6,French Polynesia,7,4,4.857,5.0,0.378,4.0,5.0,destination appeal,flight availability
+7,Aruba,10,8,4.8,5.0,0.632,3.0,5.0,beach,destination
+8,unknown,14,13,4.786,5.0,0.579,3.0,5.0,accommodation,cuisine
+9,Namibia,9,8,4.778,5.0,0.441,4.0,5.0,damaraland,overall experience
+10,Botswana,35,25,4.771,5.0,0.49,3.0,5.0,boat cruises,tour guides
+11,England,29,29,4.759,5.0,0.636,2.0,5.0,accommodation,stonehenge
+12,none,4,4,4.75,5.0,0.5,4.0,5.0,accommodation,parking
+13,Britain,3,3,4.667,5.0,0.577,4.0,5.0,food,live music
+14,Zambia,3,3,4.667,5.0,0.577,4.0,5.0,victoria falls,river cruise
+15,Nepal,17,17,4.647,5.0,0.606,3.0,5.0,jeep safari,ebc trek difficulty
+16,Saudi Arabia,8,7,4.625,5.0,0.518,4.0,5.0,atmosphere,tourist attractions
+17,Wales,16,15,4.625,5.0,0.806,2.0,5.0,arcades,airport infrastructure
+18,Bosnia,5,3,4.6,5.0,0.548,4.0,5.0,border waiting time,general information
+19,Ireland/Scotland,5,5,4.4,5.0,0.894,3.0,5.0,destination appeal,time management
+20,Estonia,55,38,4.4,5.0,0.784,2.0,5.0,accommodation,tourist arrivals
+21,Bulgaria,15,14,4.4,5.0,0.828,2.0,5.0,atmosphere,weather
+22,Rwanda,34,28,4.382,5.0,1.129,1.0,5.0,wildlife trekking,health and safety
+23,Ireland,116,74,4.371,5.0,0.86,1.0,5.0,information resources,rental cars
+24,Luxembourg,3,3,4.333,4.0,0.577,4.0,5.0,food,city visit
+25,Morocco,40,28,4.325,5.0,0.997,2.0,5.0,architecture,transportation
+26,Puerto Rico,41,32,4.317,5.0,0.82,3.0,5.0,la placita,condado beach
+27,Slovenia,86,59,4.279,5.0,0.903,2.0,5.0,accessibility,food options
+28,Serbia,15,15,4.267,4.0,0.799,3.0,5.0,autumn colors,belgrade
+29,Senegal,4,4,4.25,4.0,0.5,4.0,5.0,overall experience,city experience
+30,Tanzania,24,16,4.25,5.0,1.225,2.0,5.0,activity,safari cost
+31,Faroe Islands,21,18,4.238,5.0,1.091,2.0,5.0,remoteness,best time to visit
+32,Ecuador,28,24,4.214,5.0,0.995,2.0,5.0,accommodation,immigration requirements
+33,Australia,68,47,4.176,5.0,1.007,1.0,5.0,margaret river,deposit
+34,Montenegro,211,125,4.166,4.0,1.036,1.0,5.0,lake scenery,cleanliness
+35,Canada,102,75,4.147,4.0,0.776,2.0,5.0,scenic views,rental car prices
+36,Bolivia,14,14,4.143,5.0,1.099,2.0,5.0,activities,safety
+37,New Zealand,70,56,4.129,5.0,1.25,1.0,5.0,alternative destination,attraction
+38,Azores,8,4,4.125,4.0,0.354,4.0,5.0,revisit intention,alternative destination
+39,Malta,82,61,4.11,5.0,1.286,1.0,5.0,history,area to avoid
+40,Latvia,22,18,4.091,4.0,0.971,2.0,5.0,old city center,nightlife
+41,United Kingdom,187,111,4.086,4.0,1.049,1.0,5.0,local experience,traffic
+42,Japan,495,279,4.063,4.0,1.076,1.0,5.0,zoo,tourist behavior
+43,USA,365,193,4.063,4.0,1.138,1.0,5.0,restaurant - root down,hotel quality
+44,Taiwan,162,98,4.062,4.0,1.007,1.0,5.0,night markets,temperature
+45,Scotland,51,44,4.059,4.0,1.173,1.0,5.0,language,train service
+46,Romania,34,29,4.059,5.0,1.434,1.0,5.0,autumn scenery,green space
+47,North Macedonia,17,14,4.059,5.0,1.345,2.0,5.0,atmosphere,climate
+48,San Marino,19,17,4.053,4.0,0.97,2.0,5.0,hiking,weather
+49,Czech Republic,48,35,4.042,4.0,1.148,1.0,5.0,accommodation,logistics
+50,Costa Rica,51,30,4.02,4.0,1.086,2.0,5.0,nature,accommodation pricing
+51,Turkey,186,123,4.011,5.0,1.344,1.0,5.0,yeni cami (new mosque),accommodation experience
+52,UK,5,5,4.0,4.0,1.0,3.0,5.0,guided tours,local cuisine
+53,Patagonia,3,3,4.0,4.0,1.0,3.0,5.0,natural beauty,regional visit
+54,Patagonia (Argentina/Chile),5,4,4.0,4.0,1.0,3.0,5.0,southern patagonia,weather
+55,Poland,67,51,4.0,4.0,1.181,1.0,5.0,affordability,historical sites
+56,The Netherlands,3,3,4.0,4.0,0.0,4.0,4.0,accommodation,accommodation
+57,Central America,7,6,4.0,4.0,1.0,2.0,5.0,adventure opportunities,cost
+58,None,9,9,4.0,4.0,0.866,3.0,5.0,outdoor activities,crowds
+59,Uruguay,16,14,4.0,4.0,1.155,2.0,5.0,cemetery,city experience
+60,Belgium,29,25,4.0,5.0,1.282,1.0,5.0,walkability,flight experience
+61,Lithuania,28,21,4.0,4.0,1.089,2.0,5.0,accommodation location,climate
+62,Southeast Asia,16,13,4.0,5.0,1.317,2.0,5.0,backpacking,atm fees
+63,Greece,187,107,3.984,4.0,1.055,1.0,5.0,road trip,tourist trap
+64,Myanmar,23,20,3.957,5.0,1.364,1.0,5.0,yangon,safety and politics
+65,El Salvador,21,12,3.952,4.0,0.973,2.0,5.0,airport proximity,accommodation
+66,Spain,398,188,3.952,4.0,1.166,0.0,5.0,region,tourist reception
+67,Philippines,71,56,3.944,4.0,1.145,1.0,5.0,access to boracay,cities
+68,Portugal,284,161,3.944,4.0,1.062,0.0,5.0,wine tasting,beach vacation
+69,Mongolia,30,24,3.933,4.0,1.202,1.0,5.0,accommodation,driving times
+70,Iceland,52,40,3.923,4.5,1.281,1.0,5.0,nature,cost
+71,France,354,189,3.921,4.0,1.136,1.0,5.0,restaurant atmosphere,cleanliness
+72,Kenya,72,51,3.917,4.0,1.196,1.0,5.0,wildlife viewing,cost
+73,Albania,228,126,3.917,4.0,1.04,1.0,5.0,festival,infrastructure/development
+74,Thailand,251,140,3.912,4.0,1.183,1.0,5.0,wildlife sanctuary,relaxation
+75,Uzbekistan,38,26,3.895,4.0,1.158,1.0,5.0,taxi service,ride-hailing apps
+76,Europe,26,24,3.885,4.0,1.143,1.0,5.0,festival,european airlines
+77,China,424,232,3.882,4.0,1.228,1.0,5.0,maps and navigation,shopping in chaoyang
+78,Malaysia,159,112,3.874,4.0,1.118,1.0,5.0,accommodation,genting
+79,Argentina,169,105,3.87,4.0,1.067,1.0,5.0,wine tasting,racism and discrimination
+80,Georgia,38,33,3.868,4.0,0.906,3.0,5.0,wine,history
+81,Germany,220,110,3.864,4.0,1.231,1.0,5.0,access to amenities,logistics
+82,Austria,136,89,3.86,4.0,1.318,1.0,5.0,abbey,ski resort
+83,Fiji,21,18,3.857,4.0,1.195,2.0,5.0,river tubing,trip duration
+84,Korea,7,7,3.857,5.0,1.464,2.0,5.0,beaches/lakes,crowd
+85,Switzerland,235,135,3.855,4.0,1.1,1.0,5.0,mountain scenery,tourist traps
+86,Norway,61,45,3.852,4.0,1.236,1.0,5.0,wildlife,light pollution
+87,Asia,6,6,3.833,4.5,1.602,1.0,5.0,cost of living,air quality
+88,Brazil,23,16,3.826,4.0,1.403,1.0,5.0,beach quality,cost
+89,South Africa,17,15,3.824,4.0,1.015,2.0,5.0,flora and fauna,airport transfer
+90,Central Asia,11,11,3.818,4.0,1.25,2.0,5.0,local tour group,language barrier
+91,Colombia,108,78,3.815,4.0,1.086,1.0,5.0,wildlife viewing,cities/nightlife
+92,Italy,769,368,3.801,4.0,1.174,1.0,5.0,rural areas,train station experience
+93,Zambia/Zimbabwe,5,5,3.8,4.0,1.304,2.0,5.0,bridge,white-water rafting
+94,Azerbaijan,14,14,3.786,4.0,1.369,1.0,5.0,ateshgah (fire temple),traffic
+95,Slovakia,13,10,3.769,4.0,1.423,1.0,5.0,local hospitality,driving experience
+96,Denmark,124,84,3.766,4.0,1.045,1.0,5.0,walkability,cost
+97,Panama,21,18,3.762,4.0,1.091,2.0,5.0,nature,road conditions
+98,South East Asia,8,8,3.75,5.0,1.832,1.0,5.0,accommodation prices,beach conditions
+99,South Korea,51,36,3.75,4.0,1.176,1.0,5.0,cuisine,cost
+100,Mexico,208,126,3.744,4.0,1.226,1.0,5.0,xochimilco experience,cabo
+101,Peru,218,122,3.743,4.0,1.135,1.0,5.0,wildlife experience,nazca lines
+102,Vietnam,373,192,3.743,4.0,1.175,1.0,5.0,local people,road safety
+103,Hungary,56,46,3.732,4.0,1.355,1.0,5.0,accommodation,retail service
+104,New Caledonia,11,11,3.727,4.0,1.191,2.0,5.0,local people,food and water availability
+105,Kazakhstan,36,36,3.722,4.0,1.186,1.0,5.0,lake,road conditions
+106,Chile,58,34,3.714,4.0,1.232,1.0,5.0,accommodation,cost
+107,Ethiopia,17,17,3.706,4.0,1.105,2.0,5.0,airline reliability,heat
+108,Sri Lanka,54,32,3.704,4.0,1.143,1.0,5.0,whale watching,travel timing
+109,Guatemala,130,75,3.7,4.0,1.166,1.0,5.0,xelapan bakery,solo female travel
+110,Mauritius,13,13,3.692,3.0,0.855,3.0,5.0,beach relaxation,accommodation
+111,Indonesia,263,150,3.692,4.0,1.242,1.0,5.0,accessibility,transportation (damri)
+112,Croatia,141,99,3.681,4.0,1.227,1.0,5.0,history,border waiting time
+113,Hong Kong and Laos,3,3,3.667,4.0,0.577,3.0,4.0,public transport,accommodation
+114,Brunei,3,3,3.667,4.0,0.577,3.0,4.0,day trip,city atmosphere
+115,Multiple,66,47,3.651,4.0,0.845,2.0,5.0,hiking and adventure activities,weather
+116,Finland,20,17,3.65,4.0,0.933,1.0,5.0,transportation,atmosphere
+117,Netherlands,45,26,3.622,4.0,1.23,1.0,5.0,neighborhoods,cost
+118,Cambodia,40,32,3.6,4.0,1.482,1.0,5.0,accommodation,weather
+119,Balkans,5,5,3.6,4.0,0.894,2.0,4.0,border crossing,travel planning resources
+120,Sweden,19,15,3.579,4.0,0.838,2.0,5.0,natural diversity,comparison to other cities
+121,Singapore,24,21,3.542,3.5,0.932,2.0,5.0,city experience,weather
+122,Dominican Republic,15,12,3.533,4.0,1.302,2.0,5.0,accommodation,beach conditions
+123,Laos,29,26,3.517,4.0,1.299,1.0,5.0,solo travel experience,destination recommendation
+124,United States,111,79,3.477,4.0,1.306,1.0,5.0,ecological diversity,hotel prices
+125,Uganda,19,17,3.474,3.0,1.264,1.0,5.0,wildlife trekking,health and safety
+126,Kyrgyzstan,28,22,3.429,3.0,1.2,1.0,5.0,riding quality,communication
+127,Moldova,17,17,3.412,3.0,1.064,2.0,5.0,train travel,tour pricing
+128,India,132,67,3.409,4.0,1.365,1.0,5.0,scenic beauty,government policies
+129,Africa,5,5,3.4,3.0,1.517,2.0,5.0,overall experience,over-tourism
+130,Russia,8,8,3.375,4.0,1.506,1.0,5.0,natural scenery,remoteness
+131,Macedonia,3,3,3.333,3.0,1.528,2.0,5.0,overall experience,travel restrictions
+132,Central African Republic,9,9,3.333,3.0,1.225,2.0,5.0,scenic views,accommodation
+133,Montenegro and Albania,3,3,3.333,3.0,1.528,2.0,5.0,relaxation,driving
+134,Ivory Coast,3,3,3.333,4.0,1.155,2.0,4.0,flight route,city experience
+135,Jordan,10,8,3.3,3.0,0.483,3.0,4.0,accommodation,comparison to other destinations
+136,Tunisia,39,31,3.282,3.0,1.191,1.0,5.0,day trip,car rental
+137,Czechia,11,10,3.273,4.0,0.905,2.0,4.0,castle visits,city life
+138,Egypt,126,86,3.264,3.0,1.339,1.0,5.0,flight prices,scam risk
+139,Tajikistan,12,10,3.25,3.0,1.138,1.0,5.0,hiking,road conditions
+140,Hong Kong,6,6,3.167,3.0,0.753,2.0,4.0,destination options,things to do
+141,Bahamas,7,7,3.143,3.0,1.345,2.0,5.0,beach and water quality,local vendors and salespeople
+142,Lebanon,9,8,3.111,3.0,1.764,1.0,5.0,architecture,politics
+143,Armenia,12,11,3.083,3.0,0.289,3.0,4.0,driving experience,architecture
+144,Bosnia and Herzegovina,15,12,3.067,3.0,0.799,2.0,5.0,overall experience,cost
+145,Latin America,3,3,3.0,3.0,2.0,1.0,5.0,tourism,us influence
+146,Burkina Faso,3,3,3.0,3.0,1.0,2.0,4.0,flight experience,safety
+147,Syria,5,4,3.0,3.0,0.0,3.0,3.0,border crossing,border crossing
+148,Pakistan,18,15,2.833,2.5,1.043,2.0,5.0,hiking,climate
+149,South America,4,4,2.75,2.0,1.5,2.0,5.0,culture,cost
+150,Chile/Argentina,4,4,2.75,2.5,0.957,2.0,4.0,overall experience,child-friendliness
+151,Argentina/Chile,4,4,2.75,2.5,1.708,1.0,5.0,visiting patagonia,seasonal travel
+152,"general Alps region (e.g. France, Switzerland, Austria, etc.)",5,5,2.4,2.0,0.894,2.0,4.0,mountaineering,cable cars
+153,Monaco,11,9,2.364,2.0,1.286,1.0,4.0,day trip to monaco,overall experience
+154,Türkiye,3,3,2.333,1.0,2.309,1.0,5.0,exploration,driving
+155,Gibraltar,10,9,1.8,1.0,1.135,1.0,4.0,day trip options,city worth
+156,Vietnam and Cambodia,5,5,1.8,2.0,0.837,1.0,3.0,guided tours,group tours

@@ -1,0 +1,2995 @@
+rank,aspect,mention_count,pct_of_aspects,mean_sentiment,median_sentiment,std_sentiment
+1,transportation,569,5.1,3.479,3.0,1.074
+2,overall experience,503,4.5,4.304,5.0,1.057
+3,accommodation,416,3.8,3.657,4.0,0.953
+4,food,294,2.7,4.304,5.0,0.925
+5,weather,268,2.4,2.787,2.0,1.288
+6,attractions,169,1.5,4.337,5.0,0.801
+7,safety,168,1.5,3.263,3.0,1.367
+8,cost,130,1.2,2.985,3.0,1.335
+9,itinerary planning,109,1.0,3.165,3.0,0.727
+10,beaches,108,1.0,4.056,4.0,1.118
+11,natural beauty,107,1.0,4.888,5.0,0.396
+12,itinerary,98,0.9,3.327,3.0,0.906
+13,hiking,90,0.8,4.322,5.0,0.946
+14,nightlife,85,0.8,3.867,4.0,1.124
+15,nature,76,0.7,4.447,5.0,0.79
+16,culture,75,0.7,4.307,5.0,0.854
+17,beach,74,0.7,4.068,4.0,0.926
+18,crowds,74,0.7,2.473,2.0,1.285
+19,destination,73,0.7,4.342,5.0,0.786
+20,city experience,71,0.6,3.901,4.0,0.988
+21,scenic views,70,0.6,4.8,5.0,0.554
+22,public transportation,69,0.6,4.116,4.0,0.993
+23,atmosphere,64,0.6,4.391,5.0,1.107
+24,history,64,0.6,4.312,5.0,0.871
+25,tourist attractions,62,0.6,4.129,5.0,1.235
+26,architecture,57,0.5,4.596,5.0,0.728
+27,museums,52,0.5,4.212,4.0,0.997
+28,day trips,50,0.5,3.98,4.0,0.685
+29,city visit,49,0.4,4.0,4.0,0.764
+30,scenery,46,0.4,4.826,5.0,0.529
+31,city exploration,46,0.4,3.87,4.0,0.957
+32,attraction,45,0.4,3.933,5.0,1.452
+33,tourist crowds,42,0.4,2.571,2.0,1.213
+34,day trip,41,0.4,4.195,4.0,0.872
+35,walkability,41,0.4,4.78,5.0,0.725
+36,sightseeing,41,0.4,3.878,4.0,0.872
+37,city,40,0.4,3.875,4.0,0.911
+38,outdoor activities,40,0.4,4.385,5.0,1.091
+39,border crossing,38,0.3,3.421,4.0,1.154
+40,location,38,0.3,4.053,4.0,0.928
+41,shopping,37,0.3,3.714,4.0,1.341
+42,wildlife,36,0.3,4.694,5.0,0.889
+43,scenic beauty,34,0.3,4.794,5.0,0.641
+44,language,34,0.3,3.735,4.0,1.136
+45,budget,32,0.3,3.375,3.0,0.793
+46,national park,31,0.3,4.516,5.0,0.677
+47,destination recommendation,31,0.3,4.032,5.0,1.56
+48,old town,30,0.3,4.467,5.0,0.681
+49,beach quality,30,0.3,3.7,4.0,1.236
+50,activities,30,0.3,4.067,4.0,0.944
+51,travel planning,29,0.3,3.483,3.0,0.785
+52,natural attractions,28,0.3,4.679,5.0,0.723
+53,logistics,28,0.3,2.857,3.0,1.268
+54,value for money,27,0.2,3.519,4.0,1.626
+55,food options,26,0.2,3.885,4.0,0.993
+56,city atmosphere,25,0.2,4.4,5.0,0.816
+57,accommodation location,25,0.2,3.92,4.0,1.115
+58,beach experience,24,0.2,3.708,4.0,1.233
+59,road conditions,24,0.2,2.667,2.0,1.049
+60,solo travel,24,0.2,3.667,3.5,1.049
+61,relaxation,24,0.2,4.458,5.0,1.179
+62,local people,24,0.2,4.583,5.0,1.06
+63,tour,23,0.2,4.13,4.0,1.058
+64,restaurant,23,0.2,4.522,5.0,0.898
+65,car rental,23,0.2,3.261,3.0,1.054
+66,hiking trails,22,0.2,4.091,5.0,1.231
+67,people,22,0.2,4.909,5.0,0.294
+68,trip duration,22,0.2,2.955,2.5,1.09
+69,road trip,22,0.2,4.364,4.0,0.492
+70,historical sites,22,0.2,4.5,5.0,0.964
+71,public transport,22,0.2,3.636,4.0,1.255
+72,visa requirements,21,0.2,3.095,3.0,1.221
+73,restaurants,21,0.2,4.286,5.0,0.956
+74,alternative destinations,20,0.2,4.25,4.0,0.444
+75,island experience,20,0.2,4.45,5.0,0.887
+76,cultural experience,19,0.2,4.842,5.0,0.375
+77,immigration process,18,0.2,3.667,3.5,1.029
+78,city overall,18,0.2,4.389,5.0,1.195
+79,train service,18,0.2,4.0,4.0,1.188
+80,destination choice,18,0.2,3.5,3.5,0.924
+81,destination appeal,18,0.2,4.056,4.0,1.211
+82,traffic,18,0.2,1.5,1.0,0.618
+83,towns,18,0.2,4.389,4.0,0.502
+84,infrastructure,17,0.2,3.059,2.0,1.478
+85,neighborhoods,17,0.2,4.353,4.0,0.606
+86,city charm,17,0.2,4.529,5.0,0.8
+87,local culture,17,0.2,4.647,5.0,0.493
+88,planning,16,0.1,3.625,4.0,0.806
+89,airport experience,16,0.1,2.875,3.0,1.147
+90,tourist destinations,15,0.1,3.6,3.0,1.183
+91,tourist infrastructure,15,0.1,3.733,4.0,0.799
+92,train travel,15,0.1,3.8,4.0,1.146
+93,landmarks,15,0.1,4.467,5.0,0.64
+94,museum,15,0.1,4.4,5.0,0.91
+95,cuisine,15,0.1,4.267,5.0,1.033
+96,trip planning,15,0.1,3.429,3.0,0.756
+97,transportation options,15,0.1,3.4,4.0,0.91
+98,food scene,15,0.1,4.533,5.0,0.834
+99,accessibility,15,0.1,3.867,4.0,1.187
+100,travel time,15,0.1,2.533,2.0,0.99
+101,local interaction,15,0.1,4.533,5.0,0.834
+102,city life,15,0.1,3.6,4.0,0.91
+103,food and drink,15,0.1,4.4,5.0,0.828
+104,affordability,15,0.1,4.6,5.0,0.632
+105,town atmosphere,15,0.1,3.6,4.0,1.121
+106,duration of stay,15,0.1,3.467,4.0,0.915
+107,alternative destination,14,0.1,4.071,4.0,0.616
+108,dining,14,0.1,4.143,4.0,1.099
+109,driving,14,0.1,2.714,3.0,1.204
+110,national parks,14,0.1,4.286,4.0,0.611
+111,exploration,14,0.1,4.357,4.0,0.497
+112,crowd,14,0.1,2.5,2.0,1.019
+113,accommodation duration,14,0.1,3.429,4.0,1.158
+114,safari experience,14,0.1,4.286,5.0,0.914
+115,natural attraction,14,0.1,4.643,5.0,0.842
+116,natural scenery,14,0.1,4.857,5.0,0.363
+117,time management,14,0.1,3.0,3.0,0.877
+118,markets,13,0.1,4.231,4.0,0.832
+119,tourist areas,13,0.1,3.615,4.0,1.261
+120,local experience,13,0.1,4.923,5.0,0.277
+121,driving experience,13,0.1,3.385,4.0,1.121
+122,language barrier,13,0.1,2.615,2.0,1.044
+123,tourist season,13,0.1,3.077,3.0,1.038
+124,city comparison,13,0.1,3.385,3.0,0.961
+125,scenic route,13,0.1,4.846,5.0,0.376
+126,small towns,12,0.1,4.25,4.5,1.138
+127,cleanliness,12,0.1,3.25,4.0,1.913
+128,climate,12,0.1,3.0,3.0,1.279
+129,family-friendliness,12,0.1,3.833,4.0,1.03
+130,guided tours,12,0.1,4.167,4.5,1.03
+131,transportation cost,12,0.1,2.917,2.5,1.24
+132,health and safety,12,0.1,2.083,1.5,1.443
+133,tour operator,12,0.1,4.0,5.0,1.279
+134,travel experience,12,0.1,4.333,5.0,1.231
+135,comparison to other destinations,12,0.1,3.417,4.0,0.996
+136,parking,12,0.1,2.167,1.5,1.467
+137,activity,11,0.1,4.091,4.0,0.944
+138,accommodation options,11,0.1,3.818,4.0,0.751
+139,wildlife viewing,11,0.1,4.909,5.0,0.302
+140,surfing,11,0.1,4.182,5.0,1.25
+141,tourist experience,11,0.1,3.727,4.0,0.786
+142,city vibe,11,0.1,4.636,5.0,0.674
+143,city appeal,11,0.1,3.818,4.0,1.079
+144,prices,11,0.1,2.727,2.0,1.679
+145,wine,11,0.1,4.091,4.0,0.944
+146,trekking,11,0.1,4.364,4.0,0.674
+147,local food,11,0.1,4.455,5.0,0.82
+148,tour options,11,0.1,3.364,4.0,1.12
+149,street food,11,0.1,5.0,5.0,0.0
+150,comparison to other cities,11,0.1,3.0,3.0,0.775
+151,best time to visit,11,0.1,3.909,4.0,1.044
+152,tourist attraction,11,0.1,4.0,4.0,0.894
+153,destination selection,10,0.1,3.5,3.0,0.707
+154,cities,10,0.1,3.222,3.0,1.641
+155,tourist destination,10,0.1,3.5,4.0,1.269
+156,travel pace,10,0.1,2.9,2.5,1.287
+157,flight options,10,0.1,3.4,3.5,0.966
+158,lake,10,0.1,4.3,4.0,0.675
+159,scenic drives,10,0.1,4.3,5.0,1.059
+160,island hopping,10,0.1,4.2,4.0,0.632
+161,landscapes,10,0.1,5.0,5.0,0.0
+162,cultural experiences,10,0.1,4.6,5.0,0.699
+163,scams,10,0.1,1.6,1.0,0.843
+164,destination options,10,0.1,3.5,3.5,0.527
+165,social scene,10,0.1,4.1,4.0,0.568
+166,regional exploration,9,0.1,4.333,4.0,0.5
+167,local cuisine,9,0.1,3.333,3.0,1.414
+168,airport accessibility,9,0.1,3.111,3.0,0.782
+169,social atmosphere,9,0.1,4.222,4.0,0.833
+170,views,9,0.1,4.889,5.0,0.333
+171,snorkeling,9,0.1,4.444,5.0,0.882
+172,taxi service,9,0.1,3.375,4.0,1.506
+173,beach activities,9,0.1,3.889,4.0,1.364
+174,parks,9,0.1,4.444,4.0,0.527
+175,pace of travel,9,0.1,3.667,4.0,1.0
+176,solo travel experience,9,0.1,3.667,3.0,1.414
+177,scenic drive,9,0.1,4.667,5.0,0.5
+178,flight connections,8,0.1,4.0,4.0,0.0
+179,walking,8,0.1,4.125,4.5,1.356
+180,hotel,8,0.1,4.375,4.5,0.744
+181,lake experience,8,0.1,4.375,4.0,0.518
+182,city attractiveness,8,0.1,3.5,3.5,1.414
+183,city overall experience,8,0.1,3.75,4.5,1.753
+184,city preference,8,0.1,3.375,4.5,1.996
+185,market,8,0.1,4.25,4.5,0.886
+186,city worth visiting,8,0.1,2.75,2.5,1.282
+187,tipping culture,8,0.1,3.375,3.5,1.598
+188,crowd levels,8,0.1,2.0,2.0,1.309
+189,layover experience,8,0.1,2.75,3.0,0.707
+190,tour package,8,0.1,3.75,4.0,0.463
+191,itinerary pacing,8,0.1,2.375,2.0,0.744
+192,region,8,0.1,4.625,5.0,0.518
+193,travel duration,7,0.1,3.143,3.0,1.069
+194,hotel service,7,0.1,4.167,4.5,1.169
+195,tourism infrastructure,7,0.1,3.286,3.0,1.704
+196,neighborhood,7,0.1,4.429,5.0,0.976
+197,city attractions,7,0.1,4.714,5.0,0.488
+198,adventure,7,0.1,4.0,4.0,0.894
+199,flight experience,7,0.1,2.286,2.0,1.38
+200,gorilla trekking,7,0.1,4.429,5.0,1.134
+201,backpacking,7,0.1,4.0,4.0,0.816
+202,driving route,7,0.1,3.857,4.0,1.215
+203,wine region,7,0.1,4.429,4.0,0.535
+204,packing,7,0.1,3.429,3.0,0.787
+205,overall impression,7,0.1,4.857,5.0,0.378
+206,flight prices,7,0.1,4.0,4.0,0.816
+207,photography,7,0.1,4.286,5.0,0.951
+208,destination suggestion,7,0.1,4.286,5.0,0.951
+209,rural areas,7,0.1,4.571,5.0,0.535
+210,tour guides,7,0.1,4.0,4.5,1.265
+211,waterfalls,7,0.1,4.857,5.0,0.378
+212,beauty,7,0.1,5.0,5.0,0.0
+213,cost of living,7,0.1,3.571,5.0,1.813
+214,route planning,7,0.1,4.286,4.0,0.488
+215,time allocation,7,0.1,2.857,3.0,0.69
+216,events,7,0.1,4.429,5.0,0.787
+217,travel flexibility,7,0.1,4.0,4.0,1.0
+218,temples,7,0.1,4.571,5.0,0.787
+219,currency exchange,7,0.1,3.571,4.0,1.272
+220,scenic routes,7,0.1,3.857,5.0,1.676
+221,city activities,6,0.1,3.667,4.0,1.033
+222,food quality,6,0.1,3.667,3.5,1.211
+223,city accessibility,6,0.1,4.0,4.0,0.0
+224,destination prioritization,6,0.1,3.333,4.0,1.033
+225,castles,6,0.1,4.5,4.5,0.548
+226,destination preference,6,0.1,3.0,3.0,2.191
+227,city recommendation,6,0.1,4.333,5.0,1.633
+228,city size,6,0.1,3.167,3.0,0.753
+229,tourist activities,6,0.1,3.2,3.0,1.304
+230,travel convenience,6,0.1,2.833,2.0,1.329
+231,castle,6,0.1,4.5,4.5,0.548
+232,boat tour,6,0.1,4.333,4.5,0.816
+233,coastal areas,6,0.1,5.0,5.0,0.0
+234,countryside,6,0.1,4.667,5.0,0.516
+235,cycling,6,0.1,4.0,4.5,1.549
+236,scuba diving,6,0.1,4.833,5.0,0.408
+237,uniqueness,6,0.1,3.5,3.5,1.643
+238,length of stay,6,0.1,4.0,4.0,1.095
+239,accommodation cost,6,0.1,3.333,3.5,1.211
+240,local hospitality,6,0.1,5.0,5.0,0.0
+241,group tours,6,0.1,2.5,2.0,1.761
+242,adventure activities,6,0.1,4.667,5.0,0.816
+243,ruins,6,0.1,3.833,4.0,1.169
+244,historical site,6,0.1,4.5,4.5,0.548
+245,restaurant prices,6,0.1,2.333,1.5,1.751
+246,hospitality,6,0.1,4.667,5.0,0.516
+247,altitude,6,0.1,2.167,2.0,0.753
+248,air quality,6,0.1,1.333,1.0,0.516
+249,islands,6,0.1,4.833,5.0,0.408
+250,national park experience,6,0.1,4.667,5.0,0.516
+251,art,5,0.0,3.8,3.0,1.095
+252,local attitude,5,0.0,3.4,4.0,1.817
+253,public transit,5,0.0,3.4,3.0,1.14
+254,photography opportunities,5,0.0,4.6,5.0,0.548
+255,airport,5,0.0,3.2,3.0,0.447
+256,family activities,5,0.0,3.2,3.0,1.095
+257,island,5,0.0,3.6,3.0,0.894
+258,local experiences,5,0.0,4.6,5.0,0.894
+259,boat trip,5,0.0,4.0,4.0,1.0
+260,comfort,5,0.0,3.2,4.0,1.643
+261,train journey,5,0.0,4.0,4.0,0.0
+262,local customs,5,0.0,4.0,4.0,1.0
+263,romance,5,0.0,5.0,5.0,0.0
+264,local atmosphere,5,0.0,3.4,4.0,1.817
+265,lake scenery,5,0.0,4.8,5.0,0.447
+266,ease of travel,5,0.0,5.0,5.0,0.0
+267,cafe,5,0.0,4.4,4.0,0.548
+268,price,5,0.0,3.6,5.0,1.949
+269,airport transportation,5,0.0,3.6,4.0,1.517
+270,city worthiness,5,0.0,4.2,5.0,1.095
+271,previous travel experience,5,0.0,4.8,5.0,0.447
+272,regional visit,5,0.0,3.4,3.0,0.894
+273,bus service,5,0.0,3.2,3.0,0.447
+274,diving,5,0.0,5.0,5.0,0.0
+275,cultural activities,5,0.0,4.2,4.0,0.837
+276,travel route,5,0.0,3.4,3.0,0.548
+277,travel restrictions,5,0.0,2.2,2.0,1.095
+278,dining options,5,0.0,3.6,4.0,1.517
+279,hidden gems,5,0.0,3.8,4.0,0.447
+280,island visit,5,0.0,4.2,4.0,0.837
+281,tourist traffic,5,0.0,3.4,3.0,0.548
+282,town character,5,0.0,3.8,4.0,0.837
+283,accommodation prices,5,0.0,3.0,3.0,1.225
+284,accommodation deals,5,0.0,4.0,4.0,0.0
+285,seasonal timing,5,0.0,3.2,3.0,1.304
+286,tours,5,0.0,4.0,5.0,1.414
+287,tourist information,5,0.0,3.2,3.0,1.789
+288,general experience,5,0.0,3.4,3.0,1.14
+289,bar,5,0.0,4.4,4.0,0.548
+290,seasonal experience,5,0.0,4.2,5.0,1.304
+291,accommodation/stopping point,5,0.0,3.0,3.0,0.0
+292,accommodation booking,5,0.0,4.0,4.0,0.0
+293,flight duration,5,0.0,3.4,4.0,1.342
+294,town charm,5,0.0,4.6,5.0,0.548
+295,season,5,0.0,3.2,3.0,0.837
+296,navigation,5,0.0,4.0,4.0,1.225
+297,payment methods,5,0.0,4.0,4.0,1.0
+298,festival experience,5,0.0,4.6,5.0,0.548
+299,charm,5,0.0,4.2,5.0,1.789
+300,temples and shrines,4,0.0,4.25,5.0,1.5
+301,landscape,4,0.0,5.0,5.0,0.0
+302,landmark,4,0.0,4.25,4.5,0.957
+303,mountain scenery,4,0.0,5.0,5.0,0.0
+304,tourist stops,4,0.0,4.0,4.0,0.0
+305,city duration,4,0.0,3.0,3.0,1.155
+306,tourism,4,0.0,4.0,4.0,1.155
+307,city break,4,0.0,4.0,4.0,1.155
+308,cultural interaction,4,0.0,3.75,3.5,0.957
+309,night markets,4,0.0,4.75,5.0,0.5
+310,cultural sensitivity,4,0.0,4.5,4.5,0.577
+311,churches,4,0.0,4.75,5.0,0.5
+312,temperature,4,0.0,3.0,3.0,1.633
+313,travel documentation,4,0.0,3.25,3.0,0.5
+314,daytrip options,4,0.0,5.0,5.0,0.0
+315,racism and discrimination,4,0.0,1.0,1.0,0.0
+316,culture and people,4,0.0,5.0,5.0,0.0
+317,things to do,4,0.0,3.5,3.5,1.732
+318,wine tasting,4,0.0,4.0,4.5,1.414
+319,pollution,4,0.0,1.0,1.0,0.0
+320,luggage handling,4,0.0,3.0,2.5,1.414
+321,coastline,4,0.0,4.25,5.0,1.5
+322,wildlife experience,4,0.0,5.0,5.0,0.0
+323,pace of life,4,0.0,4.75,5.0,0.5
+324,coffee shops,4,0.0,4.25,4.5,0.957
+325,accommodations,4,0.0,4.0,4.0,0.816
+326,local attractions,4,0.0,4.5,4.5,0.577
+327,connectivity,4,0.0,3.75,4.0,0.5
+328,convenience,4,0.0,4.75,5.0,0.5
+329,local attitude towards tourism,4,0.0,2.5,2.0,1.0
+330,overall travel experience,4,0.0,4.5,4.5,0.577
+331,town,4,0.0,4.25,4.0,0.5
+332,time to visit,4,0.0,4.25,4.0,0.5
+333,accommodation pricing,4,0.0,2.0,2.0,0.0
+334,planning and research,4,0.0,4.5,4.5,0.577
+335,ticketing system,4,0.0,3.5,3.5,1.291
+336,mention,4,0.0,3.0,3.0,0.0
+337,crowd level,4,0.0,2.5,2.0,1.0
+338,mexico city,4,0.0,3.0,3.0,0.816
+339,crowd management,4,0.0,2.25,2.5,0.957
+340,clothing,4,0.0,3.25,3.0,0.5
+341,theme parks,4,0.0,3.5,3.5,1.291
+342,cruise,4,0.0,3.75,4.0,0.5
+343,previous destinations,4,0.0,3.0,3.0,0.0
+344,entertainment,4,0.0,4.75,5.0,0.5
+345,autumn scenery,4,0.0,5.0,5.0,0.0
+346,road trips,4,0.0,4.25,4.5,0.957
+347,side trips,4,0.0,2.0,2.0,0.0
+348,seasonal travel recommendation,4,0.0,4.0,4.0,0.0
+349,uber service,4,0.0,3.25,3.5,2.062
+350,social experience,4,0.0,4.75,5.0,0.5
+351,destinations,4,0.0,5.0,5.0,0.0
+352,general impression,4,0.0,4.5,4.5,0.577
+353,general information,4,0.0,3.75,4.0,0.5
+354,beach conditions,4,0.0,2.25,2.0,1.258
+355,romantic atmosphere,4,0.0,5.0,5.0,0.0
+356,historic sites,4,0.0,5.0,5.0,0.0
+357,restaurant options,4,0.0,4.0,4.0,0.816
+358,downtown area,4,0.0,4.25,4.0,0.5
+359,getting around,4,0.0,3.5,3.0,1.0
+360,great wall,4,0.0,3.75,4.0,1.258
+361,river cruise,4,0.0,4.25,4.5,0.957
+362,historical significance,4,0.0,4.5,5.0,1.0
+363,urban landscape,4,0.0,3.0,3.0,1.155
+364,festival,4,0.0,5.0,5.0,0.0
+365,sights,4,0.0,4.0,4.0,0.816
+366,food pricing,4,0.0,3.25,3.5,2.062
+367,food prices,4,0.0,1.5,1.5,0.577
+368,destination flexibility,4,0.0,4.0,4.0,0.816
+369,safety and security,4,0.0,3.0,2.5,1.414
+370,unique experiences,4,0.0,3.75,3.5,0.957
+371,destination interest,4,0.0,4.75,5.0,0.5
+372,family travel,4,0.0,3.5,3.0,1.0
+373,archeological site,4,0.0,4.25,4.5,0.957
+374,island exploration,4,0.0,4.0,4.0,0.0
+375,undiscovered destinations,4,0.0,5.0,5.0,0.0
+376,signage,3,0.0,2.667,2.0,2.082
+377,local knowledge,3,0.0,4.333,4.0,0.577
+378,tourism popularity,3,0.0,4.333,5.0,1.155
+379,ferry ride,3,0.0,4.333,4.0,0.577
+380,flight availability,3,0.0,4.0,4.0,0.0
+381,flight,3,0.0,3.0,4.0,1.732
+382,tourism level,3,0.0,2.667,2.0,2.082
+383,payment options,3,0.0,3.0,3.0,1.0
+384,parks and gardens,3,0.0,4.667,5.0,0.577
+385,city visit consideration,3,0.0,3.0,3.0,0.0
+386,flexibility,3,0.0,4.667,5.0,0.577
+387,local life,3,0.0,4.667,5.0,0.577
+388,cliffs of moher,3,0.0,4.667,5.0,0.577
+389,local market,3,0.0,4.333,4.0,0.577
+390,city visit duration,3,0.0,3.667,4.0,1.528
+391,local transportation,3,0.0,4.0,4.0,0.0
+392,park,3,0.0,4.667,5.0,0.577
+393,local restaurants,3,0.0,4.667,5.0,0.577
+394,city stay,3,0.0,3.667,4.0,1.528
+395,regional characteristics,3,0.0,4.333,4.0,0.577
+396,group size,3,0.0,3.667,4.0,0.577
+397,flight connectivity,3,0.0,2.0,2.0,0.0
+398,nature and scenery,3,0.0,4.333,4.0,0.577
+399,natural wonder,3,0.0,5.0,5.0,0.0
+400,naval experience,3,0.0,3.0,3.0,0.0
+401,seafood,3,0.0,4.667,5.0,0.577
+402,seasonal accessibility,3,0.0,2.0,2.0,0.0
+403,forest tours,3,0.0,4.333,4.0,0.577
+404,general beauty,3,0.0,5.0,5.0,0.0
+405,night life,3,0.0,2.667,3.0,0.577
+406,city beauty,3,0.0,4.0,5.0,1.732
+407,city character,3,0.0,4.0,4.0,1.0
+408,mountains,3,0.0,4.667,5.0,0.577
+409,oaxaca,3,0.0,3.333,3.0,0.577
+410,old city center,3,0.0,4.0,5.0,1.732
+411,seasonality,3,0.0,4.333,5.0,1.155
+412,tourist destination preference,3,0.0,3.0,3.0,0.0
+413,food and wine,3,0.0,4.667,5.0,0.577
+414,geographical location,3,0.0,5.0,5.0,0.0
+415,service quality,3,0.0,3.0,4.0,1.732
+416,flights,3,0.0,3.667,4.0,1.528
+417,seville as a destination,3,0.0,4.0,4.0,1.0
+418,meeting locals,3,0.0,3.667,3.0,1.155
+419,overall beauty,3,0.0,5.0,5.0,0.0
+420,coastal scenery,3,0.0,5.0,5.0,0.0
+421,overall trip,3,0.0,4.667,5.0,0.577
+422,tourist atmosphere,3,0.0,2.0,2.0,1.0
+423,safety/security,3,0.0,1.333,1.0,0.577
+424,safety/concerns,3,0.0,2.0,2.0,0.0
+425,scenic area,3,0.0,4.667,5.0,0.577
+426,communication,3,0.0,3.0,4.0,1.732
+427,coastal towns,3,0.0,3.667,4.0,0.577
+428,scenic view,3,0.0,4.667,5.0,0.577
+429,cultural events,3,0.0,5.0,5.0,0.0
+430,diversity,3,0.0,5.0,5.0,0.0
+431,distance and accessibility,3,0.0,3.0,2.0,1.732
+432,porto,3,0.0,3.333,3.0,0.577
+433,dining experience,3,0.0,5.0,5.0,0.0
+434,lakes,3,0.0,4.333,4.0,0.577
+435,hot springs,3,0.0,4.0,4.0,1.0
+436,destination worthiness,3,0.0,3.333,4.0,1.155
+437,cultural richness,3,0.0,5.0,5.0,0.0
+438,hotel amenities,3,0.0,4.333,4.0,0.577
+439,cultural sights,3,0.0,5.0,5.0,0.0
+440,lake como,3,0.0,3.667,3.0,1.155
+441,remoteness,3,0.0,3.333,4.0,2.082
+442,regional travel,3,0.0,3.667,4.0,0.577
+443,customer service,3,0.0,2.0,2.0,1.0
+444,cultural attractions,3,0.0,4.0,4.0,1.0
+445,internet connectivity,3,0.0,3.333,3.0,0.577
+446,technology,3,0.0,3.667,4.0,1.528
+447,taxis,3,0.0,3.0,3.0,1.0
+448,taxi services,3,0.0,2.333,2.0,1.528
+449,day tour,3,0.0,3.667,4.0,1.528
+450,privacy,3,0.0,5.0,5.0,0.0
+451,proximity to attractions,3,0.0,4.667,5.0,0.577
+452,day trip options,3,0.0,4.0,4.0,0.0
+453,pubs,3,0.0,5.0,5.0,0.0
+454,puerto escondido,3,0.0,3.333,3.0,0.577
+455,daytrip,3,0.0,3.667,4.0,1.528
+456,surf spots,3,0.0,4.0,4.0,0.0
+457,jeep tour,3,0.0,4.0,4.0,1.0
+458,island destinations,3,0.0,5.0,5.0,0.0
+459,cultural differences,3,0.0,2.667,3.0,0.577
+460,street life,3,0.0,4.333,4.0,0.577
+461,local exploration,3,0.0,4.667,5.0,0.577
+462,historical landmarks,3,0.0,4.333,4.0,0.577
+463,hanoi experience,3,0.0,3.667,4.0,0.577
+464,heat,3,0.0,2.0,2.0,1.0
+465,romantic setting,3,0.0,5.0,5.0,0.0
+466,tour company,3,0.0,3.333,3.0,1.528
+467,swimming,3,0.0,4.667,5.0,0.577
+468,romantic getaway,3,0.0,3.333,4.0,1.155
+469,tour booking,3,0.0,3.667,3.0,1.155
+470,local drink,3,0.0,3.667,5.0,2.309
+471,social activities,3,0.0,5.0,5.0,
+472,tivoli gardens,3,0.0,3.667,4.0,0.577
+473,european alps,3,0.0,4.0,4.0,0.0
+474,social etiquette,3,0.0,4.667,5.0,0.577
+475,timing of visit,3,0.0,4.667,5.0,0.577
+476,local assistance,3,0.0,4.333,5.0,1.155
+477,country,3,0.0,4.667,5.0,0.577
+478,popularity,3,0.0,4.333,5.0,1.155
+479,planning and booking,3,0.0,3.667,4.0,0.577
+480,duration of visit,3,0.0,3.0,3.0,0.0
+481,country selection,3,0.0,4.333,4.0,0.577
+482,planning and organization,3,0.0,3.667,4.0,1.528
+483,lifestyle,3,0.0,4.333,5.0,1.155
+484,history and culture,3,0.0,4.333,5.0,1.155
+485,honesty of locals,3,0.0,5.0,5.0,0.0
+486,driving conditions,3,0.0,2.667,2.0,1.155
+487,honeymoon destination,3,0.0,3.667,5.0,2.309
+488,layovers,3,0.0,3.333,4.0,1.155
+489,stopover,3,0.0,3.0,3.0,0.0
+490,crowds and tourism,3,0.0,3.333,4.0,1.155
+491,dress code,3,0.0,4.333,5.0,1.155
+492,street art,3,0.0,5.0,5.0,0.0
+493,scooter rental,3,0.0,4.333,4.0,0.577
+494,local behavior,3,0.0,2.333,2.0,1.528
+495,beer,3,0.0,3.667,3.0,1.155
+496,beach town,3,0.0,4.0,4.0,1.0
+497,transport,3,0.0,5.0,5.0,0.0
+498,beach towns,3,0.0,3.333,3.0,1.528
+499,cenotes,3,0.0,4.667,5.0,0.577
+500,beach/coast,3,0.0,4.667,5.0,0.577
+501,town experience,3,0.0,3.667,4.0,1.528
+502,barcelona,3,0.0,4.333,5.0,1.155
+503,bar/nightlife,3,0.0,4.333,4.0,0.577
+504,village charm,3,0.0,4.333,4.0,0.577
+505,cathedral,3,0.0,4.333,4.0,0.577
+506,boat tours,3,0.0,4.333,4.0,0.577
+507,walking tours,3,0.0,5.0,5.0,0.0
+508,travel plans,3,0.0,3.0,3.0,0.0
+509,amusement park,3,0.0,4.667,5.0,0.577
+510,beach/relaxation,3,0.0,4.667,5.0,0.577
+511,age of travelers,3,0.0,4.0,4.0,0.0
+512,biking,3,0.0,4.333,4.0,0.577
+513,train station,3,0.0,3.0,2.0,1.732
+514,travel safety,3,0.0,3.333,3.0,0.577
+515,beaches/lakes,3,0.0,5.0,5.0,0.0
+516,travel style,3,0.0,4.0,4.0,1.0
+517,wineries,3,0.0,4.0,4.0,0.0
+518,train experience,3,0.0,3.667,4.0,1.528
+519,accommodation logistics,3,0.0,2.333,2.0,0.577
+520,bars,3,0.0,4.333,5.0,1.155
+521,art and culture,3,0.0,4.667,5.0,0.577
+522,viewpoint,3,0.0,5.0,5.0,0.0
+523,cities and towns,3,0.0,4.0,4.0,0.0
+524,vineyards,3,0.0,4.667,5.0,0.577
+525,beach accessibility,3,0.0,3.333,3.0,1.528
+526,bureaucracy,3,0.0,2.667,3.0,1.528
+527,authenticity,3,0.0,3.667,4.0,1.528
+528,accommodation/location preference,3,0.0,4.667,5.0,0.577
+529,beach relaxation,3,0.0,4.667,5.0,0.577
+530,rural area safety,2,0.0,3.0,3.0,1.414
+531,aggregator platforms,2,0.0,5.0,5.0,0.0
+532,island comparison,2,0.0,3.5,3.5,2.121
+533,study abroad program,2,0.0,3.0,3.0,0.0
+534,archaeological site,2,0.0,4.0,4.0,1.414
+535,subway system,2,0.0,5.0,5.0,0.0
+536,pedestrian infrastructure,2,0.0,3.0,3.0,1.414
+537,tangier,2,0.0,4.0,4.0,1.414
+538,age suitability,2,0.0,4.0,4.0,1.414
+539,local vendors,2,0.0,3.0,3.0,1.414
+540,people and culture,2,0.0,5.0,5.0,0.0
+541,local wildlife,2,0.0,4.5,4.5,0.707
+542,locals,2,0.0,5.0,5.0,0.0
+543,summer palace,2,0.0,4.0,4.0,0.0
+544,payment systems,2,0.0,2.0,2.0,1.414
+545,bird watching,2,0.0,4.0,4.0,0.0
+546,destination worth,2,0.0,3.0,3.0,1.414
+547,destination variety,2,0.0,4.5,4.5,0.707
+548,peace and quiet,2,0.0,5.0,5.0,0.0
+549,district,2,0.0,4.0,4.0,0.0
+550,hagia sophia,2,0.0,4.5,4.5,0.707
+551,stopover experience,2,0.0,3.0,3.0,0.0
+552,local interactions,2,0.0,4.0,4.0,1.414
+553,state comparison,2,0.0,4.0,4.0,1.414
+554,airline,2,0.0,3.5,3.5,0.707
+555,racial tolerance,2,0.0,2.5,2.5,0.707
+556,visibility,2,0.0,2.0,2.0,0.0
+557,overtourism,2,0.0,1.5,1.5,0.707
+558,drinks,2,0.0,4.0,4.0,1.414
+559,travel with kids,2,0.0,2.5,2.5,2.121
+560,manta ray sighting,2,0.0,1.5,1.5,0.707
+561,people watching,2,0.0,4.5,4.5,0.707
+562,domestic flights,2,0.0,4.0,4.0,1.414
+563,rainforest,2,0.0,3.5,3.5,0.707
+564,local products,2,0.0,4.0,4.0,0.0
+565,perast,2,0.0,3.5,3.5,0.707
+566,travel timing,2,0.0,1.5,1.5,0.707
+567,travel time and planning,2,0.0,3.0,3.0,0.0
+568,rainforest tour,2,0.0,3.5,3.5,0.707
+569,tourist interest,2,0.0,3.5,3.5,2.121
+570,villages,2,0.0,4.5,4.5,0.707
+571,sunset cruise,2,0.0,5.0,5.0,0.0
+572,location/accessibility,2,0.0,5.0,5.0,0.0
+573,park regulations,2,0.0,3.0,3.0,0.0
+574,day trip planning,2,0.0,3.5,3.5,2.121
+575,desert visit,2,0.0,5.0,5.0,0.0
+576,regional comparison,2,0.0,3.5,3.5,0.707
+577,parks and outdoor spaces,2,0.0,5.0,5.0,0.0
+578,safari,2,0.0,4.5,4.5,0.707
+579,demographics,2,0.0,4.0,4.0,1.414
+580,white-water rafting,2,0.0,3.5,3.5,2.121
+581,luggage storage,2,0.0,3.5,3.5,0.707
+582,safari pace,2,0.0,2.0,2.0,0.0
+583,destination accessibility,2,0.0,3.5,3.5,0.707
+584,safari cost,2,0.0,2.0,2.0,0.0
+585,safari logistics,2,0.0,2.0,2.0,0.0
+586,autumn colors,2,0.0,5.0,5.0,0.0
+587,activity accessibility,2,0.0,2.0,2.0,0.0
+588,daylight,2,0.0,3.0,3.0,1.414
+589,valley tour,2,0.0,4.0,4.0,0.0
+590,machu picchu,2,0.0,3.5,3.5,2.121
+591,kotor,2,0.0,3.5,3.5,0.707
+592,travel guide,2,0.0,3.0,3.0,0.0
+593,party scene,2,0.0,2.0,2.0,1.414
+594,birdwatching,2,0.0,5.0,5.0,0.0
+595,destination management,2,0.0,4.5,4.5,0.707
+596,guides,2,0.0,5.0,5.0,0.0
+597,gym culture,2,0.0,3.5,3.5,2.121
+598,lodging,2,0.0,3.5,3.5,2.121
+599,patagonia region,2,0.0,5.0,5.0,0.0
+600,blue mosque,2,0.0,4.5,4.5,0.707
+601,destination planning,2,0.0,3.0,3.0,0.0
+602,destination overcrowding,2,0.0,2.0,2.0,0.0
+603,logistics and transportation,2,0.0,3.0,3.0,1.414
+604,travel itinerary,2,0.0,4.0,4.0,0.0
+605,region preference,2,0.0,4.0,4.0,0.0
+606,pasta,2,0.0,3.0,3.0,2.828
+607,destination difficulty,2,0.0,2.0,2.0,0.0
+608,group travel,2,0.0,4.0,4.0,1.414
+609,itinerary suggestion,2,0.0,4.0,4.0,0.0
+610,border waiting time,2,0.0,3.0,3.0,2.828
+611,surroundings,2,0.0,5.0,5.0,0.0
+612,day trip feasibility,2,0.0,2.5,2.5,0.707
+613,sveti stefan,2,0.0,4.5,4.5,0.707
+614,destination comparison,2,0.0,3.0,3.0,1.414
+615,hotel chain,2,0.0,5.0,5.0,0.0
+616,driving routes,2,0.0,4.0,4.0,0.0
+617,kennedy space center,2,0.0,4.0,4.0,0.0
+618,seasonal activities,2,0.0,3.0,3.0,0.0
+619,alternative destination suggestion,2,0.0,4.0,4.0,0.0
+620,alternative attraction,2,0.0,4.0,4.0,0.0
+621,beach town experience,2,0.0,5.0,5.0,0.0
+622,shrines,2,0.0,5.0,5.0,0.0
+623,bariloche,2,0.0,3.5,3.5,0.707
+624,beach vacation,2,0.0,2.5,2.5,3.536
+625,beach visit,2,0.0,4.5,4.5,0.707
+626,proximity to other destinations,2,0.0,5.0,5.0,0.0
+627,sea,2,0.0,5.0,5.0,0.0
+628,sightseeing time,2,0.0,2.5,2.5,0.707
+629,scenic towns,2,0.0,4.5,4.5,0.707
+630,kecak fire dance,2,0.0,4.5,4.5,0.707
+631,language school,2,0.0,3.5,3.5,0.707
+632,similarity to other destinations,2,0.0,3.0,3.0,0.0
+633,walking tour,2,0.0,4.0,4.0,1.414
+634,politics,2,0.0,1.5,1.5,0.707
+635,political stability,2,0.0,1.5,1.5,0.707
+636,police helpfulness,2,0.0,2.5,2.5,0.707
+637,fall colors,2,0.0,5.0,5.0,0.0
+638,scenic value,2,0.0,5.0,5.0,0.0
+639,public toilet payment options,2,0.0,5.0,5.0,0.0
+640,fort,2,0.0,4.0,4.0,1.414
+641,forbidden city,2,0.0,4.0,4.0,1.414
+642,footwear,2,0.0,3.0,3.0,0.0
+643,football,2,0.0,3.0,3.0,0.0
+644,seclusion,2,0.0,4.5,4.5,0.707
+645,private guide,2,0.0,3.0,3.0,0.0
+646,self-touring,2,0.0,4.0,4.0,0.0
+647,beach access,2,0.0,4.5,4.5,0.707
+648,seasonal travel,2,0.0,3.0,3.0,2.828
+649,amalfi coast,2,0.0,3.5,3.5,0.707
+650,service,2,0.0,3.5,3.5,2.121
+651,beach crowds,2,0.0,2.0,2.0,0.0
+652,private tours,2,0.0,4.0,4.0,0.0
+653,baths,2,0.0,4.0,4.0,0.0
+654,altitude sickness,2,0.0,2.0,2.0,1.414
+655,flight route,2,0.0,4.5,4.5,0.707
+656,beach destination,2,0.0,4.5,4.5,0.707
+657,killarney national park,2,0.0,5.0,5.0,0.0
+658,preparation,2,0.0,4.0,4.0,0.0
+659,beach popularity,2,0.0,4.0,4.0,0.0
+660,flight cost,2,0.0,4.5,4.5,0.707
+661,food tour,2,0.0,4.5,4.5,0.707
+662,base city,2,0.0,3.5,3.5,0.707
+663,tulum,2,0.0,1.5,1.5,0.707
+664,lake garda,2,0.0,4.0,4.0,1.414
+665,ski resort,2,0.0,2.5,2.5,2.121
+666,scenic spot,2,0.0,4.0,4.0,0.0
+667,airline reliability,2,0.0,5.0,5.0,0.0
+668,waterparks,2,0.0,3.0,3.0,0.0
+669,entry requirements,2,0.0,3.5,3.5,0.707
+670,solo female travel,2,0.0,2.0,2.0,1.414
+671,energy,2,0.0,4.5,4.5,0.707
+672,airport location,2,0.0,1.0,1.0,0.0
+673,jet lag,2,0.0,1.0,1.0,0.0
+674,glaciers,2,0.0,5.0,5.0,0.0
+675,water quality,2,0.0,3.5,3.5,2.121
+676,physical activity,2,0.0,3.5,3.5,0.707
+677,glamping,2,0.0,5.0,5.0,0.0
+678,waterfront,2,0.0,5.0,5.0,0.0
+679,global connectivity,2,0.0,5.0,5.0,0.0
+680,exploration opportunities,2,0.0,5.0,5.0,0.0
+681,spice bazaar,2,0.0,4.0,4.0,0.0
+682,airport efficiency,2,0.0,4.0,4.0,0.0
+683,local events,2,0.0,4.5,4.5,0.707
+684,airport connections,2,0.0,4.5,4.5,0.707
+685,breakfast,2,0.0,4.0,4.0,0.0
+686,airport access,2,0.0,3.5,3.5,2.121
+687,photography spots,2,0.0,5.0,5.0,0.0
+688,airline service,2,0.0,2.5,2.5,0.707
+689,stanley park,2,0.0,4.5,4.5,0.707
+690,golden monkey trekking,2,0.0,4.0,4.0,0.0
+691,vacation experience,2,0.0,3.0,3.0,1.414
+692,environmental conservation,2,0.0,5.0,5.0,0.0
+693,scenic attractions,2,0.0,5.0,5.0,0.0
+694,local amenities,2,0.0,4.5,4.5,0.707
+695,skiing,2,0.0,4.0,4.0,1.414
+696,game drive,2,0.0,4.5,4.5,0.707
+697,leisure activities,2,0.0,5.0,5.0,0.0
+698,gardens,2,0.0,5.0,5.0,0.0
+699,expectations,2,0.0,2.5,2.5,0.707
+700,urban atmosphere,2,0.0,3.5,3.5,2.121
+701,amenities,2,0.0,5.0,5.0,0.0
+702,exchange rate,2,0.0,4.5,4.5,0.707
+703,trip length and destination recommendation,2,0.0,4.5,4.5,0.707
+704,beach/water activities,2,0.0,2.0,2.0,
+705,event planning,2,0.0,2.0,2.0,1.414
+706,snorkelling,2,0.0,4.5,4.5,0.707
+707,scenic places,2,0.0,3.0,3.0,0.0
+708,beaches and islands,2,0.0,5.0,5.0,0.0
+709,evening atmosphere,2,0.0,3.0,3.0,1.414
+710,beaches and outdoor activities,2,0.0,3.5,3.5,2.121
+711,airport train,2,0.0,4.0,4.0,0.0
+712,lisbon,2,0.0,4.0,4.0,1.414
+713,live music,2,0.0,3.5,3.5,0.707
+714,social interaction,2,0.0,1.5,1.5,0.707
+715,bali,2,0.0,3.5,3.5,0.707
+716,rugby,2,0.0,3.0,3.0,0.0
+717,machu picchu tour,2,0.0,4.5,4.5,0.707
+718,cusco,2,0.0,4.0,4.0,0.0
+719,train route,2,0.0,3.0,3.0,0.0
+720,museums/history,2,0.0,5.0,5.0,0.0
+721,horse trek,2,0.0,4.5,4.5,0.707
+722,convenience store food,2,0.0,1.5,1.5,0.707
+723,cafes,2,0.0,5.0,5.0,0.0
+724,restaurant recommendations,2,0.0,3.0,3.0,0.0
+725,conservancies,2,0.0,4.0,4.0,0.0
+726,rental car prices,2,0.0,2.0,2.0,0.0
+727,hiking/walking,2,0.0,3.5,3.5,2.121
+728,cooking class,2,0.0,5.0,5.0,0.0
+729,natural disasters,2,0.0,1.0,1.0,0.0
+730,town attractiveness,2,0.0,4.0,4.0,1.414
+731,road trip route,2,0.0,4.5,4.5,0.707
+732,nile cruise,2,0.0,3.0,3.0,0.0
+733,mosques,2,0.0,4.0,4.0,1.414
+734,mostar,2,0.0,3.0,3.0,0.0
+735,cemetery,2,0.0,5.0,5.0,0.0
+736,money exchange,2,0.0,2.5,2.5,0.707
+737,astronomical events,2,0.0,5.0,5.0,0.0
+738,milan,2,0.0,4.0,4.0,1.414
+739,mobility and accessibility,2,0.0,4.5,4.5,0.707
+740,noise level,2,0.0,2.0,2.0,0.0
+741,restaurant payment options,2,0.0,5.0,5.0,0.0
+742,city interest,2,0.0,5.0,5.0,0.0
+743,roman ruins,2,0.0,4.0,4.0,0.0
+744,tourist traps,2,0.0,1.5,1.5,0.707
+745,train station experience,2,0.0,3.0,3.0,2.828
+746,mobility,2,0.0,1.5,1.5,0.707
+747,city logistics,2,0.0,3.0,3.0,2.828
+748,hiking/trail experience,2,0.0,5.0,5.0,0.0
+749,attraction value,2,0.0,4.0,4.0,1.414
+750,cost of food,2,0.0,4.0,4.0,0.0
+751,car rentals,2,0.0,5.0,5.0,0.0
+752,old town exploration,2,0.0,5.0,5.0,0.0
+753,arequipa,2,0.0,4.0,4.0,0.0
+754,tour operators,2,0.0,5.0,5.0,0.0
+755,nikko,2,0.0,4.0,4.0,1.414
+756,tourist arrivals,2,0.0,3.0,3.0,0.0
+757,rental services,2,0.0,3.0,3.0,0.0
+758,city priority,2,0.0,4.5,4.5,0.707
+759,towns and villages,2,0.0,4.5,4.5,0.707
+760,tour duration,2,0.0,3.5,3.5,0.707
+761,tour experience,2,0.0,5.0,5.0,0.0
+762,mountain huts,2,0.0,3.5,3.5,2.121
+763,atm accessibility,2,0.0,4.0,4.0,0.0
+764,tour guide,2,0.0,5.0,5.0,0.0
+765,colca canyon,2,0.0,4.5,4.5,0.707
+766,resort quality,2,0.0,2.0,2.0,1.414
+767,national park regulations,2,0.0,3.0,3.0,0.0
+768,immigration requirements,2,0.0,2.0,2.0,0.0
+769,castle visits,2,0.0,4.5,4.5,0.707
+770,returning to a destination,2,0.0,5.0,5.0,0.0
+771,vibe,2,0.0,5.0,5.0,0.0
+772,coffee culture,2,0.0,5.0,5.0,0.0
+773,coffee,2,0.0,4.0,4.0,0.0
+774,resorts,2,0.0,2.5,2.5,2.121
+775,neurodiverse-friendliness,2,0.0,3.5,3.5,0.707
+776,neuschwanstein castle,2,0.0,4.0,4.0,1.414
+777,return intention,2,0.0,3.0,3.0,2.828
+778,winter experience,2,0.0,4.5,4.5,0.707
+779,camping,2,0.0,3.5,3.5,0.707
+780,road safety,2,0.0,1.0,1.0,0.0
+781,town comparison,2,0.0,4.0,4.0,0.0
+782,off the beaten path,2,0.0,4.0,4.0,0.0
+783,city walls,2,0.0,4.5,4.5,0.707
+784,city size and atmosphere,2,0.0,4.0,4.0,0.0
+785,immersion,2,0.0,4.5,4.5,0.707
+786,tourist activity,2,0.0,4.5,4.5,0.707
+787,tour arrangement,2,0.0,3.5,3.5,0.707
+788,cave,2,0.0,4.5,4.5,0.707
+789,city walkability,2,0.0,3.5,3.5,2.121
+790,river travel,2,0.0,4.5,4.5,0.707
+791,imagery,2,0.0,5.0,5.0,0.0
+792,national reserve,2,0.0,4.0,4.0,0.0
+793,vietnam as a destination,2,0.0,4.0,4.0,1.414
+794,mountains and scenery,2,0.0,5.0,5.0,0.0
+795,area to avoid,2,0.0,1.0,1.0,0.0
+796,time of visit,2,0.0,3.0,3.0,2.828
+797,time constraint,2,0.0,2.0,2.0,0.0
+798,regional significance,2,0.0,3.5,3.5,0.707
+799,transportation from airport,2,0.0,1.0,1.0,0.0
+800,christmas markets,2,0.0,4.0,4.0,0.0
+801,variety of activities,2,0.0,5.0,5.0,0.0
+802,restaurant experience,2,0.0,3.5,3.5,2.121
+803,thailand as a destination,2,0.0,4.5,4.5,0.707
+804,village exploration,2,0.0,4.5,4.5,0.707
+805,overall destination,2,0.0,4.0,4.0,0.0
+806,atm availability,2,0.0,2.0,2.0,0.0
+807,hot air balloon ride,2,0.0,4.0,4.0,1.414
+808,internet,2,0.0,2.5,2.5,0.707
+809,cruise ship experience,2,0.0,4.0,4.0,0.0
+810,regional train pass,2,0.0,3.0,3.0,0.0
+811,accommodation safety,2,0.0,2.5,2.5,0.707
+812,nature/outdoors,2,0.0,5.0,5.0,0.0
+813,translation apps,2,0.0,4.0,4.0,0.0
+814,tourist reception,2,0.0,3.0,3.0,2.828
+815,iquitos,2,0.0,4.5,4.5,0.707
+816,aurora viewing,2,0.0,4.0,4.0,1.414
+817,nature and outdoors,2,0.0,4.5,4.5,0.707
+818,budapest,2,0.0,3.0,3.0,0.0
+819,island accessibility,2,0.0,2.5,2.5,2.121
+820,city aesthetics,2,0.0,1.0,1.0,0.0
+821,nature and scenic beauty,2,0.0,5.0,5.0,0.0
+822,tourist etiquette,2,0.0,4.5,4.5,0.707
+823,overall trip planning,2,0.0,3.5,3.5,0.707
+824,ride-hailing services,2,0.0,5.0,5.0,0.0
+825,accommodation/time spent,2,0.0,4.0,4.0,0.0
+826,temple experience,2,0.0,5.0,5.0,0.0
+827,temple of heaven,2,0.0,3.5,3.5,2.121
+828,wildlife spotting,2,0.0,4.0,4.0,1.414
+829,brunch,2,0.0,4.5,4.5,0.707
+830,wildlife trekking,2,0.0,5.0,5.0,0.0
+831,harbor,2,0.0,5.0,5.0,0.0
+832,royal palace,2,0.0,4.5,4.5,0.707
+833,cultural norms,2,0.0,3.5,3.5,0.707
+834,acclimatization,2,0.0,2.5,2.5,0.707
+835,victoria falls,2,0.0,5.0,5.0,0.0
+836,hobbiton,2,0.0,5.0,5.0,0.0
+837,tour organization,2,0.0,3.5,3.5,0.707
+838,cross-border transportation,2,0.0,2.0,2.0,0.0
+839,traffic laws,2,0.0,2.5,2.5,0.707
+840,city enjoyability,2,0.0,3.5,3.5,0.707
+841,crime,2,0.0,2.0,2.0,0.0
+842,village atmosphere,2,0.0,5.0,5.0,0.0
+843,infrastructure development,2,0.0,1.5,1.5,0.707
+844,city excitement,2,0.0,3.5,3.5,2.121
+845,cable car,2,0.0,4.0,4.0,0.0
+846,hostels,2,0.0,3.0,3.0,0.0
+847,hiking and nature,2,0.0,5.0,5.0,0.0
+848,tourist town,2,0.0,3.0,3.0,1.414
+849,traffic safety,2,0.0,2.0,2.0,0.0
+850,chefchaouen,2,0.0,4.0,4.0,1.414
+851,onsen experience,2,0.0,5.0,5.0,0.0
+852,attractions and activities,2,0.0,3.5,3.5,0.707
+853,cheese,2,0.0,4.5,4.5,0.707
+854,city energy,2,0.0,4.5,4.5,0.707
+855,regulations,2,0.0,2.5,2.5,0.707
+856,tourist spots,2,0.0,3.0,3.0,0.0
+857,transit time,2,0.0,2.0,2.0,0.0
+858,bus tours,2,0.0,2.5,2.5,0.707
+859,thermal baths,2,0.0,4.0,4.0,1.414
+860,high-speed rail,2,0.0,4.5,4.5,0.707
+861,crowd and atmosphere,2,0.0,4.0,4.0,0.0
+862,bus travel,2,0.0,3.5,3.5,0.707
+863,transit ticket machines,2,0.0,5.0,5.0,0.0
+864,traditional culture,2,0.0,5.0,5.0,0.0
+865,crowd demographics,2,0.0,3.0,3.0,0.0
+866,wine regions,2,0.0,4.0,4.0,1.414
+867,ticket availability,2,0.0,3.0,3.0,0.0
+868,crowd and popularity,2,0.0,4.0,4.0,0.0
+869,tour/attraction,2,0.0,5.0,5.0,0.0
+870,hostel experience,2,0.0,3.0,3.0,1.414
+871,restaurant - illegal pete’s,1,0.0,5.0,5.0,
+872,restaurant - chubby's,1,0.0,4.0,4.0,
+873,public transit system,1,0.0,4.0,4.0,
+874,restaurant - casa da companhia,1,0.0,5.0,5.0,
+875,public square,1,0.0,2.0,2.0,
+876,volcano tours,1,0.0,3.0,3.0,
+877,restaurant - gallatoire's,1,0.0,5.0,5.0,
+878,proximity to bologna,1,0.0,3.0,3.0,
+879,restaurant - johnny's,1,0.0,5.0,5.0,
+880,restaurant - la diabla pozole y mezcal,1,0.0,5.0,5.0,
+881,restaurant atmosphere,1,0.0,5.0,5.0,
+882,private guides,1,0.0,4.0,4.0,
+883,private listings,1,0.0,5.0,5.0,
+884,restaurant and bar recommendation,1,0.0,5.0,5.0,
+885,private transfer services,1,0.0,5.0,5.0,
+886,restaurant - work & class,1,0.0,5.0,5.0,
+887,restaurant - tacos de valle,1,0.0,5.0,5.0,
+888,private transfers,1,0.0,3.0,3.0,
+889,private transportation,1,0.0,5.0,5.0,
+890,promenade,1,0.0,5.0,5.0,
+891,proximity,1,0.0,5.0,5.0,
+892,volcanoes,1,0.0,5.0,5.0,
+893,restaurant - brendan's,1,0.0,5.0,5.0,
+894,proximity to convention center,1,0.0,4.0,4.0,
+895,restaurant - root down,1,0.0,5.0,5.0,
+896,restaurant - pedro dos frangos,1,0.0,5.0,5.0,
+897,restaurant - nola po boys,1,0.0,5.0,5.0,
+898,proximity to nature,1,0.0,5.0,5.0,
+899,vigo,1,0.0,3.0,3.0,
+900,restaurant - la loma,1,0.0,5.0,5.0,
+901,public beaches,1,0.0,3.0,3.0,
+902,public behavior,1,0.0,4.0,4.0,
+903,public bus system,1,0.0,5.0,5.0,
+904,public facilities,1,0.0,2.0,2.0,
+905,public space,1,0.0,4.0,4.0,
+906,restaurant - buckhorn exchange,1,0.0,4.0,4.0,
+907,resort character,1,0.0,5.0,5.0,
+908,restaurant - brasão coliseu,1,0.0,5.0,5.0,
+909,volcano and waterfalls,1,0.0,4.0,4.0,
+910,red forest,1,0.0,3.0,3.0,
+911,recommendation for repeat visitors,1,0.0,2.0,2.0,
+912,recommendation for first-time visitors,1,0.0,5.0,5.0,
+913,relaxation and calmness,1,0.0,5.0,5.0,
+914,relaxation and leisure,1,0.0,5.0,5.0,
+915,rebound of tourism,1,0.0,3.0,3.0,
+916,relaxing,1,0.0,4.0,4.0,
+917,visa process,1,0.0,5.0,5.0,
+918,re-entry policy,1,0.0,3.0,3.0,
+919,religion,1,0.0,5.0,5.0,
+920,ramen,1,0.0,5.0,5.0,
+921,remote work,1,0.0,5.0,5.0,
+922,visa regulations,1,0.0,3.0,3.0,
+923,rajasthan,1,0.0,3.0,3.0,
+924,rent a car,1,0.0,4.0,4.0,
+925,rainy season,1,0.0,3.0,3.0,
+926,rainforests,1,0.0,3.0,3.0,
+927,rental car experience,1,0.0,4.0,4.0,
+928,rainforest accessibility,1,0.0,2.0,2.0,
+929,rehabilitation centers,1,0.0,4.0,4.0,
+930,visa policy,1,0.0,3.0,3.0,
+931,region attractiveness,1,0.0,3.0,3.0,
+932,regional preference,1,0.0,5.0,5.0,
+933,regional diversity,1,0.0,4.0,4.0,
+934,regional experience,1,0.0,5.0,5.0,
+935,regional culture,1,0.0,4.0,4.0,
+936,regional content,1,0.0,5.0,5.0,
+937,village visit,1,0.0,4.0,4.0,
+938,village life,1,0.0,5.0,5.0,
+939,regional geography,1,0.0,3.0,3.0,
+940,vintgar gorge,1,0.0,5.0,5.0,
+941,regional stability,1,0.0,2.0,2.0,
+942,regret about itinerary,1,0.0,5.0,5.0,
+943,regional climate,1,0.0,5.0,5.0,
+944,regional trains,1,0.0,2.0,2.0,
+945,visa and permit process,1,0.0,3.0,3.0,
+946,regional attractiveness,1,0.0,5.0,5.0,
+947,village experiences,1,0.0,5.0,5.0,
+948,regional variety,1,0.0,5.0,5.0,
+949,regional appreciation,1,0.0,5.0,5.0,
+950,regional vibe,1,0.0,4.0,4.0,
+951,rainbow mountain,1,0.0,3.0,3.0,
+952,rail travel,1,0.0,4.0,4.0,
+953,radisson blu poste lafayette resort & spa,1,0.0,3.0,3.0,
+954,village,1,0.0,5.0,5.0,
+955,resort type (adults-only vs family),1,0.0,3.0,3.0,
+956,puntas las marias beach,1,0.0,4.0,4.0,
+957,puno,1,0.0,3.0,3.0,
+958,punctuality,1,0.0,2.0,2.0,
+959,punakaiki,1,0.0,5.0,5.0,
+960,rest and relaxation,1,0.0,3.0,3.0,
+961,puglia region,1,0.0,3.0,3.0,
+962,puglia,1,0.0,5.0,5.0,
+963,puerto vallarta,1,0.0,3.0,3.0,
+964,pyramid,1,0.0,4.0,4.0,
+965,restaurant (garuda),1,0.0,5.0,5.0,
+966,puerto rico,1,0.0,4.0,4.0,
+967,visuals,1,0.0,5.0,5.0,
+968,restaurant (pagi sore),1,0.0,2.0,2.0,
+969,restaurant - acme oyster,1,0.0,3.0,3.0,
+970,puebla,1,0.0,4.0,4.0,
+971,"pubs, bars, restaurants",1,0.0,3.0,3.0,
+972,restaurant - barbacoa edison,1,0.0,5.0,5.0,
+973,visiting patagonia,1,0.0,5.0,5.0,
+974,qingtiangang,1,0.0,2.0,2.0,
+975,visas and permits,1,0.0,3.0,3.0,
+976,quilotoa loop,1,0.0,5.0,5.0,
+977,rental cars,1,0.0,1.0,1.0,
+978,racism,1,0.0,1.0,1.0,
+979,rental services (vespa/bike),1,0.0,4.0,4.0,
+980,racial acceptance,1,0.0,5.0,5.0,
+981,visit duration,1,0.0,3.0,3.0,
+982,visit to athens,1,0.0,4.0,4.0,
+983,renting a car,1,0.0,5.0,5.0,
+984,reputation,1,0.0,2.0,2.0,
+985,quiet places,1,0.0,4.0,4.0,
+986,resort town quality,1,0.0,2.0,2.0,
+987,reservation process,1,0.0,4.0,4.0,
+988,residenz,1,0.0,4.0,4.0,
+989,quiet island locations,1,0.0,4.0,4.0,
+990,resort amenities,1,0.0,2.0,2.0,
+991,regional division,1,0.0,3.0,3.0,
+992,quiet atmosphere,1,0.0,5.0,5.0,
+993,queen elizabeth park,1,0.0,3.0,3.0,
+994,resort experience,1,0.0,2.0,2.0,
+995,private flight,1,0.0,5.0,5.0,
+996,tourist information center service,1,0.0,5.0,5.0,
+997,private beaches,1,0.0,5.0,5.0,
+998,outdoor exploration,1,0.0,5.0,5.0,
+999,our saviour’s church,1,0.0,3.0,3.0,
+1000,ottoman architecture,1,0.0,4.0,4.0,
+1001,osaka,1,0.0,3.0,3.0,
+1002,ortaköy mosque,1,0.0,4.0,4.0,
+1003,orkhon valley horse trek,1,0.0,4.0,4.0,
+1004,organized tour,1,0.0,4.0,4.0,
+1005,organization,1,0.0,5.0,5.0,
+1006,orakei korako geothermal park,1,0.0,5.0,5.0,
+1007,wine route in beaune,1,0.0,3.0,3.0,
+1008,optional side trip,1,0.0,4.0,4.0,
+1009,operating hours,1,0.0,2.0,2.0,
+1010,opera house,1,0.0,5.0,5.0,
+1011,onsen culture,1,0.0,5.0,5.0,
+1012,onsen (hot springs),1,0.0,5.0,5.0,
+1013,onboard experience,1,0.0,3.0,3.0,
+1014,omarama clay cliffs,1,0.0,5.0,5.0,
+1015,olympos ancient city,1,0.0,5.0,5.0,
+1016,old towns,1,0.0,5.0,5.0,
+1017,old town/historical area,1,0.0,5.0,5.0,
+1018,old town area,1,0.0,3.0,3.0,
+1019,old town architecture,1,0.0,5.0,5.0,
+1020,old town and lake,1,0.0,4.0,4.0,
+1021,old town (kaleiçi),1,0.0,5.0,5.0,
+1022,wine tours,1,0.0,4.0,4.0,
+1023,old san juan,1,0.0,5.0,5.0,
+1024,old city baku,1,0.0,5.0,5.0,
+1025,old cities,1,0.0,4.0,4.0,
+1026,wine bars,1,0.0,4.0,4.0,
+1027,over-tourism,1,0.0,2.0,2.0,
+1028,volcán chicabal,1,0.0,5.0,5.0,
+1029,overall atmosphere,1,0.0,5.0,5.0,
+1030,palace museum (forbidden city),1,0.0,2.0,2.0,
+1031,wildlife experiences,1,0.0,5.0,5.0,
+1032,pacing,1,0.0,3.0,3.0,
+1033,wildlife in kalimantan,1,0.0,5.0,5.0,
+1034,pace of the city,1,0.0,2.0,2.0,
+1035,wildlife safety,1,0.0,2.0,2.0,
+1036,oylat waterfall,1,0.0,5.0,5.0,
+1037,oylat thermal springs,1,0.0,5.0,5.0,
+1038,oylat cave,1,0.0,4.0,4.0,
+1039,oxford,1,0.0,5.0,5.0,
+1040,overland trip,1,0.0,4.0,4.0,
+1041,wildlife sanctuary,1,0.0,5.0,5.0,
+1042,overland travel,1,0.0,2.0,2.0,
+1043,overall vibe,1,0.0,5.0,5.0,
+1044,overall trip value,1,0.0,4.0,4.0,
+1045,overall trip plan,1,0.0,4.0,4.0,
+1046,overall stay duration,1,0.0,2.0,2.0,
+1047,overall region,1,0.0,5.0,5.0,
+1048,overall itinerary,1,0.0,4.0,4.0,
+1049,overall experience with injury,1,0.0,1.0,1.0,
+1050,overall experience in tokyo,1,0.0,5.0,5.0,
+1051,overall experience in rwanda,1,0.0,5.0,5.0,
+1052,overall experience in hokkaido,1,0.0,5.0,5.0,
+1053,wildlife watching,1,0.0,5.0,5.0,
+1054,overall excitement,1,0.0,5.0,5.0,
+1055,overall cost,1,0.0,5.0,5.0,
+1056,wine bar,1,0.0,5.0,5.0,
+1057,okavango delta,1,0.0,5.0,5.0,
+1058,ogliastra / foxi manna area,1,0.0,4.0,4.0,
+1059,offbeat destinations,1,0.0,5.0,5.0,
+1060,off the beaten path travel,1,0.0,5.0,5.0,
+1061,wudaokou,1,0.0,5.0,5.0,
+1062,new zealand's south island,1,0.0,4.0,4.0,
+1063,new chums beach,1,0.0,5.0,5.0,
+1064,wulong karst,1,0.0,4.0,4.0,
+1065,neighbourhood,1,0.0,5.0,5.0,
+1066,xelapan bakery,1,0.0,5.0,5.0,
+1067,xiyuan temple,1,0.0,5.0,5.0,
+1068,neighborhoods to visit,1,0.0,5.0,5.0,
+1069,neighborhoods and sites,1,0.0,4.0,4.0,
+1070,xochimilco experience,1,0.0,5.0,5.0,
+1071,yamdrok yumco lake,1,0.0,5.0,5.0,
+1072,yangon,1,0.0,5.0,5.0,
+1073,yasawa chain,1,0.0,4.0,4.0,
+1074,neighborhood tour,1,0.0,5.0,5.0,
+1075,neighborhood safety,1,0.0,1.0,1.0,
+1076,neighborhood planning,1,0.0,5.0,5.0,
+1077,neighborhood experience,1,0.0,5.0,5.0,
+1078,neighborhood - roma norte,1,0.0,4.0,4.0,
+1079,nazca lines,1,0.0,1.0,1.0,
+1080,yeni cami (new mosque),1,0.0,5.0,5.0,
+1081,nazare/ericeira,1,0.0,4.0,4.0,
+1082,yogyakarta,1,0.0,4.0,4.0,
+1083,youth hostels,1,0.0,4.0,4.0,
+1084,zagreb,1,0.0,3.0,3.0,
+1085,zhangjiajie national park,1,0.0,4.0,4.0,
+1086,nature/hiking,1,0.0,4.0,4.0,
+1087,zoe hora restaurant,1,0.0,4.0,4.0,
+1088,working during travel,1,0.0,2.0,2.0,
+1089,night scenery,1,0.0,5.0,5.0,
+1090,work-life balance,1,0.0,2.0,2.0,
+1091,northern coast,1,0.0,4.0,4.0,
+1092,off the beaten path destinations,1,0.0,5.0,5.0,
+1093,off season ski resort town,1,0.0,4.0,4.0,
+1094,ocean temperature,1,0.0,2.0,2.0,
+1095,nørrebro,1,0.0,3.0,3.0,
+1096,nyhavn,1,0.0,3.0,3.0,
+1097,nxai pan national park,1,0.0,5.0,5.0,
+1098,novi sad,1,0.0,3.0,3.0,
+1099,northwest region,1,0.0,5.0,5.0,
+1100,northern patagonia,1,0.0,4.0,4.0,
+1101,northern lights viewing,1,0.0,2.0,2.0,
+1102,northern lights experience,1,0.0,4.0,4.0,
+1103,northern lights,1,0.0,5.0,5.0,
+1104,north eastern states,1,0.0,5.0,5.0,
+1105,nightlife in sanlitun,1,0.0,1.0,1.0,
+1106,noise level near airport,1,0.0,3.0,3.0,
+1107,winery,1,0.0,5.0,5.0,
+1108,nizami street,1,0.0,5.0,5.0,
+1109,ninh binh experience,1,0.0,4.0,4.0,
+1110,ninh binh,1,0.0,5.0,5.0,
+1111,nin binh,1,0.0,3.0,3.0,
+1112,work experience,1,0.0,2.0,2.0,
+1113,nihn binh experience,1,0.0,3.0,3.0,
+1114,nighttime views,1,0.0,5.0,5.0,
+1115,nighttime tour,1,0.0,4.0,4.0,
+1116,nightlife/atmosphere,1,0.0,5.0,5.0,
+1117,work restrictions,1,0.0,3.0,3.0,
+1118,palace of culture & science,1,0.0,4.0,4.0,
+1119,palaces,1,0.0,4.0,4.0,
+1120,palenque,1,0.0,4.0,4.0,
+1121,war remnants museum,1,0.0,4.0,4.0,
+1122,walking experience,1,0.0,2.0,2.0,
+1123,pop culture reference,1,0.0,5.0,5.0,
+1124,pop culture,1,0.0,5.0,5.0,
+1125,walking routes,1,0.0,4.0,4.0,
+1126,walking safari,1,0.0,5.0,5.0,
+1127,pool,1,0.0,4.0,4.0,
+1128,pompette wine bar,1,0.0,4.0,4.0,
+1129,polynesian spa,1,0.0,3.0,3.0,
+1130,police enforcement,1,0.0,3.0,3.0,
+1131,polar night experience,1,0.0,4.0,4.0,
+1132,walking/hangout spots,1,0.0,5.0,5.0,
+1133,pokhara town,1,0.0,5.0,5.0,
+1134,poiana brașov,1,0.0,5.0,5.0,
+1135,podgorica,1,0.0,3.0,3.0,
+1136,plitvice np,1,0.0,3.0,3.0,
+1137,walking/hiking,1,0.0,2.0,2.0,
+1138,plitvice national park,1,0.0,3.0,3.0,
+1139,walks,1,0.0,5.0,5.0,
+1140,plaza de españa,1,0.0,5.0,5.0,
+1141,playa del carmen,1,0.0,1.0,1.0,
+1142,planning/ease of travel,1,0.0,5.0,5.0,
+1143,planning resources,1,0.0,5.0,5.0,
+1144,planning requirements,1,0.0,4.0,4.0,
+1145,planning and time management,1,0.0,3.0,3.0,
+1146,planning and scheduling,1,0.0,4.0,4.0,
+1147,walvis bay,1,0.0,5.0,5.0,
+1148,planning and logistics,1,0.0,1.0,1.0,
+1149,walking distance,1,0.0,2.0,2.0,
+1150,walking areas,1,0.0,5.0,5.0,
+1151,walking and mobility,1,0.0,2.0,2.0,
+1152,pre-trip excitement,1,0.0,5.0,5.0,
+1153,pricing transparency,1,0.0,2.0,2.0,
+1154,pricing,1,0.0,1.0,1.0,
+1155,prices at pubs and bars,1,0.0,1.0,1.0,
+1156,volterra town,1,0.0,5.0,5.0,
+1157,price transparency,1,0.0,1.0,1.0,
+1158,volunteering,1,0.0,5.0,5.0,
+1159,previous experience in peru,1,0.0,4.0,4.0,
+1160,previous experience in colombia,1,0.0,4.0,4.0,
+1161,previous experience,1,0.0,4.0,4.0,
+1162,volunteering experience,1,0.0,5.0,5.0,
+1163,prepaid travel cards,1,0.0,5.0,5.0,
+1164,preference,1,0.0,5.0,5.0,
+1165,waikite valley hot pools,1,0.0,5.0,5.0,
+1166,pororari river walk,1,0.0,5.0,5.0,
+1167,pre-cruise stay,1,0.0,4.0,4.0,
+1168,waiotapu,1,0.0,3.0,3.0,
+1169,prato city,1,0.0,5.0,5.0,
+1170,wait times,1,0.0,2.0,2.0,
+1171,prato chinatown,1,0.0,5.0,5.0,
+1172,prague,1,0.0,3.0,3.0,
+1173,practicality,1,0.0,5.0,5.0,
+1174,power adapter,1,0.0,5.0,5.0,
+1175,potala palace,1,0.0,5.0,5.0,
+1176,portugal,1,0.0,5.0,5.0,
+1177,portobello rd market,1,0.0,5.0,5.0,
+1178,walkable areas,1,0.0,3.0,3.0,
+1179,war history,1,0.0,4.0,4.0,
+1180,plains,1,0.0,2.0,2.0,
+1181,palma as a place to stay,1,0.0,4.0,4.0,
+1182,warm lakes,1,0.0,4.0,4.0,
+1183,people/friendliness,1,0.0,5.0,5.0,
+1184,people-watching,1,0.0,5.0,5.0,
+1185,weather preparation,1,0.0,4.0,4.0,
+1186,people's kindness and honesty,1,0.0,5.0,5.0,
+1187,people and community,1,0.0,5.0,5.0,
+1188,penang,1,0.0,3.0,3.0,
+1189,pedestrian boardwalk,1,0.0,4.0,4.0,
+1190,peace,1,0.0,5.0,5.0,
+1191,payment system,1,0.0,3.0,3.0,
+1192,weather/climate,1,0.0,3.0,3.0,
+1193,weaving workshop,1,0.0,5.0,5.0,
+1194,pattaya,1,0.0,3.0,3.0,
+1195,patagonia,1,0.0,3.0,3.0,
+1196,wellness activities,1,0.0,5.0,5.0,
+1197,pastries,1,0.0,5.0,5.0,
+1198,passport stamping,1,0.0,2.0,2.0,
+1199,passport control for indian citizens,1,0.0,2.0,2.0,
+1200,parque centro américa,1,0.0,4.0,4.0,
+1201,"wengen, switzerland",1,0.0,5.0,5.0,
+1202,whale watching,1,0.0,5.0,5.0,
+1203,wildlife diversity,1,0.0,5.0,5.0,
+1204,park quality,1,0.0,5.0,5.0,
+1205,park experience,1,0.0,4.0,4.0,
+1206,paris,1,0.0,5.0,5.0,
+1207,parc de la tete,1,0.0,3.0,3.0,
+1208,panoramic views,1,0.0,5.0,5.0,
+1209,pandeli,1,0.0,4.0,4.0,
+1210,perge ancient city,1,0.0,5.0,5.0,
+1211,personal boundaries and privacy,1,0.0,2.0,2.0,
+1212,personal comfort,1,0.0,5.0,5.0,
+1213,phuket experience,1,0.0,3.0,3.0,
+1214,warsaw university's library garden,1,0.0,4.0,4.0,
+1215,water color,1,0.0,5.0,5.0,
+1216,water parks,1,0.0,1.0,1.0,
+1217,places to explore,1,0.0,4.0,4.0,
+1218,pizza,1,0.0,5.0,5.0,
+1219,pingjiang road,1,0.0,5.0,5.0,
+1220,pilgrimage site,1,0.0,4.0,4.0,
+1221,piha beach,1,0.0,5.0,5.0,
+1222,views and scenery,1,0.0,5.0,5.0,
+1223,physical conditioning,1,0.0,4.0,4.0,
+1224,physical activities,1,0.0,5.0,5.0,
+1225,physical accessibility,1,0.0,2.0,2.0,
+1226,phuket,1,0.0,3.0,3.0,
+1227,personal preference,1,0.0,5.0,5.0,
+1228,watertowns,1,0.0,5.0,5.0,
+1229,photography services,1,0.0,5.0,5.0,
+1230,photography service,1,0.0,5.0,5.0,
+1231,weather and clothing,1,0.0,3.0,3.0,
+1232,weather and terrain,1,0.0,3.0,3.0,
+1233,weather forecasting,1,0.0,4.0,4.0,
+1234,weather in portugal,1,0.0,4.0,4.0,
+1235,photogenicity,1,0.0,5.0,5.0,
+1236,weather in september and october,1,0.0,1.0,1.0,
+1237,photo opportunities,1,0.0,5.0,5.0,
+1238,weather in spain,1,0.0,4.0,4.0,
+1239,phnom penh experience,1,0.0,2.0,2.0,
+1240,physical difficulty,1,0.0,3.0,3.0,
+1241,rural views,1,0.0,5.0,5.0,
+1242,restaurant availability,1,0.0,5.0,5.0,
+1243,table mountain,1,0.0,3.0,3.0,
+1244,tatry mountains,1,0.0,3.0,3.0,
+1245,tashkent visit,1,0.0,3.0,3.0,
+1246,tashilhunpo monastery,1,0.0,5.0,5.0,
+1247,tapas and wine in madrid,1,0.0,5.0,5.0,
+1248,travel duration and planning,1,0.0,3.0,3.0,
+1249,taman negara,1,0.0,3.0,3.0,
+1250,taksim mosque,1,0.0,5.0,5.0,
+1251,travel ease,1,0.0,1.0,1.0,
+1252,travel efficiency,1,0.0,3.0,3.0,
+1253,takeshita street,1,0.0,1.0,1.0,
+1254,takayama,1,0.0,3.0,3.0,
+1255,tacos tony street cart,1,0.0,5.0,5.0,
+1256,tacos el guero,1,0.0,5.0,5.0,
+1257,süleymaniye mosque,1,0.0,5.0,5.0,
+1258,taxi affordability,1,0.0,4.0,4.0,
+1259,symi,1,0.0,5.0,5.0,
+1260,switzerland as a destination,1,0.0,5.0,5.0,
+1261,travel guidance,1,0.0,3.0,3.0,
+1262,swim stops,1,0.0,5.0,5.0,
+1263,travel hacks,1,0.0,3.0,3.0,
+1264,travel in may,1,0.0,5.0,5.0,
+1265,travel insurance,1,0.0,5.0,5.0,
+1266,travel logistics,1,0.0,3.0,3.0,
+1267,travel order,1,0.0,3.0,3.0,
+1268,surabaya airport,1,0.0,3.0,3.0,
+1269,supermarket prices,1,0.0,5.0,5.0,
+1270,travel pacing,1,0.0,5.0,5.0,
+1271,sunway lagoon,1,0.0,4.0,4.0,
+1272,taxco,1,0.0,4.0,4.0,
+1273,travel documents,1,0.0,2.0,2.0,
+1274,texas,1,0.0,4.0,4.0,
+1275,travel agents,1,0.0,3.0,3.0,
+1276,transportation hub,1,0.0,4.0,4.0,
+1277,terracotta warriors,1,0.0,4.0,4.0,
+1278,tennessee,1,0.0,4.0,4.0,
+1279,transportation infrastructure,1,0.0,5.0,5.0,
+1280,temples and monasteries,1,0.0,5.0,5.0,
+1281,transportation prices,1,0.0,3.0,3.0,
+1282,transportation quality,1,0.0,4.0,4.0,
+1283,transportation scheduling,1,0.0,2.0,2.0,
+1284,temple tours,1,0.0,4.0,4.0,
+1285,transportation to narita airport,1,0.0,4.0,4.0,
+1286,temple,1,0.0,4.0,4.0,
+1287,travel advisories,1,0.0,2.0,2.0,
+1288,travel agency,1,0.0,4.0,4.0,
+1289,telecom/service provider,1,0.0,4.0,4.0,
+1290,travel documentation process,1,0.0,1.0,1.0,
+1291,telecom/data services,1,0.0,5.0,5.0,
+1292,travel between cities,1,0.0,3.0,3.0,
+1293,telecom service,1,0.0,4.0,4.0,
+1294,telecom,1,0.0,3.0,3.0,
+1295,travel comfort,1,0.0,5.0,5.0,
+1296,teamlabs,1,0.0,3.0,3.0,
+1297,tea house culture,1,0.0,5.0,5.0,
+1298,tea factory tour,1,0.0,5.0,5.0,
+1299,te pa tu,1,0.0,3.0,3.0,
+1300,travel companionship,1,0.0,5.0,5.0,
+1301,taxi/ride apps,1,0.0,3.0,3.0,
+1302,travel constraints,1,0.0,2.0,2.0,
+1303,travel distance,1,0.0,2.0,2.0,
+1304,sunsets,1,0.0,5.0,5.0,
+1305,travel planning resources,1,0.0,2.0,2.0,
+1306,sunrise attitude,1,0.0,3.0,3.0,
+1307,sports,1,0.0,5.0,5.0,
+1308,traveling with baby,1,0.0,2.0,2.0,
+1309,state attractions,1,0.0,5.0,5.0,
+1310,trek length,1,0.0,3.0,3.0,
+1311,state,1,0.0,4.0,4.0,
+1312,trekking experience,1,0.0,5.0,5.0,
+1313,starlight mountain lodge,1,0.0,5.0,5.0,
+1314,stargazing/ astronomy,1,0.0,5.0,5.0,
+1315,star gazing,1,0.0,5.0,5.0,
+1316,standing in line for attractions,1,0.0,1.0,1.0,
+1317,staff,1,0.0,5.0,5.0,
+1318,sri lanka,1,0.0,3.0,3.0,
+1319,squares,1,0.0,3.0,3.0,
+1320,trekking route,1,0.0,4.0,4.0,
+1321,sport,1,0.0,3.0,3.0,
+1322,sunny's pinchos,1,0.0,5.0,5.0,
+1323,trekking trails,1,0.0,4.0,4.0,
+1324,split,1,0.0,3.0,3.0,
+1325,spirituality,1,0.0,5.0,5.0,
+1326,specific restaurant (gettó gulyás),1,0.0,1.0,1.0,
+1327,specific area (foz do douro),1,0.0,4.0,4.0,
+1328,spanish school,1,0.0,4.0,4.0,
+1329,spain as a potential destination,1,0.0,3.0,3.0,
+1330,spain,1,0.0,3.0,3.0,
+1331,space & time cube/museum,1,0.0,3.0,3.0,
+1332,spa/massage,1,0.0,5.0,5.0,
+1333,southern patagonia,1,0.0,5.0,5.0,
+1334,southern coast,1,0.0,5.0,5.0,
+1335,sopa lodges,1,0.0,4.0,4.0,
+1336,state park,1,0.0,5.0,5.0,
+1337,state size,1,0.0,3.0,3.0,
+1338,traveling with a baby/young kid,1,0.0,5.0,5.0,
+1339,station,1,0.0,3.0,3.0,
+1340,travel preparation,1,0.0,3.0,3.0,
+1341,sunday morning market on the saone,1,0.0,4.0,4.0,
+1342,sumatra,1,0.0,4.0,4.0,
+1343,sultanahmet area,1,0.0,1.0,1.0,
+1344,travel recommendation,1,0.0,5.0,5.0,
+1345,sulfur springs in dalol,1,0.0,4.0,4.0,
+1346,sulaymaniye mosque,1,0.0,5.0,5.0,
+1347,travel regulations,1,0.0,4.0,4.0,
+1348,suitability for young children,1,0.0,2.0,2.0,
+1349,suica card,1,0.0,5.0,5.0,
+1350,suggested visit duration,1,0.0,2.0,2.0,
+1351,study abroad experience,1,0.0,5.0,5.0,
+1352,strictness,1,0.0,2.0,2.0,
+1353,stress level,1,0.0,2.0,2.0,
+1354,streets and wandering,1,0.0,5.0,5.0,
+1355,streets and architecture,1,0.0,5.0,5.0,
+1356,streets,1,0.0,4.0,4.0,
+1357,street markets,1,0.0,4.0,4.0,
+1358,travel time and logistics,1,0.0,3.0,3.0,
+1359,street cats,1,0.0,5.0,5.0,
+1360,street atmosphere,1,0.0,3.0,3.0,
+1361,travel to france,1,0.0,5.0,5.0,
+1362,strasbourg,1,0.0,5.0,5.0,
+1363,stops and attractions,1,0.0,5.0,5.0,
+1364,travel to the nordics,1,0.0,4.0,4.0,
+1365,travel with baby,1,0.0,3.0,3.0,
+1366,stonehenge,1,0.0,2.0,2.0,
+1367,transportation (train),1,0.0,4.0,4.0,
+1368,the beara peninsula,1,0.0,5.0,5.0,
+1369,solo travel feasibility,1,0.0,3.0,3.0,
+1370,traffic information,1,0.0,5.0,5.0,
+1371,tourism growth,1,0.0,4.0,4.0,
+1372,tourism development,1,0.0,2.0,2.0,
+1373,towns to visit,1,0.0,3.0,3.0,
+1374,tradition,1,0.0,5.0,5.0,
+1375,tourism demand,1,0.0,5.0,5.0,
+1376,tour season,1,0.0,4.0,4.0,
+1377,traditional houses,1,0.0,5.0,5.0,
+1378,traditional village,1,0.0,5.0,5.0,
+1379,traffic and transportation,1,0.0,1.0,1.0,
+1380,tour scheduling,1,0.0,3.0,3.0,
+1381,tour quality,1,0.0,5.0,5.0,
+1382,tour pricing,1,0.0,2.0,2.0,
+1383,tour planning,1,0.0,3.0,3.0,
+1384,tour packages,1,0.0,2.0,2.0,
+1385,town visit,1,0.0,5.0,5.0,
+1386,trail,1,0.0,5.0,5.0,
+1387,tour operator reputation,1,0.0,4.0,4.0,
+1388,trail difficulty,1,0.0,5.0,5.0,
+1389,train accessibility,1,0.0,3.0,3.0,
+1390,tour itinerary,1,0.0,2.0,2.0,
+1391,tour guides in cairo,1,0.0,3.0,3.0,
+1392,train booking,1,0.0,4.0,4.0,
+1393,tour guides and porters,1,0.0,5.0,5.0,
+1394,train cleanliness,1,0.0,1.0,1.0,
+1395,tour guide/excursion,1,0.0,5.0,5.0,
+1396,train connectivity,1,0.0,4.0,4.0,
+1397,tour guide/driver service,1,0.0,5.0,5.0,
+1398,tour guide quality,1,0.0,4.0,4.0,
+1399,towns and state parks,1,0.0,4.0,4.0,
+1400,town size,1,0.0,3.0,3.0,
+1401,transportation (damri),1,0.0,1.0,1.0,
+1402,tourist trap,1,0.0,1.0,1.0,
+1403,tourist expectations,1,0.0,1.0,1.0,
+1404,tourist mentality,1,0.0,4.0,4.0,
+1405,tourist numbers,1,0.0,3.0,3.0,
+1406,tourist planning,1,0.0,5.0,5.0,
+1407,tourist popularity,1,0.0,3.0,3.0,
+1408,tourist district,1,0.0,5.0,5.0,
+1409,tourist development,1,0.0,4.0,4.0,
+1410,tourist recovery,1,0.0,3.0,3.0,
+1411,tourist scams/pricing,1,0.0,1.0,1.0,
+1412,tourist shops,1,0.0,3.0,3.0,
+1413,tourist destination ranking,1,0.0,5.0,5.0,
+1414,tourist tolerance,1,0.0,2.0,2.0,
+1415,tourist destination popularity,1,0.0,5.0,5.0,
+1416,touristy activities,1,0.0,2.0,2.0,
+1417,tourism marketing,1,0.0,2.0,2.0,
+1418,tourist card,1,0.0,3.0,3.0,
+1419,tourist behavior,1,0.0,1.0,1.0,
+1420,touristy cities,1,0.0,2.0,2.0,
+1421,town aesthetics,1,0.0,4.0,4.0,
+1422,town center,1,0.0,4.0,4.0,
+1423,tourist attention,1,0.0,2.0,2.0,
+1424,town centre,1,0.0,4.0,4.0,
+1425,tourist area safety,1,0.0,2.0,2.0,
+1426,town exploration,1,0.0,4.0,4.0,
+1427,tourism season,1,0.0,2.0,2.0,
+1428,tourism requirements,1,0.0,4.0,4.0,
+1429,town maintenance,1,0.0,4.0,4.0,
+1430,tourism office,1,0.0,4.0,4.0,
+1431,tour guide flexibility,1,0.0,5.0,5.0,
+1432,tour groups,1,0.0,3.0,3.0,
+1433,tour extension,1,0.0,2.0,2.0,
+1434,ticket booking process,1,0.0,4.0,4.0,
+1435,time spent in city,1,0.0,4.0,4.0,
+1436,time spent,1,0.0,2.0,2.0,
+1437,time required,1,0.0,3.0,3.0,
+1438,train system,1,0.0,4.0,4.0,
+1439,time efficiency,1,0.0,2.0,2.0,
+1440,train system website,1,0.0,4.0,4.0,
+1441,time change,1,0.0,2.0,2.0,
+1442,train tours,1,0.0,3.0,3.0,
+1443,trains,1,0.0,1.0,1.0,
+1444,tikal ruins,1,0.0,5.0,5.0,
+1445,tikal,1,0.0,2.0,2.0,
+1446,ticketing and planning,1,0.0,4.0,4.0,
+1447,ticket pricing,1,0.0,4.0,4.0,
+1448,transit,1,0.0,2.0,2.0,
+1449,tour company service,1,0.0,4.0,4.0,
+1450,tianmen mountain,1,0.0,4.0,4.0,
+1451,transit experience,1,0.0,4.0,4.0,
+1452,three towers,1,0.0,4.0,4.0,
+1453,transition fatigue,1,0.0,2.0,2.0,
+1454,thermal hotsprings,1,0.0,4.0,4.0,
+1455,translation app,1,0.0,5.0,5.0,
+1456,theme park,1,0.0,5.0,5.0,
+1457,the shard,1,0.0,3.0,3.0,
+1458,the residence,1,0.0,3.0,3.0,
+1459,the little mermaid,1,0.0,3.0,3.0,
+1460,the lafayette hotel,1,0.0,4.0,4.0,
+1461,the burren,1,0.0,4.0,4.0,
+1462,transportation (car rental),1,0.0,5.0,5.0,
+1463,train station area,1,0.0,1.0,1.0,
+1464,timetable flexibility,1,0.0,3.0,3.0,
+1465,timing,1,0.0,5.0,5.0,
+1466,train services,1,0.0,2.0,2.0,
+1467,train costs,1,0.0,3.0,3.0,
+1468,tour companies,1,0.0,5.0,5.0,
+1469,tour buses,1,0.0,3.0,3.0,
+1470,train network,1,0.0,4.0,4.0,
+1471,tour availability,1,0.0,4.0,4.0,
+1472,tour agents,1,0.0,4.0,4.0,
+1473,tour agency,1,0.0,5.0,5.0,
+1474,tour activity,1,0.0,5.0,5.0,
+1475,tour activities,1,0.0,5.0,5.0,
+1476,train pass,1,0.0,2.0,2.0,
+1477,torvehallerne market,1,0.0,3.0,3.0,
+1478,topography,1,0.0,4.0,4.0,
+1479,topkapi palace,1,0.0,4.0,4.0,
+1480,train passes,1,0.0,3.0,3.0,
+1481,top deck tours,1,0.0,3.0,3.0,
+1482,train ride,1,0.0,5.0,5.0,
+1483,toll roads and passes,1,0.0,5.0,5.0,
+1484,tokyo,1,0.0,3.0,3.0,
+1485,toilet facilities,1,0.0,2.0,2.0,
+1486,todos santos,1,0.0,4.0,4.0,
+1487,train rides,1,0.0,5.0,5.0,
+1488,titlis,1,0.0,3.0,3.0,
+1489,tirana,1,0.0,3.0,3.0,
+1490,tipping etiquette,1,0.0,3.0,3.0,
+1491,train route efficiency,1,0.0,3.0,3.0,
+1492,timor,1,0.0,4.0,4.0,
+1493,train scheduling,1,0.0,4.0,4.0,
+1494,solo travel intensity,1,0.0,2.0,2.0,
+1495,nature escapes,1,0.0,4.0,4.0,
+1496,restaurant booking,1,0.0,1.0,1.0,
+1497,rumipaxi lodge,1,0.0,5.0,5.0,
+1498,safety for solo female travelers,1,0.0,5.0,5.0,
+1499,valladolid,1,0.0,4.0,4.0,
+1500,safety during ebola outbreak,1,0.0,4.0,4.0,
+1501,safety comparison,1,0.0,4.0,4.0,
+1502,valle d'itria,1,0.0,4.0,4.0,
+1503,safety and politics,1,0.0,1.0,1.0,
+1504,valley experience,1,0.0,5.0,5.0,
+1505,safari experience with sola safari travels,1,0.0,5.0,5.0,
+1506,sacred valley tour,1,0.0,4.0,4.0,
+1507,sacred valley,1,0.0,4.0,4.0,
+1508,rural experiences,1,0.0,4.0,4.0,
+1509,rural area,1,0.0,5.0,5.0,
+1510,runa wasi hostel,1,0.0,5.0,5.0,
+1511,value,1,0.0,5.0,5.0,
+1512,safety measures,1,0.0,5.0,5.0,
+1513,rugby culture,1,0.0,4.0,4.0,
+1514,ruby cocktail bar,1,0.0,4.0,4.0,
+1515,ruby beach,1,0.0,5.0,5.0,
+1516,vancouver,1,0.0,3.0,3.0,
+1517,ruacana falls,1,0.0,5.0,5.0,
+1518,route suggestion,1,0.0,5.0,5.0,
+1519,varenna,1,0.0,3.0,3.0,
+1520,route information,1,0.0,4.0,4.0,
+1521,route from hue to hanoi,1,0.0,2.0,2.0,
+1522,route accessibility,1,0.0,5.0,5.0,
+1523,route,1,0.0,3.0,3.0,
+1524,rottnest island,1,0.0,5.0,5.0,
+1525,variety of experiences,1,0.0,5.0,5.0,
+1526,valencia accessibility,1,0.0,,,
+1527,safety of cable cars,1,0.0,5.0,5.0,
+1528,sauna experiences,1,0.0,5.0,5.0,
+1529,san cristóbal de las casas,1,0.0,4.0,4.0,
+1530,sarandë,1,0.0,4.0,4.0,
+1531,sarajevo,1,0.0,3.0,3.0,
+1532,santorini as a destination,1,0.0,5.0,5.0,
+1533,santaella,1,0.0,4.0,4.0,
+1534,sanlitun,1,0.0,5.0,5.0,
+1535,sandboarding,1,0.0,5.0,5.0,
+1536,sand boarding,1,0.0,3.0,3.0,
+1537,sanctuary,1,0.0,4.0,4.0,
+1538,san miguel de allende,1,0.0,4.0,4.0,
+1539,san josé del cabo,1,0.0,4.0,4.0,
+1540,vacation spot,1,0.0,2.0,2.0,
+1541,san gimignano town,1,0.0,4.0,4.0,
+1542,san gimignano gelato,1,0.0,5.0,5.0,
+1543,san cristóbal,1,0.0,3.0,3.0,
+1544,safety precautions,1,0.0,4.0,4.0,
+1545,san blas tour,1,0.0,3.0,3.0,
+1546,sami culture,1,0.0,5.0,5.0,
+1547,samarkand visit,1,0.0,3.0,3.0,
+1548,salzburg,1,0.0,3.0,3.0,
+1549,salt mountains,1,0.0,4.0,4.0,
+1550,salt flats tour,1,0.0,4.0,4.0,
+1551,salinas beach,1,0.0,5.0,5.0,
+1552,sailing,1,0.0,5.0,5.0,
+1553,vacation time,1,0.0,5.0,5.0,
+1554,sahara desert tour,1,0.0,3.0,3.0,
+1555,vaccination requirements,1,0.0,1.0,1.0,
+1556,safety/scams,1,0.0,1.0,1.0,
+1557,valencia,1,0.0,4.0,4.0,
+1558,rotorua area,1,0.0,5.0,5.0,
+1559,rosenborg castle,1,0.0,3.0,3.0,
+1560,rosario islands,1,0.0,4.0,4.0,
+1561,ribeira neighborhood,1,0.0,4.0,4.0,
+1562,verona,1,0.0,3.0,3.0,
+1563,riu turquoise,1,0.0,3.0,3.0,
+1564,riquewihr,1,0.0,5.0,5.0,
+1565,ring of kerry,1,0.0,5.0,5.0,
+1566,victoria park/broadway market,1,0.0,5.0,5.0,
+1567,rigi,1,0.0,3.0,3.0,
+1568,riding quality,1,0.0,5.0,5.0,
+1569,vienna,1,0.0,3.0,3.0,
+1570,riding experience,1,0.0,5.0,5.0,
+1571,ridehailing services,1,0.0,4.0,4.0,
+1572,ride-hailing service,1,0.0,3.0,3.0,
+1573,ride-hailing apps,1,0.0,1.0,1.0,
+1574,ride intensity,1,0.0,4.0,4.0,
+1575,ribeauville,1,0.0,5.0,5.0,
+1576,ropeway view,1,0.0,4.0,4.0,
+1577,rialto beach,1,0.0,4.0,4.0,
+1578,rhino transportation service,1,0.0,5.0,5.0,
+1579,revisit intention,1,0.0,5.0,5.0,
+1580,return visits,1,0.0,4.0,4.0,
+1581,retail service,1,0.0,1.0,1.0,
+1582,restaurants and bars,1,0.0,5.0,5.0,
+1583,vietnamese food,1,0.0,5.0,5.0,
+1584,restaurant reservation process,1,0.0,4.0,4.0,
+1585,restaurant quality,1,0.0,2.0,2.0,
+1586,view/scenic view,1,0.0,5.0,5.0,
+1587,restaurant location,1,0.0,4.0,4.0,
+1588,viewpoints and national park,1,0.0,5.0,5.0,
+1589,views and national parks,1,0.0,5.0,5.0,
+1590,vermont,1,0.0,5.0,5.0,
+1591,river cruises,1,0.0,2.0,2.0,
+1592,river cruising,1,0.0,4.0,4.0,
+1593,river safari,1,0.0,5.0,5.0,
+1594,room,1,0.0,3.0,3.0,
+1595,rongbuk monastery,1,0.0,5.0,5.0,
+1596,ronda,1,0.0,3.0,3.0,
+1597,vasa museum,1,0.0,4.0,4.0,
+1598,rome city,1,0.0,3.0,3.0,
+1599,rome,1,0.0,3.0,3.0,
+1600,romantic spots,1,0.0,5.0,5.0,
+1601,vegan-friendly travel,1,0.0,5.0,5.0,
+1602,romantic places,1,0.0,3.0,3.0,
+1603,romantic evenings,1,0.0,5.0,5.0,
+1604,vegetarian food options,1,0.0,5.0,5.0,
+1605,vendor service,1,0.0,5.0,5.0,
+1606,rolling geeks golf cart tour,1,0.0,5.0,5.0,
+1607,rodeos,1,0.0,5.0,5.0,
+1608,roadtrip experience,1,0.0,2.0,2.0,
+1609,venice,1,0.0,3.0,3.0,
+1610,road trip stops,1,0.0,1.0,1.0,
+1611,road trip planning,1,0.0,3.0,3.0,
+1612,road trip itinerary,1,0.0,3.0,3.0,
+1613,venice city,1,0.0,3.0,3.0,
+1614,road tolls,1,0.0,3.0,3.0,
+1615,venue - larimer lounge,1,0.0,5.0,5.0,
+1616,rivers,1,0.0,5.0,5.0,
+1617,river views,1,0.0,5.0,5.0,
+1618,veranda palmar beach hotel,1,0.0,3.0,3.0,
+1619,river tubing,1,0.0,5.0,5.0,
+1620,river seine,1,0.0,5.0,5.0,
+1621,vacation length,1,0.0,3.0,3.0,
+1622,scam risk,1,0.0,1.0,1.0,
+1623,triglav national park,1,0.0,5.0,5.0,
+1624,tsaatan reindeer tour,1,0.0,3.0,3.0,
+1625,size and activities,1,0.0,2.0,2.0,
+1626,tripadvisor reviews,1,0.0,4.0,4.0,
+1627,site maintenance,1,0.0,4.0,4.0,
+1628,troncones,1,0.0,3.0,3.0,
+1629,singapore,1,0.0,4.0,4.0,
+1630,sim card,1,0.0,5.0,5.0,
+1631,silicon valley of beijing,1,0.0,5.0,5.0,
+1632,tropical destinations,1,0.0,5.0,5.0,
+1633,sigiriya,1,0.0,3.0,3.0,
+1634,sightseeing/attractions,1,0.0,5.0,5.0,
+1635,sightseeing opportunities,1,0.0,4.0,4.0,
+1636,sightseeing in kathmandu,1,0.0,5.0,5.0,
+1637,sightseeing accessibility,1,0.0,4.0,4.0,
+1638,sights and attractions,1,0.0,5.0,5.0,
+1639,size of the city,1,0.0,3.0,3.0,
+1640,sights and activities,1,0.0,5.0,5.0,
+1641,siem reap experience,1,0.0,4.0,4.0,
+1642,sicilia region,1,0.0,4.0,4.0,
+1643,shops,1,0.0,3.0,3.0,
+1644,shopping/cafes,1,0.0,5.0,5.0,
+1645,shopping in chaoyang,1,0.0,1.0,1.0,
+1646,shopping experience,1,0.0,5.0,5.0,
+1647,shopping district,1,0.0,5.0,5.0,
+1648,tuk-tuk service,1,0.0,4.0,4.0,
+1649,ship size,1,0.0,3.0,3.0,
+1650,shinjuku gyoen,1,0.0,4.0,4.0,
+1651,shigatse,1,0.0,5.0,5.0,
+1652,shibuya,1,0.0,4.0,4.0,
+1653,trip to paris,1,0.0,4.0,4.0,
+1654,size of the region,1,0.0,4.0,4.0,
+1655,scammers and vendors,1,0.0,1.0,1.0,
+1656,trip idea,1,0.0,5.0,5.0,
+1657,solo exploration,1,0.0,4.0,4.0,
+1658,solitude,1,0.0,5.0,5.0,
+1659,sol duc falls,1,0.0,5.0,5.0,
+1660,socializing and meeting people,1,0.0,4.0,4.0,
+1661,socializing,1,0.0,5.0,5.0,
+1662,social vibe spots,1,0.0,5.0,5.0,
+1663,social vibe,1,0.0,5.0,5.0,
+1664,trip customization,1,0.0,5.0,5.0,
+1665,social interactions,1,0.0,4.0,4.0,
+1666,trip finale,1,0.0,5.0,5.0,
+1667,trip flexibility,1,0.0,4.0,4.0,
+1668,social environment,1,0.0,4.0,4.0,
+1669,social connections,1,0.0,2.0,2.0,
+1670,social,1,0.0,4.0,4.0,
+1671,skagit bay view,1,0.0,4.0,4.0,
+1672,snorkeling/diving,1,0.0,5.0,5.0,
+1673,snorkeling and diving,1,0.0,5.0,5.0,
+1674,snack bar sofra te alba,1,0.0,5.0,5.0,
+1675,smk national gallery,1,0.0,3.0,3.0,
+1676,small town vibe,1,0.0,5.0,5.0,
+1677,small town experiences,1,0.0,3.0,3.0,
+1678,small coastal towns,1,0.0,5.0,5.0,
+1679,slow travel,1,0.0,3.0,3.0,
+1680,sky garden,1,0.0,3.0,3.0,
+1681,skiing and winter activities,1,0.0,4.0,4.0,
+1682,trip options,1,0.0,5.0,5.0,
+1683,ski shop,1,0.0,4.0,4.0,
+1684,ski resorts,1,0.0,3.0,3.0,
+1685,shi shi beach,1,0.0,5.0,5.0,
+1686,shenandoah valley,1,0.0,2.0,2.0,
+1687,tumpak sewu waterfall,1,0.0,5.0,5.0,
+1688,scenic train route,1,0.0,5.0,5.0,
+1689,seasonal events,1,0.0,4.0,4.0,
+1690,seasonal activity,1,0.0,5.0,5.0,
+1691,universal studios,1,0.0,4.0,4.0,
+1692,seaside towns,1,0.0,5.0,5.0,
+1693,university,1,0.0,4.0,4.0,
+1694,scottish highlands,1,0.0,5.0,5.0,
+1695,scheduling,1,0.0,4.0,4.0,
+1696,schedule,1,0.0,2.0,2.0,
+1697,scenic walks/drives,1,0.0,5.0,5.0,
+1698,scenic vistas,1,0.0,5.0,5.0,
+1699,scenic villages,1,0.0,5.0,5.0,
+1700,university campus,1,0.0,5.0,5.0,
+1701,upcoming travel plans,1,0.0,4.0,4.0,
+1702,upscale enclave,1,0.0,4.0,4.0,
+1703,shared car service,1,0.0,4.0,4.0,
+1704,scenic roads,1,0.0,5.0,5.0,
+1705,urban garden porto central hostel,1,0.0,3.0,3.0,
+1706,scenic railway,1,0.0,5.0,5.0,
+1707,urban planning,1,0.0,1.0,1.0,
+1708,urban vs rural experience,1,0.0,4.0,4.0,
+1709,us influence,1,0.0,1.0,1.0,
+1710,scenic lookout,1,0.0,5.0,5.0,
+1711,scenic drives/hikes,1,0.0,4.0,4.0,
+1712,ushuaia,1,0.0,4.0,4.0,
+1713,using usd,1,0.0,2.0,2.0,
+1714,utah,1,0.0,2.0,2.0,
+1715,uzupis neighborhood,1,0.0,5.0,5.0,
+1716,vacation desire,1,0.0,1.0,1.0,
+1717,seasonal information,1,0.0,2.0,2.0,
+1718,uniqueness of experience,1,0.0,4.0,4.0,
+1719,seasonal preference,1,0.0,1.0,1.0,
+1720,uniqueness for tourism,1,0.0,5.0,5.0,
+1721,shanghai city,1,0.0,4.0,4.0,
+1722,turgen gorge,1,0.0,3.0,3.0,
+1723,shahdag national park,1,0.0,5.0,5.0,
+1724,turkish food,1,0.0,5.0,5.0,
+1725,tuscan countryside,1,0.0,3.0,3.0,
+1726,tuscan landscape,1,0.0,5.0,5.0,
+1727,sevilla accessibility,1,0.0,,,
+1728,services,1,0.0,5.0,5.0,
+1729,tuscany coast,1,0.0,4.0,4.0,
+1730,service staff,1,0.0,2.0,2.0,
+1731,sera monastery,1,0.0,5.0,5.0,
+1732,sequoia national park,1,0.0,4.0,4.0,
+1733,sentiero d’elsa hike,1,0.0,5.0,5.0,
+1734,senso-ji,1,0.0,4.0,4.0,
+1735,tuscany region,1,0.0,4.0,4.0,
+1736,self-drive adventure,1,0.0,5.0,5.0,
+1737,self driving,1,0.0,1.0,1.0,
+1738,self drive tour,1,0.0,5.0,5.0,
+1739,tâmpa mountain,1,0.0,5.0,5.0,
+1740,security process,1,0.0,4.0,4.0,
+1741,security,1,0.0,5.0,5.0,
+1742,seattle skyline,1,0.0,5.0,5.0,
+1743,seattle,1,0.0,3.0,3.0,
+1744,ueno park,1,0.0,4.0,4.0,
+1745,uludag mountain,1,0.0,5.0,5.0,
+1746,underwater world langkawi,1,0.0,4.0,4.0,
+1747,unique attractions,1,0.0,5.0,5.0,
+1748,nature views,1,0.0,5.0,5.0,
+1749,abadia do porto restaurant,1,0.0,4.0,4.0,
+1750,nature and wildlife,1,0.0,4.0,4.0,
+1751,community resources,1,0.0,4.0,4.0,
+1752,colobus monkeys in nyungwe national park,1,0.0,5.0,5.0,
+1753,colosseum tour,1,0.0,3.0,3.0,
+1754,combination with nearby city,1,0.0,4.0,4.0,
+1755,combination with other destinations,1,0.0,5.0,5.0,
+1756,comfort level,1,0.0,3.0,3.0,
+1757,commercialization,1,0.0,2.0,2.0,
+1758,community involvement,1,0.0,5.0,5.0,
+1759,community-based stays,1,0.0,5.0,5.0,
+1760,comparison to joshua tree,1,0.0,4.0,4.0,
+1761,commute,1,0.0,5.0,5.0,
+1762,commute time,1,0.0,3.0,3.0,
+1763,commuter rail,1,0.0,5.0,5.0,
+1764,commuting,1,0.0,3.0,3.0,
+1765,commuting and travel hassle,1,0.0,2.0,2.0,
+1766,comparison to alternative destination,1,0.0,3.0,3.0,
+1767,comparison to antigua,1,0.0,4.0,4.0,
+1768,colmar,1,0.0,5.0,5.0,
+1769,colle di val d’elsa old town,1,0.0,5.0,5.0,
+1770,coimbra,1,0.0,3.0,3.0,
+1771,cogwheel train at jungfrau,1,0.0,4.0,4.0,
+1772,coal harbour,1,0.0,4.0,4.0,
+1773,coast,1,0.0,4.0,4.0,
+1774,coastal attractions,1,0.0,4.0,4.0,
+1775,coastal charm,1,0.0,5.0,5.0,
+1776,coastal experience,1,0.0,5.0,5.0,
+1777,coastal portugal,1,0.0,5.0,5.0,
+1778,coastal roads,1,0.0,4.0,4.0,
+1779,coastal town,1,0.0,5.0,5.0,
+1780,coastal vibe,1,0.0,4.0,4.0,
+1781,coastal views,1,0.0,5.0,5.0,
+1782,coastal villages,1,0.0,5.0,5.0,
+1783,coastlines,1,0.0,5.0,5.0,
+1784,cocina al fondo,1,0.0,4.0,4.0,
+1785,cocktail bars,1,0.0,3.0,3.0,
+1786,coffee tour,1,0.0,2.0,2.0,
+1787,comparison to dubrovnik,1,0.0,3.0,3.0,
+1788,comparison to other countries,1,0.0,4.0,4.0,
+1789,clothing and packing,1,0.0,4.0,4.0,
+1790,creative activities,1,0.0,5.0,5.0,
+1791,country overall,1,0.0,5.0,5.0,
+1792,country size,1,0.0,5.0,5.0,
+1793,country size and planning,1,0.0,4.0,4.0,
+1794,countryside transportation,1,0.0,3.0,3.0,
+1795,coworking spaces,1,0.0,4.0,4.0,
+1796,coyoacan bazaar sabado,1,0.0,4.0,4.0,
+1797,cozumel,1,0.0,3.0,3.0,
+1798,croatia as a destination,1,0.0,4.0,4.0,
+1799,comparison to us national parks,1,0.0,3.0,3.0,
+1800,crowd and traffic,1,0.0,2.0,2.0,
+1801,crowd behavior,1,0.0,2.0,2.0,
+1802,crowd sizes,1,0.0,2.0,2.0,
+1803,crowds and noise,1,0.0,2.0,2.0,
+1804,crowds and peak season,1,0.0,2.0,2.0,
+1805,crowds and popularity,1,0.0,2.0,2.0,
+1806,crowds and tourist season,1,0.0,5.0,5.0,
+1807,country music,1,0.0,5.0,5.0,
+1808,country exploration,1,0.0,4.0,4.0,
+1809,country connectivity,1,0.0,1.0,1.0,
+1810,country combination,1,0.0,4.0,4.0,
+1811,competition,1,0.0,4.0,4.0,
+1812,condado,1,0.0,5.0,5.0,
+1813,condado beach,1,0.0,3.0,3.0,
+1814,conflict history,1,0.0,2.0,2.0,
+1815,connemara,1,0.0,4.0,4.0,
+1816,convenience store meals,1,0.0,5.0,5.0,
+1817,convenience stores,1,0.0,4.0,4.0,
+1818,corfu day trip,1,0.0,3.0,3.0,
+1819,coronado beach,1,0.0,3.0,3.0,
+1820,cosmopolitan atmosphere,1,0.0,5.0,5.0,
+1821,costa del sol as a destination,1,0.0,4.0,4.0,
+1822,cote de azur,1,0.0,2.0,2.0,
+1823,cotopaxi,1,0.0,5.0,5.0,
+1824,cottesloe beach,1,0.0,5.0,5.0,
+1825,country choice,1,0.0,5.0,5.0,
+1826,coach service,1,0.0,4.0,4.0,
+1827,cliffs,1,0.0,5.0,5.0,
+1828,crowds and touristy areas,1,0.0,2.0,2.0,
+1829,child friendly activities,1,0.0,5.0,5.0,
+1830,chaoyang,1,0.0,5.0,5.0,
+1831,character and soul,1,0.0,2.0,2.0,
+1832,charco azul tour,1,0.0,5.0,5.0,
+1833,charming alleys,1,0.0,5.0,5.0,
+1834,charyn canyon,1,0.0,3.0,3.0,
+1835,chiang mai,1,0.0,3.0,3.0,
+1836,chichen itza,1,0.0,5.0,5.0,
+1837,child-friendliness,1,0.0,2.0,2.0,
+1838,churches and statues,1,0.0,4.0,4.0,
+1839,chitwan national park,1,0.0,5.0,5.0,
+1840,chocolate,1,0.0,4.0,4.0,
+1841,choquequirao trek,1,0.0,3.0,3.0,
+1842,christiania neighborhood,1,0.0,3.0,3.0,
+1843,christiansborg palace,1,0.0,3.0,3.0,
+1844,christmas celebrations,1,0.0,3.0,3.0,
+1845,christmas market,1,0.0,5.0,5.0,
+1846,chaos and pollution,1,0.0,2.0,2.0,
+1847,chao praya river,1,0.0,5.0,5.0,
+1848,chang mai experience,1,0.0,3.0,3.0,
+1849,challenge/difficulty level,1,0.0,4.0,4.0,
+1850,cardiff bay,1,0.0,5.0,5.0,
+1851,caribbean destinations,1,0.0,2.0,2.0,
+1852,cartegena,1,0.0,4.0,4.0,
+1853,casa guedes restaurant,1,0.0,4.0,4.0,
+1854,castle stay,1,0.0,4.0,4.0,
+1855,castle visit,1,0.0,4.0,4.0,
+1856,cathedrals,1,0.0,4.0,4.0,
+1857,caucasus mountains,1,0.0,5.0,5.0,
+1858,caves,1,0.0,3.0,3.0,
+1859,cağaloğlu hamam,1,0.0,4.0,4.0,
+1860,cebu city,1,0.0,3.0,3.0,
+1861,celebration,1,0.0,4.0,4.0,
+1862,cementerio general,1,0.0,4.0,4.0,
+1863,central locations,1,0.0,3.0,3.0,
+1864,ceremony timing,1,0.0,5.0,5.0,
+1865,church,1,0.0,5.0,5.0,
+1866,cities/nightlife,1,0.0,1.0,1.0,
+1867,cleanliness and comfort,1,0.0,5.0,5.0,
+1868,city tour,1,0.0,3.0,3.0,
+1869,city preservation,1,0.0,5.0,5.0,
+1870,city safety,1,0.0,4.0,4.0,
+1871,city scenery,1,0.0,5.0,5.0,
+1872,city size and exploration,1,0.0,4.0,4.0,
+1873,city skyline,1,0.0,4.0,4.0,
+1874,city stay duration,1,0.0,3.0,3.0,
+1875,city suitability,1,0.0,2.0,2.0,
+1876,city travel,1,0.0,3.0,3.0,
+1877,city - florence,1,0.0,3.0,3.0,
+1878,city uniqueness,1,0.0,5.0,5.0,
+1879,city vibes,1,0.0,5.0,5.0,
+1880,city visitability during summer,1,0.0,2.0,2.0,
+1881,city walk,1,0.0,5.0,5.0,
+1882,city worth,1,0.0,1.0,1.0,
+1883,city/culture,1,0.0,3.0,3.0,
+1884,cityscape,1,0.0,5.0,5.0,
+1885,city planning,1,0.0,4.0,4.0,
+1886,city pace,1,0.0,3.0,3.0,
+1887,city offerings,1,0.0,5.0,5.0,
+1888,city of mahdia,1,0.0,5.0,5.0,
+1889,city - naples,1,0.0,3.0,3.0,
+1890,city - rome,1,0.0,3.0,3.0,
+1891,city - venice,1,0.0,3.0,3.0,
+1892,city amenities,1,0.0,4.0,4.0,
+1893,city area,1,0.0,4.0,4.0,
+1894,city blend,1,0.0,5.0,5.0,
+1895,city center,1,0.0,4.0,4.0,
+1896,city change experience,1,0.0,2.0,2.0,
+1897,city combination,1,0.0,5.0,5.0,
+1898,city highlights,1,0.0,3.0,3.0,
+1899,city impression,1,0.0,2.0,2.0,
+1900,city infrastructure,1,0.0,5.0,5.0,
+1901,city maintenance,1,0.0,5.0,5.0,
+1902,city noise and crowds,1,0.0,2.0,2.0,
+1903,city of kairouan,1,0.0,2.0,2.0,
+1904,crowds and tourist traps,1,0.0,1.0,1.0,
+1905,cruise options,1,0.0,4.0,4.0,
+1906,exploration value,1,0.0,4.0,4.0,
+1907,ebc trek difficulty,1,0.0,3.0,3.0,
+1908,dubrovnik,1,0.0,3.0,3.0,
+1909,dunes,1,0.0,5.0,5.0,
+1910,duomo,1,0.0,5.0,5.0,
+1911,durmitor national park,1,0.0,5.0,5.0,
+1912,e-visa process,1,0.0,4.0,4.0,
+1913,eastern serbia,1,0.0,3.0,3.0,
+1914,easycard,1,0.0,3.0,3.0,
+1915,ebc trek organization,1,0.0,4.0,4.0,
+1916,embassy experience,1,0.0,3.0,3.0,
+1917,ecological diversity,1,0.0,5.0,5.0,
+1918,economy,1,0.0,1.0,1.0,
+1919,egyptian temple in madrid,1,0.0,4.0,4.0,
+1920,el yunque rain forest,1,0.0,5.0,5.0,
+1921,el yunque tour,1,0.0,5.0,5.0,
+1922,electricity,1,0.0,2.0,2.0,
+1923,elephant tourism,1,0.0,1.0,1.0,
+1924,dublin bay cruise,1,0.0,4.0,4.0,
+1925,dublin,1,0.0,4.0,4.0,
+1926,drug laws,1,0.0,2.0,2.0,
+1927,driving times,1,0.0,1.0,1.0,
+1928,diy trip,1,0.0,3.0,3.0,
+1929,documentation requirements,1,0.0,4.0,4.0,
+1930,dolmabahçe palace,1,0.0,4.0,4.0,
+1931,dome tickets,1,0.0,4.0,4.0,
+1932,douro viewpoints,1,0.0,4.0,4.0,
+1933,drepung monastery,1,0.0,5.0,5.0,
+1934,dressing and attire,1,0.0,3.0,3.0,
+1935,drinking age,1,0.0,3.0,3.0,
+1936,drivers,1,0.0,5.0,5.0,
+1937,driving accessibility,1,0.0,4.0,4.0,
+1938,driving and transportation,1,0.0,3.0,3.0,
+1939,driving convenience,1,0.0,5.0,5.0,
+1940,driving distance,1,0.0,4.0,4.0,
+1941,driving in rain,1,0.0,2.0,2.0,
+1942,driving time,1,0.0,2.0,2.0,
+1943,ella,1,0.0,3.0,3.0,
+1944,embassy process,1,0.0,1.0,1.0,
+1945,diving in west papua,1,0.0,5.0,5.0,
+1946,everest base camp,1,0.0,5.0,5.0,
+1947,evening vibe,1,0.0,5.0,5.0,
+1948,event,1,0.0,5.0,5.0,
+1949,event (solar eclipse),1,0.0,4.0,4.0,
+1950,event celebration,1,0.0,5.0,5.0,
+1951,event/vibe,1,0.0,3.0,3.0,
+1952,events - free concerts,1,0.0,5.0,5.0,
+1953,events and entertainment,1,0.0,5.0,5.0,
+1954,exchange rates,1,0.0,3.0,3.0,
+1955,emissions regulations,1,0.0,5.0,5.0,
+1956,excursions,1,0.0,5.0,5.0,
+1957,excursions and day trips,1,0.0,5.0,5.0,
+1958,expedition agencies,1,0.0,3.0,3.0,
+1959,experience,1,0.0,4.0,4.0,
+1960,experience for female tourists,1,0.0,3.0,3.0,
+1961,exploration of smaller cities,1,0.0,4.0,4.0,
+1962,exploration opportunity,1,0.0,4.0,4.0,
+1963,evening entertainment,1,0.0,4.0,4.0,
+1964,evening activities,1,0.0,5.0,5.0,
+1965,european airlines,1,0.0,1.0,1.0,
+1966,etosha national park,1,0.0,5.0,5.0,
+1967,emotional impact,1,0.0,3.0,3.0,
+1968,entrance fees,1,0.0,3.0,3.0,
+1969,entrance prices,1,0.0,1.0,1.0,
+1970,environment,1,0.0,5.0,5.0,
+1971,environmental cleanliness,1,0.0,1.0,1.0,
+1972,environmental conditions,1,0.0,1.0,1.0,
+1973,environmental impact,1,0.0,1.0,1.0,
+1974,epupa falls,1,0.0,5.0,5.0,
+1975,ericeira,1,0.0,3.0,3.0,
+1976,erte ale volcano,1,0.0,4.0,4.0,
+1977,escambron beach,1,0.0,4.0,4.0,
+1978,escape destinations,1,0.0,4.0,4.0,
+1979,essaouira,1,0.0,3.0,3.0,
+1980,esteros,1,0.0,2.0,2.0,
+1981,ethical travel,1,0.0,5.0,5.0,
+1982,diy travel,1,0.0,4.0,4.0,
+1983,diversity of options,1,0.0,5.0,5.0,
+1984,cruise ship excursions,1,0.0,1.0,1.0,
+1985,date spot,1,0.0,5.0,5.0,
+1986,da nang experience,1,0.0,3.0,3.0,
+1987,daily life,1,0.0,3.0,3.0,
+1988,dalmatian coast,1,0.0,4.0,4.0,
+1989,dalston,1,0.0,5.0,5.0,
+1990,damaraland,1,0.0,5.0,5.0,
+1991,damri bus service,1,0.0,1.0,1.0,
+1992,danube fortresses,1,0.0,3.0,3.0,
+1993,day tours,1,0.0,4.0,4.0,
+1994,day-trip,1,0.0,4.0,4.0,
+1995,day trip to bath,1,0.0,4.0,4.0,
+1996,day trip to colonia del sacramento,1,0.0,4.0,4.0,
+1997,day trip to helsinki,1,0.0,4.0,4.0,
+1998,day trip to monaco,1,0.0,4.0,4.0,
+1999,day trip to stonehenge,1,0.0,4.0,4.0,
+2000,day trip to èze,1,0.0,4.0,4.0,
+2001,day trip transit,1,0.0,4.0,4.0,
+2002,da nang,1,0.0,3.0,3.0,
+2003,cycling infrastructure,1,0.0,4.0,4.0,
+2004,customs process,1,0.0,3.0,3.0,
+2005,customs and security,1,0.0,3.0,3.0,
+2006,cruise tourism,1,0.0,1.0,1.0,
+2007,cultural acceptance,1,0.0,2.0,2.0,
+2008,cultural authenticity,1,0.0,4.0,4.0,
+2009,cultural contrast,1,0.0,5.0,5.0,
+2010,cultural difference,1,0.0,5.0,5.0,
+2011,cultural heritage,1,0.0,5.0,5.0,
+2012,cultural identity,1,0.0,3.0,3.0,
+2013,cultural immersion,1,0.0,5.0,5.0,
+2014,cultural influence,1,0.0,5.0,5.0,
+2015,cultural preparation,1,0.0,5.0,5.0,
+2016,cultural sites,1,0.0,5.0,5.0,
+2017,cultural transition,1,0.0,4.0,4.0,
+2018,cultural understanding,1,0.0,4.0,4.0,
+2019,culture and history,1,0.0,4.0,4.0,
+2020,currency,1,0.0,3.0,3.0,
+2021,day trips and excursions,1,0.0,5.0,5.0,
+2022,deception pass bridge,1,0.0,4.0,4.0,
+2023,distillery tour,1,0.0,4.0,4.0,
+2024,dining hours,1,0.0,3.0,3.0,
+2025,development,1,0.0,5.0,5.0,
+2026,dhërmi,1,0.0,4.0,4.0,
+2027,digital nomad community,1,0.0,4.0,4.0,
+2028,dingle peninsula,1,0.0,5.0,5.0,
+2029,dining and nightlife,1,0.0,4.0,4.0,
+2030,dining and shopping,1,0.0,4.0,4.0,
+2031,dining guides,1,0.0,5.0,5.0,
+2032,dining tips,1,0.0,5.0,5.0,
+2033,decorations and festivities,1,0.0,5.0,5.0,
+2034,direct booking options,1,0.0,5.0,5.0,
+2035,disney,1,0.0,4.0,4.0,
+2036,distance,1,0.0,4.0,4.0,
+2037,distance and transportation options,1,0.0,4.0,4.0,
+2038,distance and travel time,1,0.0,3.0,3.0,
+2039,distance between towns,1,0.0,2.0,2.0,
+2040,distances and flights,1,0.0,2.0,2.0,
+2041,destination uniqueness,1,0.0,5.0,5.0,
+2042,destination suitability,1,0.0,2.0,2.0,
+2043,destination similarity,1,0.0,3.0,3.0,
+2044,destination rating,1,0.0,5.0,5.0,
+2045,delhi,1,0.0,2.0,2.0,
+2046,delicacies,1,0.0,5.0,5.0,
+2047,delta,1,0.0,3.0,3.0,
+2048,deposit,1,0.0,1.0,1.0,
+2049,deramakot forest reserve,1,0.0,3.0,3.0,
+2050,desert tour,1,0.0,4.0,4.0,
+2051,destination (waterton lakes),1,0.0,4.0,4.0,
+2052,destination addition,1,0.0,4.0,4.0,
+2053,destination attractiveness,1,0.0,5.0,5.0,
+2054,destination combination,1,0.0,3.0,3.0,
+2055,destination consideration,1,0.0,3.0,3.0,
+2056,destination diversity,1,0.0,5.0,5.0,
+2057,destination overall,1,0.0,5.0,5.0,
+2058,destination popularity,1,0.0,3.0,3.0,
+2059,destination quantity,1,0.0,1.0,1.0,
+2060,car requirements,1,0.0,5.0,5.0,
+2061,car rental and driving,1,0.0,3.0,3.0,
+2062,car hire and driver,1,0.0,5.0,5.0,
+2063,archaeological sites,1,0.0,5.0,5.0,
+2064,antigua,1,0.0,4.0,4.0,
+2065,anxiety and health,1,0.0,2.0,2.0,
+2066,apple orchards,1,0.0,4.0,4.0,
+2067,aquaria klcc,1,0.0,2.0,2.0,
+2068,aquarium,1,0.0,1.0,1.0,
+2069,aran islands,1,0.0,4.0,4.0,
+2070,arcades,1,0.0,5.0,5.0,
+2071,archeology,1,0.0,5.0,5.0,
+2072,aruba accessibility,1,0.0,5.0,5.0,
+2073,area attractiveness,1,0.0,5.0,5.0,
+2074,area suitability for business travelers,1,0.0,4.0,4.0,
+2075,area suitability for couples,1,0.0,4.0,4.0,
+2076,area suitability for families,1,0.0,5.0,5.0,
+2077,art installations,1,0.0,5.0,5.0,
+2078,art scene,1,0.0,5.0,5.0,
+2079,arts and culture,1,0.0,5.0,5.0,
+2080,annecy,1,0.0,4.0,4.0,
+2081,animals and ice cream,1,0.0,4.0,4.0,
+2082,animal sanctuaries,1,0.0,5.0,5.0,
+2083,animal life,1,0.0,5.0,5.0,
+2084,almaty attractions,1,0.0,4.0,4.0,
+2085,alps (ortisei),1,0.0,5.0,5.0,
+2086,alternative route,1,0.0,4.0,4.0,
+2087,alternative travel times,1,0.0,5.0,5.0,
+2088,altitude acclimation,1,0.0,4.0,4.0,
+2089,altitude acclimatization,1,0.0,4.0,4.0,
+2090,amalfi/naples,1,0.0,3.0,3.0,
+2091,amalienborg palace,1,0.0,4.0,4.0,
+2092,amazon tour,1,0.0,4.0,4.0,
+2093,amazon trip,1,0.0,4.0,4.0,
+2094,amazon visit,1,0.0,1.0,1.0,
+2095,anatolian side,1,0.0,4.0,4.0,
+2096,ancient temples and streets,1,0.0,5.0,5.0,
+2097,angkor wat experience,1,0.0,3.0,3.0,
+2098,animal experiences,1,0.0,5.0,5.0,
+2099,arts scene,1,0.0,4.0,4.0,
+2100,asia del sur,1,0.0,4.0,4.0,
+2101,all-inclusive resorts,1,0.0,4.0,4.0,
+2102,ayahuasca experience in peru,1,0.0,4.0,4.0,
+2103,aurora hunting,1,0.0,4.0,4.0,
+2104,austria as a potential destination,1,0.0,3.0,3.0,
+2105,austrian alps,1,0.0,2.0,2.0,
+2106,authentic towns,1,0.0,4.0,4.0,
+2107,autumn leaves,1,0.0,4.0,4.0,
+2108,availability of baby products,1,0.0,5.0,5.0,
+2109,availability of services,1,0.0,4.0,4.0,
+2110,azores,1,0.0,3.0,3.0,
+2111,assale lake salt flats,1,0.0,4.0,4.0,
+2112,baby facilities,1,0.0,3.0,3.0,
+2113,bacalar,1,0.0,4.0,4.0,
+2114,backpacker destinations,1,0.0,2.0,2.0,
+2115,backpacking culture,1,0.0,5.0,5.0,
+2116,backpacking duration,1,0.0,3.0,3.0,
+2117,bag storage,1,0.0,4.0,4.0,
+2118,bagan,1,0.0,5.0,5.0,
+2119,aurora chances,1,0.0,5.0,5.0,
+2120,aurora borealis,1,0.0,3.0,3.0,
+2121,augustiner beer,1,0.0,5.0,5.0,
+2122,atx microgravity simulation,1,0.0,4.0,4.0,
+2123,astronaut training experience,1,0.0,4.0,4.0,
+2124,ateshgah (fire temple),1,0.0,5.0,5.0,
+2125,athens,1,0.0,4.0,4.0,
+2126,atm fees,1,0.0,2.0,2.0,
+2127,atmosphere and relaxation,1,0.0,5.0,5.0,
+2128,atmosphere and vibe,1,0.0,5.0,5.0,
+2129,attraction (dujiangyan blue tears),1,0.0,3.0,3.0,
+2130,attraction accessibility,1,0.0,5.0,5.0,
+2131,attraction booking process,1,0.0,1.0,1.0,
+2132,attraction booking system,1,0.0,2.0,2.0,
+2133,attraction hours,1,0.0,2.0,2.0,
+2134,attraction popularity,1,0.0,5.0,5.0,
+2135,attraction pricing,1,0.0,1.0,1.0,
+2136,attraction visit,1,0.0,4.0,4.0,
+2137,attraction visitation,1,0.0,1.0,1.0,
+2138,alleppey,1,0.0,3.0,3.0,
+2139,all-inclusive package,1,0.0,2.0,2.0,
+2140,capsule hotel,1,0.0,5.0,5.0,
+2141,accommodation quality,1,0.0,4.0,4.0,
+2142,accommodation inside the castle,1,0.0,2.0,2.0,
+2143,accommodation offers,1,0.0,5.0,5.0,
+2144,accommodation payment,1,0.0,4.0,4.0,
+2145,accommodation planning,1,0.0,4.0,4.0,
+2146,accommodation policy,1,0.0,2.0,2.0,
+2147,accommodation preference,1,0.0,1.0,1.0,
+2148,accommodation preferences,1,0.0,4.0,4.0,
+2149,accommodation savings,1,0.0,5.0,5.0,
+2150,activities for kids,1,0.0,3.0,3.0,
+2151,accommodation services,1,0.0,4.0,4.0,
+2152,accommodation strategy,1,0.0,4.0,4.0,
+2153,accommodation value,1,0.0,2.0,2.0,
+2154,accommodation/relaxation,1,0.0,5.0,5.0,
+2155,accommodation/stay,1,0.0,2.0,2.0,
+2156,accommodation_location,1,0.0,4.0,4.0,
+2157,activities and entertainment,1,0.0,3.0,3.0,
+2158,accommodation in thamel,1,0.0,4.0,4.0,
+2159,accommodation in ksamil,1,0.0,3.0,3.0,
+2160,accommodation in himarë,1,0.0,3.0,3.0,
+2161,accommodation experience,1,0.0,1.0,1.0,
+2162,acadia national park,1,0.0,3.0,3.0,
+2163,acatenango,1,0.0,4.0,4.0,
+2164,acatenango hike,1,0.0,5.0,5.0,
+2165,access to amenities,1,0.0,5.0,5.0,
+2166,access to boracay,1,0.0,5.0,5.0,
+2167,accessibility for older adults,1,0.0,4.0,4.0,
+2168,accommodation (airbnb),1,0.0,3.0,3.0,
+2169,accommodation accessibility,1,0.0,3.0,3.0,
+2170,accommodation amenities,1,0.0,1.0,1.0,
+2171,accommodation and amenities,1,0.0,5.0,5.0,
+2172,accommodation area (lapad),1,0.0,3.0,3.0,
+2173,accommodation availability,1,0.0,2.0,2.0,
+2174,accommodation base,1,0.0,5.0,5.0,
+2175,accommodation choice,1,0.0,5.0,5.0,
+2176,accommodation costs,1,0.0,4.0,4.0,
+2177,activities and opportunities,1,0.0,5.0,5.0,
+2178,activity (cruise),1,0.0,4.0,4.0,
+2179,all inclusive resorts,1,0.0,4.0,4.0,
+2180,airport to city center transportation,1,0.0,3.0,3.0,
+2181,airport infrastructure,1,0.0,2.0,2.0,
+2182,airport logistics,1,0.0,3.0,3.0,
+2183,airport procedure,1,0.0,4.0,4.0,
+2184,airport proximity,1,0.0,5.0,5.0,
+2185,airport security,1,0.0,4.0,4.0,
+2186,airport shuttle,1,0.0,4.0,4.0,
+2187,airport strategy,1,0.0,3.0,3.0,
+2188,airport transfer,1,0.0,2.0,2.0,
+2189,activity costs,1,0.0,1.0,1.0,
+2190,akihabara,1,0.0,4.0,4.0,
+2191,alabama,1,0.0,4.0,4.0,
+2192,albanian riviera,1,0.0,5.0,5.0,
+2193,alcapurrias quema,1,0.0,4.0,4.0,
+2194,alcohol prices,1,0.0,1.0,1.0,
+2195,algavre region,1,0.0,4.0,4.0,
+2196,alhambra,1,0.0,5.0,5.0,
+2197,airport hotel,1,0.0,3.0,3.0,
+2198,airport flexibility,1,0.0,4.0,4.0,
+2199,airport fees,1,0.0,2.0,2.0,
+2200,airport congestion,1,0.0,1.0,1.0,
+2201,activity preferences,1,0.0,5.0,5.0,
+2202,additional fees,1,0.0,2.0,2.0,
+2203,adriatic coast,1,0.0,5.0,5.0,
+2204,adventure activity,1,0.0,5.0,5.0,
+2205,adventure opportunities,1,0.0,5.0,5.0,
+2206,aesthetics,1,0.0,5.0,5.0,
+2207,age and travel,1,0.0,4.0,4.0,
+2208,air travel,1,0.0,5.0,5.0,
+2209,airbnb,1,0.0,4.0,4.0,
+2210,airfare,1,0.0,2.0,2.0,
+2211,airline comfort,1,0.0,3.0,3.0,
+2212,airline options,1,0.0,4.0,4.0,
+2213,airline pricing,1,0.0,2.0,2.0,
+2214,airline safety,1,0.0,4.0,4.0,
+2215,airlines,1,0.0,3.0,3.0,
+2216,baggage service,1,0.0,3.0,3.0,
+2217,balat neighborhood,1,0.0,5.0,5.0,
+2218,balcony,1,0.0,5.0,5.0,
+2219,budget travel,1,0.0,3.0,3.0,
+2220,bridge,1,0.0,5.0,5.0,
+2221,bridge bar,1,0.0,4.0,4.0,
+2222,bromo visit,1,0.0,3.0,3.0,
+2223,brunch - onefold,1,0.0,5.0,5.0,
+2224,brunch spot,1,0.0,4.0,4.0,
+2225,brunelleschi's dome,1,0.0,4.0,4.0,
+2226,budapest as a hub,1,0.0,5.0,5.0,
+2227,budgeting,1,0.0,4.0,4.0,
+2228,bus tour,1,0.0,5.0,5.0,
+2229,budva,1,0.0,4.0,4.0,
+2230,bukhara experience,1,0.0,3.0,3.0,
+2231,bureaucracy/permission process,1,0.0,2.0,2.0,
+2232,bureaucracy/visas,1,0.0,3.0,3.0,
+2233,bursa grand mosque,1,0.0,5.0,5.0,
+2234,bus services (flix bus),1,0.0,5.0,5.0,
+2235,bus station experience,1,0.0,4.0,4.0,
+2236,brewery tour,1,0.0,4.0,4.0,
+2237,bovilla lake,1,0.0,5.0,5.0,
+2238,bouzov castle,1,0.0,5.0,5.0,
+2239,bouchons,1,0.0,4.0,4.0,
+2240,boating activities,1,0.0,5.0,5.0,
+2241,boiling hypersaline springs,1,0.0,4.0,4.0,
+2242,book market,1,0.0,5.0,5.0,
+2243,booking fees,1,0.0,2.0,2.0,
+2244,booking perks,1,0.0,5.0,5.0,
+2245,booking process,1,0.0,4.0,4.0,
+2246,booking websites,1,0.0,3.0,3.0,
+2247,bookstore,1,0.0,5.0,5.0,
+2248,border crossing wait times,1,0.0,4.0,4.0,
+2249,border crossings,1,0.0,4.0,4.0,
+2250,borneo (kalimantan),1,0.0,4.0,4.0,
+2251,borneo rainforest/forest trail experience,1,0.0,4.0,4.0,
+2252,borough market,1,0.0,4.0,4.0,
+2253,bosphorus ferry,1,0.0,5.0,5.0,
+2254,botanical garden,1,0.0,4.0,4.0,
+2255,bus system,1,0.0,4.0,4.0,
+2256,bus transportation,1,0.0,4.0,4.0,
+2257,bali visit,1,0.0,5.0,5.0,
+2258,canals,1,0.0,5.0,5.0,
+2259,calabria region,1,0.0,4.0,4.0,
+2260,calafate,1,0.0,5.0,5.0,
+2261,cambodia as a destination,1,0.0,3.0,3.0,
+2262,cambridge,1,0.0,5.0,5.0,
+2263,campervan rental,1,0.0,5.0,5.0,
+2264,camping and outdoor activities,1,0.0,5.0,5.0,
+2265,canal tour,1,0.0,3.0,3.0,
+2266,cancun accessibility,1,0.0,5.0,5.0,
+2267,business travel,1,0.0,3.0,3.0,
+2268,canterbury,1,0.0,5.0,5.0,
+2269,canyon,1,0.0,5.0,5.0,
+2270,capa negra ii restaurant,1,0.0,5.0,5.0,
+2271,capital cities,1,0.0,1.0,1.0,
+2272,capital city,1,0.0,5.0,5.0,
+2273,capital city excitement,1,0.0,2.0,2.0,
+2274,capital city exploration,1,0.0,3.0,3.0,
+2275,calabria,1,0.0,4.0,4.0,
+2276,cafés,1,0.0,5.0,5.0,
+2277,café scene,1,0.0,5.0,5.0,
+2278,café and sunset spots,1,0.0,5.0,5.0,
+2279,bwindi,1,0.0,3.0,3.0,
+2280,bwindi national park,1,0.0,4.0,4.0,
+2281,cable bay,1,0.0,5.0,5.0,
+2282,cable car ride,1,0.0,5.0,5.0,
+2283,cable cars,1,0.0,2.0,2.0,
+2284,cabo,1,0.0,1.0,1.0,
+2285,cabo pulmo national park,1,0.0,4.0,4.0,
+2286,cafe - cafe du monde,1,0.0,4.0,4.0,
+2287,cafe and restaurant amenities,1,0.0,4.0,4.0,
+2288,cafe and restaurant options,1,0.0,5.0,5.0,
+2289,cafe and restaurant quality,1,0.0,5.0,5.0,
+2290,cafe and restaurant scene,1,0.0,5.0,5.0,
+2291,cafe culture,1,0.0,4.0,4.0,
+2292,cafe scene,1,0.0,3.0,3.0,
+2293,cafe society,1,0.0,4.0,4.0,
+2294,boat ride,1,0.0,4.0,4.0,
+2295,boat cruises,1,0.0,5.0,5.0,
+2296,boardwalk,1,0.0,4.0,4.0,
+2297,beach life,1,0.0,5.0,5.0,
+2298,bazaar and castle visit,1,0.0,4.0,4.0,
+2299,bazaar prices,1,0.0,2.0,2.0,
+2300,beach and water quality,1,0.0,5.0,5.0,
+2301,beach cafes,1,0.0,4.0,4.0,
+2302,beach culture,1,0.0,4.0,4.0,
+2303,beach diversity,1,0.0,5.0,5.0,
+2304,beach experience in colombia,1,0.0,4.0,4.0,
+2305,beach resort,1,0.0,1.0,1.0,
+2306,boarding process for celestyal cruises,1,0.0,3.0,3.0,
+2307,beach resorts,1,0.0,4.0,4.0,
+2308,beach scenery,1,0.0,2.0,2.0,
+2309,beach town atmosphere,1,0.0,5.0,5.0,
+2310,beach/coastal experience,1,0.0,2.0,2.0,
+2311,beach/coastal vibes,1,0.0,3.0,3.0,
+2312,beach/coastline,1,0.0,4.0,4.0,
+2313,beach/island,1,0.0,4.0,4.0,
+2314,bay,1,0.0,5.0,5.0,
+2315,bathroom facilities,1,0.0,2.0,2.0,
+2316,bathroom availability,1,0.0,3.0,3.0,
+2317,bath,1,0.0,5.0,5.0,
+2318,"bali, indonesia as a destination",1,0.0,5.0,5.0,
+2319,ballestas tour,1,0.0,3.0,3.0,
+2320,bamboo forest scenery,1,0.0,5.0,5.0,
+2321,banff,1,0.0,3.0,3.0,
+2322,bangkok experience,1,0.0,3.0,3.0,
+2323,bar - horseshoe lounge,1,0.0,5.0,5.0,
+2324,bar - the dive inn,1,0.0,5.0,5.0,
+2325,bar crawl,1,0.0,4.0,4.0,
+2326,bar scene,1,0.0,4.0,4.0,
+2327,barcelona accessibility,1,0.0,,,
+2328,bars and nightlife,1,0.0,5.0,5.0,
+2329,base for exploration,1,0.0,5.0,5.0,
+2330,base for outdoor activities,1,0.0,5.0,5.0,
+2331,basilica cistern,1,0.0,5.0,5.0,
+2332,basilicata,1,0.0,4.0,4.0,
+2333,beach/isle visit,1,0.0,5.0,5.0,
+2334,beach/lagoon,1,0.0,5.0,5.0,
+2335,beach/lake,1,0.0,2.0,2.0,
+2336,bicycle riding,1,0.0,5.0,5.0,
+2337,bike culture,1,0.0,5.0,5.0,
+2338,bike purchase,1,0.0,4.0,4.0,
+2339,bike reliability,1,0.0,2.0,2.0,
+2340,bike resale,1,0.0,4.0,4.0,
+2341,bike ride,1,0.0,4.0,4.0,
+2342,bike tours,1,0.0,4.0,4.0,
+2343,biodiversity,1,0.0,5.0,5.0,
+2344,bioluminescent bay,1,0.0,5.0,5.0,
+2345,bioluminescent bay tour,1,0.0,5.0,5.0,
+2346,birthday celebration,1,0.0,5.0,5.0,
+2347,biserica neagră,1,0.0,5.0,5.0,
+2348,bishkek exploration,1,0.0,3.0,3.0,
+2349,bitoujiao,1,0.0,4.0,4.0,
+2350,blackfriars pub,1,0.0,5.0,5.0,
+2351,boa bao restaurant,1,0.0,4.0,4.0,
+2352,big cities,1,0.0,3.0,3.0,
+2353,bergamo,1,0.0,3.0,3.0,
+2354,beach/leisure activity,1,0.0,5.0,5.0,
+2355,bengaluru,1,0.0,4.0,4.0,
+2356,"beaches in favignana, italy",1,0.0,5.0,5.0,
+2357,"beaches in folegandros, greece",1,0.0,5.0,5.0,
+2358,"beaches in hydra, greece",1,0.0,5.0,5.0,
+2359,"beaches in salina, italy",1,0.0,5.0,5.0,
+2360,"beaches in sifnos, greece",1,0.0,5.0,5.0,
+2361,beaches/coastal areas,1,0.0,5.0,5.0,
+2362,bear zoo,1,0.0,4.0,4.0,
+2363,beautiful scenery,1,0.0,5.0,5.0,
+2364,beer celebration,1,0.0,4.0,4.0,
+2365,beer garden,1,0.0,5.0,5.0,
+2366,beginner friendliness,1,0.0,5.0,5.0,
+2367,beitou,1,0.0,4.0,4.0,
+2368,belgium,1,0.0,5.0,5.0,
+2369,belgrade,1,0.0,3.0,3.0,
+2370,bellagio,1,0.0,3.0,3.0,
+2371,exploration time,1,0.0,2.0,2.0,
+2372,exploring,1,0.0,5.0,5.0,
+2373,nature and landscapes,1,0.0,5.0,5.0,
+2374,lefkada,1,0.0,4.0,4.0,
+2375,lares trek and inca trail,1,0.0,4.0,4.0,
+2376,las vegas,1,0.0,4.0,4.0,
+2377,latina beaches,1,0.0,4.0,4.0,
+2378,latina region,1,0.0,4.0,4.0,
+2379,layover in istanbul,1,0.0,3.0,3.0,
+2380,layover policy,1,0.0,3.0,3.0,
+2381,lazienski park,1,0.0,4.0,4.0,
+2382,legal requirements,1,0.0,3.0,3.0,
+2383,lindos,1,0.0,5.0,5.0,
+2384,leisure travel,1,0.0,2.0,2.0,
+2385,les halles,1,0.0,3.0,3.0,
+2386,light and scenery,1,0.0,5.0,5.0,
+2387,light pollution,1,0.0,1.0,1.0,
+2388,ligurian beaches,1,0.0,4.0,4.0,
+2389,ligurian towns,1,0.0,4.0,4.0,
+2390,lima,1,0.0,3.0,3.0,
+2391,lanua levu,1,0.0,4.0,4.0,
+2392,language understanding,1,0.0,4.0,4.0,
+2393,language diversity,1,0.0,4.0,4.0,
+2394,langkawi,1,0.0,2.0,2.0,
+2395,lake beaches,1,0.0,2.0,2.0,
+2396,lake bled,1,0.0,3.0,3.0,
+2397,lake crescent,1,0.0,5.0,5.0,
+2398,lake nakuru,1,0.0,3.0,3.0,
+2399,lake skadar national park,1,0.0,5.0,5.0,
+2400,lake tekapo,1,0.0,4.0,4.0,
+2401,lake titicaca,1,0.0,4.0,4.0,
+2402,lake views,1,0.0,4.0,4.0,
+2403,lake views and onsen ryokan resort,1,0.0,5.0,5.0,
+2404,lake visit,1,0.0,4.0,4.0,
+2405,lakeside activities in pokhara,1,0.0,5.0,5.0,
+2406,land and drive on mars training stage,1,0.0,4.0,4.0,
+2407,landmark visit,1,0.0,5.0,5.0,
+2408,landscapes and natural beauty,1,0.0,5.0,5.0,
+2409,landscapes and wildlife,1,0.0,5.0,5.0,
+2410,limantour cocktail bar,1,0.0,5.0,5.0,
+2411,lion grove,1,0.0,5.0,5.0,
+2412,lake afdera,1,0.0,4.0,4.0,
+2413,local produce,1,0.0,5.0,5.0,
+2414,local help,1,0.0,5.0,5.0,
+2415,local identity,1,0.0,4.0,4.0,
+2416,local law enforcement,1,0.0,2.0,2.0,
+2417,local markets,1,0.0,5.0,5.0,
+2418,local people and culture,1,0.0,5.0,5.0,
+2419,local perspective,1,0.0,4.0,4.0,
+2420,local pride,1,0.0,5.0,5.0,
+2421,local product,1,0.0,3.0,3.0,
+2422,little mermaid statue,1,0.0,3.0,3.0,
+2423,local products (vineyards),1,0.0,4.0,4.0,
+2424,local projects,1,0.0,3.0,3.0,
+2425,local restaurant,1,0.0,5.0,5.0,
+2426,local scenery,1,0.0,3.0,3.0,
+2427,local shops,1,0.0,2.0,2.0,
+2428,local specialty - oysters,1,0.0,4.0,4.0,
+2429,local tips,1,0.0,5.0,5.0,
+2430,local guide,1,0.0,4.0,4.0,
+2431,local friendliness,1,0.0,5.0,5.0,
+2432,local festivals,1,0.0,5.0,5.0,
+2433,local discovery,1,0.0,5.0,5.0,
+2434,living experience,1,0.0,5.0,5.0,
+2435,livraria lello,1,0.0,4.0,4.0,
+2436,ljublana,1,0.0,3.0,3.0,
+2437,local accommodation,1,0.0,3.0,3.0,
+2438,local attitude towards tourists,1,0.0,4.0,4.0,
+2439,local attitudes towards foreigners,1,0.0,2.0,2.0,
+2440,local authorities,1,0.0,1.0,1.0,
+2441,abbey,1,0.0,5.0,5.0,
+2442,local bus service,1,0.0,3.0,3.0,
+2443,local businesses,1,0.0,5.0,5.0,
+2444,local checkpoints,1,0.0,3.0,3.0,
+2445,local cuisine (nasi padang),1,0.0,5.0,5.0,
+2446,local cuisine - green chile sauce,1,0.0,5.0,5.0,
+2447,local delis,1,0.0,5.0,5.0,
+2448,local dining experiences,1,0.0,5.0,5.0,
+2449,lake angeles,1,0.0,5.0,5.0,
+2450,lake activities,1,0.0,5.0,5.0,
+2451,local tour/boat tour,1,0.0,5.0,5.0,
+2452,jiaoxi,1,0.0,4.0,4.0,
+2453,jacques cartier national forest,1,0.0,5.0,5.0,
+2454,japan,1,0.0,3.0,3.0,
+2455,japan as a destination,1,0.0,4.0,4.0,
+2456,japanese fried chicken,1,0.0,5.0,5.0,
+2457,java,1,0.0,4.0,4.0,
+2458,jeep safari,1,0.0,5.0,5.0,
+2459,jetlag recovery,1,0.0,3.0,3.0,
+2460,jinja,1,0.0,3.0,3.0,
+2461,jungle trek scenery,1,0.0,3.0,3.0,
+2462,jinji lake,1,0.0,5.0,5.0,
+2463,jiufen,1,0.0,4.0,4.0,
+2464,jokhang monastery,1,0.0,5.0,5.0,
+2465,journey/worth it,1,0.0,5.0,5.0,
+2466,jungfraujoch,1,0.0,4.0,4.0,
+2467,jungle,1,0.0,4.0,4.0,
+2468,jungle experience,1,0.0,5.0,5.0,
+2469,itinerary transparency,1,0.0,4.0,4.0,
+2470,itinerary flexibility,1,0.0,5.0,5.0,
+2471,itinerary balance,1,0.0,5.0,5.0,
+2472,itinerary and time allocation,1,0.0,3.0,3.0,
+2473,island tour,1,0.0,5.0,5.0,
+2474,island uniqueness,1,0.0,2.0,2.0,
+2475,island vibe,1,0.0,5.0,5.0,
+2476,island visits,1,0.0,5.0,5.0,
+2477,island-hopping,1,0.0,4.0,4.0,
+2478,islands and beaches,1,0.0,4.0,4.0,
+2479,isolation,1,0.0,5.0,5.0,
+2480,issyk lake,1,0.0,3.0,3.0,
+2481,istanbulkart,1,0.0,5.0,5.0,
+2482,istria region,1,0.0,3.0,3.0,
+2483,italian riviera,1,0.0,5.0,5.0,
+2484,italian riviera/liguria region,1,0.0,4.0,4.0,
+2485,italy,1,0.0,3.0,3.0,
+2486,italy as a destination,1,0.0,5.0,5.0,
+2487,itinerary advice,1,0.0,3.0,3.0,
+2488,jungle relaxing,1,0.0,4.0,4.0,
+2489,kanazawa,1,0.0,3.0,3.0,
+2490,lagoon attitude,1,0.0,3.0,3.0,
+2491,kravica falls,1,0.0,3.0,3.0,
+2492,klook taipei unlimited fun pass,1,0.0,3.0,3.0,
+2493,kochi,1,0.0,3.0,3.0,
+2494,koh rong samloen experience,1,0.0,4.0,4.0,
+2495,konkan coast,1,0.0,5.0,5.0,
+2496,konyaaltı beach,1,0.0,5.0,5.0,
+2497,kotor fortress,1,0.0,5.0,5.0,
+2498,krabi experience,1,0.0,3.0,3.0,
+2499,ksamil,1,0.0,4.0,4.0,
+2500,kandy,1,0.0,3.0,3.0,
+2501,ktv rooms,1,0.0,2.0,2.0,
+2502,kunene river,1,0.0,5.0,5.0,
+2503,la maddalena city,1,0.0,5.0,5.0,
+2504,la paz,1,0.0,4.0,4.0,
+2505,la placita,1,0.0,5.0,5.0,
+2506,labor strikes,1,0.0,2.0,2.0,
+2507,lado b restaurant,1,0.0,4.0,4.0,
+2508,kinabatangan river tour,1,0.0,3.0,3.0,
+2509,kilkenny castle,1,0.0,4.0,4.0,
+2510,kid-friendly restaurants,1,0.0,3.0,3.0,
+2511,kibale,1,0.0,3.0,3.0,
+2512,kaokoland,1,0.0,5.0,5.0,
+2513,karakol experience,1,0.0,3.0,3.0,
+2514,karaoke bars,1,0.0,3.0,3.0,
+2515,karnataka coast,1,0.0,5.0,5.0,
+2516,karola glacier,1,0.0,5.0,5.0,
+2517,kayaking excursion,1,0.0,3.0,3.0,
+2518,kayaking/canoeing,1,0.0,5.0,5.0,
+2519,kayserberg,1,0.0,5.0,5.0,
+2520,keisei station facilities,1,0.0,4.0,4.0,
+2521,kerala,1,0.0,3.0,3.0,
+2522,kerala coast,1,0.0,5.0,5.0,
+2523,key west,1,0.0,4.0,4.0,
+2524,khao sok national park experience,1,0.0,3.0,3.0,
+2525,khiva visit,1,0.0,3.0,3.0,
+2526,khovsgol lake,1,0.0,5.0,5.0,
+2527,local tour group,1,0.0,5.0,5.0,
+2528,local tours,1,0.0,4.0,4.0,
+2529,exploring bolivia,1,0.0,4.0,4.0,
+2530,mount kinabalu,1,0.0,3.0,3.0,
+2531,motorbike rentals,1,0.0,4.0,4.0,
+2532,motorcycle routes,1,0.0,4.0,4.0,
+2533,motorcycle travel,1,0.0,3.0,3.0,
+2534,mount bromo,1,0.0,5.0,5.0,
+2535,mount cook,1,0.0,5.0,5.0,
+2536,mount everest base camp,1,0.0,5.0,5.0,
+2537,mount john track,1,0.0,5.0,5.0,
+2538,mount semeru,1,0.0,5.0,5.0,
+2539,mountain ranges,1,0.0,5.0,5.0,
+2540,mount storm king hike,1,0.0,5.0,5.0,
+2541,mount sunday,1,0.0,5.0,5.0,
+2542,mountain accommodations,1,0.0,5.0,5.0,
+2543,mountain coaster,1,0.0,4.0,4.0,
+2544,mountain experience,1,0.0,5.0,5.0,
+2545,mountain hikes,1,0.0,5.0,5.0,
+2546,mountain lakes,1,0.0,3.0,3.0,
+2547,motorbike rental,1,0.0,4.0,4.0,
+2548,motorbike food tour,1,0.0,4.0,4.0,
+2549,morskie oko lake,1,0.0,3.0,3.0,
+2550,morning atmosphere,1,0.0,5.0,5.0,
+2551,miami,1,0.0,4.0,4.0,
+2552,midges,1,0.0,1.0,1.0,
+2553,midnight shopping,1,0.0,3.0,3.0,
+2554,mirissa,1,0.0,3.0,3.0,
+2555,mission beach,1,0.0,3.0,3.0,
+2556,mobile data plans,1,0.0,4.0,4.0,
+2557,modern architecture,1,0.0,4.0,4.0,
+2558,mokoro canoe tour,1,0.0,5.0,5.0,
+2559,moldoveanu peak hike,1,0.0,5.0,5.0,
+2560,monasteries,1,0.0,5.0,5.0,
+2561,monastery,1,0.0,4.0,4.0,
+2562,money and currency,1,0.0,4.0,4.0,
+2563,monkey park,1,0.0,4.0,4.0,
+2564,monterotondo marittimo landscape,1,0.0,5.0,5.0,
+2565,montreal,1,0.0,3.0,3.0,
+2566,mountain landscapes,1,0.0,5.0,5.0,
+2567,mountain refuges,1,0.0,4.0,4.0,
+2568,mezquita,1,0.0,5.0,5.0,
+2569,natural landmarks,1,0.0,5.0,5.0,
+2570,national museum,1,0.0,5.0,5.0,
+2571,national park and foot baths,1,0.0,4.0,4.0,
+2572,national parks and nature,1,0.0,2.0,2.0,
+2573,national parks and scenery,1,0.0,5.0,5.0,
+2574,national reserve visit,1,0.0,4.0,4.0,
+2575,natural diversity,1,0.0,5.0,5.0,
+2576,natural environment,1,0.0,4.0,4.0,
+2577,natural landscapes,1,0.0,5.0,5.0,
+2578,mountain roads,1,0.0,2.0,2.0,
+2579,natural park,1,0.0,4.0,4.0,
+2580,natural phenomenon,1,0.0,5.0,5.0,
+2581,natural reserve,1,0.0,5.0,5.0,
+2582,natural settings and outdoor activities,1,0.0,5.0,5.0,
+2583,natural sights,1,0.0,4.0,4.0,
+2584,natural views,1,0.0,5.0,5.0,
+2585,natural wonders,1,0.0,5.0,5.0,
+2586,nafplion as a destination,1,0.0,2.0,2.0,
+2587,muslim quarter,1,0.0,4.0,4.0,
+2588,music scene,1,0.0,3.0,3.0,
+2589,music,1,0.0,3.0,3.0,
+2590,mountain views,1,0.0,5.0,5.0,
+2591,mountain visit,1,0.0,5.0,5.0,
+2592,mountaineering,1,0.0,4.0,4.0,
+2593,mt pilatus,1,0.0,3.0,3.0,
+2594,multi-day tour,1,0.0,5.0,5.0,
+2595,mumbai,1,0.0,3.0,3.0,
+2596,muradiya complex,1,0.0,4.0,4.0,
+2597,museum culture,1,0.0,5.0,5.0,
+2598,museum entry process,1,0.0,4.0,4.0,
+2599,museum experience,1,0.0,4.0,4.0,
+2600,museum visits,1,0.0,4.0,4.0,
+2601,museums and art galleries,1,0.0,5.0,5.0,
+2602,museums and cultural landmarks,1,0.0,5.0,5.0,
+2603,museums and galleries,1,0.0,5.0,5.0,
+2604,museums/historical sites,1,0.0,5.0,5.0,
+2605,mgahinga national park,1,0.0,5.0,5.0,
+2606,mexico city accessibility,1,0.0,,,
+2607,local vendors and salespeople,1,0.0,2.0,2.0,
+2608,madrid,1,0.0,4.0,4.0,
+2609,luquillo beach,1,0.0,5.0,5.0,
+2610,luxury and shopping,1,0.0,3.0,3.0,
+2611,luxury resorts,1,0.0,1.0,1.0,
+2612,maasai mara,1,0.0,5.0,5.0,
+2613,macau experience,1,0.0,3.0,3.0,
+2614,mackinac island,1,0.0,4.0,4.0,
+2615,madeira,1,0.0,5.0,5.0,
+2616,magdalena bay,1,0.0,4.0,4.0,
+2617,mancora,1,0.0,4.0,4.0,
+2618,maid of the mist tour,1,0.0,5.0,5.0,
+2619,maine,1,0.0,5.0,5.0,
+2620,makgadikgadi pans national park,1,0.0,5.0,5.0,
+2621,malaga as a destination,1,0.0,4.0,4.0,
+2622,malaysia,1,0.0,4.0,4.0,
+2623,mallorca as a destination,1,0.0,4.0,4.0,
+2624,malta,1,0.0,5.0,5.0,
+2625,luggage service,1,0.0,4.0,4.0,
+2626,luggage forwarding,1,0.0,5.0,5.0,
+2627,lucca comic con,1,0.0,1.0,1.0,
+2628,luberon region,1,0.0,4.0,4.0,
+2629,local villages,1,0.0,5.0,5.0,
+2630,local wine,1,0.0,5.0,5.0,
+2631,location accessibility,1,0.0,2.0,2.0,
+2632,location choice,1,0.0,4.0,4.0,
+2633,location convenience,1,0.0,3.0,3.0,
+2634,lochs,1,0.0,5.0,5.0,
+2635,locker system,1,0.0,5.0,5.0,
+2636,logistical stress,1,0.0,2.0,2.0,
+2637,logistical support,1,0.0,4.0,4.0,
+2638,logistics of travel,1,0.0,2.0,2.0,
+2639,lombok,1,0.0,4.0,4.0,
+2640,london attractions,1,0.0,5.0,5.0,
+2641,lost and found service,1,0.0,5.0,5.0,
+2642,louisiana museum of modern art,1,0.0,3.0,3.0,
+2643,low cost carriers,1,0.0,3.0,3.0,
+2644,maltby st market,1,0.0,5.0,5.0,
+2645,mandalay,1,0.0,5.0,5.0,
+2646,mexican food,1,0.0,5.0,5.0,
+2647,meeting other travelers,1,0.0,4.0,4.0,
+2648,medical advice,1,0.0,4.0,4.0,
+2649,medical care,1,0.0,4.0,4.0,
+2650,medical emergency handling,1,0.0,4.0,4.0,
+2651,medieval streets,1,0.0,4.0,4.0,
+2652,medieval town,1,0.0,5.0,5.0,
+2653,medieval towns,1,0.0,5.0,5.0,
+2654,medieval/renaissance architecture,1,0.0,5.0,5.0,
+2655,meeting people,1,0.0,3.0,3.0,
+2656,manila,1,0.0,3.0,3.0,
+2657,meganisi,1,0.0,4.0,4.0,
+2658,meiji jingu,1,0.0,4.0,4.0,
+2659,mekong delta experience,1,0.0,4.0,4.0,
+2660,memorability,1,0.0,5.0,5.0,
+2661,memories,1,0.0,5.0,5.0,
+2662,merida,1,0.0,4.0,4.0,
+2663,meteora as a destination,1,0.0,5.0,5.0,
+2664,media perception,1,0.0,2.0,2.0,
+2665,medellín,1,0.0,4.0,4.0,
+2666,meals,1,0.0,3.0,3.0,
+2667,mdina exploration,1,0.0,4.0,4.0,
+2668,maps and navigation,1,0.0,5.0,5.0,
+2669,mar y rosa,1,0.0,4.0,4.0,
+2670,marbella as a destination,1,0.0,4.0,4.0,
+2671,margaret river,1,0.0,5.0,5.0,
+2672,market (mercado bom sucesso),1,0.0,4.0,4.0,
+2673,market day,1,0.0,4.0,4.0,
+2674,market experience,1,0.0,5.0,5.0,
+2675,market visit,1,0.0,4.0,4.0,
+2676,marketing,1,0.0,3.0,3.0,
+2677,marlborough winery tour,1,0.0,5.0,5.0,
+2678,marrakech,1,0.0,3.0,3.0,
+2679,marsaxlokk visit,1,0.0,5.0,5.0,
+2680,marymere falls/mount storm king trail,1,0.0,5.0,5.0,
+2681,mazaltan,1,0.0,3.0,3.0,
+2682,mazunte,1,0.0,3.0,3.0,
+2683,island to stay,1,0.0,5.0,5.0,
+2684,island size,1,0.0,4.0,4.0,
+2685,island scenery,1,0.0,4.0,4.0,
+2686,go montenegro sail,1,0.0,3.0,3.0,
+2687,geology,1,0.0,5.0,5.0,
+2688,georgia,1,0.0,4.0,4.0,
+2689,german food,1,0.0,2.0,2.0,
+2690,germany as a potential destination,1,0.0,3.0,3.0,
+2691,getaway from city life,1,0.0,5.0,5.0,
+2692,gibraltar as a destination,1,0.0,3.0,3.0,
+2693,ginza,1,0.0,4.0,4.0,
+2694,gobi desert tour,1,0.0,3.0,3.0,
+2695,gorrupu canyon,1,0.0,5.0,5.0,
+2696,gobi region,1,0.0,3.0,3.0,
+2697,gobustan mud volcanoes,1,0.0,3.0,3.0,
+2698,golden circle,1,0.0,5.0,5.0,
+2699,golf,1,0.0,5.0,5.0,
+2700,google maps,1,0.0,4.0,4.0,
+2701,google streetview as a planning tool,1,0.0,5.0,5.0,
+2702,gorilla trekking experience,1,0.0,5.0,5.0,
+2703,geography and planning,1,0.0,2.0,2.0,
+2704,geography,1,0.0,4.0,4.0,
+2705,geographical uniqueness,1,0.0,5.0,5.0,
+2706,geographical diversity,1,0.0,4.0,4.0,
+2707,fuel availability,1,0.0,2.0,2.0,
+2708,fukuoka,1,0.0,3.0,3.0,
+2709,functionality,1,0.0,5.0,5.0,
+2710,future travel plans,1,0.0,4.0,4.0,
+2711,g adventures,1,0.0,3.0,3.0,
+2712,galata bridge,1,0.0,5.0,5.0,
+2713,galata tower,1,0.0,4.0,4.0,
+2714,game drives,1,0.0,5.0,5.0,
+2715,gear,1,0.0,4.0,4.0,
+2716,gear and packing,1,0.0,3.0,3.0,
+2717,general destination,1,0.0,4.0,4.0,
+2718,general interest,1,0.0,5.0,5.0,
+2719,generic sightseeing,1,0.0,1.0,1.0,
+2720,genting,1,0.0,1.0,1.0,
+2721,geographical challenges,1,0.0,3.0,3.0,
+2722,gorilla treks,1,0.0,5.0,5.0,
+2723,government advisories,1,0.0,3.0,3.0,
+2724,friendliness of locals,1,0.0,5.0,5.0,
+2725,gulf of orosei,1,0.0,4.0,4.0,
+2726,guide quality,1,0.0,3.0,3.0,
+2727,guided excursions,1,0.0,4.0,4.0,
+2728,guided tour,1,0.0,5.0,5.0,
+2729,guides and permits,1,0.0,3.0,3.0,
+2730,guides and tour operators,1,0.0,5.0,5.0,
+2731,guilin,1,0.0,4.0,4.0,
+2732,guizhou,1,0.0,4.0,4.0,
+2733,gulf of poets area,1,0.0,4.0,4.0,
+2734,government policies,1,0.0,1.0,1.0,
+2735,ha giang experience,1,0.0,4.0,4.0,
+2736,ha giang loop experience,1,0.0,4.0,4.0,
+2737,ha long bay,1,0.0,5.0,5.0,
+2738,ha long bay/bai ta long bay,1,0.0,3.0,3.0,
+2739,hackney area,1,0.0,5.0,5.0,
+2740,hackney wick,1,0.0,5.0,5.0,
+2741,hai van pass,1,0.0,3.0,3.0,
+2742,guide,1,0.0,5.0,5.0,
+2743,guatemala,1,0.0,3.0,3.0,
+2744,guatape,1,0.0,4.0,4.0,
+2745,guanajuato,1,0.0,4.0,4.0,
+2746,government regulations,1,0.0,3.0,3.0,
+2747,government travel advisory,1,0.0,3.0,3.0,
+2748,gozo,1,0.0,5.0,5.0,
+2749,grand bazaar,1,0.0,4.0,4.0,
+2750,grand canyon,1,0.0,4.0,4.0,
+2751,granville island,1,0.0,5.0,5.0,
+2752,great food,1,0.0,5.0,5.0,
+2753,green chile,1,0.0,5.0,5.0,
+2754,green space,1,0.0,1.0,1.0,
+2755,grindelwald first,1,0.0,3.0,3.0,
+2756,grocery prices,1,0.0,4.0,4.0,
+2757,grotta di nettuno,1,0.0,4.0,4.0,
+2758,group demographics,1,0.0,3.0,3.0,
+2759,group joining option,1,0.0,4.0,4.0,
+2760,group tour,1,0.0,5.0,5.0,
+2761,friuli-venezia giulia,1,0.0,4.0,4.0,
+2762,french riviera,1,0.0,4.0,4.0,
+2763,island relaxation,1,0.0,5.0,5.0,
+2764,first impression,1,0.0,2.0,2.0,
+2765,ferry tickets,1,0.0,5.0,5.0,
+2766,ferry trip,1,0.0,4.0,4.0,
+2767,fes,1,0.0,3.0,3.0,
+2768,festivals and events,1,0.0,3.0,3.0,
+2769,fez medina,1,0.0,5.0,5.0,
+2770,film industry,1,0.0,4.0,4.0,
+2771,firefly boat tour,1,0.0,3.0,3.0,
+2772,fishing,1,0.0,3.0,3.0,
+2773,flight cost and convenience,1,0.0,4.0,4.0,
+2774,fishing excursion,1,0.0,4.0,4.0,
+2775,fishing villages,1,0.0,4.0,4.0,
+2776,fjord areas,1,0.0,5.0,5.0,
+2777,fjord exploration,1,0.0,5.0,5.0,
+2778,flexibility of car travel,1,0.0,4.0,4.0,
+2779,flexibility of travel dates,1,0.0,4.0,4.0,
+2780,flight booking,1,0.0,2.0,2.0,
+2781,ferry service (buquebus),1,0.0,4.0,4.0,
+2782,ferry service,1,0.0,3.0,3.0,
+2783,ferry ride from bainbridge island,1,0.0,5.0,5.0,
+2784,ferry experience,1,0.0,2.0,2.0,
+2785,falconry,1,0.0,3.0,3.0,
+2786,family connection,1,0.0,5.0,5.0,
+2787,family trip,1,0.0,4.0,4.0,
+2788,family-friendly activity,1,0.0,5.0,5.0,
+2789,farm volunteer holidays,1,0.0,2.0,2.0,
+2790,farm work,1,0.0,4.0,4.0,
+2791,farmlands and vistas,1,0.0,5.0,5.0,
+2792,faroe islands,1,0.0,3.0,3.0,
+2793,fashion,1,0.0,5.0,5.0,
+2794,fashion scene,1,0.0,5.0,5.0,
+2795,fatih mosque,1,0.0,5.0,5.0,
+2796,felucca ride,1,0.0,4.0,4.0,
+2797,female-friendly vibe,1,0.0,3.0,3.0,
+2798,ferries,1,0.0,3.0,3.0,
+2799,ferry connections,1,0.0,5.0,5.0,
+2800,flight cancellation,1,0.0,5.0,5.0,
+2801,flight reliability,1,0.0,2.0,2.0,
+2802,french resistance museum,1,0.0,3.0,3.0,
+2803,fortress and old town,1,0.0,5.0,5.0,
+2804,food culture,1,0.0,5.0,5.0,
+2805,food options for non-seafood eaters,1,0.0,4.0,4.0,
+2806,food review platforms,1,0.0,5.0,5.0,
+2807,food/dessert,1,0.0,4.0,4.0,
+2808,food/drink,1,0.0,5.0,5.0,
+2809,foreigner friendliness,1,0.0,1.0,1.0,
+2810,forest,1,0.0,4.0,4.0,
+2811,fortress/castle,1,0.0,4.0,4.0,
+2812,flight scheduling,1,0.0,2.0,2.0,
+2813,fourviere,1,0.0,4.0,4.0,
+2814,fox glacier,1,0.0,5.0,5.0,
+2815,france as a potential destination,1,0.0,3.0,3.0,
+2816,franz josef,1,0.0,5.0,5.0,
+2817,free walking tours,1,0.0,5.0,5.0,
+2818,freedom to explore,1,0.0,5.0,5.0,
+2819,freetown christiania,1,0.0,3.0,3.0,
+2820,food buffet,1,0.0,5.0,5.0,
+2821,food budget,1,0.0,3.0,3.0,
+2822,food availability,1,0.0,3.0,3.0,
+2823,food and water availability,1,0.0,2.0,2.0,
+2824,flight search tools,1,0.0,5.0,5.0,
+2825,flixbus,1,0.0,3.0,3.0,
+2826,flora and fauna,1,0.0,5.0,5.0,
+2827,florence,1,0.0,3.0,3.0,
+2828,florence city,1,0.0,4.0,4.0,
+2829,flores,1,0.0,4.0,4.0,
+2830,flow restaurant,1,0.0,4.0,4.0,
+2831,foliage,1,0.0,5.0,5.0,
+2832,food and beverage,1,0.0,5.0,5.0,
+2833,food and cafes,1,0.0,5.0,5.0,
+2834,food and culture,1,0.0,4.0,4.0,
+2835,food and dining,1,0.0,3.0,3.0,
+2836,food and local cuisine,1,0.0,3.0,3.0,
+2837,food and markets,1,0.0,4.0,4.0,
+2838,food and nightlife,1,0.0,4.0,4.0,
+2839,hala mirowska,1,0.0,4.0,4.0,
+2840,hallstatt,1,0.0,5.0,5.0,
+2841,halong bay experience,1,0.0,3.0,3.0,
+2842,iceland,1,0.0,5.0,5.0,
+2843,humidity,1,0.0,1.0,1.0,
+2844,humidity/transit,1,0.0,2.0,2.0,
+2845,hurricane hill,1,0.0,5.0,5.0,
+2846,hutong,1,0.0,5.0,5.0,
+2847,hyderabad,1,0.0,4.0,4.0,
+2848,hyères,1,0.0,4.0,4.0,
+2849,ic card payment system,1,0.0,5.0,5.0,
+2850,iconic landmarks,1,0.0,5.0,5.0,
+2851,immigration and laws,1,0.0,4.0,4.0,
+2852,iconic status,1,0.0,5.0,5.0,
+2853,iguaza falls,1,0.0,3.0,3.0,
+2854,iguazu,1,0.0,5.0,5.0,
+2855,iguazú,1,0.0,3.0,3.0,
+2856,ijen,1,0.0,5.0,5.0,
+2857,ijen visit,1,0.0,3.0,3.0,
+2858,imbak canyon,1,0.0,3.0,3.0,
+2859,humble administrator's garden,1,0.0,5.0,5.0,
+2860,humantay lake hike,1,0.0,3.0,3.0,
+2861,huaraz,1,0.0,4.0,4.0,
+2862,hotsprings,1,0.0,4.0,4.0,
+2863,hot springs in orense,1,0.0,5.0,5.0,
+2864,hotel accessibility,1,0.0,5.0,5.0,
+2865,hotel accommodation,1,0.0,4.0,4.0,
+2866,hotel concierge,1,0.0,1.0,1.0,
+2867,hotel experience,1,0.0,5.0,5.0,
+2868,hotel pool,1,0.0,4.0,4.0,
+2869,hotel prices,1,0.0,1.0,1.0,
+2870,hotel pricing,1,0.0,3.0,3.0,
+2871,hotel quality,1,0.0,1.0,1.0,
+2872,hotel reviews,1,0.0,4.0,4.0,
+2873,hotel services,1,0.0,4.0,4.0,
+2874,hotel upgrades,1,0.0,3.0,3.0,
+2875,hotel weber ambassador,1,0.0,3.0,3.0,
+2876,hotels,1,0.0,5.0,5.0,
+2877,hotels and accommodations,1,0.0,5.0,5.0,
+2878,immersive kl,1,0.0,3.0,3.0,
+2879,imperial city,1,0.0,4.0,4.0,
+2880,handicap accessibility,1,0.0,2.0,2.0,
+2881,island atmosphere,1,0.0,4.0,4.0,
+2882,international marketing,1,0.0,2.0,2.0,
+2883,internet and connectivity,1,0.0,2.0,2.0,
+2884,internet and wifi,1,0.0,4.0,4.0,
+2885,internet reliability,1,0.0,2.0,2.0,
+2886,isla holbox,1,0.0,4.0,4.0,
+2887,isla verde beach,1,0.0,5.0,5.0,
+2888,island - capri,1,0.0,5.0,5.0,
+2889,island attractions,1,0.0,4.0,4.0,
+2890,imperial war museum,1,0.0,5.0,5.0,
+2891,island beauty,1,0.0,5.0,5.0,
+2892,island choice,1,0.0,2.0,2.0,
+2893,island getaway,1,0.0,5.0,5.0,
+2894,island life,1,0.0,5.0,5.0,
+2895,island of lokrum,1,0.0,4.0,4.0,
+2896,island of lopud,1,0.0,5.0,5.0,
+2897,island of unauna,1,0.0,5.0,5.0,
+2898,interest,1,0.0,2.0,2.0,
+2899,intercity train,1,0.0,5.0,5.0,
+2900,interactions with locals,1,0.0,4.0,4.0,
+2901,insurance,1,0.0,2.0,2.0,
+2902,independence of travel,1,0.0,5.0,5.0,
+2903,independence while traveling,1,0.0,5.0,5.0,
+2904,independent travel,1,0.0,4.0,4.0,
+2905,independent travel options,1,0.0,4.0,4.0,
+2906,indrive service,1,0.0,2.0,2.0,
+2907,industrial sights,1,0.0,4.0,4.0,
+2908,information resources,1,0.0,5.0,5.0,
+2909,infrastructure (power banks),1,0.0,3.0,3.0,
+2910,infrastructure (transit),1,0.0,5.0,5.0,
+2911,infrastructure accessibility,1,0.0,2.0,2.0,
+2912,infrastructure for families,1,0.0,2.0,2.0,
+2913,infrastructure/development,1,0.0,1.0,1.0,
+2914,inland attractions,1,0.0,4.0,4.0,
+2915,inle lake,1,0.0,5.0,5.0,
+2916,inquiry about experience,1,0.0,3.0,3.0,
+2917,hostel/hotel safety,1,0.0,5.0,5.0,
+2918,hostel amenities,1,0.0,4.0,4.0,
+2919,horseback riding,1,0.0,3.0,3.0,
+2920,hiking routes,1,0.0,3.0,3.0,
+2921,hiking and natural beauty,1,0.0,5.0,5.0,
+2922,hiking and nature activities,1,0.0,1.0,1.0,
+2923,hiking and outdoor activities,1,0.0,5.0,5.0,
+2924,hiking and outdoor adventures,1,0.0,3.0,3.0,
+2925,hiking and trails,1,0.0,5.0,5.0,
+2926,hiking and trekking,1,0.0,5.0,5.0,
+2927,hiking groups,1,0.0,5.0,5.0,
+2928,hiking trail,1,0.0,4.0,4.0,
+2929,horse welfare,1,0.0,5.0,5.0,
+2930,hiking/climbing,1,0.0,4.0,4.0,
+2931,hiking/outdoors,1,0.0,5.0,5.0,
+2932,hiking/trails,1,0.0,5.0,5.0,
+2933,hiking/trekking,1,0.0,3.0,3.0,
+2934,hilly regions,1,0.0,5.0,5.0,
+2935,himachal pradesh,1,0.0,5.0,5.0,
+2936,himarë,1,0.0,4.0,4.0,
+2937,hiking and camping,1,0.0,4.0,4.0,
+2938,hiking and adventure activities,1,0.0,5.0,5.0,
+2939,hikes,1,0.0,4.0,4.0,
+2940,highway system,1,0.0,4.0,4.0,
+2941,hands-on tours,1,0.0,5.0,5.0,
+2942,harajuku,1,0.0,4.0,4.0,
+2943,harbor cruise,1,0.0,5.0,5.0,
+2944,harbor town,1,0.0,4.0,4.0,
+2945,health concerns,1,0.0,2.0,2.0,
+2946,health safety,1,0.0,2.0,2.0,
+2947,heat tolerance,1,0.0,3.0,3.0,
+2948,helicopter ride,1,0.0,5.0,5.0,
+2949,herceg novi,1,0.0,4.0,4.0,
+2950,heritage spots,1,0.0,5.0,5.0,
+2951,high altitude pastures,1,0.0,5.0,5.0,
+2952,high altitude trekking,1,0.0,3.0,3.0,
+2953,high speed rail,1,0.0,5.0,5.0,
+2954,high speed railway,1,0.0,5.0,5.0,
+2955,highway experience,1,0.0,4.0,4.0,
+2956,historic architecture,1,0.0,5.0,5.0,
+2957,historic buildings,1,0.0,5.0,5.0,
+2958,historic castles,1,0.0,5.0,5.0,
+2959,hluboká castle,1,0.0,2.0,2.0,
+2960,ho chi minh city,1,0.0,3.0,3.0,
+2961,ho chi minh experience,1,0.0,4.0,4.0,
+2962,hoh rainforest,1,0.0,5.0,5.0,
+2963,hoi an,1,0.0,3.0,3.0,
+2964,hoi an experience,1,0.0,3.0,3.0,
+2965,hokkaido milk,1,0.0,5.0,5.0,
+2966,holiday season,1,0.0,3.0,3.0,
+2967,homestay,1,0.0,4.0,4.0,
+2968,honesty of taxi drivers,1,0.0,5.0,5.0,
+2969,hong kong experience,1,0.0,3.0,3.0,
+2970,hooters restaurant,1,0.0,2.0,2.0,
+2971,hop-on hop-off bus tour,1,0.0,4.0,4.0,
+2972,horse riding,1,0.0,3.0,3.0,
+2973,horse riding experience,1,0.0,4.0,4.0,
+2974,horse trekking operators,1,0.0,3.0,3.0,
+2975,ho chi min city experience,1,0.0,3.0,3.0,
+2976,history/charm,1,0.0,5.0,5.0,
+2977,historic city centers,1,0.0,4.0,4.0,
+2978,history and museums,1,0.0,4.0,4.0,
+2979,historic preservation,1,0.0,5.0,5.0,
+2980,historic pub,1,0.0,4.0,4.0,
+2981,historical area,1,0.0,5.0,5.0,
+2982,historical buildings,1,0.0,5.0,5.0,
+2983,historical centre,1,0.0,4.0,4.0,
+2984,historical context,1,0.0,2.0,2.0,
+2985,historical heritage,1,0.0,5.0,5.0,
+2986,historical landmark,1,0.0,4.0,4.0,
+2987,historical monuments,1,0.0,5.0,5.0,
+2988,historical places,1,0.0,5.0,5.0,
+2989,historical preservation,1,0.0,4.0,4.0,
+2990,historical site visit,1,0.0,4.0,4.0,
+2991,historical tours,1,0.0,5.0,5.0,
+2992,historical town,1,0.0,5.0,5.0,
+2993,history and architecture,1,0.0,5.0,5.0,
+2994,zoo,1,0.0,5.0,5.0,

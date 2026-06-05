@@ -1,0 +1,530 @@
+rank,aspect,mention_count,mean_sentiment,median_sentiment,std_sentiment
+1,racism and discrimination,4,1.0,1.0,0.0
+2,pollution,4,1.0,1.0,0.0
+3,safety/security,3,1.333,1.0,0.577
+4,air quality,6,1.333,1.0,0.516
+5,food prices,4,1.5,1.5,0.577
+6,traffic,18,1.5,1.0,0.618
+7,scams,10,1.6,1.0,0.843
+8,crowd levels,8,2.0,2.0,1.309
+9,customer service,3,2.0,2.0,1.0
+10,safety/concerns,3,2.0,2.0,0.0
+11,flight connectivity,3,2.0,2.0,0.0
+12,heat,3,2.0,2.0,1.0
+13,side trips,4,2.0,2.0,0.0
+14,tourist atmosphere,3,2.0,2.0,1.0
+15,accommodation pricing,4,2.0,2.0,0.0
+16,seasonal accessibility,3,2.0,2.0,0.0
+17,health and safety,12,2.083,1.5,1.443
+18,altitude,6,2.167,2.0,0.753
+19,parking,12,2.167,1.5,1.467
+20,travel restrictions,5,2.2,2.0,1.095
+21,crowd management,4,2.25,2.5,0.957
+22,beach conditions,4,2.25,2.0,1.258
+23,flight experience,7,2.286,2.0,1.38
+24,taxi services,3,2.333,2.0,1.528
+25,restaurant prices,6,2.333,1.5,1.751
+26,local behavior,3,2.333,2.0,1.528
+27,accommodation logistics,3,2.333,2.0,0.577
+28,itinerary pacing,8,2.375,2.0,0.744
+29,crowds,74,2.473,2.0,1.285
+30,local attitude towards tourism,4,2.5,2.0,1.0
+31,crowd level,4,2.5,2.0,1.0
+32,group tours,6,2.5,2.0,1.761
+33,crowd,14,2.5,2.0,1.019
+34,travel time,15,2.533,2.0,0.99
+35,tourist crowds,42,2.571,2.0,1.213
+36,language barrier,13,2.615,2.0,1.044
+37,cultural differences,3,2.667,3.0,0.577
+38,road conditions,24,2.667,2.0,1.049
+39,tourism level,3,2.667,2.0,2.082
+40,night life,3,2.667,3.0,0.577
+41,signage,3,2.667,2.0,2.082
+42,driving conditions,3,2.667,2.0,1.155
+43,bureaucracy,3,2.667,3.0,1.528
+44,driving,14,2.714,3.0,1.204
+45,prices,11,2.727,2.0,1.679
+46,layover experience,8,2.75,3.0,0.707
+47,city worth visiting,8,2.75,2.5,1.282
+48,weather,268,2.787,2.0,1.288
+49,travel convenience,6,2.833,2.0,1.329
+50,time allocation,7,2.857,3.0,0.69
+51,logistics,28,2.857,3.0,1.268
+52,airport experience,16,2.875,3.0,1.147
+53,travel pace,10,2.9,2.5,1.287
+54,transportation cost,12,2.917,2.5,1.24
+55,trip duration,22,2.955,2.5,1.09
+56,cost,130,2.985,3.0,1.335
+57,climate,12,3.0,3.0,1.279
+58,communication,3,3.0,4.0,1.732
+59,tourist destination preference,3,3.0,3.0,0.0
+60,travel plans,3,3.0,3.0,0.0
+61,safety and security,4,3.0,2.5,1.414
+62,comparison to other cities,11,3.0,3.0,0.775
+63,city visit consideration,3,3.0,3.0,0.0
+64,duration of visit,3,3.0,3.0,0.0
+65,train station,3,3.0,2.0,1.732
+66,distance and accessibility,3,3.0,2.0,1.732
+67,payment options,3,3.0,3.0,1.0
+68,urban landscape,4,3.0,3.0,1.155
+69,destination preference,6,3.0,3.0,2.191
+70,previous destinations,4,3.0,3.0,0.0
+71,time management,14,3.0,3.0,0.877
+72,accommodation prices,5,3.0,3.0,1.225
+73,flight,3,3.0,4.0,1.732
+74,luggage handling,4,3.0,2.5,1.414
+75,service quality,3,3.0,4.0,1.732
+76,accommodation/stopping point,5,3.0,3.0,0.0
+77,temperature,4,3.0,3.0,1.633
+78,taxis,3,3.0,3.0,1.0
+79,city duration,4,3.0,3.0,1.155
+80,stopover,3,3.0,3.0,0.0
+81,mexico city,4,3.0,3.0,0.816
+82,mention,4,3.0,3.0,0.0
+83,naval experience,3,3.0,3.0,0.0
+84,infrastructure,17,3.059,2.0,1.478
+85,tourist season,13,3.077,3.0,1.038
+86,visa requirements,21,3.095,3.0,1.221
+87,airport accessibility,9,3.111,3.0,0.782
+88,travel duration,7,3.143,3.0,1.069
+89,itinerary planning,109,3.165,3.0,0.727
+90,city size,6,3.167,3.0,0.753
+91,seasonal timing,5,3.2,3.0,1.304
+92,season,5,3.2,3.0,0.837
+93,tourist activities,6,3.2,3.0,1.304
+94,bus service,5,3.2,3.0,0.447
+95,family activities,5,3.2,3.0,1.095
+96,comfort,5,3.2,4.0,1.643
+97,airport,5,3.2,3.0,0.447
+98,tourist information,5,3.2,3.0,1.789
+99,cities,10,3.222,3.0,1.641
+100,clothing,4,3.25,3.0,0.5
+101,uber service,4,3.25,3.5,2.062
+102,cleanliness,12,3.25,4.0,1.913
+103,travel documentation,4,3.25,3.0,0.5
+104,food pricing,4,3.25,3.5,2.062
+105,car rental,23,3.261,3.0,1.054
+106,safety,168,3.263,3.0,1.367
+107,tourism infrastructure,7,3.286,3.0,1.704
+108,itinerary,98,3.327,3.0,0.906
+109,porto,3,3.333,3.0,0.577
+110,travel safety,3,3.333,3.0,0.577
+111,romantic getaway,3,3.333,4.0,1.155
+112,accommodation cost,6,3.333,3.5,1.211
+113,crowds and tourism,3,3.333,4.0,1.155
+114,destination worthiness,3,3.333,4.0,1.155
+115,tour company,3,3.333,3.0,1.528
+116,remoteness,3,3.333,4.0,2.082
+117,puerto escondido,3,3.333,3.0,0.577
+118,destination prioritization,6,3.333,4.0,1.033
+119,oaxaca,3,3.333,3.0,0.577
+120,beach towns,3,3.333,3.0,1.528
+121,beach accessibility,3,3.333,3.0,1.528
+122,internet connectivity,3,3.333,3.0,0.577
+123,local cuisine,9,3.333,3.0,1.414
+124,layovers,3,3.333,4.0,1.155
+125,tour options,11,3.364,4.0,1.12
+126,city preference,8,3.375,4.5,1.996
+127,tipping culture,8,3.375,3.5,1.598
+128,budget,32,3.375,3.0,0.793
+129,taxi service,9,3.375,4.0,1.506
+130,driving experience,13,3.385,4.0,1.121
+131,city comparison,13,3.385,3.0,0.961
+132,travel route,5,3.4,3.0,0.548
+133,transportation options,15,3.4,4.0,0.91
+134,regional visit,5,3.4,3.0,0.894
+135,flight duration,5,3.4,4.0,1.342
+136,local attitude,5,3.4,4.0,1.817
+137,local atmosphere,5,3.4,4.0,1.817
+138,public transit,5,3.4,3.0,1.14
+139,tourist traffic,5,3.4,3.0,0.548
+140,general experience,5,3.4,3.0,1.14
+141,flight options,10,3.4,3.5,0.966
+142,comparison to other destinations,12,3.417,4.0,0.996
+143,border crossing,38,3.421,4.0,1.154
+144,accommodation duration,14,3.429,4.0,1.158
+145,trip planning,15,3.429,3.0,0.756
+146,packing,7,3.429,3.0,0.787
+147,duration of stay,15,3.467,4.0,0.915
+148,transportation,569,3.479,3.0,1.074
+149,travel planning,29,3.483,3.0,0.785
+150,tourist destination,10,3.5,4.0,1.269
+151,destination choice,18,3.5,3.5,0.924
+152,destination options,10,3.5,3.5,0.527
+153,ticketing system,4,3.5,3.5,1.291
+154,city attractiveness,8,3.5,3.5,1.414
+155,destination selection,10,3.5,3.0,0.707
+156,family travel,4,3.5,3.0,1.0
+157,things to do,4,3.5,3.5,1.732
+158,uniqueness,6,3.5,3.5,1.643
+159,theme parks,4,3.5,3.5,1.291
+160,getting around,4,3.5,3.0,1.0
+161,value for money,27,3.519,4.0,1.626
+162,currency exchange,7,3.571,4.0,1.272
+163,cost of living,7,3.571,5.0,1.813
+164,island,5,3.6,3.0,0.894
+165,town atmosphere,15,3.6,4.0,1.121
+166,dining options,5,3.6,4.0,1.517
+167,airport transportation,5,3.6,4.0,1.517
+168,price,5,3.6,5.0,1.949
+169,tourist destinations,15,3.6,3.0,1.183
+170,city life,15,3.6,4.0,0.91
+171,tourist areas,13,3.615,4.0,1.261
+172,planning,16,3.625,4.0,0.806
+173,public transport,22,3.636,4.0,1.255
+174,accommodation,416,3.657,4.0,0.953
+175,tivoli gardens,3,3.667,4.0,0.577
+176,tour booking,3,3.667,3.0,1.155
+177,city stay,3,3.667,4.0,1.528
+178,city visit duration,3,3.667,4.0,1.528
+179,beer,3,3.667,3.0,1.155
+180,regional travel,3,3.667,4.0,0.577
+181,coastal towns,3,3.667,4.0,0.577
+182,solo travel,24,3.667,3.5,1.049
+183,daytrip,3,3.667,4.0,1.528
+184,day tour,3,3.667,4.0,1.528
+185,technology,3,3.667,4.0,1.528
+186,authenticity,3,3.667,4.0,1.528
+187,city activities,6,3.667,4.0,1.033
+188,town experience,3,3.667,4.0,1.528
+189,planning and booking,3,3.667,4.0,0.577
+190,planning and organization,3,3.667,4.0,1.528
+191,train experience,3,3.667,4.0,1.528
+192,hanoi experience,3,3.667,4.0,0.577
+193,local drink,3,3.667,5.0,2.309
+194,flights,3,3.667,4.0,1.528
+195,food quality,6,3.667,3.5,1.211
+196,immigration process,18,3.667,3.5,1.029
+197,honeymoon destination,3,3.667,5.0,2.309
+198,lake como,3,3.667,3.0,1.155
+199,meeting locals,3,3.667,3.0,1.155
+200,group size,3,3.667,4.0,0.577
+201,pace of travel,9,3.667,4.0,1.0
+202,solo travel experience,9,3.667,3.0,1.414
+203,beach quality,30,3.7,4.0,1.236
+204,beach experience,24,3.708,4.0,1.233
+205,shopping,37,3.714,4.0,1.341
+206,tourist experience,11,3.727,4.0,0.786
+207,tourist infrastructure,15,3.733,4.0,0.799
+208,language,34,3.735,4.0,1.136
+209,connectivity,4,3.75,4.0,0.5
+210,general information,4,3.75,4.0,0.5
+211,cultural interaction,4,3.75,3.5,0.957
+212,unique experiences,4,3.75,3.5,0.957
+213,cruise,4,3.75,4.0,0.5
+214,city overall experience,8,3.75,4.5,1.753
+215,great wall,4,3.75,4.0,1.258
+216,tour package,8,3.75,4.0,0.463
+217,art,5,3.8,3.0,1.095
+218,town character,5,3.8,4.0,0.837
+219,train travel,15,3.8,4.0,1.146
+220,hidden gems,5,3.8,4.0,0.447
+221,city appeal,11,3.818,4.0,1.079
+222,accommodation options,11,3.818,4.0,0.751
+223,ruins,6,3.833,4.0,1.169
+224,family-friendliness,12,3.833,4.0,1.03
+225,driving route,7,3.857,4.0,1.215
+226,scenic routes,7,3.857,5.0,1.676
+227,accessibility,15,3.867,4.0,1.187
+228,nightlife,85,3.867,4.0,1.124
+229,city exploration,46,3.87,4.0,0.957
+230,city,40,3.875,4.0,0.911
+231,sightseeing,41,3.878,4.0,0.872
+232,food options,26,3.885,4.0,0.993
+233,beach activities,9,3.889,4.0,1.364
+234,city experience,71,3.901,4.0,0.988
+235,best time to visit,11,3.909,4.0,1.044
+236,accommodation location,25,3.92,4.0,1.115
+237,attraction,45,3.933,5.0,1.452
+238,day trips,50,3.98,4.0,0.685
+239,city break,4,4.0,4.0,1.155
+240,accommodations,4,4.0,4.0,0.816
+241,city character,3,4.0,4.0,1.0
+242,flight prices,7,4.0,4.0,0.816
+243,city accessibility,6,4.0,4.0,0.0
+244,cities and towns,3,4.0,4.0,0.0
+245,flight connections,8,4.0,4.0,0.0
+246,boat trip,5,4.0,4.0,1.0
+247,flight availability,3,4.0,4.0,0.0
+248,hot springs,3,4.0,4.0,1.0
+249,city visit,49,4.0,4.0,0.764
+250,city beauty,3,4.0,5.0,1.732
+251,beach town,3,4.0,4.0,1.0
+252,european alps,3,4.0,4.0,0.0
+253,adventure,7,4.0,4.0,0.894
+254,wineries,3,4.0,4.0,0.0
+255,age of travelers,3,4.0,4.0,0.0
+256,cycling,6,4.0,4.5,1.549
+257,jeep tour,3,4.0,4.0,1.0
+258,destination flexibility,4,4.0,4.0,0.816
+259,accommodation booking,5,4.0,4.0,0.0
+260,backpacking,7,4.0,4.0,0.816
+261,accommodation deals,5,4.0,4.0,0.0
+262,day trip options,3,4.0,4.0,0.0
+263,island exploration,4,4.0,4.0,0.0
+264,cultural attractions,3,4.0,4.0,1.0
+265,train service,18,4.0,4.0,1.188
+266,tourism,4,4.0,4.0,1.155
+267,surf spots,3,4.0,4.0,0.0
+268,travel style,3,4.0,4.0,1.0
+269,travel flexibility,7,4.0,4.0,1.0
+270,local customs,5,4.0,4.0,1.0
+271,wine tasting,4,4.0,4.5,1.414
+272,payment methods,5,4.0,4.0,1.0
+273,navigation,5,4.0,4.0,1.225
+274,sights,4,4.0,4.0,0.816
+275,seville as a destination,3,4.0,4.0,1.0
+276,tour operator,12,4.0,5.0,1.279
+277,seasonal travel recommendation,4,4.0,4.0,0.0
+278,tour guides,7,4.0,4.5,1.265
+279,tourist attraction,11,4.0,4.0,0.894
+280,local transportation,3,4.0,4.0,0.0
+281,tourist stops,4,4.0,4.0,0.0
+282,train journey,5,4.0,4.0,0.0
+283,old city center,3,4.0,5.0,1.732
+284,restaurant options,4,4.0,4.0,0.816
+285,length of stay,6,4.0,4.0,1.095
+286,tours,5,4.0,5.0,1.414
+287,destination recommendation,31,4.032,5.0,1.56
+288,location,38,4.053,4.0,0.928
+289,beaches,108,4.056,4.0,1.118
+290,destination appeal,18,4.056,4.0,1.211
+291,activities,30,4.067,4.0,0.944
+292,beach,74,4.068,4.0,0.926
+293,alternative destination,14,4.071,4.0,0.616
+294,hiking trails,22,4.091,5.0,1.231
+295,wine,11,4.091,4.0,0.944
+296,activity,11,4.091,4.0,0.944
+297,social scene,10,4.1,4.0,0.568
+298,public transportation,69,4.116,4.0,0.993
+299,walking,8,4.125,4.5,1.356
+300,tourist attractions,62,4.129,5.0,1.235
+301,tour,23,4.13,4.0,1.058
+302,dining,14,4.143,4.0,1.099
+303,hotel service,7,4.167,4.5,1.169
+304,guided tours,12,4.167,4.5,1.03
+305,surfing,11,4.182,5.0,1.25
+306,day trip,41,4.195,4.0,0.872
+307,cultural activities,5,4.2,4.0,0.837
+308,city worthiness,5,4.2,5.0,1.095
+309,island visit,5,4.2,4.0,0.837
+310,charm,5,4.2,5.0,1.789
+311,seasonal experience,5,4.2,5.0,1.304
+312,island hopping,10,4.2,4.0,0.632
+313,museums,52,4.212,4.0,0.997
+314,social atmosphere,9,4.222,4.0,0.833
+315,markets,13,4.231,4.0,0.832
+316,alternative destinations,20,4.25,4.0,0.444
+317,town,4,4.25,4.0,0.5
+318,market,8,4.25,4.5,0.886
+319,archeological site,4,4.25,4.5,0.957
+320,landmark,4,4.25,4.5,0.957
+321,temples and shrines,4,4.25,5.0,1.5
+322,downtown area,4,4.25,4.0,0.5
+323,coastline,4,4.25,5.0,1.5
+324,coffee shops,4,4.25,4.5,0.957
+325,small towns,12,4.25,4.5,1.138
+326,road trips,4,4.25,4.5,0.957
+327,river cruise,4,4.25,4.5,0.957
+328,time to visit,4,4.25,4.0,0.5
+329,cuisine,15,4.267,5.0,1.033
+330,national parks,14,4.286,4.0,0.611
+331,destination suggestion,7,4.286,5.0,0.951
+332,safari experience,14,4.286,5.0,0.914
+333,route planning,7,4.286,4.0,0.488
+334,restaurants,21,4.286,5.0,0.956
+335,photography,7,4.286,5.0,0.951
+336,lake,10,4.3,4.0,0.675
+337,scenic drives,10,4.3,5.0,1.059
+338,food,294,4.304,5.0,0.925
+339,overall experience,503,4.304,5.0,1.057
+340,culture,75,4.307,5.0,0.854
+341,history,64,4.312,5.0,0.871
+342,hiking,90,4.322,5.0,0.946
+343,tourism popularity,3,4.333,5.0,1.155
+344,lifestyle,3,4.333,5.0,1.155
+345,local market,3,4.333,4.0,0.577
+346,history and culture,3,4.333,5.0,1.155
+347,forest tours,3,4.333,4.0,0.577
+348,local knowledge,3,4.333,4.0,0.577
+349,historical landmarks,3,4.333,4.0,0.577
+350,hotel amenities,3,4.333,4.0,0.577
+351,dress code,3,4.333,5.0,1.155
+352,regional exploration,9,4.333,4.0,0.5
+353,local assistance,3,4.333,5.0,1.155
+354,ferry ride,3,4.333,4.0,0.577
+355,lakes,3,4.333,4.0,0.577
+356,seasonality,3,4.333,5.0,1.155
+357,nature and scenery,3,4.333,4.0,0.577
+358,scooter rental,3,4.333,4.0,0.577
+359,popularity,3,4.333,5.0,1.155
+360,village charm,3,4.333,4.0,0.577
+361,travel experience,12,4.333,5.0,1.231
+362,regional characteristics,3,4.333,4.0,0.577
+363,bar/nightlife,3,4.333,4.0,0.577
+364,barcelona,3,4.333,5.0,1.155
+365,cathedral,3,4.333,4.0,0.577
+366,street life,3,4.333,4.0,0.577
+367,country selection,3,4.333,4.0,0.577
+368,biking,3,4.333,4.0,0.577
+369,boat tour,6,4.333,4.5,0.816
+370,boat tours,3,4.333,4.0,0.577
+371,bars,3,4.333,5.0,1.155
+372,city recommendation,6,4.333,5.0,1.633
+373,attractions,169,4.337,5.0,0.801
+374,destination,73,4.342,5.0,0.786
+375,neighborhoods,17,4.353,4.0,0.606
+376,exploration,14,4.357,4.0,0.497
+377,trekking,11,4.364,4.0,0.674
+378,road trip,22,4.364,4.0,0.492
+379,hotel,8,4.375,4.5,0.744
+380,lake experience,8,4.375,4.0,0.518
+381,outdoor activities,40,4.385,5.0,1.091
+382,towns,18,4.389,4.0,0.502
+383,city overall,18,4.389,5.0,1.195
+384,atmosphere,64,4.391,5.0,1.107
+385,city atmosphere,25,4.4,5.0,0.816
+386,museum,15,4.4,5.0,0.91
+387,cafe,5,4.4,4.0,0.548
+388,food and drink,15,4.4,5.0,0.828
+389,bar,5,4.4,4.0,0.548
+390,neighborhood,7,4.429,5.0,0.976
+391,events,7,4.429,5.0,0.787
+392,gorilla trekking,7,4.429,5.0,1.134
+393,wine region,7,4.429,4.0,0.535
+394,snorkeling,9,4.444,5.0,0.882
+395,parks,9,4.444,4.0,0.527
+396,nature,76,4.447,5.0,0.79
+397,island experience,20,4.45,5.0,0.887
+398,local food,11,4.455,5.0,0.82
+399,relaxation,24,4.458,5.0,1.179
+400,old town,30,4.467,5.0,0.681
+401,landmarks,15,4.467,5.0,0.64
+402,planning and research,4,4.5,4.5,0.577
+403,castle,6,4.5,4.5,0.548
+404,overall travel experience,4,4.5,4.5,0.577
+405,cultural sensitivity,4,4.5,4.5,0.577
+406,historical significance,4,4.5,5.0,1.0
+407,historical sites,22,4.5,5.0,0.964
+408,local attractions,4,4.5,4.5,0.577
+409,castles,6,4.5,4.5,0.548
+410,historical site,6,4.5,4.5,0.548
+411,general impression,4,4.5,4.5,0.577
+412,national park,31,4.516,5.0,0.677
+413,restaurant,23,4.522,5.0,0.898
+414,city charm,17,4.529,5.0,0.8
+415,food scene,15,4.533,5.0,0.834
+416,local interaction,15,4.533,5.0,0.834
+417,temples,7,4.571,5.0,0.787
+418,rural areas,7,4.571,5.0,0.535
+419,local people,24,4.583,5.0,1.06
+420,architecture,57,4.596,5.0,0.728
+421,photography opportunities,5,4.6,5.0,0.548
+422,local experiences,5,4.6,5.0,0.894
+423,cultural experiences,10,4.6,5.0,0.699
+424,festival experience,5,4.6,5.0,0.548
+425,affordability,15,4.6,5.0,0.632
+426,town charm,5,4.6,5.0,0.548
+427,region,8,4.625,5.0,0.518
+428,city vibe,11,4.636,5.0,0.674
+429,natural attraction,14,4.643,5.0,0.842
+430,local culture,17,4.647,5.0,0.493
+431,countryside,6,4.667,5.0,0.516
+432,food and wine,3,4.667,5.0,0.577
+433,flexibility,3,4.667,5.0,0.577
+434,scenic area,3,4.667,5.0,0.577
+435,scenic drive,9,4.667,5.0,0.5
+436,cliffs of moher,3,4.667,5.0,0.577
+437,hospitality,6,4.667,5.0,0.516
+438,beach/coast,3,4.667,5.0,0.577
+439,scenic view,3,4.667,5.0,0.577
+440,beach relaxation,3,4.667,5.0,0.577
+441,seafood,3,4.667,5.0,0.577
+442,beach/relaxation,3,4.667,5.0,0.577
+443,timing of visit,3,4.667,5.0,0.577
+444,local life,3,4.667,5.0,0.577
+445,local exploration,3,4.667,5.0,0.577
+446,social etiquette,3,4.667,5.0,0.577
+447,amusement park,3,4.667,5.0,0.577
+448,local restaurants,3,4.667,5.0,0.577
+449,cenotes,3,4.667,5.0,0.577
+450,swimming,3,4.667,5.0,0.577
+451,art and culture,3,4.667,5.0,0.577
+452,national park experience,6,4.667,5.0,0.516
+453,park,3,4.667,5.0,0.577
+454,mountains,3,4.667,5.0,0.577
+455,parks and gardens,3,4.667,5.0,0.577
+456,accommodation/location preference,3,4.667,5.0,0.577
+457,vineyards,3,4.667,5.0,0.577
+458,overall trip,3,4.667,5.0,0.577
+459,adventure activities,6,4.667,5.0,0.816
+460,proximity to attractions,3,4.667,5.0,0.577
+461,country,3,4.667,5.0,0.577
+462,natural attractions,28,4.679,5.0,0.723
+463,wildlife,36,4.694,5.0,0.889
+464,city attractions,7,4.714,5.0,0.488
+465,pace of life,4,4.75,5.0,0.5
+466,convenience,4,4.75,5.0,0.5
+467,night markets,4,4.75,5.0,0.5
+468,social experience,4,4.75,5.0,0.5
+469,churches,4,4.75,5.0,0.5
+470,entertainment,4,4.75,5.0,0.5
+471,destination interest,4,4.75,5.0,0.5
+472,walkability,41,4.78,5.0,0.725
+473,scenic beauty,34,4.794,5.0,0.641
+474,previous travel experience,5,4.8,5.0,0.447
+475,lake scenery,5,4.8,5.0,0.447
+476,scenic views,70,4.8,5.0,0.554
+477,scenery,46,4.826,5.0,0.529
+478,scuba diving,6,4.833,5.0,0.408
+479,islands,6,4.833,5.0,0.408
+480,cultural experience,19,4.842,5.0,0.375
+481,scenic route,13,4.846,5.0,0.376
+482,waterfalls,7,4.857,5.0,0.378
+483,overall impression,7,4.857,5.0,0.378
+484,natural scenery,14,4.857,5.0,0.363
+485,natural beauty,107,4.888,5.0,0.396
+486,views,9,4.889,5.0,0.333
+487,people,22,4.909,5.0,0.294
+488,wildlife viewing,11,4.909,5.0,0.302
+489,local experience,13,4.923,5.0,0.277
+490,ease of travel,5,5.0,5.0,0.0
+491,beaches/lakes,3,5.0,5.0,0.0
+492,social activities,3,5.0,5.0,
+493,honesty of locals,3,5.0,5.0,0.0
+494,natural wonder,3,5.0,5.0,0.0
+495,cultural sights,3,5.0,5.0,0.0
+496,coastal areas,6,5.0,5.0,0.0
+497,local hospitality,6,5.0,5.0,0.0
+498,coastal scenery,3,5.0,5.0,0.0
+499,beauty,7,5.0,5.0,0.0
+500,romantic atmosphere,4,5.0,5.0,0.0
+501,festival,4,5.0,5.0,0.0
+502,autumn scenery,4,5.0,5.0,0.0
+503,romance,5,5.0,5.0,0.0
+504,island destinations,3,5.0,5.0,0.0
+505,mountain scenery,4,5.0,5.0,0.0
+506,transport,3,5.0,5.0,0.0
+507,romantic setting,3,5.0,5.0,0.0
+508,dining experience,3,5.0,5.0,0.0
+509,diversity,3,5.0,5.0,0.0
+510,street food,11,5.0,5.0,0.0
+511,diving,5,5.0,5.0,0.0
+512,pubs,3,5.0,5.0,0.0
+513,undiscovered destinations,4,5.0,5.0,0.0
+514,culture and people,4,5.0,5.0,0.0
+515,overall beauty,3,5.0,5.0,0.0
+516,landscape,4,5.0,5.0,0.0
+517,privacy,3,5.0,5.0,0.0
+518,destinations,4,5.0,5.0,0.0
+519,daytrip options,4,5.0,5.0,0.0
+520,wildlife experience,4,5.0,5.0,0.0
+521,walking tours,3,5.0,5.0,0.0
+522,viewpoint,3,5.0,5.0,0.0
+523,geographical location,3,5.0,5.0,0.0
+524,cultural events,3,5.0,5.0,0.0
+525,cultural richness,3,5.0,5.0,0.0
+526,general beauty,3,5.0,5.0,0.0
+527,historic sites,4,5.0,5.0,0.0
+528,street art,3,5.0,5.0,0.0
+529,landscapes,10,5.0,5.0,0.0
