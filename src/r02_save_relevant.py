@@ -14,6 +14,7 @@ Flags:
 
 import os
 import sys
+import argparse
 import json
 import time
 import logging
@@ -35,7 +36,7 @@ GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 # MongoDB Configuration
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("MONGO_DB_NAME", "travel_pipeline_db")
-SOURCE_COLLECTION = "reddit_posts_final"
+SOURCE_COLLECTION = "r01_reddit_posts_raw_final"
 TARGET_COLLECTION = "reddit_relevant"
 
 # ==========================================
@@ -190,79 +191,71 @@ def analyze_post(title, text, max_retries=5):
     raise GroqLimitError(f"All {max_retries} attempts exhausted due to persistent API limits.")
 
 
-def main():
+def get_unprocessed_run_ids(db) -> list:
+    """
+    Returns list of run_ids from SOURCE_COLLECTION that have no entries in TARGET_COLLECTION yet.
+    Ordered oldest first so we always process in chronological order.
+    """
+    all_run_ids = db[SOURCE_COLLECTION].distinct("run_id")
+    processed_run_ids = set(db[TARGET_COLLECTION].distinct("run_id"))
+    unprocessed = [r for r in all_run_ids if r not in processed_run_ids]
+    unprocessed.sort()  # oldest first
+    return unprocessed
+
+
+def process_run_id(db, run_id: str):
+    """Process all posts for a single run_id."""
+
+    # Derive date string from run_id for querying published_at
+    # run_id format: run-YYYYMMDD-AUTO or run_YYYYMMDD_local
+    import re
+    match = re.search(r"(\d{8})", run_id)
+    if not match:
+        log.error(f"Cannot extract date from run_id: {run_id}")
+        return
+    date_compact = match.group(1)
+    db_date_str = f"{date_compact[:4]}-{date_compact[4:6]}-{date_compact[6:8]}"
+
     log.info("=" * 60)
-    log.info("PROCESS MONGO POSTS AND SAVE RELEVANT DATA")
-    
-    # ── Ask user for the date ───────────────────────────────────────────────
-    user_date = input("Enter the publication date to process (YYYYMMDD) [e.g. 20260527]: ").strip()
-    if len(user_date) != 8 or not user_date.isdigit():
-        log.error("Invalid date format. Please restart and use YYYYMMDD.")
-        sys.exit(1)
-        
-    db_date_str = f"{user_date[:4]}-{user_date[4:6]}-{user_date[6:8]}"
-    run_id = f"run_{user_date}"
-
-    log.info(f"Targeting Run ID: {run_id}")
-    log.info(f"Searching for posts starting with date: {db_date_str}")
+    log.info(f"Processing run_id: {run_id}")
+    log.info(f"Date: {db_date_str}")
     log.info("=" * 60)
 
-    # ── MongoDB setup ───────────────────────────────────────────────────────
-    db = None
-    if not TEST_MODE:
-        try:
-            client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-            client.server_info()
-            db = client[DB_NAME]
-        except Exception as e:
-            log.error(f"MongoDB connection failed: {e}")
-            return
-
-    # ── Fetch posts filtered by Date ─────────────────────────────────────────
-    # Since date is "2026-05-21T19:39:04.000Z", a regex matches the YYYY-MM-DD prefix
     date_query = {"published_at": {"$regex": f"^{db_date_str}"}}
+    posts = list(db[SOURCE_COLLECTION].find(date_query))
 
-    if TEST_MODE:
-        posts = None
-        try:
-            test_client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=3000)
-            test_client.server_info()
-            db_temp = test_client[DB_NAME]
-            posts = list(db_temp[SOURCE_COLLECTION].find(date_query).limit(TEST_LIMIT))
-        except Exception as e:
-            log.warning(f"MongoDB unavailable in TEST_MODE. Trying local fixture...")
-
-        if posts is None:
-            if os.path.exists(TEST_FIXTURE_FILE):
-                with open(TEST_FIXTURE_FILE, "r", encoding="utf-8") as f:
-                    all_fixture = json.load(f)
-                # Filter fixture data matching the requested date
-                posts = [p for p in all_fixture if str(p.get("published_at", "")).startswith(db_date_str)][:TEST_LIMIT]
-            else:
-                log.error("No MongoDB connection and no local fixture found.")
-                return
-    else:
-        posts = list(db[SOURCE_COLLECTION].find(date_query))
-
-    total_posts = len(posts)
-
-    if total_posts == 0:
+    if not posts:
         log.info(f"No posts found in '{SOURCE_COLLECTION}' for date {db_date_str}.")
         return
 
-    log.info(f"Found {total_posts} posts to process for {db_date_str}.")
+    log.info(f"Found {len(posts)} posts for {db_date_str}.")
 
+    # ── Skip already-processed doc_ids for this run_id ───────────────────
+    already_processed = set(
+        doc["doc_id"] for doc in db[TARGET_COLLECTION].find(
+            {"run_id": run_id}, {"doc_id": 1}
+        )
+    )
+    if already_processed:
+        before = len(posts)
+        posts = [p for p in posts if p.get("doc_id") not in already_processed]
+        log.info(f"Skipping {before - len(posts)} already-processed posts. {len(posts)} remaining.")
+
+    if not posts:
+        log.info(f"All posts for run_id '{run_id}' already processed.")
+        return
+
+    total_posts     = len(posts)
     total_processed = 0
-    total_saved = 0
-    operations = []
-    test_results = []
+    total_saved     = 0
+    operations      = []
 
     for idx, post in enumerate(posts):
         doc_id = post.get('doc_id', post.get('post_id', f"unknown_{idx}"))
         log.info(f"Processing post {idx + 1}/{total_posts}: {doc_id}...")
 
         title = post.get('title', '')
-        text = post.get('text', '')
+        text  = post.get('text', '')
 
         if not title and not text:
             analysis_result = {"relevant": "no", "aspects": []}
@@ -270,56 +263,83 @@ def main():
             try:
                 analysis_result = analyze_post(title, text)
             except GroqLimitError as e:
-                # ── Stop processing immediately on Limit/Quota Error ───────
                 log.error(f"❌ GROQ API LIMITATION ENCOUNTERED: {e}")
-                log.info("Stopping execution. Will save all currently processed posts...")
-                break  # Breaks the for-loop, but proceeds to the flush logic
-
-            time.sleep(6) # 10 requests per minute buffer
+                log.info("Stopping execution. Saving processed posts so far...")
+                break
+            time.sleep(6)
 
         post['analysis'] = analysis_result
         total_processed += 1
 
-        # ── Check relevance and attach RUN_ID ──────────────────────────────
         if analysis_result.get("relevant", "").lower() == "yes":
             post.pop('_id', None)
-            post['run_id'] = run_id  # <--- Adding Run ID here
-
-            if TEST_MODE:
-                test_results.append(post)
-            else:
-                operations.append(
-                    UpdateOne({"doc_id": doc_id}, {"$set": post}, upsert=True)
-                )
+            post['run_id'] = run_id
+            operations.append(
+                UpdateOne({"doc_id": doc_id}, {"$set": post}, upsert=True)
+            )
             total_saved += 1
 
-        # ── Batch write ─────────────────────────────────────────────────────
-        if not TEST_MODE and len(operations) >= 50:
+        if len(operations) >= 50:
             db[TARGET_COLLECTION].bulk_write(operations)
             operations = []
 
-    # ── Flush remaining writes ──────────────────────────────────────────────
-    # This executes normally if finished, OR if the loop broke early due to API limits.
-    if not TEST_MODE and operations:
-        log.info(f"Flushing {len(operations)} remaining operations to MongoDB...")
+    if operations:
+        log.info(f"Flushing {len(operations)} remaining operations...")
         db[TARGET_COLLECTION].bulk_write(operations)
 
-    # ── Test mode: save locally ─────────────────────────────────────────────
-    if TEST_MODE:
-        with open(TEST_OUTPUT_FILE, "w", encoding="utf-8") as f:
-            json.dump(test_results, f, indent=2, default=str)
-        log.info(f"Test results saved to '{TEST_OUTPUT_FILE}'.")
-
-    # ── Summary ─────────────────────────────────────────────────────────────
     log.info("=" * 60)
-    log.info("PROCESSING SUMMARY")
-    log.info(f"Run ID:                  {run_id}")
-    log.info(f"Total Posts Found:       {total_posts}")
-    log.info(f"Total Posts Processed:   {total_processed}")
-    log.info(f"Total Relevant Saved:    {total_saved}")
+    log.info(f"SUMMARY — {run_id}")
+    log.info(f"Posts found:      {total_posts}")
+    log.info(f"Posts processed:  {total_processed}")
+    log.info(f"Relevant saved:   {total_saved}")
     if total_processed > 0:
-        log.info(f"Relevancy Rate:          {(total_saved / total_processed) * 100:.2f}%")
+        log.info(f"Relevancy rate:   {(total_saved / total_processed) * 100:.2f}%")
     log.info("=" * 60)
+
+
+def main():
+    log.info("=" * 60)
+    log.info("R02 — RELEVANCE FILTER ON POSTS")
+
+    parser = argparse.ArgumentParser(description="Process Reddit posts — auto-detects unprocessed run_ids.")
+    parser.add_argument("--date", required=False, default=None,
+                        help="Optional: force a specific date YYYYMMDD instead of auto-detecting")
+    args = parser.parse_args()
+
+    # ── MongoDB setup ───────────────────────────────────────────────────────
+    try:
+        client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
+        client.server_info()
+        db = client[DB_NAME]
+        log.info("MongoDB connection OK ✓")
+    except Exception as e:
+        log.error(f"MongoDB connection failed: {e}")
+        return
+
+    # ── Determine which run_ids to process ──────────────────────────────────
+    if args.date:
+        user_date = args.date
+        if len(user_date) != 8 or not user_date.isdigit():
+            log.error("Invalid date format. Use YYYYMMDD.")
+            sys.exit(1)
+        cutoff = "20260601"
+        run_ids_to_process = [
+            f"run_{user_date}_local" if user_date <= cutoff else f"run-{user_date}-AUTO"
+        ]
+        log.info(f"Manual override: processing run_id {run_ids_to_process[0]}")
+    else:
+        run_ids_to_process = get_unprocessed_run_ids(db)
+        if not run_ids_to_process:
+            log.info("✅ All run_ids already processed. Nothing to do.")
+            return
+        log.info(f"Found {len(run_ids_to_process)} unprocessed run_id(s): {run_ids_to_process}")
+
+    log.info("=" * 60)
+
+    for run_id in run_ids_to_process:
+        process_run_id(db, run_id)
+
+    log.info("ALL DONE")
 
 if __name__ == "__main__":
     main()

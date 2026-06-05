@@ -1,0 +1,52 @@
+2026-06-05 11:17:45,107 [INFO] Building location processor...
+2026-06-05 11:17:45,397 [INFO] FlashText processor built: 11626 cities, 260 countries
+2026-06-05 11:17:45,398 [INFO] ============================================================
+2026-06-05 11:17:45,398 [INFO] R01 — r/travel DAILY FETCH (n-2)
+2026-06-05 11:17:45,399 [INFO] Run today:   2026-06-05
+2026-06-05 11:17:45,399 [INFO] Target date: 2026-06-03  (2 days ago)
+2026-06-05 11:17:45,399 [INFO] Run ID:      run-20260603-AUTO
+2026-06-05 11:17:45,399 [INFO] Collection:  r01_reddit_posts_raw_final
+2026-06-05 11:17:45,399 [INFO] ============================================================
+2026-06-05 11:17:52,546 [INFO] Warming up browser session...
+2026-06-05 11:17:55,988 [INFO] Fetching page 1/10...
+2026-06-05 11:17:57,732 [INFO]   \u2192 100 posts (total so far: 100)
+2026-06-05 11:17:59,735 [INFO] Fetching page 2/10...
+2026-06-05 11:18:01,309 [INFO]   \u2192 100 posts (total so far: 200)
+2026-06-05 11:18:01,309 [INFO] Scrolled past 2026-06-03 — stopping pagination
+2026-06-05 11:18:01,478 [INFO] Total raw posts fetched: 200
+2026-06-05 11:18:01,495 [INFO] Kept: 40 | Dropped (wrong date): 123 | Dropped (no location): 37
+2026-06-05 11:18:01,500 [INFO] Local backup \u2192 artifacts\daily_reddit\rtravel_2026-06-03_20260605_091801.json
+2026-06-05 11:18:15,387 [ERROR] MongoDB connection failed: No replica set members found yet, Timeout: 5.0s, Topology Description: <TopologyDescription id: 6a2294499f3f02cff4df62a8, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-in3libp-shard-00-00.yoejyj8.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-in3libp-shard-00-01.yoejyj8.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-in3libp-shard-00-02.yoejyj8.mongodb.net', 27017) server_type: Unknown, rtt: None>]>
+2026-06-05 11:18:15,388 [INFO] ============================================================
+2026-06-05 11:18:15,388 [INFO] DONE
+2026-06-05 11:18:15,389 [INFO] Run ID:      run-20260603-AUTO
+2026-06-05 11:18:15,389 [INFO] Target date: 2026-06-03
+2026-06-05 11:18:15,389 [INFO] Posts saved: 40
+2026-06-05 11:18:15,389 [INFO] ============================================================
+2026-06-05 11:24:58,937 [INFO] Building location processor...
+2026-06-05 11:24:59,164 [INFO] FlashText processor built: 11626 cities, 260 countries
+2026-06-05 11:24:59,165 [INFO] ============================================================
+2026-06-05 11:24:59,165 [INFO] R01 — r/travel DAILY FETCH (n-2)
+2026-06-05 11:24:59,166 [INFO] Run today:   2026-06-05
+2026-06-05 11:24:59,166 [INFO] Target date: 2026-06-03  (2 days ago)
+2026-06-05 11:24:59,166 [INFO] Run ID:      run-20260603-AUTO
+2026-06-05 11:24:59,166 [INFO] Collection:  r01_reddit_posts_raw_final
+2026-06-05 11:24:59,166 [INFO] ============================================================
+2026-06-05 11:25:02,009 [INFO] Warming up browser session...
+2026-06-05 11:25:05,271 [INFO] Fetching page 1/10...
+2026-06-05 11:25:07,069 [INFO]   \u2192 100 posts (total so far: 100)
+2026-06-05 11:25:09,079 [INFO] Fetching page 2/10...
+2026-06-05 11:25:10,973 [INFO]   \u2192 100 posts (total so far: 200)
+2026-06-05 11:25:10,976 [INFO] Scrolled past 2026-06-03 — stopping pagination
+2026-06-05 11:25:11,356 [INFO] Total raw posts fetched: 200
+2026-06-05 11:25:11,380 [INFO] Kept: 40 | Dropped (wrong date): 123 | Dropped (no location): 37
+2026-06-05 11:25:11,395 [INFO] Local backup \u2192 artifacts\daily_reddit\rtravel_2026-06-03_20260605_092511.json
+2026-06-05 11:25:12,670 [INFO] MongoDB connection OK \u2713
+2026-06-05 11:25:12,803 [INFO] MongoDB: 13 new inserted, 27 already existed \u2192 'r01_reddit_posts_raw_final'
+2026-06-05 11:25:12,953 [INFO] Artifact saved \u2192 'pipeline_artifacts' (run_id: run-20260603-AUTO)
+2026-06-05 11:25:12,953 [INFO] ============================================================
+2026-06-05 11:25:12,953 [INFO] DONE
+2026-06-05 11:25:12,953 [INFO] Run ID:      run-20260603-AUTO
+2026-06-05 11:25:12,953 [INFO] Target date: 2026-06-03
+2026-06-05 11:25:12,959 [INFO] Posts saved: 40
+2026-06-05 11:25:12,959 [INFO] ============================================================

@@ -78,96 +78,98 @@ def extract_aspects(cursor, doc_type, forced_run_id):
             
     return rows
 
-def main():
-    parser = argparse.ArgumentParser(description="Merge and aggregate sentiment data.")
-    parser.add_argument(
-        "--date",
-        type=str,
-        required=True,
-        help="Target date in YYYYMMDD format to match previous processes (e.g., 20260527)"
-    )
-    args = parser.parse_args()
+def get_unprocessed_run_ids(db) -> list:
+    """
+    Returns run_ids present in POSTS_COLLECTION or COMMENTS_COLLECTION
+    that are not yet in TARGET_COLLECTION. Oldest first.
+    """
+    post_run_ids     = set(db[POSTS_COLLECTION].distinct("run_id"))
+    comment_run_ids  = set(db[COMMENTS_COLLECTION].distinct("run_id"))
+    all_run_ids      = post_run_ids | comment_run_ids
+    processed_run_ids = set(db[TARGET_COLLECTION].distinct("run_id"))
+    unprocessed = [r for r in all_run_ids if r not in processed_run_ids]
+    unprocessed.sort()
+    return unprocessed
 
-    if not re.match(r"^\d{8}$", args.date):
-        print("Error: Invalid date format. Please use YYYYMMDD (e.g., 20260527).")
-        sys.exit(1)
 
-    target_date = args.date
-    output_run_id = f"run_{target_date}_local"
-
+def process_run_id(db, run_id: str):
+    """Aggregate posts and comments for a single run_id."""
     print("=" * 60)
-    print("MERGE AND AGGREGATE SENTIMENT DATA")
-    print("=" * 60)
-    print(f"Target Date:      {target_date}")
-    print(f"Output Run ID:    {output_run_id}")
+    print(f"R05 — Aggregating run_id: {run_id}")
     print("=" * 60)
 
-    # Connect to MongoDB
-    client = MongoClient(MONGO_URI)
-    db = client[DB_NAME]
-    
-    # ==========================================
-    # Custom Queries per Collection
-    # ==========================================
-    # Filter POSTS to only include documents where text_type is "review" and matches date
     posts_query = {
-        "run_id": {"$regex": f"^run_{target_date}"},
+        "run_id": run_id,
         "analysis.text_type": "review"
     }
-    
-    # Comments just need the matching run_id date prefix
-    comments_query = {
-        "run_id": {"$regex": f"^run_{target_date}"}
-    }
-    
-    # Fetch and process posts
-    print(f"Fetching POSTS (reviews only) for date {target_date}...")
-    posts_cursor = db[POSTS_COLLECTION].find(posts_query)
-    posts_data = extract_aspects(posts_cursor, "post", output_run_id)
-    
-    # Fetch and process comments
-    print(f"Fetching COMMENTS for date {target_date}...")
+    comments_query = {"run_id": run_id}
+
+    print(f"Fetching POSTS (reviews only)...")
+    posts_cursor  = db[POSTS_COLLECTION].find(posts_query)
+    posts_data    = extract_aspects(posts_cursor, "post", run_id)
+
+    print(f"Fetching COMMENTS...")
     comments_cursor = db[COMMENTS_COLLECTION].find(comments_query)
-    comments_data = extract_aspects(comments_cursor, "comment", output_run_id)
-    
-    # Combine the flattened lists
+    comments_data   = extract_aspects(comments_cursor, "comment", run_id)
+
     all_data = posts_data + comments_data
-    
+
     if not all_data:
-        print(f"No data found matching date '{target_date}' in either collection.")
+        print(f"No data found for run_id '{run_id}'.")
         return
-    
-    # Create the DataFrame to enforce schema/column order
+
     df = pd.DataFrame(all_data)
     expected_columns = [
-        "aspect", "sentiment_score", "city", "country", 
+        "aspect", "sentiment_score", "city", "country",
         "id_", "doc_id", "post_id", "fetched_at", "run_id", "type"
     ]
     df = df.reindex(columns=expected_columns)
-    
     print(f"Merge complete! Generated {len(df)} aspect-level records.")
-    
-    # ==========================================
-    # Save to MongoDB
-    # ==========================================
-    target_coll = db[TARGET_COLLECTION]
-    
-    # Idempotency: Remove old documents for this specific output_run_id to avoid duplicates
-    delete_query = {"run_id": output_run_id}
-    deleted_result = target_coll.delete_many(delete_query)
+
+    target_coll    = db[TARGET_COLLECTION]
+    deleted_result = target_coll.delete_many({"run_id": run_id})
     if deleted_result.deleted_count > 0:
-        print(f"Cleared {deleted_result.deleted_count} old records from '{TARGET_COLLECTION}' for {output_run_id}.")
-    
-    # Convert DataFrame back to a list of dictionaries for MongoDB insertion
+        print(f"Cleared {deleted_result.deleted_count} old records for {run_id}.")
+
     records_to_insert = df.to_dict(orient="records")
-    
-    # Insert the new aggregated data
     print(f"Inserting {len(records_to_insert)} records into '{TARGET_COLLECTION}'...")
     insert_result = target_coll.insert_many(records_to_insert)
-    
+
     print("=" * 60)
-    print("SUCCESS")
-    print(f"Inserted {len(insert_result.inserted_ids)} records.")
+    print(f"SUCCESS — {run_id}")
+    print("=" * 60)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Aggregate sentiment data — auto-detects unprocessed run_ids.")
+    parser.add_argument("--date", required=False, default=None,
+                        help="Optional: force a specific date YYYYMMDD instead of auto-detecting")
+    args = parser.parse_args()
+
+    client = MongoClient(MONGO_URI)
+    db = client[DB_NAME]
+
+    if args.date:
+        if not re.match(r"^[0-9]{8}$", args.date):
+            print("Error: Invalid date format. Use YYYYMMDD.")
+            sys.exit(1)
+        cutoff = "20260601"
+        run_ids_to_process = [
+            f"run_{args.date}_local" if args.date <= cutoff else f"run-{args.date}-AUTO"
+        ]
+        print(f"Manual override: processing {run_ids_to_process[0]}")
+    else:
+        run_ids_to_process = get_unprocessed_run_ids(db)
+        if not run_ids_to_process:
+            print("✅ All run_ids already aggregated. Nothing to do.")
+            return
+        print(f"Found {len(run_ids_to_process)} unprocessed run_id(s): {run_ids_to_process}")
+
+    for run_id in run_ids_to_process:
+        process_run_id(db, run_id)
+
+    print("ALL DONE")
+    print(f"Inserted {len(insert_result.inserted_ids)} records into '{TARGET_COLLECTION}'.")
     print("=" * 60)
 
 if __name__ == "__main__":
