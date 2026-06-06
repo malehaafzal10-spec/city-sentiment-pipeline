@@ -1,4 +1,4 @@
-name: Daily Tourist Sentiment Pipeline
+name: News pipeline
 
 on:
   # Scheduled to run every day at 9:00 AM UTC
