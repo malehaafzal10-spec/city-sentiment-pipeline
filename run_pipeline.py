@@ -66,7 +66,7 @@ if __name__ == "__main__":
     run_script("s01a_ingest_daily_news.py", ["--date", target_date])
     
     # Step 2: Extract Tourist Alerts (Production mode: test=0)
-    run_script("s02_tourist_alert.py", ["--date", target_date, "--test", "0"])
+    run_script("n02_get_alert.py", ["--date", target_date, "--test", "0"])
         
     log.info("=" * 60)
     log.info("🎉 PIPELINE COMPLETED SUCCESSFULLY!")
