@@ -1,0 +1,50 @@
+name: Daily Tourist Sentiment Pipeline
+
+on:
+  # Scheduled to run every day at 9:00 AM UTC
+  schedule:
+    - cron: '0 9 * * *'
+  
+  # Allows you to run the pipeline manually from the GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  run-orchestrator:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: 🚀 Execute Pipeline Orchestrator
+
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_REPO_ID: ${{ secrets.HF_REPO_ID }}
+          PIPELINE_LOG_LEVEL: "INFO"
+        run: python run_pipeline.py | tee pipeline_run.log
+
+      - name: 💾 Save Logs as Artifact
+        uses: actions/upload-artifact@v4
+        # 'always()' ensures we get the logs even if the python script fails halfway through
+        if: always() 
+        with:
+          name: pipeline-logs
+          path: pipeline_run.log
+          retention-days: 30 # You can increase this up to 90
