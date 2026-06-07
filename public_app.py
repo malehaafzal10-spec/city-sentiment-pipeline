@@ -17,7 +17,7 @@ COLLECTION = "reddit_cleaned"
 
 # Cities to exclude from display — common English words picked up by FlashText
 BLOCKLIST = {
-    "most", "nice", "tours", "reading", "bar", "like", "rest", "sale",
+    "most", "nice", "tours", "reading", "none", "bar", "like", "rest", "sale",
     "well", "can", "more", "her", "his", "our", "run", "new", "old",
     "best", "west", "east", "north", "south", "worth", "bath", "deal",
     "rich", "man", "chester", "hamilton", "richmond", "oxford", "cambridge",
@@ -288,17 +288,23 @@ def load_data():
 
 def get_top10(df, sort_aspect="Overall"):
     if df.empty: return pd.DataFrame()
-    if sort_aspect == "Overall":
+    if sort_aspect == "Most Mentioned":
         agg = df.groupby(["city","country"]).agg(
             avg=("sentiment_score","mean"), n=("sentiment_score","count")
         ).reset_index()
+        agg = agg[agg["n"] >= 5].sort_values("n", ascending=False).head(10).reset_index(drop=True)
+    elif sort_aspect == "Overall":
+        agg = df.groupby(["city","country"]).agg(
+            avg=("sentiment_score","mean"), n=("sentiment_score","count")
+        ).reset_index()
+        agg = agg[agg["n"] >= 5].sort_values("avg", ascending=False).head(10).reset_index(drop=True)
     else:
         sub = df[df["aspect_cleaned"] == sort_aspect]
         if sub.empty: return pd.DataFrame()
         agg = sub.groupby(["city","country"]).agg(
             avg=("sentiment_score","mean"), n=("sentiment_score","count")
         ).reset_index()
-    agg = agg[agg["n"] >= 3].sort_values("avg", ascending=False).head(10).reset_index(drop=True)
+        agg = agg[agg["n"] >= 5].sort_values("avg", ascending=False).head(10).reset_index(drop=True)
     agg["avg"] = agg["avg"].round(2)
     return agg
 
@@ -481,6 +487,48 @@ with main_col:
                       <div style="font-size:0.6rem;color:#a09c93;">{cnt} mentions</div>
                     </div>""", unsafe_allow_html=True)
 
+            # ── In the News alerts ───────────────────────────────────────────
+            try:
+                db_conn = get_db()
+                if ctype == "city":
+                    alert_query = {"$or": [{"city": name}, {"llm_city": name}]}
+                else:
+                    alert_query = {"$or": [{"city": name}, {"llm_city": name}]}
+                alerts = list(db_conn["news_alert"].find(alert_query).sort("date", -1).limit(5))
+            except:
+                alerts = []
+
+            if alerts:
+                st.markdown("""
+                <div style="display:flex;align-items:baseline;gap:0.7rem;margin:2rem 0 1.1rem;">
+                  <span style="font-size:1rem;font-weight:800;color:#161410;letter-spacing:-0.02em;">In the News</span>
+                  <span style="background:#fdecea;color:#c0392b;font-size:0.58rem;font-weight:700;padding:0.18rem 0.6rem;border-radius:20px;letter-spacing:0.08em;text-transform:uppercase;">Latest alerts</span>
+                </div>""", unsafe_allow_html=True)
+
+                for alert in alerts:
+                    event    = alert.get("main_event", "")
+                    title    = alert.get("title", "")
+                    url      = alert.get("url", "")
+                    date_str = alert.get("date", "")[:10] if alert.get("date") else ""
+                    city_tag = alert.get("llm_city") or alert.get("city", "")
+
+                    link_html = f'<a href="{url}" target="_blank" style="font-size:0.68rem;color:#1e4fa3;text-decoration:none;font-weight:600;">Read article →</a>' if url else ""
+
+                    st.markdown(f"""
+                    <div style="background:white;border:1.5px solid #e5e2d9;border-left:3px solid #c0392b;border-radius:10px;padding:1rem 1.2rem;margin-bottom:0.7rem;">
+                      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;">
+                        <div style="flex:1;">
+                          <div style="font-size:0.7rem;font-weight:700;color:#c0392b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">⚠ {event}</div>
+                          <div style="font-size:0.82rem;font-weight:600;color:#161410;line-height:1.4;margin-bottom:0.4rem;">{title}</div>
+                          {link_html}
+                        </div>
+                        <div style="text-align:right;white-space:nowrap;">
+                          <div style="font-size:0.62rem;color:#a09c93;">{date_str}</div>
+                          <div style="font-size:0.62rem;color:#a09c93;margin-top:0.2rem;">{city_tag}</div>
+                        </div>
+                      </div>
+                    </div>""", unsafe_allow_html=True)
+
             # ── Country view: suggest top cities ────────────────────────────
             if ctype == "country":
                 city_agg = sub.groupby("city").agg(
@@ -528,64 +576,100 @@ with main_col:
     # HOME — TOP 10
     # ══════════════════════════════════════════════════════════════════════════
     else:
-        # Sort controls
-        sort_opts = ["Overall"] + sorted(ASPECT_ICONS.keys())
-        hrow1, hrow2 = st.columns([3, 2])
-        with hrow1:
-            st.markdown("""
-            <div style="display:flex;align-items:baseline;gap:0.7rem;margin-bottom:0.3rem;">
-              <span style="font-size:1rem;font-weight:800;color:#161410;letter-spacing:-0.02em;">Top 10 Destinations</span>
-              <span style="background:#fef3c7;color:#b45309;font-size:0.58rem;font-weight:700;padding:0.18rem 0.6rem;border-radius:20px;letter-spacing:0.08em;text-transform:uppercase;border:1px solid #fde68a;">By traveller sentiment</span>
-            </div>""", unsafe_allow_html=True)
-        with hrow2:
-            st.markdown('<div class="sort-box">', unsafe_allow_html=True)
-            sort_by = st.selectbox("Sort by aspect", sort_opts,
-                format_func=lambda x: f"Sort by: {x}",
-                label_visibility="collapsed", key="sort_asp")
-            st.markdown('</div>', unsafe_allow_html=True)
+        home_tab1, home_tab2 = st.tabs(["🏆  Top 10 Destinations", "⚠  Latest Alerts"])
 
-        st.markdown("<div style='height:0.8rem'></div>", unsafe_allow_html=True)
+        with home_tab2:
+            try:
+                db_conn = get_db()
+                all_alerts = list(db_conn["news_alert"].find({}).sort("date", -1).limit(20))
+            except:
+                all_alerts = []
 
-        t10 = get_top10(df, sort_by)
+            if not all_alerts:
+                st.info("No alerts at the moment.")
+            else:
+                st.markdown("<div style='height:0.5rem'></div>", unsafe_allow_html=True)
+                for alert in all_alerts:
+                    event    = alert.get("main_event", "")
+                    title    = alert.get("title", "")
+                    url      = alert.get("url", "")
+                    date_str = alert.get("date", "")[:10] if alert.get("date") else ""
+                    city_tag = alert.get("llm_city") or alert.get("city", "")
+                    link_html = f'<a href="{url}" target="_blank" style="font-size:0.68rem;color:#1e4fa3;text-decoration:none;font-weight:600;">Read article →</a>' if url else ""
 
-        if t10.empty:
-            st.info("No data yet — run the pipeline first.")
-        else:
-            cols5 = st.columns(5)
-            for i, (_, row) in enumerate(t10.iterrows()):
-                city    = row["city"]
-                country = row["country"]
-                score   = row["avg"]
-                n       = int(row["n"])
-                sc      = score_cls(score)
-                lbl     = score_lbl(score)
-                img     = get_img(city)
-                col_    = color_map[sc]
-                bg_     = bg_map[sc]
-                p       = bar_pct(score)
-
-                city_df  = df[df["city"] == city]
-                top_asp  = city_df.groupby("aspect_cleaned")["sentiment_score"].mean().sort_values(ascending=False).head(3)
-
-                bars_html = ""
-                for asp_n, asp_s in top_asp.items():
-                    ico = ASPECT_ICONS.get(asp_n, "📌")
-                    ap  = bar_pct(asp_s)
-                    ac  = bar_col(asp_s)
-                    bars_html += f"""
-                    <div style="margin-bottom:0.4rem;">
-                      <div style="display:flex;justify-content:space-between;margin-bottom:0.15rem;">
-                        <span style="font-size:0.59rem;color:#52504a;">{ico} {asp_n}</span>
-                        <span style="font-size:0.59rem;font-weight:700;color:#52504a;">{asp_s:.1f}</span>
-                      </div>
-                      <div style="height:3px;background:#f0ede5;border-radius:3px;overflow:hidden;">
-                        <div style="width:{ap:.0f}%;height:100%;background:{ac};border-radius:3px;"></div>
-                      </div>
-                    </div>"""
-
-                with cols5[i % 5]:
                     st.markdown(f"""
-                    <div style="background:white;border:1.5px solid #e5e2d9;border-radius:16px;overflow:hidden;margin-bottom:0.5rem;box-shadow:0 1px 5px rgba(0,0,0,0.04);display:flex;flex-direction:column;height:380px;">
+                    <div style="background:white;border:1.5px solid #e5e2d9;border-left:3px solid #c0392b;border-radius:10px;padding:1rem 1.2rem;margin-bottom:0.7rem;">
+                      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;">
+                        <div style="flex:1;">
+                          <div style="font-size:0.68rem;font-weight:700;color:#c0392b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.3rem;">⚠ {event}</div>
+                          <div style="font-size:0.82rem;font-weight:600;color:#161410;line-height:1.4;margin-bottom:0.4rem;">{title}</div>
+                          {link_html}
+                        </div>
+                        <div style="text-align:right;white-space:nowrap;flex-shrink:0;">
+                          <div style="background:#fef3c7;color:#b45309;font-size:0.6rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px;margin-bottom:0.3rem;">{city_tag}</div>
+                          <div style="font-size:0.62rem;color:#a09c93;">{date_str}</div>
+                        </div>
+                      </div>
+                    </div>""", unsafe_allow_html=True)
+
+        with home_tab1:
+            sort_opts = ["Overall", "Most Mentioned"] + sorted(ASPECT_ICONS.keys())
+            hrow1, hrow2 = st.columns([3, 2])
+            with hrow1:
+                st.markdown("""
+                <div style="display:flex;align-items:baseline;gap:0.7rem;margin-bottom:0.3rem;">
+                  <span style="font-size:1rem;font-weight:800;color:#161410;letter-spacing:-0.02em;">Top 10 Destinations</span>
+                  <span style="background:#fef3c7;color:#b45309;font-size:0.58rem;font-weight:700;padding:0.18rem 0.6rem;border-radius:20px;letter-spacing:0.08em;text-transform:uppercase;border:1px solid #fde68a;">By traveller sentiment</span>
+                </div>""", unsafe_allow_html=True)
+            with hrow2:
+                st.markdown('<div class="sort-box">', unsafe_allow_html=True)
+                sort_by = st.selectbox("Sort by aspect", sort_opts,
+                    format_func=lambda x: f"Sort by: {x}",
+                    label_visibility="collapsed", key="sort_asp")
+                st.markdown('</div>', unsafe_allow_html=True)
+
+            st.markdown("<div style='height:0.8rem'></div>", unsafe_allow_html=True)
+
+            t10 = get_top10(df, sort_by)
+
+            if t10.empty:
+                st.info("No data yet — run the pipeline first.")
+            else:
+                cols5 = st.columns(5)
+                for i, (_, row) in enumerate(t10.iterrows()):
+                    city    = row["city"]
+                    country = row["country"]
+                    score   = row["avg"]
+                    n       = int(row["n"])
+                    sc      = score_cls(score)
+                    lbl     = score_lbl(score)
+                    img     = get_img(city)
+                    col_    = color_map[sc]
+                    bg_     = bg_map[sc]
+                    p       = bar_pct(score)
+
+                    city_df  = df[df["city"] == city]
+                    top_asp  = city_df.groupby("aspect_cleaned")["sentiment_score"].mean().sort_values(ascending=False).head(3)
+
+                    bars_html = ""
+                    for asp_n, asp_s in top_asp.items():
+                        ico = ASPECT_ICONS.get(asp_n, "📌")
+                        ap  = bar_pct(asp_s)
+                        ac  = bar_col(asp_s)
+                        bars_html += (
+                            f'<div style="margin-bottom:0.4rem;">'
+                            f'<div style="display:flex;justify-content:space-between;margin-bottom:0.15rem;">'
+                            f'<span style="font-size:0.59rem;color:#52504a;">{ico} {asp_n}</span>'
+                            f'<span style="font-size:0.59rem;font-weight:700;color:#52504a;">{asp_s:.1f}</span>'
+                            f'</div>'
+                            f'<div style="height:3px;background:#f0ede5;border-radius:3px;overflow:hidden;">'
+                            f'<div style="width:{ap:.0f}%;height:100%;background:{ac};border-radius:3px;"></div>'
+                            f'</div></div>'
+                        )
+
+                    with cols5[i % 5]:
+                        st.markdown(f"""
+                        <div style="background:white;border:1.5px solid #e5e2d9;border-radius:16px;overflow:hidden;margin-bottom:0.5rem;box-shadow:0 1px 5px rgba(0,0,0,0.04);display:flex;flex-direction:column;height:380px;">
                       <div style="position:relative;">
                         <img src="{img}" style="width:100%;height:140px;object-fit:cover;display:block;">
                         <div style="position:absolute;top:0.55rem;left:0.55rem;background:rgba(22,20,16,0.72);backdrop-filter:blur(4px);color:white;font-size:0.58rem;font-weight:700;padding:0.16rem 0.5rem;border-radius:20px;">#{i+1}</div>
@@ -602,10 +686,10 @@ with main_col:
                       </div>
                     </div>""", unsafe_allow_html=True)
 
-                    if st.button("Explore →", key=f"btn_{city}_{i}"):
-                        st.session_state.update({"view":"detail","city":city,"ctype":"city"})
-                        st.rerun()
-                    st.markdown("<div style='margin-bottom:1rem'></div>", unsafe_allow_html=True)
+                        if st.button("Explore →", key=f"btn_{city}_{i}"):
+                            st.session_state.update({"view":"detail","city":city,"ctype":"city"})
+                            st.rerun()
+                        st.markdown("<div style='margin-bottom:1rem'></div>", unsafe_allow_html=True)
 
     st.markdown("<div style='height:2rem'></div>", unsafe_allow_html=True)
     st.markdown('<div style="text-align:center;font-size:0.65rem;color:#a09c93;padding-bottom:1rem;">Powered by Reddit r/travel · Analysed daily · City Sentiment Pipeline</div>', unsafe_allow_html=True)
