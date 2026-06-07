@@ -1,75 +1,72 @@
 # City Sentiment Pipeline
 
-A Python data pipeline that tracks travel sentiment for major European cities using news content, LLM relevance filtering, VADER sentiment scoring, and weekly feature aggregation in MongoDB.
+A Python data pipeline that tracks real-time travel sentiment across thousands of cities worldwide using Reddit data, LLM relevance filtering, aspect-based sentiment scoring, and daily aggregation in MongoDB.
 
-## https://city-travel-sentiment-live-dashboard.streamlit.app/
+## 🌍 Live Apps
+- **Public Explorer:** https://city-sentiment-pipeline-touristapp.streamlit.app/
+- **Monitoring Dashboard:** https://city-sentiment-pipeline-dashboard.streamlit.app/
 
 ## What this project does
-
-- Ingests daily city-related news articles
-- Filters to travel-relevant content (keyword pre-filter + LLM classification)
-- Scores sentiment with VADER
-- Builds weekly city-level aggregates (sentiment, crowding/cost/safety signals)
-- Stores pipeline artifacts and metrics for traceability
-- Provides Streamlit dashboards for monitoring and exploration
-
-## Target cities
-
-Configured in `config/cities.json`:
-
-- Paris
-- Rome
-- Barcelona
-- Lisbon
-- Amsterdam
-- Prague
-- Athens
-- London
+- Fetches daily r/travel posts from Reddit (targeting n-2 date to allow comment accumulation)
+- Filters to travel-relevant content using LLM relevance classification (Groq/LLaMA)
+- Fetches top 20 comments per relevant post
+- Scores sentiment at aspect level (Food & Dining, Safety, Cost, Crowds, Accommodation etc.)
+- Aggregates daily aspect-level scores per city and country
+- Stores pipeline artifacts and run IDs for full traceability
+- Provides a public-facing city explorer and an internal monitoring dashboard
 
 ## Pipeline flow
 
-Main orchestrator: `run_pipeline.py`
+### Reddit Pipeline (R01–R05)
+| Step | Script | Runs on | Description |
+|------|--------|---------|-------------|
+| R01 | `src/r01_fetch_reddit.py` | Windows Task Scheduler (19:00) | Fetch r/travel posts from n-2 date |
+| R02 | `src/r02_save_relevant.py` | GitHub Actions (19:30 Danish) | LLM relevance filter on posts |
+| R03 | `src/r03_fetch_comments.py` | Windows Task Scheduler (20:30) | Fetch top 20 comments per relevant post |
+| R04 | `src/r04_analice_sentiment.py` | GitHub Actions (21:00 Danish) | LLM relevance + aspect scoring on comments |
+| R05 | `src/r05_aggregate.py` | GitHub Actions (21:00 Danish) | Aggregate aspect scores per city |
 
-Executed steps (in order):
+### News Pipeline
+| Step | Script | Description |
+|------|--------|-------------|
+| S01 | `src/s01a_ingest_daily_news.py` | Ingest daily news articles from NewsAPI |
 
-1. `src/s01a_ingest_daily_news.py`
-2. `src/s02_store_relevant_docs.py`
-3. `src/s03_score.py`
-4. `src/s04_create_features.py`
-
-Optional monitoring dashboard exists in `src/dashboard_db_data.py`.
+## Run ID system
+Every daily run is assigned a unique run ID:
+- `run_YYYYMMDD_local` — data collected locally (on/before June 1 2026)
+- `run-YYYYMMDD-AUTO` — data collected via automated pipeline (after June 1 2026)
 
 ## Data storage (MongoDB)
-
 Default DB: `travel_pipeline_db`
 
-Primary collections used by the core pipeline:
+### Reddit collections
+- `r01_reddit_posts_raw_final` — raw posts fetched by R01
+- `reddit_relevant` — posts that passed LLM relevance filter (R02)
+- `reddit_comments_final` — comments fetched by R03
+- `reddit_comments_relevant` — comments that passed LLM scoring (R04)
+- `reddit_aggregated` — aspect-level aggregated scores (R05)
+- `reddit_cleaned` — cleaned aggregated data
 
-- `raw_documents_historical`
-- `processed_documents`
-- `scored_documents`
-- `document_features`
-- `city_weekly_features`
-- `pipeline_artifacts`
-
-You can view our data monitoring dashboard here: https://city-sentiment-data-dashboard.streamlit.app/
-
-Additional collections used by dashboard/monitoring flows include:
-
-- `monitoring_alerts`
-- `user_feedback`
+### News collections
+- `raw_documents_historical` — raw news articles
+- `news_alert` — news documents that triggered alerts
 
 ## Project structure
-
 ```text
 city-sentiment-pipeline/
-├── src/                         # Pipeline steps and utility scripts
-├── preprocess/                  # Historical/backfill preprocessing scripts
-├── human_in_the_loop/           # Manual evaluation workflows and outputs
-├── config/cities.json           # City + keyword configuration
-├── app.py                       # Main Streamlit city sentiment app
-├── run_pipeline.py              # Pipeline orchestrator entrypoint
-├── requirements.txt             # Python dependencies
+├── src/                         # Pipeline scripts (R01–R05, news, monitoring)
+├── scheduler/                   # Windows Task Scheduler bat files
+│   ├── run_r01.bat
+│   └── run_r03.bat
+├── .github/workflows/           # GitHub Actions workflows
+│   ├── r02_pipeline.yml
+│   ├── r04_r05_pipeline.yml
+│   └── daily_news.yml
+├── artifacts/                   # Local pipeline artifacts and backups
+├── config/                      # Configuration files
+├── public_app.py                # Public-facing city sentiment explorer
+├── monitoring_dashboard.py      # Internal pipeline monitoring dashboard
+├── requirements.txt
 ├── Dockerfile
 └── docker-compose.yml
 ```
@@ -77,94 +74,45 @@ city-sentiment-pipeline/
 ## Quick start (local)
 
 ### 1) Prerequisites
-
 - Python 3.10+
-- MongoDB instance (local or Atlas)
-- .env file with API keys needed:
-  MONGO_URI: Database Access URI
-  MONGO_DB_NAME: Database User
-  NEWSAPI_KEY: NewsAPI Key
-  GEMINI_API_KEY: GEMINI API KEY 
-  GROQ_API_KEY: GROQ API KEY 
-  HF_TOKEN: Hugging face token
-  HF_REPO_ID: Hugging face repo ID
+- MongoDB Atlas instance
+- `.env` file with:
+```env
+MONGO_URI=your_mongodb_atlas_uri
+MONGO_DB_NAME=travel_pipeline_db
+GROQ_API_KEY=your_groq_key
+NEWSAPI_KEY=your_newsapi_key
+```
 
 ### 2) Install
-
 ```bash
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+python -m venv venv
+venv\Scripts\activate   # Windows
 pip install -r requirements.txt
+playwright install chromium
 ```
 
-### 3) Configure environment
-
-Create a `.env` file in the repository root.
-
-Minimum:
-
-```env
-MONGO_URI=mongodb://localhost:27017
-MONGO_DB_NAME=travel_pipeline_db
-NEWSAPI_KEY=<your_newsapi_key>
-```
-
-Optional (for LLM relevance filtering):
-
-```env
-GROQ_API_KEY=<your_groq_key>
-GEMINI_API_KEY=<your_gemini_key>
-#--- rest API KEY here ---
-```
-
-### 4) Run the pipeline
-
+### 3) Run individual pipeline steps
 ```bash
-python run_pipeline.py
+python src/r01_fetch_reddit.py
+python src/r02_save_relevant.py
+python src/r03_fetch_comments.py --date YYYYMMDD
+python src/r04_analice_sentiment.py
+python src/r05_aggregate.py
 ```
 
-### 5) Run the dashboard
-
+### 4) Run the dashboards
 ```bash
-streamlit run app.py
+streamlit run public_app.py
+streamlit run monitoring_dashboard.py
 ```
 
-## Docker
-### 1) Prerequisites
-
-
-- .env file with API keys needed:
-  MONGO_URI: Database Access URI
-  MONGO_DB_NAME: Database User
-  NEWSAPI_KEY: NewsAPI Key
-  GEMINI_API_KEY: GEMINI API KEY 
-  GROQ_API_KEY: GROQ API KEY 
-  HF_TOKEN: Hugging face token
-  HF_REPO_ID: Hugging face repo ID
-  
-`docker-compose.yml` defines a `pipeline` service that runs the orchestrator.
-
-```bash
-docker compose build
-docker compose up
-```
-
-## GitHub Actions
-
-Workflows are available in `.github/workflows/`:
-
-- `daily_news.yml`
-- `pipeline.yml`
-
-To run in GitHub Actions, set required repository secrets (for example `MONGO_URI`, `NEWSAPI_KEY`, and optional LLM keys).
-
-## Notes
-
-- The orchestrator currently runs the 4 core steps listed above.
-- Historical/backfill scripts are in `preprocess/` and can be run separately.
+## GitHub Actions secrets required
+- `MONGO_URI`
+- `MONGO_DB_NAME`
+- `GROQ_API_KEY`
 
 ## Team
-
 - Karolina Bohdan
 - Faraiba Farnan
 - Maleha Afzal
