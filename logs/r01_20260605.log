@@ -50,3 +50,30 @@
 2026-06-05 11:25:12,953 [INFO] Target date: 2026-06-03
 2026-06-05 11:25:12,959 [INFO] Posts saved: 40
 2026-06-05 11:25:12,959 [INFO] ============================================================
+2026-06-05 19:00:01,991 [INFO] Building location processor...
+2026-06-05 19:00:02,278 [INFO] FlashText processor built: 11626 cities, 260 countries
+2026-06-05 19:00:02,280 [INFO] ============================================================
+2026-06-05 19:00:02,280 [INFO] R01 — r/travel DAILY FETCH (n-2)
+2026-06-05 19:00:02,281 [INFO] Run today:   2026-06-05
+2026-06-05 19:00:02,281 [INFO] Target date: 2026-06-03  (2 days ago)
+2026-06-05 19:00:02,281 [INFO] Run ID:      run-20260603-AUTO
+2026-06-05 19:00:02,281 [INFO] Collection:  r01_reddit_posts_raw_final
+2026-06-05 19:00:02,281 [INFO] ============================================================
+2026-06-05 19:00:18,696 [INFO] Warming up browser session...
+2026-06-05 19:00:24,900 [INFO] Fetching page 1/10...
+2026-06-05 19:00:26,779 [INFO]   \u2192 100 posts (total so far: 100)
+2026-06-05 19:00:28,811 [INFO] Fetching page 2/10...
+2026-06-05 19:00:30,610 [INFO]   \u2192 100 posts (total so far: 200)
+2026-06-05 19:00:30,611 [INFO] Scrolled past 2026-06-03 — stopping pagination
+2026-06-05 19:00:31,233 [INFO] Total raw posts fetched: 200
+2026-06-05 19:00:31,274 [INFO] Kept: 40 | Dropped (wrong date): 123 | Dropped (no location): 37
+2026-06-05 19:00:31,291 [INFO] Local backup \u2192 artifacts\daily_reddit\rtravel_2026-06-03_20260605_170031.json
+2026-06-05 19:00:32,784 [INFO] MongoDB connection OK \u2713
+2026-06-05 19:00:32,893 [INFO] MongoDB: 0 new inserted, 40 already existed \u2192 'r01_reddit_posts_raw_final'
+2026-06-05 19:00:32,956 [INFO] Artifact saved \u2192 'pipeline_artifacts' (run_id: run-20260603-AUTO)
+2026-06-05 19:00:32,957 [INFO] ============================================================
+2026-06-05 19:00:32,957 [INFO] DONE
+2026-06-05 19:00:32,957 [INFO] Run ID:      run-20260603-AUTO
+2026-06-05 19:00:32,957 [INFO] Target date: 2026-06-03
+2026-06-05 19:00:32,957 [INFO] Posts saved: 40
+2026-06-05 19:00:32,957 [INFO] ============================================================

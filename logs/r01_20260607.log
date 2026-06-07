@@ -1,0 +1,25 @@
+2026-06-07 13:09:20,619 [INFO] Building location processor...
+2026-06-07 13:09:21,474 [INFO] FlashText processor built: 11626 cities, 260 countries
+2026-06-07 13:09:21,478 [INFO] ============================================================
+2026-06-07 13:09:21,478 [INFO] R01 — r/travel DAILY FETCH (n-2)
+2026-06-07 13:09:21,478 [INFO] Run today:   2026-06-07
+2026-06-07 13:09:21,479 [INFO] Target date: 2026-06-05  (2 days ago)
+2026-06-07 13:09:21,479 [INFO] Run ID:      run-20260605-AUTO
+2026-06-07 13:09:21,479 [INFO] Collection:  r01_reddit_posts_raw_final
+2026-06-07 13:09:21,479 [INFO] ============================================================
+2026-06-07 13:09:50,714 [INFO] Warming up browser session...
+2026-06-07 13:09:55,442 [INFO] Fetching page 1/10...
+2026-06-07 13:10:00,009 [INFO]   \u2192 100 posts (total so far: 100)
+2026-06-07 13:10:02,037 [INFO] Fetching page 2/10...
+2026-06-07 13:10:04,194 [INFO]   \u2192 100 posts (total so far: 200)
+2026-06-07 13:10:04,196 [INFO] Scrolled past 2026-06-05 — stopping pagination
+2026-06-07 13:10:04,616 [INFO] Total raw posts fetched: 200
+2026-06-07 13:10:04,667 [INFO] Kept: 31 | Dropped (wrong date): 138 | Dropped (no location): 31
+2026-06-07 13:10:04,677 [INFO] Local backup \u2192 artifacts\daily_reddit\rtravel_2026-06-05_20260607_111004.json
+2026-06-07 13:10:14,299 [ERROR] MongoDB connection failed: No replica set members found yet, Timeout: 5.0s, Topology Description: <TopologyDescription id: 6a25518cf99e051c1d30d538, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-in3libp-shard-00-00.yoejyj8.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-in3libp-shard-00-01.yoejyj8.mongodb.net', 27017) server_type: Unknown, rtt: None>, <ServerDescription ('ac-in3libp-shard-00-02.yoejyj8.mongodb.net', 27017) server_type: Unknown, rtt: None>]>
+2026-06-07 13:10:14,299 [INFO] ============================================================
+2026-06-07 13:10:14,299 [INFO] DONE
+2026-06-07 13:10:14,299 [INFO] Run ID:      run-20260605-AUTO
+2026-06-07 13:10:14,299 [INFO] Target date: 2026-06-05
+2026-06-07 13:10:14,299 [INFO] Posts saved: 31
+2026-06-07 13:10:14,299 [INFO] ============================================================
