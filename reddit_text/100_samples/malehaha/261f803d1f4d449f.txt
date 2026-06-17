@@ -1,0 +1,2 @@
+. Rejsekort app, is the prefer travel payment for most folk. You connect a
+payment method in the app and it willdraw money for the tickets you need.

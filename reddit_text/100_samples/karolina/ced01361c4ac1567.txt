@@ -1,0 +1,13 @@
+. Cool setup you’ve built here. Scraping and qualifying at scale is tough, and
+seems like you nailed the tiered approach for cost and accuracy balance. Storing
+raw HTML in Postgres is definitely a weak spot—it bloats your DB and slows
+queries. Maybe offload raw HTML to object storage (S3 or similar) and just keep
+parsed metadata in Postgres. That’d free up n8n and VPS memory. Also, thinking
+about pipeline efficiency, batching AI calls and caching intermediate results
+might help reduce costs and latency. Claude integration could be worth exploring
+if you want faster processing and lower load, but that depends on your budget
+and API limits. You’re clearly iterating well. Curious: how do you handle error
+recovery in scraping if your proxies or bots get blocked? Always battling that
+can be a big ops drain. What’s your current plan for scaling email sending while
+maintaining deliverability? Would love to hear how you’re thinking about these
+parts.

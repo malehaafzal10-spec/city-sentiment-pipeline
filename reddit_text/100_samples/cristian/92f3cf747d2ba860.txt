@@ -1,0 +1,393 @@
+Civ VII Workshop Round 3 full patch notes. Round 3 of the Workshop starts
+tomorrow April 1st. You can get a key to access the Workshop in the official Civ
+Discord server if you want to test the upcoming 1.4.0 "Test of Time" update
+(includes "one Civ" mode). It's only available on Steam, and you must own the
+game. # Leading one Civilization For the first time, we’ve blown the doors off
+the roster: **every Civilization is now available to play across every Age.**
+That means the full roster now includes: * **Already Playable**: Rome, Egypt,
+Assyria\* , Carthage\* , Greece, Han, Maya, Inca, Abbasids, Majapahit, Chola,
+Spain, Mongolia, America, Prussia, Siam, Buganda, French Empire, Mughal, Qing *
+**New in Round 3**: Aksum, Khmer, Maurya, Missippian, Persia, Silla\* , Tonga\*
+, Bulgaria\* , Dai Viet\* , Hawaii, Iceland \* , Ming, Norman, Republic of
+Pirates\* , Shawnee, Songhai, Great Britain\* , Meiji Japan, Mexico, Nepal\* ,
+Ottomans\* , Qajar\*, Russia * *\*Please note that DLC ownership in the base
+game is respected by and carried into the Firaxis Feature Workshop. If you don't
+own these civs for the live version of Civ VII, you won't have access to it in
+the Workshop.* We also wanted to give a peek at what our audio team has been
+crafting for Test of Time. We’re adding a massive amount of new music to the
+game - some of which you can hear right now, with the rest arriving in the 1.4.0
+update. It is important to note that we’ve taken a slightly different path than
+the "Age-specific themes" approach you might remember from Civilization VI.
+Instead, we’re using a subtractive and additive model for our civ themes.
+Outside of a civ’s Apex Age, you’ll hear scaled-down, more intimate variations
+of their core theme. In the civ’s Apex, you’ll get the full multi-layered
+version of the theme. We’re still tucking new tracks into the build as we go, so
+keep your ears open for new ambient themes across all three Ages! Please go find
+your favorite Civ, take them on a journey from Antiquity to the Modern Age, and
+let us know how that "end-to-end" experience feels! **Civ Balance Changes**
+We’ve also made several balance adjustments to various civilizations this round,
+with a focus on reintroducing flavor to Majapahit and Buganda. We heard your
+feedback that these civs felt a bit thin without their passive Civic effects, so
+we worked to add some of that flavor back: * **Majapahit**: We’ve given them a
+completely new Unique Ability to ramp up the feeling of building an archipelagic
+empire. Their Culture buildings now receive adjacency bonuses from Coasts, and
+their Districts gain an additional Specialist slot if they are adjacent to
+Coast. * **Buganda**: Lakes are now better than ever for Buganda. They now earn
+additional Culture and Food on Lake tiles that scales through the Ages.
+Additionally, if you can nab their associated Wonder before your rivals do, it
+now provides additional population to any settlements adjacent to Lakes. *
+**Mughal**: To help you more easily establish your economic engine in Antiquity,
+the yield malus from the Mughal Unique Ability no longer applies to Food. **More
+Options When Syncretising** We’ve been following the conversation around
+Syncretism since our very first round of testing. We saw some initial feedback
+in Round 1 about how picking from other civilizations could feel a bit
+immersion-breaking for some of you, so we sat back and gathered more thoughts
+during Round 2 to see if that sentiment held up. It turns out, while many of you
+enjoy the hybrid system, a lot of you also want to lean into that "one civ"
+fantasy from start to finish without feeling like you're missing out on a
+strategic edge. In this latest build, we’re trying something new by adding a
+third option - **Affirmation** \- to the Syncretism screen. We definitely don't
+want to take away from the fun of building a hybrid empire, but for those of you
+who want to double down on your roots, you now have the tools to do that. You’ll
+now find unique Traditions designed to specifically reinforce your current
+civilization’s identity. **Diplomacy Focuses: Influence & Happiness** Our
+original design for the Diplomatic attribute leaned pretty heavily toward
+Influence bonuses. This meant that if you were playing a Happiness-based
+Diplomatic civ in a Time-Tested Age - like the French Empire in Antiquity - you
+often lacked meaningful benefits compared to Influence-based civs. To make sure
+every playstyle feels rewarded, we’re taking a page out of the "Tall & Wide"
+Expansionist split we did in Round 2. We’re splitting the Diplomatic attribute
+into two distinct Civic nodes: **Influence** and **Happiness**. While the
+Influence side will keep using the existing node, the Happiness side is getting
+a brand-new unique node, affecting several civs. Here’s what the split looks
+like: * **Happiness**: Han; Normans; French Empire; Mexico * **Influence**:
+Greece; Silla; Tonga; Chola; Shawnee; America; Nepal; Prussia; Qajar; Siam For
+those of you playing the Han, Normans, French Empire, or Mexico, keep an eye out
+for new Happiness-based Traditions in a Time-Tested Age. We want to know if
+these feel like they support your internal empire rather than giving you a pile
+of Influence you might not have a use for! PS; if it looks like the Happiness
+civs are a bit outnumbered, our designers noticed too. Something we’ll keep in
+mind as we keep expanding the Civ VII roster. **Test of Valor: Repurposed**
+Sometimes, playtests reveal a mechanic that just isn’t working as intended, and
+after a couple rounds of feedback, we felt that was the case for Test of Valor
+(which our early Workshoppers might remember as the "Burden of Time"). While our
+goal was to create a unique challenge for civs playing outside their Apex Age,
+many of you shared in Discord that it felt more like an unengaging tax or a
+hurdle than an interesting part of your empire’s story. We also saw this
+sentiment echoed in lower satisfaction scores in the survey. So, our designers
+have taken the best parts of that content and repurposed them into narrative
+events specifically for when you're leading a civilization outside of their Apex
+Age. As part of this, many of the Traditions you could earn from Test of Valor
+were actually repurposed into our update to Syncretism (see the Syncretism
+section below). This was specifically a recommendation from some of our
+Workshoppers - so thanks for sharing it! Overall, this shift allows us to offer
+more natural choices and rewards that feel like seamless parts of your empire's
+journey, rather than a separate, high-cost mechanic. We're still interested in
+how to best represent the "weight" of history here, but we think this new
+direction keeps the focus where it belongs: on your decisions and your
+civilization's growth. Let us know what you think of these new storylets!
+**Victories** **Victory Point Names** We’ll start with a small tweak before we
+get into the larger changes; we’ve done a quick pass on our Victory terminology
+to better match the flavorful titles of **Tourism** (Culture) and **GDP**
+(Economy). Science Victory Points are now known as **Innovation**, and Military
+Victory Points **Dominion**. If you see these in-game and in the patch notes,
+now you know! **Victory Balance** We’ve spent the last couple of rounds
+listening to your feedback and fine-tuning how earning Victories feels in
+practice. In Round 1, we caught an AI bug that was triggering Victories way too
+early in the Exploration Age. We fixed that for Round 2 and tightened the
+Victory countdown, but your feedback was still pointing to a persistent problem:
+a “waiting to win” feeling. Once a lead felt secure, the final turns morphed
+into a lot of passive button-pressing. For Round 3, we’re focusing on giving you
+more active ways to move the needle toward Victory, making your late-game
+decisions (e.g. how you specialize your economy or where you grow your culture)
+be the things that help push you across the finish line. Here are some of the
+changes: These just represent some of the bigger changes, but there are more.
+Keep an eye out for others in-game, mainly in the Exploration and Modern Ages!
+Additionally, to help with that "waiting to win" feeling, we’ve also overhauled
+the Victory tiers to be more consistent, with a much heavier focus on the Modern
+Age. We removed the earliest possible Exploration victory to give that Age more
+room to breathe, while adding new tiers in Modern to keep the late-game
+competition active. While finding that perfect “Goldilocks” zone for pacing and
+balance is always a tricky endeavor - especially for a game like Civ - we hope
+these changes help the mid and late game retain the excitement of the Antiquity
+Age. Let us know how it feels. * We’ve added four new Exploration Age Triumphs
+specifically for pivotal moments where you need to switch strategies in the
+game. These include: * **Ingenious Al-Jazari**: Build 2 Wonders that grant
+Innovation. Dedication: +2 Innovation on Modern Age Wonders built. * **Nuestra
+Señora de Atocha**: Unload a Treasure Fleet worth 10 Resource Value. Dedication:
++1 Dominion for settlements in Distant Lands. * **Timurid Renaissance**: Own 7
+Universities. Dedication: Projects grant GDP. * **Gwlad y Cestyll**: Have 30
+fortifications. Dedication: +1 Tourism on fortifications. To help with pacing,
+Treasure fleets now take 50% longer to spawn, but we’re making resources more
+valuable from Distant Lands. Gold and Silver now count double, and other
+resources can be upgraded to be worth double in the Civics Tree. We’ve reworked
+late-game milestones to focus more on Tourism. For example, mastering Flight now
+grants a major Tourism boost to your unique infrastructure, and the Eiffel Tower
+has been shifted to prioritize Tourism over Happiness. * **Transcendent
+Victory** \- Exploration Age >50% Age Progress: 6x * **Crushing Victory** \-
+Exploration Age >80% Age Progress through start of Modern: 4x * **Decisive
+Victory** \- Modern Age >20% Age Progress: 3x * **Momentous Victory** \- Modern
+Age >40% Age Progress: 2x * **Substantive Victory** \- Modern Age >60% Age
+Progress: 1.5x * **Narrow Victory** \- Modern Age >80% Age Progress: 1.25x **UI
+Improvements for Victories & Moment of Victory** Additionally, we’ve made some
+UI improvements related to Victories. First, the specialized Victory Tabs
+(Summary, Military, Culture, Science, and Economy) now have updated screens.
+These should make it much easier to track your progress and see exactly where
+your rivals are gaining ground. We’ve heard the feedback that players want more
+from the end-game and victory screens to better reflect their journey. To help
+make that moment feel a little more special, we’ve added a few work-in-progress
+changes to the conclusion of a campaign, broken down into a multi-part sequence:
+An end-game moment based on your Victory type, (if you win) a flyover of your
+winning empire while your leader provides some closing thoughts on the journey,
+a short animation where narrator Gwendoline Christie recognizes your Leader's
+success (or acknowledges the defeat), and the final Victory Screens, where
+you’ll get a full breakdown of scores and standings. Since this is brand new and
+still getting some TLC, you can definitely expect a little roughness here!
+**Triumphs** If you’re new to the Workshop, **Triumphs** are our replacement for
+the old Legacy Path system. One of the biggest pieces of community feedback we
+received was that Legacy Paths felt too prescriptive - like the game was
+steering you down a single “correct” route. Triumphs were built to open that up.
+Instead of dictating your strategy, Triumphs offer a wide range of optional
+challenges tied to the six core Attributes in Civ VII - Militaristic, Cultural,
+Scientific, Economic, Diplomatic, and Expansionist. Some will trigger naturally
+through strong play, like hitting a population milestone. Others ask you to
+pursue a riskier or more off-the-beaten-path goal, like maintaining wars on
+multiple fronts or racing to secure the most Natural Wonders. Completing a
+Triumph grants either an immediate empire bonus (granted by minor Triumphs) or a
+reward you can use at the start of the next Age (granted by major Triumphs). #
+Adjustments to Triumphs Our goal is for Triumphs to feel difficult (but not
+impossible) to complete, with rewards that feel worth the investment.
+Additionally, we want to make sure that rewards are not so overpowered that they
+become critical to a successful campaign. Based on those goals - and your Round
+1 and 2 feedback - we’ve entirely redesigned some Triumphs, and made changes to
+the goals or rewards of many others. We’ve also added a few Triumphs per Age
+that offer a unique way to earn various Victory Points (detailed out above in
+the Victories section). To start, we took a look at some Triumphs that were
+causing a bit of frustration and smoothed them out: * **Espionage-related
+Triumphs**: You no longer have to stay undetected to finish these. No more
+losing out on a reward just because one spy had a bad day. * **Orphic Mysteries
+Triumph**: This no longer requires the Oracle. Instead, it’s a race to be the
+first to build five Altars. * **And for Tall Players**: For those who prefer a
+"quality over quantity" empire, many Triumphs that used to require a specific
+number of cities now look at your Specialists instead. # New Triumphs & Triumph
+Sets If you haven’t tried out the Triumph Sets yet, there’s never been a better
+time than here in Round 3. These sets allow you to tailor your list of available
+Triumphs to your specific playstyle. Here are the full sets available to you
+now: * **Default Set:** The standard list with 30 Triumphs per Age. *
+**Trailblazer Set**: Every Triumph becomes a race - only the first player to
+complete it earns the reward. * **Conqueror Set**: Warmongers rejoice! This set
+includes only militaristic-focused Triumphs. * **Classic Set**: For those who
+liked the original Legacy Paths, these Triumphs represent those same original
+goals. * **Explorer Set (New!):** If you’re the type of player who always wants
+to see what is over the horizon or master the high seas, this brand-new mix of
+old and new Triumphs is built specifically for you. Beyond that, we’ve also
+added more Triumphs this round, officially completing the catalog for the later
+Ages and hopefully adding a bit more depth to the Crisis system: * **Exploration
+& Modern Age Triumphs**: Added 6 new Triumphs to both, bringing both lists to a
+full 30/30. * **New Triumphs in Conqueror’s Set**: Added the final 4 Triumphs to
+complete the set. * **Crisis Triumphs**: We’ve added 7 new Exploration Crisis
+Triumphs (and completed the Antiquity set). And lastly, to make tracking all of
+this easier, the Legacy Menu is now complete, and we’ve added brand-new Civ
+Unlocks and Dedications tabs. **Specialist Updates** A major point of feedback
+we received from this was that changing Specialists to rely more on their
+adjacencies and incentivizing more careful placement was fun, but the increasing
+costs on Age Transition could be brutal. To address this, we’ve kept the changes
+to their base Yields, and updated maintenance costs to push those higher
+requirements to later in the Age. Now, placing a Specialist on a Warehouse or
+Obsolete building only costs -1 Food, -1 Happiness (not per Age), so Age
+Transition doesn’t immediately plunge you into an Unhappiness spiral. Current-
+Age and Civ Unique Ageless Buildings keep the -2 Food, -2 Happiness per Age
+maintenance cost from previous Rounds. Overall, our goal is to make Specialist
+management feel like a rewarding puzzle you’re solving as you build out your
+cities and choose which Techs and Civs to pursue. We know given all the feedback
+around this system, this change may seem small, but we want to start with a
+focused nudge and see how it plays out in real games. **Leader Balanace** In
+this round, we’re starting to nudge our leaders in the right direction to see
+how they play with the new systems. We’re rolling these changes out slowly - we
+don’t want to change too many variables at once - but we’ve definitely got more
+changes in the pipeline. Our goal is for every leader to feel directional.
+Picking a specific leader should fundamentally change your strategy and how you
+interact with your civ. If a leader doesn't feel impactful enough to steer your
+game, we want to hear about it; your feedback is exactly how we'll find the
+right places for future buffs. A quick note on reading these notes: to keep
+things concise, we’ve only highlighted what has changed. If a leader or ability
+isn't listed below, it's unchanged from the version in the live game. * **Ada
+Lovelace**: Now gains Culture equal to 100% of your total Science per turn when
+you complete a Technology Mastery. *(Previously: Culture gain of 50%.)* *
+**Harriet Tubman**: Now earns a Migrant in the Capital whenever you complete an
+Espionage Action without being detected. **Dev note**: We’ve left the Memento
+that previously did this unchanged, so you can double down now. * **Himiko (High
+Shaman)**: Yields adjusted to +15% Culture and -15% Science; these effects still
+double during a Celebration. *(Previously: +20% Culture but -10% Science.)* *
+**Himiko (Queen of Wa)**: Now has a +100% Influence cost penalty when rejecting
+Diplomatic Actions. * **Ashoka (Renouncer):** Unique Buildings now gain a
+Happiness adjacency for all tile improvements. *(Previously: All Buildings gain
+a +1 Happiness Adjacency for all tile improvements.)* **Dev note**: With our
+Specialist changes being well received, we felt Ashoka had to change.
+Unfortunately, his abilities negated too much of the Specialist costs. He still
+provides a lot of Happiness, just in a new way. * **Pachacuti**: Specialists
+adjacent to Mountains keep their maintenance reduction, but Specialists not
+adjacent to Mountains now have their Happiness maintenance increased by +1.
+*(Previously: Specialists adjacent to Mountains have their Happiness maintenance
+reduced by -2.)* **Dev note**: While a nerf, this felt like a good opportunity
+to reinforce identity as we lean more into asymmetry and directional design. It
+felt appropriate for Pachacuti to require mountains more than other leaders, and
+have a reason to fight over them. * **Simon Bolivar**: Now gains +2 War Support
+specifically on wars you declare. *(Previously: Gain +1 War Support on all your
+wars.)* **Dev note**: This is a small tweak for now, but we’ve got our eye on
+Bolivar. He’ll get a larger update when we add new systems in the future. *
+**Charlemagne**: His adjacency bonus has been switched from Quarters to
+Fortifications. * **Tecumseh**: Now earns +1 Food per Age in Towns and +1
+Production per Age in Cities for every suzerained City-State. \*(Previously:
+Both bonuses applied to all Settlements.)\*His combat bonus is now specific to
+Infantry and Ranged Units, and all Independent Powers will now start Friendly
+with him. **Dev note**: Tecumseh is a fun and powerful Leader, but the wide
+application of his bonuses were closing design space around other City-State
+gameplay, and didn’t reinforce his synergy with civs that cared about City-
+States like the Shawnee or Greece in a healthy way. We’re hoping this change
+feels more like a reinforcement of his identity, even though parts of it are
+technically a nerf. * **Friedrich (Oblique)**: Now gains +2 Science per Age for
+each Commendation earned by your Commanders. * **Xerxes (King of Kings)**:
+Adjusted his Settlement Limit bonus to +1 per Age. Previously, this bonus scaled
+cumulatively (+1 in Antiquity, +2 in Exploration, +3 in Modern, totaling +6),
+but it now consistently grants +1 in each Age (+3 total). **Dev note**: As
+Settlement Limit can be retained across Ages, effects that provided multiple
+Settlement Limit increases in later Ages were too valuable. The Corona Civica
+Memento was updated to match this change as well. **Other Balance Changes**
+We’re not done with balance yet! There are also a few more areas like building
+costs, diplomacy, and even landmass requirements that have seen some tweaks,
+including: * **Unique Improvement Scaling**: The cost increase for building the
+same type of Unique Improvement in a settlement has been reduced to 50% *(down
+from 100% in Round 2)*. The Han and Ming Great Walls scale more slowly *(25%
+instead of 50%)*. * **Building Cost Scaling**: Production Buildings no longer
+contribute to the increased cost scaling for future Buildings in that
+settlement. * **Dev note**: We love to take opportunities to make Buildings
+matter beyond just providing Yield. Having Production Buildings not impact
+Production costs matches Gold and Happiness Buildings not requiring their
+respective Yields as maintenance costs. * **Diplomatic Action Scaling**: We’ve
+found a lot of success in using cost scaling to better pace and balance game
+content that is available to multiple players, so we’re bringing it to
+Diplomatic Actions. While we plan to expand Diplomacy gameplay in the future,
+these changes will help smooth out the late game Influence economy for players
+now. Here are some of the changes: * **Improve Trade Relations**: Now has a 25%
+increased Influence cost each time it is performed. * **Dev note**: We’re
+particularly interested in how this makes leaders and civs with additional Trade
+Routes and bonuses towards this Action feel better, so be sure to leave
+feedback! * **Befriend Independent**: Now increases by 20% per active action and
+suzerained City-State. * **Itsaraphab** (Siam Unique Action): Now has 10%
+increased Influence cost per number of Suzerained City-States and active
+Befriend Independent Actions. * **Dev note**: As a general rule, we like to
+scale civ-unique content at a lower rate, as part of that civ’s power. *
+**Razing Speed**: With the increased impact of Settlement Limit introduced in
+Round 2, we saw more Razing of Settlements than before. However, Razing
+Settlements in late Exploration and Modern can be quite time consuming, so we
+sped it up. Now when Razing, the Settlement loses 1 District per Age per turn
+*(Previously: 1 District per turn)*. * **War Weariness**: As iteration continued
+on the Happiness economy, we found the Unhappiness of War in Exploration and
+Modern was not as impactful as we would like. Now, Unhappiness increases by +2
+per Settlement in Exploration and +4 in Modern, compared to Antiquity. New
+values (Settlements Founded by you/other civs/someone you are at war with): *
+**Antiquity**: 3/5/7 happiness penalty in the settlement per negative war
+support (unchanged) * **Exploration**: 5/7/9 penalty per negative war support *
+**Modern**: 7/9/11 penalty per negative war support * **Wonder Changes**: With
+the changes to Specialists, Machu Pikchu and Brihadeeswarar Temple had an
+outsized impact on the game. We like granting adjacencies as part of making the
+map matter more, so we’ve limited these to only work on "Buildings in this
+Settlement”. Now you can make a “Machu Pikchu-Settlement” like you would make a
+“Petra-Settlement”. * **Memento Changes**: We’ve got a larger pass on Mementos
+coming, but a few have been changed early because they were either nonfunctional
+with the switch to Triumphs, or to match similar changes in other parts of the
+game. * **Noli Me Tangere Memento**: Now provides +1 Science, Culture, and Gold
+per Age for each Major Triumph completed in an Age. *(Previously: +10% to
+Science, Culture, and Gold per Age for each Legacy Path completed.)* * **Corona
+Civica**: Now gives +1 Settlement Limit each Age, but +50% Convert to City cost.
+*(Previously: +1 Settlement Limit per Age, but +50% Convert to City cost.)*
+**Commerce Screen** In Round 2, we introduced the brand new Commerce Screen, a
+place to manage Resources, trade routes, and empire logistics without bouncing
+between menus. This was largely a hit! But we heard from your feedback that
+there were still QOL improvements to be made, and there was still some confusion
+figuring out exactly how your settlements were connected. So for Round 3, we’ve
+improved the UI for the Commerce Screen, focusing on making your trade network
+transparent and making the actual interactions feel a lot more intuitive. These
+are the current changes, but more are still coming: * First pass of a new drag-
+and-drop functionality for mouse input to make assigning Resources feel more
+natural. * New UI elements and tags for Building types that indicate Settlement
+traits, Warehouse counts, and Rail Stations to give you the information you need
+to best optimize Resource assignments. * Automatic Resource sorting by type,
+sub-sorted by whether the goods are internal or imported. * A new "remove all"
+option to clear Resource assignments from a single Settlement or your entire
+empire in one go. * Expanded sorting and filtering options to help you find what
+you need without a scavenger hunt. * Improved logic for faster Resource
+unassignment and general UI polish to reduce the overall click-count.
+**Advisors** Advisors aren't just for the early-game training wheels anymore -
+we’ve officially expanded their coverage to the full game, including new intros
+and additional content specifically for the Exploration and Modern Ages. We’ve
+also spent some time making them a bit more discerning, meaning your Advisors
+should no longer provide input on things that are not yet possible or have
+become obsolete. As a QOL change, Advisor Warnings and Tutorial settings have
+been separated. Now you can decide if you want the full suite of help, the
+warnings for all Advisors, or only advice from the Advisors you follow.
+Additionally, you can choose to change these settings whenever you like! And
+finally, on the UI front, the Advisor screen is now technically complete, so let
+us know what you think. We’ve reworked notification elements to make them easier
+to track at a glance, and warning notifications now display specific text
+referring to the issue at hand alongside the advice needed to deal with it. We
+still have more polish and bug fixes in the pipeline, but the core experience is
+now fully playable across all three Ages. **New Map Type: Fractal Continents**
+Surprise - a new map type! We’ve dubbed this one **Fractal Continents**, and it
+prioritizes exploration more than any other map so far. You really don't know
+what you're going to get! The only thing guaranteed is a certain fraction of
+Distant Lands, but the shapes and number of landmasses are totally randomized.
+It also supports sea levels like the other Voronoi Maps (What-maps? Check out
+this From the Devs piece You read that header correctly. We know Hotseat-players
+have been asking for this feature for a long time, and we really appreciate you
+hanging in there. We didn't want to keep it behind the curtain any longer, so
+we’re using Round 3 to finally show some progress and get an early version of it
+into your hands. **Please keep in mind this feature may not be part of the Test
+of Time update.** For anyone who hasn't tried it, Hotseat lets you play a local
+multiplayer game with friends on the same device. You take your turn, hop out of
+the hotseat, and try not to watch as your friend sits down and plots your
+downfall. It’s a staple for many Civ players, and we want to make sure it gets
+the love it deserves before it officially goes live. **Please note: this mode is
+very much a play-at-your-own-risk experience right now**. It’s in an earlier
+development phase than the other features in this build, which means it’s going
+to have some rough edges and will be more prone to issues. Our team has flagged
+that it can be particularly finicky for anyone who isn't the first player. We’re
+sharing it now to gather your feedback and show you where the mode is headed. We
+have plenty of work planned that may even extend beyond the 1.4.0 update, so if
+you decide to jump in during Round 3, please keep the current state of Hotseat
+in mind. Some of the bigger known issues for Hotseat are below, but you can
+check out ⁠No Access \[locked until Apr 1\] for a full list (just search with
+the tag Hotseat): * Any player that isn’t the first player will skip
+civilization selection when Age Transition is reached, meaning they will be
+forced to play as the same civ. * Only the first player can select Legacy Cards
+when starting an Advanced start during Hotseat. * The more the map is revealed,
+the more pop-in there is when passing the turn during gameplay. * The curtain
+between turns currently has temporary UI. * The HUD often doesn't update between
+players. * Certain data will only show the first player's info for all players
+(journal, dedications, etc.) # Other Changes **Age Transitions** * Made various
+bug fixes and added polish to Age Transition flow., * When you change your
+Capital on Age transition, it now costs a dedication slot, but also gives +3
+free population to that City., * Units who are Alert or Asleep will remain that
+way after Age Transition in Continuity mode., **AI** * Made various improvements
+to AI players’ ability to pursue Triumphs and Victories. **Art & Visuals** *
+Lighting has been upgraded with new Sun Settings and HDR texture to bring out
+the environment and units’ color and shadows better. This change also improves
+the visuals for Leaders and Independent Powers skin tones, shadows, and
+backlighting. **Tutorials** * Improved UI for tutorials. * Tutorials have been
+re-worked to support Nested Tooltips. **Quality of Life** * We’ve continued
+iteration on nested tooltips. In addition to a formatting and styling pass,
+we’ve added: * Access to Building descriptions and Resources (this is especially
+work-in-progress!). * Tags for quickly identifying key elements. * Alerts to
+highlight important statuses. * Settlement name for owned plots. * You can now
+claim unimproved plots from nearby Settlements during a Growth event. While this
+is limited for now, we’re looking into expanding this to placement events in the
+future. * Added the ability to see an enemy unit's Zone of Control when
+selected. Entering a unit's Zone of Control ends their movement, but attacks can
+still be made. This mechanic is not new, just better visualized! * Added a
+Conquest Decoration. It shows which Districts need to be captured to conquer a
+City, including your own. It can be enabled via the Lens Panel above the
+minimap. * Added an icon representing the current Age to the turn counter in the
+upper right. **UI/UX** * Made various bug fixes and added polish to Create Game
+flow. * Made numerous improvements to the functionality and styling of the
+Traditions and Policies screen. * Added 720p support for several screens.

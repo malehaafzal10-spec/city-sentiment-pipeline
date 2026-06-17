@@ -1,0 +1,53 @@
+Marketing Analyst - Wargaming - Serbia. ### ### **Job Overview** We are seeking
+a marketing analytics professional with a focus on data quality and AI\-driven
+automation to improve marketing measurement, reporting, and decision\-making.
+This role combines marketing analysis, data operations, and applied AI to ensure
+trusted, consistent data across multiple sources and to automate dashboards,
+attribution insights, and scalable analytical workflows. ### **Reports to** *
+Team Lead of Data \& Marketing Technology ### **What will you do?** * Analyze
+marketing channels performance and deliver actionable recommendations * Build
+and automate KPI reporting * Support and automate experiment measurement (A/B,
+incrementality, creative testing) * Design AI\-powered automations for
+reporting, insight generation, anomaly detection, and campaign recommendations *
+Own marketing/attribution data quality across sources (AppsFlyer \+ ad
+platforms), including validation and tracking troubleshooting * Develop and
+maintain predictive models * Partner with marketing, product, and engineering on
+tracking requirements, measurement plans, and documentation. * Help maintain
+data pipelines/semantic layers; ensure metric definitions and transformation
+logic are clean and well\-documented ### **What are we looking for?** * STEM
+education * Strong foundation in marketing analytics: attribution, funnels,
+cohort/retention, LTV, ROAS/CAC, experimentation * Hands\-on experience with
+data analysis and automation (SQL \+ Python, BI tools, workflow automation) *
+Familiarity with mobile attribution/measurement platforms (e.g., AppsFlyer) and
+multi\-source marketing data integration * Proactive mindset and eagerness to
+grow practical AI skills (ML fundamentals, LLM tooling, data quality automation)
+### **What additional skills will help you stand out?** * Experience with
+warehouses (BigQuery/Snowflake), dbt, Airflow, or similar * Experience with
+SKAdNetwork and privacy\-safe attribution * Experience operationalizing LLM
+workflows (prompting, evaluation, guardrails) for analytics use cases *
+Experience with predictive modeling techniques (e.g., regression/classification,
+time\-series forecasting, uplift/propensity modeling) and model evaluation ###
+**Work mode** * OHybrid (2\-3 days of work from the office) * This role is
+eligible for relocation \& immigration support. ### **Benefits** Benefits and
+perks are tailored to the local market and culture. Our benefits in Belgrade
+include: * Additional vacation days based on years of service at Wargaming: up
+to 5 days on top of the statutory minimum * Additional paid time off (5 Personal
+Days, Birthday Leave, Marriage Leave, Compassionate Leave) * Sick Leave
+Compensation, Maternity Leave Benefits * Premium Private Health Insurance *
+Career development and education opportunities within the company * English
+clubs and platform for learning languages * Mental well\-being program (iFeel) *
+Commuting allowance * Company events * FitPass membership * Discounts for
+employees * Personal Gaming Account * Coffee, fruits, and snacks in the office *
+On\-site canteen with subsidized prices for food and drinks * Seniority Awards *
+Referral program \- you can recommend the best talents to the Company and
+receive a reward ##### Please submit your CV in English to ensure smooth
+processing and review. ### About Wargaming Wargaming is an award\-winning online
+game developer and publisher headquartered in Nicosia, Cyprus. Operating since
+1998, Wargaming has become one of the leaders in the gaming industry with 15
+offices worldwide, including studios in Chicago, Prague, Shanghai, Tokyo, and
+Vilnius. Our diverse and multicultural team works together to deliver a
+top\-class experience to millions of players who enjoy Wargaming's titles across
+all major gaming platforms. Our flagship products include free\-to\-play hits
+World of Tanks, World of Warships and World of Tanks Blitz. Please see
+[Wargaming Candidate Privacy Policy]( for details on how Wargaming uses your
+personal data.
